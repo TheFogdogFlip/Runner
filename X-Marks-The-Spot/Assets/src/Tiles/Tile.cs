@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Tile {
 
@@ -12,18 +13,9 @@ public class Tile {
         {
             Position = value;
         }
-    } 
-    public GameObject Object
-    {
-        get
-        {
-            return Object;
-        }
-        set
-        {
-            Object = value;
-        }
     }
+
+    public List<GameObject> Objects = new List<GameObject>();
 
     public Tile(Vector3 position)
     {
