@@ -63,6 +63,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 445412}
 <<<<<<< HEAD
+<<<<<<< HEAD
   - 54: {fileID: 5457946}
 <<<<<<< HEAD
   - 65: {fileID: 6556240}
@@ -70,6 +71,11 @@ GameObject:
   - 114: {fileID: 11460050}
 =======
 >>>>>>> origin/master
+=======
+  - 114: {fileID: 11469754}
+  - 54: {fileID: 5457946}
+  - 114: {fileID: 11488038}
+>>>>>>> parent of 6ed4bdb... Added Collision and reset
 =======
   - 114: {fileID: 11469754}
   - 54: {fileID: 5457946}
@@ -420,14 +426,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   PlayerTransform: {fileID: 445412}
 --- !u!114 &11469754
 =======
+=======
+>>>>>>> parent of 6ed4bdb... Added Collision and reset
   runSpeed: 0
   jumpForce: 1000
   rb: {fileID: 0}
   turnSpeed: 55
 --- !u!114 &11488038
+<<<<<<< HEAD
+>>>>>>> parent of 6ed4bdb... Added Collision and reset
+=======
 >>>>>>> parent of 6ed4bdb... Added Collision and reset
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -439,6 +451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37120599f4502244bb0d069388019e13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
 <<<<<<< HEAD
   runSpeed: 0
   jumpForce: 1000
@@ -452,10 +465,15 @@ MonoBehaviour:
   slideSpeed: 55
 >>>>>>> origin/master
 =======
+=======
+>>>>>>> parent of 6ed4bdb... Added Collision and reset
   runSpeed: .0299999993
   jumpForce: .100000001
   rb: {fileID: 0}
   turnSpeed: 1
+<<<<<<< HEAD
+>>>>>>> parent of 6ed4bdb... Added Collision and reset
+=======
 >>>>>>> parent of 6ed4bdb... Added Collision and reset
 --- !u!124 &12416964
 Behaviour:
@@ -525,7 +543,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: turnSpeed
+<<<<<<< HEAD
       value: 500
+=======
+      value: 1
+>>>>>>> parent of 6ed4bdb... Added Collision and reset
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
