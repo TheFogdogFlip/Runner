@@ -63,9 +63,12 @@ GameObject:
   m_Component:
   - 4: {fileID: 445412}
   - 54: {fileID: 5457946}
+<<<<<<< HEAD
   - 65: {fileID: 6556240}
   - 114: {fileID: 11469754}
   - 114: {fileID: 11460050}
+=======
+>>>>>>> origin/master
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -154,8 +157,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 181140}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 3, y: 0, z: -10}
+  m_LocalScale: {x: .100000001, y: .100000001, z: .100000001}
   m_Children:
   - {fileID: 436672}
   - {fileID: 463152}
@@ -355,7 +358,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 1
   m_AngularDrag: .0500000007
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -421,6 +424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81d26e720f6db8141a4c0421f64c4ad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   PlayerTransform: {fileID: 445412}
 --- !u!114 &11469754
 MonoBehaviour:
@@ -437,6 +441,13 @@ MonoBehaviour:
   jumpForce: 1000
   rb: {fileID: 5457946}
   turnSpeed: 55
+=======
+  runSpeed: 1
+  jumpForce: 1000
+  rb: {fileID: 0}
+  turnSpeed: 500
+  slideSpeed: 55
+>>>>>>> origin/master
 --- !u!124 &12416964
 Behaviour:
   m_ObjectHideFlags: 1
@@ -497,7 +508,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: a377010571432f1499b9b8799ee0f485, type: 2}
     - target: {fileID: 0}
       propertyPath: runSpeed
-      value: .0299999993
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: jumpForce
@@ -505,7 +516,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: turnSpeed
-      value: 1
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_IsTrigger
