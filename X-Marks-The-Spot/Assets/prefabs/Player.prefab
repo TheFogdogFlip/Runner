@@ -64,6 +64,7 @@ GameObject:
   - 4: {fileID: 445412}
   - 114: {fileID: 11469754}
   - 54: {fileID: 5457946}
+  - 114: {fileID: 11488038}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -127,7 +128,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 184394}
   m_LocalRotation: {x: .143932924, y: 0, z: 0, w: .989587486}
-  m_LocalPosition: {x: .730000019, y: 5.51000023, z: -5.38999987}
+  m_LocalPosition: {x: 0, y: 5.51000023, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 445412}
@@ -139,7 +140,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128632}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .855000019, y: 2.93400002, z: .999000013}
+  m_LocalPosition: {x: 0, y: 2.93400002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 409818}
@@ -168,7 +169,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 192200}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .851000011, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 445412}
@@ -180,7 +181,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100846}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .851000011, y: 1.98199999, z: 1}
+  m_LocalPosition: {x: 0, y: 1.98199999, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 445412}
@@ -253,7 +254,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 42de7bcc0ce1ebd438e890c5822a9656, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -277,7 +278,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a377010571432f1499b9b8799ee0f485, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -301,7 +302,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 62e2b6b76fbf49945a868c5a35db8fba, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -407,10 +408,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37120599f4502244bb0d069388019e13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardForce: 10
+  runSpeed: 0
   jumpForce: 1000
   rb: {fileID: 0}
   turnSpeed: 55
+--- !u!114 &11488038
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 181140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37120599f4502244bb0d069388019e13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runSpeed: .0299999993
+  jumpForce: .100000001
+  rb: {fileID: 0}
+  turnSpeed: 1
 --- !u!124 &12416964
 Behaviour:
   m_ObjectHideFlags: 1
@@ -455,6 +471,30 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: ForwardForce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.z
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a377010571432f1499b9b8799ee0f485, type: 2}
+    - target: {fileID: 0}
+      propertyPath: runSpeed
+      value: .0299999993
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: jumpForce
+      value: .100000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: turnSpeed
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
