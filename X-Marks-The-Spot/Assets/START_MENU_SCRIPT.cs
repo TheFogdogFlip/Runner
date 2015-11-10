@@ -24,4 +24,22 @@ public class START_MENU_SCRIPT : MonoBehaviour
         startText.enabled = false;
         exitText.enabled = false;
     }
+
+    public void NoPress()
+    {
+        quitMenu.enabled = false;
+        startText.enabled = true;
+        exitText.enabled = true;
+    }
+
+    public void StartLevel()
+    {
+        Application.LoadLevel(1);
+
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 }
