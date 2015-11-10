@@ -4,11 +4,10 @@ using System.Collections;
 public class ResetPlayer : MonoBehaviour
 {
     private Vector3 StartPosition;
-    private Transform PlayerTransform;
+    public Transform PlayerTransform;
 	
 	void Start ()
     {
-        PlayerTransform = GetComponent<Transform>();
         StartPosition = PlayerTransform.position;
 	}
 	
@@ -21,7 +20,7 @@ public class ResetPlayer : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Wall"))
         {
-            PlayerTransform.position = StartPosition;
+            PlayerTransform.position.Set(StartPosition[0], StartPosition[1], StartPosition[2]);
         }
     }
 }
