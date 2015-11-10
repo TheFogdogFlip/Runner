@@ -39,13 +39,13 @@ public class START_MENU_SCRIPT : MonoBehaviour
 
     public void StartLevel()
     {
-        Application.LoadLevel(1);
+        Application.LoadLevel(2);
 
     }
 
     public void OptionsPress()
     {
-        Application.LoadLevel(2);
+        Application.LoadLevel(1);
     }
 
     public void ExitGame()
