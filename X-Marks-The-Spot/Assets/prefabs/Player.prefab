@@ -64,6 +64,9 @@ GameObject:
   - 4: {fileID: 445412}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 648af10... Lost Player makes a comeback.
   - 54: {fileID: 5457946}
 <<<<<<< HEAD
   - 65: {fileID: 6556240}
@@ -71,6 +74,7 @@ GameObject:
   - 114: {fileID: 11460050}
 =======
 >>>>>>> origin/master
+<<<<<<< HEAD
 =======
   - 114: {fileID: 11469754}
   - 54: {fileID: 5457946}
@@ -81,6 +85,8 @@ GameObject:
   - 54: {fileID: 5457946}
   - 114: {fileID: 11488038}
 >>>>>>> parent of 6ed4bdb... Added Collision and reset
+=======
+>>>>>>> parent of 648af10... Lost Player makes a comeback.
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -399,6 +405,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &6556240
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 181140}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!81 &8196844
 AudioListener:
   m_ObjectHideFlags: 1
@@ -413,7 +431,7 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 184394}
   m_Enabled: 1
---- !u!114 &11469754
+--- !u!114 &11460050
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -421,9 +439,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 181140}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37120599f4502244bb0d069388019e13, type: 3}
+  m_Script: {fileID: 11500000, guid: 81d26e720f6db8141a4c0421f64c4ad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -441,6 +460,10 @@ MonoBehaviour:
 >>>>>>> parent of 6ed4bdb... Added Collision and reset
 =======
 >>>>>>> parent of 6ed4bdb... Added Collision and reset
+=======
+  PlayerTransform: {fileID: 445412}
+--- !u!114 &11469754
+>>>>>>> parent of 648af10... Lost Player makes a comeback.
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -453,6 +476,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 648af10... Lost Player makes a comeback.
   runSpeed: 0
   jumpForce: 1000
   rb: {fileID: 5457946}
@@ -464,6 +490,7 @@ MonoBehaviour:
   turnSpeed: 500
   slideSpeed: 55
 >>>>>>> origin/master
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> parent of 6ed4bdb... Added Collision and reset
@@ -475,6 +502,8 @@ MonoBehaviour:
 >>>>>>> parent of 6ed4bdb... Added Collision and reset
 =======
 >>>>>>> parent of 6ed4bdb... Added Collision and reset
+=======
+>>>>>>> parent of 648af10... Lost Player makes a comeback.
 --- !u!124 &12416964
 Behaviour:
   m_ObjectHideFlags: 1
@@ -549,6 +578,22 @@ Prefab:
       value: 1
 >>>>>>> parent of 6ed4bdb... Added Collision and reset
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: PlayerTransform
+      value: 
+      objectReference: {fileID: 445412}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 5457946}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 181140}
