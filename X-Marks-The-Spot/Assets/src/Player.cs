@@ -37,8 +37,8 @@ public class Player : MonoBehaviour
             Turn();
         }
         lastY = transform.rotation.eulerAngles.y;
-        //transform.rotation = Quaternion.RotateTowards(transform.rotation, qTo, turnSpeed * Time.deltaTime);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, qTo, turnSpeed * Time.deltaTime);
+        
     }
 
     void FixedUpdate()
@@ -71,7 +71,7 @@ public class Player : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && rb.velocity.y < 0.01f)
         {
             rb.AddForce(new Vector3(0f, 1f, 0f) * jumpForce);
         }
