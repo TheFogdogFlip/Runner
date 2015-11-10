@@ -17,6 +17,8 @@ public class Tile {
 
     public List<GameObject> Objects = new List<GameObject>();
 
+    public GameObject Object;
+
     public Tile(Vector3 position)
     {
         this.Position = position;
