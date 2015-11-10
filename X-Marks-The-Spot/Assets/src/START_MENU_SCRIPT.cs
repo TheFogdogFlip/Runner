@@ -4,12 +4,11 @@ using System.Collections;
 
 public class START_MENU_SCRIPT : MonoBehaviour
 {
-
     public Canvas quitMenu;
     public Button startText;
     public Button exitText;
     public Button optionsText;
-	// Use this for initialization
+
 	void Start ()
     {
         quitMenu = quitMenu.GetComponent<Canvas>();
@@ -27,8 +26,6 @@ public class START_MENU_SCRIPT : MonoBehaviour
         optionsText.enabled = false;
     }
 
-    
-
     public void NoPress()
     {
         quitMenu.enabled = false;
@@ -40,7 +37,6 @@ public class START_MENU_SCRIPT : MonoBehaviour
     public void StartLevel()
     {
         Application.LoadLevel(2);
-
     }
 
     public void OptionsPress()
