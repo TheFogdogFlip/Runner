@@ -407,7 +407,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37120599f4502244bb0d069388019e13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ForwardForce: 10
+  forwardForce: 10
+  jumpForce: 1000
   rb: {fileID: 0}
   turnSpeed: 55
 --- !u!124 &12416964

@@ -4,7 +4,10 @@ using System.Collections;
 public class Player : MonoBehaviour
 {
     //For moving forward
-    public float ForwardForce;
+    public float runSpeed;
+
+    //For jumping
+    public float jumpForce;
     public Rigidbody rb;
 
     //For turning 90 degrees smoothly
@@ -12,6 +15,8 @@ public class Player : MonoBehaviour
     private float rotationTarget = 0.0f;
     private Quaternion qTo = Quaternion.identity;
     private float lastY = 0f;
+
+    //
 
 
    
@@ -23,23 +28,28 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        //Running forward block
+        Run();
+
+        //Turn block
         if (lastY == transform.rotation.eulerAngles.y)
         {
             Turn();
         }
         lastY = transform.rotation.eulerAngles.y;
+        //transform.rotation = Quaternion.RotateTowards(transform.rotation, qTo, turnSpeed * Time.deltaTime);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, qTo, turnSpeed * Time.deltaTime);
-        
     }
 
     void FixedUpdate()
     {
-        Movement();
+        Jump();
     }
 
-    void Movement()
+    void Run()
     {
-        rb.AddForce(transform.forward * ForwardForce);
+        //Run forward
+        transform.Translate(transform.forward * runSpeed, Space.World);
     }
 
     void Turn()
@@ -57,5 +67,21 @@ public class Player : MonoBehaviour
             rotationTarget = 0.0f;
         }
         qTo = Quaternion.Euler(0.0f, rotationTarget, 0.0f);
+    }
+
+    void Jump()
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            rb.AddForce(new Vector3(0f, 1f, 0f) * jumpForce);
+        }
+    }
+
+    void Slide()
+    {
+        if (Input.GetButtonDown("Slide"))
+        {
+
+        }
     }
 }
