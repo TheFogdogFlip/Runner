@@ -3,13 +3,15 @@ using System.Collections;
 
 public class Player : MonoBehaviour
 {
-    
+    //For moving forward
     public float ForwardForce;
     public Rigidbody rb;
 
+    //For turning 90 degrees smoothly
     public float turnSpeed = 55.0f;
-    private float rotation = 0.0f;
+    private float rotationTarget = 0.0f;
     private Quaternion qTo = Quaternion.identity;
+    private float lastY = 0f;
 
 
    
@@ -21,21 +23,13 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.A))
+        if (lastY == transform.rotation.eulerAngles.y)
         {
-            rotation += 90.0f;
-            qTo = Quaternion.Euler(0.0f, rotation, 0.0f);
-
+            Turn();
         }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            rotation -= 90f;
-            qTo = Quaternion.Euler(0.0f, rotation, 0.0f);
-        }
-
+        lastY = transform.rotation.eulerAngles.y;
         transform.rotation = Quaternion.RotateTowards(transform.rotation, qTo, turnSpeed * Time.deltaTime);
-
+        
     }
 
     void FixedUpdate()
@@ -45,19 +39,23 @@ public class Player : MonoBehaviour
 
     void Movement()
     {
-        float turn;
-
         rb.AddForce(transform.forward * ForwardForce);
+    }
 
-        //if (Input.GetKeyDown(KeyCode.A))
-        //{
-        //    Debug.Log("Moving right!");
-        //    transform.Rotate(Vector3.up * 90);
-        //}
-        //else if (Input.GetKeyDown(KeyCode.D))
-        //{
-        //    Debug.Log("Moving left!");
-        //    transform.Rotate(Vector3.down * 90);
-        //}
+    void Turn()
+    {
+        if (Input.GetAxisRaw("Horizontal") == 1)
+        {
+            rotationTarget += 90.0f;
+        }
+        if (Input.GetAxisRaw("Horizontal") == -1)
+        {
+            rotationTarget -= 90.0f;
+        }
+        if (rotationTarget == 360 || rotationTarget == -360)
+        {
+            rotationTarget = 0.0f;
+        }
+        qTo = Quaternion.Euler(0.0f, rotationTarget, 0.0f);
     }
 }
