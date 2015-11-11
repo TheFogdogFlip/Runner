@@ -8,6 +8,8 @@ public class START_MENU_SCRIPT : MonoBehaviour
     public Button startText;
     public Button exitText;
     public Button optionsText;
+    public Button loadLevelText;
+    public Button testGameText;
 
 	void Start ()
     {
@@ -15,6 +17,9 @@ public class START_MENU_SCRIPT : MonoBehaviour
         startText = startText.GetComponent<Button>();
         exitText = exitText.GetComponent<Button>();
         optionsText = optionsText.GetComponent<Button>();
+        loadLevelText = loadLevelText.GetComponent<Button>();
+        testGameText = testGameText.GetComponent<Button>();
+
         quitMenu.enabled = false;
 	}
 	
@@ -24,6 +29,8 @@ public class START_MENU_SCRIPT : MonoBehaviour
         startText.enabled = false;
         exitText.enabled = false;
         optionsText.enabled = false;
+        loadLevelText.enabled = false;
+        testGameText.enabled = false;
     }
 
     public void NoPress()
@@ -32,14 +39,23 @@ public class START_MENU_SCRIPT : MonoBehaviour
         startText.enabled = true;
         exitText.enabled = true;
         optionsText.enabled = true;
+        loadLevelText.enabled = true;
+        testGameText.enabled = true;
     }
 
-    public void StartLevel()
+    public void TestGamePress()
+    {
+        Application.LoadLevel(4);
+    }
+    public void LoadLevelPress()
+    {
+        Application.LoadLevel(3);
+    }
+    public void OptionsPress()
     {
         Application.LoadLevel(2);
     }
-
-    public void OptionsPress()
+    public void StartLevel()
     {
         Application.LoadLevel(1);
     }
