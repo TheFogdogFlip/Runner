@@ -3,10 +3,19 @@ using System.Collections;
 using System.Xml.Serialization;
 using System.IO;
 
-public class World {
+public class World : Component{
 
-    private Vector3 gridDimentions = new Vector3(512, 1024, 512);
-    private Tile[,] grid;
+    private static Vector3 gridDimentions = new Vector3(2, 2, 2);
+
+    public static Vector3 GridDimentions
+    {
+        get
+        {
+            return gridDimentions;
+        }
+    }
+
+    private EmptyTile[,] grid;
 
     private int width;
     private int depth;
@@ -18,26 +27,26 @@ public class World {
 
     }
 
-    public void Init(string filename)
+    public static void Init(string filename)
     {
         Instance = new World();
         Instance.load(filename);
     }
 
-    public void Init()
+    public static void Init()
     {
         Instance = new World();
         Instance.generate();
     }
 
-    public Tile GetTile(int x, int z)
+    public EmptyTile GetTile(int x, int y)
     {
-        return grid[Mathf.FloorToInt(x / gridDimentions.x), Mathf.FloorToInt(z / gridDimentions.z)];
+        return grid[Mathf.FloorToInt(y / gridDimentions.y), Mathf.FloorToInt(x / gridDimentions.x)];
     }
 
-    public void SetTile(int x, int z, Tile tile)
+    public void SetTile(int x, int y, EmptyTile tile)
     {
-        grid[Mathf.FloorToInt(x / gridDimentions.x), Mathf.FloorToInt(z / gridDimentions.z)] = tile;
+        grid[Mathf.FloorToInt(y / gridDimentions.y), Mathf.FloorToInt(x / gridDimentions.x)] = tile;
        
     }
 
@@ -48,57 +57,72 @@ public class World {
 
     public void Save(string filename)
     {
+        XmlSerializer serializer = new XmlSerializer(typeof(TileContainer));
+        FileStream stream = new FileStream("TileNodes.xml", FileMode.OpenOrCreate);
 
+        TileContainer container = new TileContainer();
+        container.Nodes.Add(new TileNode() { Name = "Empty", Color = new TileNode.NColor() { r = 1.0f, g = 1.0f, b = 1.0f, a = 1.0f } });
+        container.Nodes.Add(new TileNode() { Name = "Path", Color = new TileNode.NColor() { r = 0.0f, g = 0.0f, b = 0.0f, a = 1.0f } });
+
+        serializer.Serialize(stream, container);
+        stream.Close();
     }
 
     private void load(string filename)
     {
-        XmlSerializer serializer = new XmlSerializer(typeof(TileNode));
+
+        XmlSerializer serializer = new XmlSerializer(typeof(TileContainer));
         FileStream stream = new FileStream("TileNodes.xml", FileMode.Open);
 
         var tiles = serializer.Deserialize(stream) as TileContainer;
-
-        var texture = Resources.Load<Texture2D>(filename);
+        stream.Close();
+        Texture2D texture = Resources.Load<Texture2D>(filename);
 
         int height = texture.height;
         int width = texture.width;
 
-        this.grid = new Tile[width, height];
+        this.grid = new EmptyTile[width, height];
 
         for (int y = 0; y < height; y++)
         {
             for (int x = 0; x < width; x++)
             {
-                var color = texture.GetPixel(x, y);
+                Color color = texture.GetPixel(x, y);
 
-                var tileType = tiles.Nodes.Find(n => n.Color == color);
+                TileNode tileType = tiles.Nodes.Find(n => new Color(n.Color.r, n.Color.g, n.Color.b, n.Color.a) == color);
 
-                Tile tile = null;
+                TileNode tn = new TileNode() { Name = "Path", Color = new TileNode.NColor() };
 
-                switch (tileType.Name)
+                EmptyTile tile = null;
+
+                EmptyTile leftTile = null;
+                EmptyTile bottomTile = null;
+
+                if (x != 0)
+                    leftTile = grid[y, x - 1];
+
+                if (y != 0)
+                    bottomTile = grid[y - 1, x];
+
+                switch (tn.Name)
                 {
-                    case ModelTypes.Wall:
-                        tile = new WallTile(new Vector3(x * 512, 0, y * 512));
-                        tile.Object.SetActive(true);
+                    case TileType.Path:
+                        tile = new PathTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y));
+                        if (bottomTile == null)
+                            ((PathTile)tile).BottomWall = (GameObject)Instantiate(Resources.Load("Wall_Default"));
+
+                        if (leftTile == null)
+                            ((PathTile)tile).LeftWall = (GameObject)Instantiate(Resources.Load("Wall_Default"));
+
+                        ((PathTile)tile).Floor = (GameObject)Instantiate(Resources.Load("Floor_Default"));
+
                         break;
 
-                    case ModelTypes.Pit:
-                        tile = new PitTile(new Vector3(x * 512, -512, y * 512));
-                        break;
-
-                    case ModelTypes.Crouch:
-                        tile = new CrouchTile(new Vector3(x * 512, 0, y * 512));
-                        break;
-
-                    case ModelTypes.LeftObstacle:
-                        tile = new ObstacleTile(new Vector3(x * 512, 0, y * 512));
-                        break;
-
-                    case ModelTypes.RightObstacle:
-                        tile = new ObstacleTile(new Vector3(x * 512 + 512 - 50, 0, y * 512));
+                    case TileType.Empty:
+                        tile = new EmptyTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y));
                         break;
                 }
-                this.grid[x, y] = tile;
+                this.grid[y, x] = tile;
             }
         }
     }

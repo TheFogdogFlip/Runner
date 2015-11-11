@@ -1,10 +1,10 @@
-﻿using UnityEngine;
-using System.Xml;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 using System.Collections.Generic;
 
-public class TileContainer {
+[XmlRoot("TileContainer")]
+public class TileContainer{
 
-    [XmlAttribute("node")]
-    public List<TileNode> Nodes;
+    [XmlArray("TypeList")]
+    [XmlArrayItem("TileNode")]
+    public List<TileNode> Nodes = new List<TileNode>();
 }
