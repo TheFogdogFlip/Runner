@@ -93,6 +93,17 @@ public class World : Component{
 
                 TileNode tn = new TileNode() { Name = "Path", Color = new TileNode.NColor() };
 
+                //Temp test shit REMOVE
+
+                string t = "Empty";
+
+                if (color == new Color(0, 0, 0))
+                    t = "Path";
+                if (color == new Color(1, 1, 1))
+                    t = "Empty";
+
+                // END REMOVE
+
                 EmptyTile tile = null;
 
                 EmptyTile leftTile = null;
@@ -104,17 +115,17 @@ public class World : Component{
                 if (y != 0)
                     bottomTile = grid[y - 1, x];
 
-                switch (tn.Name)
+                switch (t)
                 {
                     case TileType.Path:
                         tile = new PathTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y));
-                        if (bottomTile == null)
-                            ((PathTile)tile).BottomWall = (GameObject)Instantiate(Resources.Load("Wall_Default"));
+                        //if (bottomTile == null)
+                        //    ((PathTile)tile).BottomWall = (GameObject)Instantiate(Resources.Load("Path"));
 
-                        if (leftTile == null)
-                            ((PathTile)tile).LeftWall = (GameObject)Instantiate(Resources.Load("Wall_Default"));
+                        //if (leftTile == null)
+                        //    ((PathTile)tile).LeftWall = (GameObject)Instantiate(Resources.Load("Path"));
 
-                        ((PathTile)tile).Floor = (GameObject)Instantiate(Resources.Load("Floor_Default"));
+                        ((PathTile)tile).Floor = (GameObject)Instantiate(Resources.Load("Path"));
 
                         break;
 
