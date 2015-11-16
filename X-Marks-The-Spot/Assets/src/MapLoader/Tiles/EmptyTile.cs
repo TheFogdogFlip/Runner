@@ -17,6 +17,10 @@ public class EmptyTile {
         }
     }
 
+    public EmptyTile()
+    {
+    }
+
     public EmptyTile(Vector3 position)
     {
         this.position = position;

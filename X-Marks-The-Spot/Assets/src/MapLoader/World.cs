@@ -61,8 +61,8 @@ public class World : Component{
         FileStream stream = new FileStream("TileNodes.xml", FileMode.OpenOrCreate);
 
         TileContainer container = new TileContainer();
-        container.Nodes.Add(new TileNode() { Name = "Empty", Color = new TileNode.NColor() { r = 1.0f, g = 1.0f, b = 1.0f, a = 1.0f } });
-        container.Nodes.Add(new TileNode() { Name = "Path", Color = new TileNode.NColor() { r = 0.0f, g = 0.0f, b = 0.0f, a = 1.0f } });
+        container.Nodes.Add(new TileNode( "Empty", new TileNode.NColor(1.0f, 1.0f, 1.0f, 1.0f )));
+        container.Nodes.Add(new TileNode("Path"));
 
         serializer.Serialize(stream, container);
         stream.Close();
@@ -70,7 +70,6 @@ public class World : Component{
 
     private void load(string filename)
     {
-
         XmlSerializer serializer = new XmlSerializer(typeof(TileContainer));
         FileStream stream = new FileStream("TileNodes.xml", FileMode.Open);
 
@@ -91,42 +90,13 @@ public class World : Component{
 
                 TileNode tileType = tiles.Nodes.Find(n => new Color(n.Color.r, n.Color.g, n.Color.b, n.Color.a) == color);
 
-                TileNode tn = new TileNode() { Name = "Path", Color = new TileNode.NColor() };
-
-                //Temp test shit REMOVE
-
-                string t = "Empty";
-
-                if (color == new Color(0, 0, 0))
-                    t = "Path";
-                if (color == new Color(1, 1, 1))
-                    t = "Empty";
-
-                // END REMOVE
-
                 EmptyTile tile = null;
 
-                EmptyTile leftTile = null;
-                EmptyTile bottomTile = null;
-
-                if (x != 0)
-                    leftTile = grid[y, x - 1];
-
-                if (y != 0)
-                    bottomTile = grid[y - 1, x];
-
-                switch (t)
+                switch (tileType.Name)
                 {
                     case TileType.Path:
                         tile = new PathTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y));
-                        //if (bottomTile == null)
-                        //    ((PathTile)tile).BottomWall = (GameObject)Instantiate(Resources.Load("Path"));
-
-                        //if (leftTile == null)
-                        //    ((PathTile)tile).LeftWall = (GameObject)Instantiate(Resources.Load("Path"));
-
-                        ((PathTile)tile).Floor = (GameObject)Instantiate(Resources.Load("Path"));
-
+                        ((PathTile)tile).GameObject = (GameObject)Instantiate(Resources.Load("Path"));
                         break;
 
                     case TileType.Empty:
