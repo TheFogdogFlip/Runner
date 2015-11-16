@@ -1,10 +1,22 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class EmptyTile : Component
 {
 
     protected Vector3 position;
+    protected Color color;
+
+    public virtual Color Color
+    {
+        get
+        {
+            return color;
+        }
+        set
+        {
+            color = value;
+        }
+    }
 
     public virtual Vector3 Position
     {
@@ -22,9 +34,10 @@ public class EmptyTile : Component
     {
     }
 
-    public EmptyTile(Vector3 position)
+    public EmptyTile(Vector3 position, Color color)
     {
         this.position = position;
+        this.color = color;
     }
 
 }
