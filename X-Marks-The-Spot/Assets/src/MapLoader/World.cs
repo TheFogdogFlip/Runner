@@ -6,12 +6,31 @@ using System.IO;
 public class World{
 
     private static Vector3 gridDimentions = new Vector3(2, 2, 2);
+    private Vector3 start;
+    private Vector3 startDirection;
+
 
     public static Vector3 GridDimentions
     {
         get
         {
             return gridDimentions;
+        }
+    }
+
+    public Vector3 StartPosition
+    {
+        get
+        {
+            return start;
+        }
+    }
+
+    public Vector3 StartDirection
+    {
+        get
+        {
+            return startDirection;
         }
     }
 
@@ -105,10 +124,19 @@ public class World{
 
                 TileNode tileType = tilesTypes.Nodes.Find(n => new Color(n.Color.r / 255.0f, n.Color.g / 255.0f, n.Color.b / 255.0f, n.Color.a / 255.0f) == color);
                 EmptyTile tile = null;
-                if(tileType == null) // Color Parsing Error
+                if (tileType == null) // Color Parsing Error
                     tile = new EmptyTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y), new Color());
                 else if (tileType.Name.ToLower() == "empty")
                     tile = new EmptyTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y), color);
+                else if (tileType.Name.ToLower() == "finish")
+                {
+                    tile = new PathTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y), color, tileType.Name, tileType.Rotation);
+                    start = tile.Position;
+                    if (((PathTile)tile).Rotation == 0.0f)
+                        startDirection = new Vector3(0, 0, 1);
+                    else
+                        startDirection = new Vector3(1, 0, 0);
+                }
                 else
                     tile = new PathTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y), color, tileType.Name, tileType.Rotation);
                 this.grid[y, x] = tile;
