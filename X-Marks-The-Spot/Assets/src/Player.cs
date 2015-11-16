@@ -99,7 +99,7 @@ public class Player : MonoBehaviour
             //Running forward block
             Run();
         }
-        else if(!ctdTimerObj.TimerSecondRunning)
+        if(!ctdTimerObj.TimerSecondRunning)
         {
             ctdTimerObj.HideTimer();
         }
@@ -107,6 +107,9 @@ public class Player : MonoBehaviour
         {
             ctdTimerObj.SetText();
         }
+        
+        
+       
     }
 
     void SetupCtdTimer()
