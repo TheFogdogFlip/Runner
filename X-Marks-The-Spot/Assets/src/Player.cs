@@ -7,7 +7,10 @@ public class Player : MonoBehaviour
     public float runSpeed;
 
     //For jumping
-    public float jumpForce;
+    private bool isJumping = false;
+    private bool isFalling = false;
+    public float jumpSpeed;
+    public float jumpHeight;
     public Rigidbody rb;
 
     //For turning 90 degrees smoothly
@@ -16,7 +19,12 @@ public class Player : MonoBehaviour
     private Quaternion qTo = Quaternion.identity;
     private float lastY = 0f;
 
-    //
+    //For sliding
+    private bool isSliding = false;
+    public float slideSpeed;
+    public float maxSlideLength;
+    private float crntSlideLength;
+    public BoxCollider bc;
 
 
    
@@ -24,12 +32,15 @@ public class Player : MonoBehaviour
     void Awake ()
     {
         rb = GetComponent<Rigidbody>();
+        bc = GetComponent<BoxCollider>();
+        crntSlideLength = maxSlideLength;
 	}
 
     void Update()
     {
         //Running forward block
         Run();
+        
 
         //Turn block
         if (lastY == transform.rotation.eulerAngles.y)
@@ -41,9 +52,16 @@ public class Player : MonoBehaviour
         
     }
 
+    void LateUpdate()
+    {
+        //Do this late because we want to check collisions first
+        Jump();
+        Slide();
+    }
+
     void FixedUpdate()
     {
-        Jump();
+        
     }
 
     void Run()
@@ -71,17 +89,63 @@ public class Player : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetButtonDown("Jump") && rb.velocity.y < 0.01f)
+        if (Input.GetButtonDown("Jump") && !isJumping)
         {
-            rb.AddForce(new Vector3(0f, 1f, 0f) * jumpForce);
+            isJumping = true;
+            //rb.AddForce(new Vector3(0f, 1f, 0f) * jumpForce);
+        }
+        if (isJumping)
+        {
+            //Going up
+            if (!isFalling)
+            {
+                transform.Translate(new Vector3(0, jumpSpeed, 0));
+                if (transform.position.y >= jumpHeight)
+                {
+                    isFalling = true;
+                }
+            }
+            //Going down
+            else if (isFalling)
+            {
+                transform.Translate(new Vector3(0, -jumpSpeed, 0));
+            }
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Floor"))
+        {
+            isJumping = false;
+            isFalling = false;
         }
     }
 
     void Slide()
     {
-        if (Input.GetButtonDown("Slide"))
+        if (Input.GetButtonDown("Slide") && !isSliding)
         {
+            //Slide start
+            isSliding = true;
+            transform.localScale += new Vector3(0, -(transform.localScale.y * 0.5f), 0);
+            
+        }
 
+        if (isSliding)
+        {
+            //Slide end
+            if (crntSlideLength <= 0)
+            {
+                transform.localScale += new Vector3(0, transform.localScale.y, 0);
+                crntSlideLength = maxSlideLength;
+                isSliding = false;
+            }
+            else
+            {
+                crntSlideLength -= slideSpeed * Time.deltaTime;
+            }
+                
         }
     }
 }
