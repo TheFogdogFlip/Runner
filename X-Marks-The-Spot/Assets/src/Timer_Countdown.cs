@@ -36,7 +36,8 @@ public class Timer_Countdown : MonoBehaviour
         }
         else
         {
-            TimerSecondRunning = false;    
+            TimerSecondRunning = false;
+            HideTimer();
             return;
         }
         
