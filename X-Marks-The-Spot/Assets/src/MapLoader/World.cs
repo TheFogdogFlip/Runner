@@ -128,7 +128,7 @@ public class World{
                     tile = new EmptyTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y), new Color());
                 else if (tileType.Name.ToLower() == "empty")
                     tile = new EmptyTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y), color);
-                else if (tileType.Name.ToLower() == "finish")
+                else if (tileType.Name.ToLower() == "start")
                 {
                     tile = new PathTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y), color, tileType.Name, tileType.Rotation);
                     start = tile.Position;
