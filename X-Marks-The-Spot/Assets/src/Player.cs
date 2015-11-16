@@ -6,6 +6,9 @@ public class Player : MonoBehaviour
 {
     //For moving forward
     public float runSpeed;
+    public float crntSpeed;
+    public float deceleration;
+    public float acceleration;
 
     //For jumping
     private bool isJumping = false;
@@ -19,6 +22,7 @@ public class Player : MonoBehaviour
     private float rotationTarget = 0.0f;
     private Quaternion qTo = Quaternion.identity;
     private float lastY = 0f;
+    private int turnPhase = 0;
 
     //For sliding
     private bool isSliding = false;
@@ -35,6 +39,11 @@ public class Player : MonoBehaviour
     private Timer_Player playerTimerObj;
     private GameObject playerTimerGameObj;
 
+    //For Animation
+    public Animator anim;
+    public bool isFirstFrame = true;
+
+
     //Ghost Timer -- TEMPORARY, just needed somewhere to make it 
     private Timer_Ghost ghostTimerObj;
     private GameObject ghostTimerGameObj;
@@ -48,11 +57,22 @@ public class Player : MonoBehaviour
         SetupCtdTimer();
         SetupPlayerTimer();
         SetupGhostTimer();
+        crntSpeed = runSpeed;
 	}
+
+    void Start ()
+    {
+
+    }
 
     void Update()
     {
-        if(!ghostTimerObj.TimerRunning)
+        if (isFirstFrame)
+        {
+            isFirstFrame = false;
+            anim = GameObject.Find("NinjaBob").GetComponent<Animator>();
+        }
+        if (!ghostTimerObj.TimerRunning)
         {
             ghostTimerObj.TimerRunning = true;
             ghostTimerObj.f_time = 0;
@@ -69,20 +89,15 @@ public class Player : MonoBehaviour
                 playerTimerObj.TimerRunning = true;
                 playerTimerObj.f_time = 0;
             }
+
             else
             {
                 playerTimerObj.SetText();
             }
 
+            Turn();
+            //Running forward block
             Run();
-
-            //Turn block
-            if (lastY == transform.rotation.eulerAngles.y)
-            {
-                Turn();
-            }
-            lastY = transform.rotation.eulerAngles.y;
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, qTo, turnSpeed * Time.deltaTime);
         }
         else if(!ctdTimerObj.TimerSecondRunning)
         {
@@ -135,24 +150,65 @@ public class Player : MonoBehaviour
     void Run()
     {
         //Run forward
-        transform.Translate(transform.forward * runSpeed, Space.World);
+        transform.Translate(transform.forward * crntSpeed, Space.World);
     }
 
     void Turn()
     {
-        if (Input.GetAxisRaw("Horizontal") == 1)
+        
+        //ACTIVATION PHASE
+        if (turnPhase == 0)
         {
-            rotationTarget += 90.0f;
+
+            if (Input.GetAxisRaw("Horizontal") == 1)
+            {
+                rotationTarget += 90.0f;
+                anim.Play("TurnRight90");
+                turnPhase = 1;
+            }
+            if (Input.GetAxisRaw("Horizontal") == -1)
+            {
+                rotationTarget -= 90.0f;
+                anim.Play("TurnLeft90");
+                turnPhase = 1;
+            }
+            if (rotationTarget == 360 || rotationTarget == -360)
+            {
+                rotationTarget = 0.0f;
+            }
+            qTo = Quaternion.Euler(0.0f, rotationTarget, 0.0f);
         }
-        if (Input.GetAxisRaw("Horizontal") == -1)
+        //BRAKING PHASE
+        if (turnPhase == 1)
         {
-            rotationTarget -= 90.0f;
+            crntSpeed -= deceleration;
+
+            if (crntSpeed <= 0.01)
+            {
+                turnPhase = 2;
+            }
         }
-        if (rotationTarget == 360 || rotationTarget == -360)
+
+        //TURNING PHASE
+        if (turnPhase == 2)
         {
-            rotationTarget = 0.0f;
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, qTo, turnSpeed * Time.deltaTime);
+
+            if (transform.rotation == qTo)
+            {
+                turnPhase = 3;
+            }
         }
-        qTo = Quaternion.Euler(0.0f, rotationTarget, 0.0f);
+        //AXELERATION PHASE
+        if (turnPhase == 3)
+        {
+            crntSpeed += acceleration;
+            if (crntSpeed >= runSpeed)
+            {
+                crntSpeed = runSpeed;
+                turnPhase = 0;
+            }
+        }
     }
 
     void Jump()

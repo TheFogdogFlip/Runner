@@ -6,12 +6,31 @@ using System.IO;
 public class World{
 
     private static Vector3 gridDimentions = new Vector3(2, 2, 2);
+    private Vector3 start;
+    private Vector3 startDirection;
+
 
     public static Vector3 GridDimentions
     {
         get
         {
             return gridDimentions;
+        }
+    }
+
+    public Vector3 StartPosition
+    {
+        get
+        {
+            return start;
+        }
+    }
+
+    public Vector3 StartDirection
+    {
+        get
+        {
+            return startDirection;
         }
     }
 
@@ -57,7 +76,7 @@ public class World{
 
     public void Save(string filename)
     {
-        Texture2D generatedMap = new Texture2D(width, depth);
+        Texture2D generatedMap = new Texture2D(width, depth, TextureFormat.RGBA32, false);
 
         var tilesTypes = getTileTypes();
 
@@ -65,18 +84,14 @@ public class World{
         {
             for (int x = 0; x < width; x++)
             {
-                //generatedMap.SetPixel(x, y, );
+                generatedMap.SetPixel(x, y, grid[y, x].Color);
             }
         }
-
-        //XmlSerializer serializer = new XmlSerializer(typeof(TileContainer));
-        //FileStream stream = new FileStream("TileNodes.xml", FileMode.OpenOrCreate);
-        //TileContainer container = new TileContainer();
-        //container.Nodes.Add(new TileNode( "Empty", new TileNode.NColor(1.0f, 1.0f, 1.0f, 1.0f )));
-        //container.Nodes.Add(new TileNode("Path"));
-
-        //serializer.Serialize(stream, container);
-        //stream.Close();
+        var rawMap = generatedMap.EncodeToPNG();
+        FileStream stream = new FileStream(filename, FileMode.OpenOrCreate);
+        stream.Write(rawMap, 0, rawMap.Length);
+        stream.Flush();
+        stream.Close();
     }
 
     private TileContainer getTileTypes()
@@ -94,14 +109,14 @@ public class World{
 
         Texture2D texture = Resources.Load<Texture2D>(filename);
 
-        int height = texture.height;
-        int width = texture.width;
+        depth = texture.height;
+        width = texture.width;
 
-        this.grid = new EmptyTile[width, height];
+        grid = new EmptyTile[width, depth];
 
         var tilesTypes = getTileTypes();
 
-        for (int y = 0; y < height; y++)
+        for (int y = 0; y < depth; y++)
         {
             for (int x = 0; x < width; x++)
             {
@@ -109,26 +124,21 @@ public class World{
 
                 TileNode tileType = tilesTypes.Nodes.Find(n => new Color(n.Color.r / 255.0f, n.Color.g / 255.0f, n.Color.b / 255.0f, n.Color.a / 255.0f) == color);
                 EmptyTile tile = null;
-                if(tileType == null)
-                    tile = new EmptyTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y));
+                if (tileType == null) // Color Parsing Error
+                    tile = new EmptyTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y), new Color());
                 else if (tileType.Name.ToLower() == "empty")
-                    tile = new EmptyTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y));
+                    tile = new EmptyTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y), color);
+                else if (tileType.Name.ToLower() == "finish")
+                {
+                    tile = new PathTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y), color, tileType.Name, tileType.Rotation);
+                    start = tile.Position;
+                    if (((PathTile)tile).Rotation == 0.0f)
+                        startDirection = new Vector3(0, 0, 1);
+                    else
+                        startDirection = new Vector3(1, 0, 0);
+                }
                 else
-                    tile = new PathTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y), tileType.Name, tileType.Rotation);
-
-
-
-                //switch (tileType.Name)
-                //{
-                //    case TileType.Path:
-                //        tile = new PathTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y));
-                //        ((PathTile)tile).GameObject = (GameObject)Instantiate(Resources.Load("Path"));
-                //        break;
-
-                //    case TileType.Empty:
-                //        tile = new EmptyTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y));
-                //        break;
-                //}
+                    tile = new PathTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y), color, tileType.Name, tileType.Rotation);
                 this.grid[y, x] = tile;
             }
         }
