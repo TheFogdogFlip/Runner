@@ -4,26 +4,45 @@ using System.Collections;
 
 public class Timer_Countdown : MonoBehaviour
 {
-    public float f_timeRemaining = 3;
-    public int i_timeRemaining;
-    public bool TimerRunning = true;
-    public bool TimerRunning_Second = true;
-    
-    public void SetText(Text textObj)
+    public float f_time;
+    public int i_time;
+    public bool TimerFirstRunning = true;
+    public bool TimerSecondRunning = true;
+    public Text textObj;
+
+    void Start()
     {
-        if(f_timeRemaining > 0.5)
+
+    }
+
+    void Update()
+    {
+        f_time -= Time.deltaTime;
+        i_time = (int)f_time;
+    }
+
+    public void SetText()
+    {
+        if(f_time >= 1)
         {
-            textObj.text = i_timeRemaining.ToString();
+            textObj.text = i_time.ToString();
+            return;
         }
-        if(i_timeRemaining == 0)
+        else if(f_time < 1 && f_time > 0)
         {
             textObj.text = "GO!";
-            TimerRunning = false;
-            
+            TimerFirstRunning = false;
+            return;
         }
-        else if(i_timeRemaining <= 0)
+        else
         {
-            TimerRunning_Second = false;            
+            TimerSecondRunning = false;    
+            return;
         }
+        
+    }
+    public void HideTimer()
+    {
+        textObj.enabled = false;
     }
 }

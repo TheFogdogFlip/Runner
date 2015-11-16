@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Player : MonoBehaviour
@@ -26,32 +27,99 @@ public class Player : MonoBehaviour
     private float crntSlideLength;
     public BoxCollider bc;
 
+    //Ctd Timer
+    private GameObject ctdTimerGameObj;
+    private Timer_Countdown ctdTimerObj;
+    
+    //Player Timer
+    private Timer_Player playerTimerObj;
+    private GameObject playerTimerGameObj;
 
-   
+    //Ghost Timer -- TEMPORARY, just needed somewhere to make it 
+    private Timer_Ghost ghostTimerObj;
+    private GameObject ghostTimerGameObj;
 
     void Awake ()
     {
         rb = GetComponent<Rigidbody>();
         bc = GetComponent<BoxCollider>();
         crntSlideLength = maxSlideLength;
+
+        SetupCtdTimer();
+        SetupPlayerTimer();
+        SetupGhostTimer();
 	}
 
     void Update()
     {
-        //Running forward block
-        Run();
-        
-
-        //Turn block
-        if (lastY == transform.rotation.eulerAngles.y)
+        if(!ghostTimerObj.TimerRunning)
         {
-            Turn();
+            ghostTimerObj.TimerRunning = true;
+            ghostTimerObj.f_time = 0;
         }
-        lastY = transform.rotation.eulerAngles.y;
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, qTo, turnSpeed * Time.deltaTime);
-        
+        else
+        {
+            ghostTimerObj.SetText();
+        }
+        //Running forward block
+        if (!ctdTimerObj.TimerFirstRunning)
+        {
+            if (!playerTimerObj.TimerRunning)
+            {
+                playerTimerObj.TimerRunning = true;
+                playerTimerObj.f_time = 0;
+            }
+            else
+            {
+                playerTimerObj.SetText();
+            }
+
+            Run();
+
+            //Turn block
+            if (lastY == transform.rotation.eulerAngles.y)
+            {
+                Turn();
+            }
+            lastY = transform.rotation.eulerAngles.y;
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, qTo, turnSpeed * Time.deltaTime);
+        }
+        else if(!ctdTimerObj.TimerSecondRunning)
+        {
+            ctdTimerObj.HideTimer();
+        }
+        else
+        {
+            ctdTimerObj.SetText();
+        }
     }
 
+    void SetupCtdTimer()
+    {
+        ctdTimerGameObj = GameObject.Find("ctdTimer");
+        ctdTimerObj = ctdTimerGameObj.GetComponent<Timer_Countdown>();
+        ctdTimerObj.f_time = 4;
+        ctdTimerObj.i_time = 4;
+        ctdTimerObj.TimerFirstRunning = true;
+        ctdTimerObj.TimerSecondRunning = true;
+        ctdTimerObj.textObj.enabled = true;
+    }
+
+    void SetupPlayerTimer()
+    {
+        playerTimerGameObj = GameObject.Find("playerTimer");
+        playerTimerObj = playerTimerGameObj.GetComponent<Timer_Player>();
+        playerTimerObj.textObj.text = "0";
+        playerTimerObj.TimerRunning = false;
+    }
+
+    void SetupGhostTimer()
+    {
+        ghostTimerGameObj = GameObject.Find("ghostTimer");
+        ghostTimerObj = ghostTimerGameObj.GetComponent<Timer_Ghost>();
+        ghostTimerObj.textObj.text = "0";
+        ghostTimerObj.TimerRunning = false;
+    }
     void LateUpdate()
     {
         //Do this late because we want to check collisions first
