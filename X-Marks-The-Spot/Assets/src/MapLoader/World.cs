@@ -57,24 +57,41 @@ public class World{
 
     public void Save(string filename)
     {
+        Texture2D generatedMap = new Texture2D(width, depth);
+
+        var tilesTypes = getTileTypes();
+
+        for (int y = 0; y < depth; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                //generatedMap.SetPixel(x, y, );
+            }
+        }
+
+        //XmlSerializer serializer = new XmlSerializer(typeof(TileContainer));
+        //FileStream stream = new FileStream("TileNodes.xml", FileMode.OpenOrCreate);
+        //TileContainer container = new TileContainer();
+        //container.Nodes.Add(new TileNode( "Empty", new TileNode.NColor(1.0f, 1.0f, 1.0f, 1.0f )));
+        //container.Nodes.Add(new TileNode("Path"));
+
+        //serializer.Serialize(stream, container);
+        //stream.Close();
+    }
+
+    private TileContainer getTileTypes()
+    {
+        FileStream stream = new FileStream("TileNodes.xml", FileMode.Open);
         XmlSerializer serializer = new XmlSerializer(typeof(TileContainer));
-        FileStream stream = new FileStream("TileNodes.xml", FileMode.OpenOrCreate);
-
-        TileContainer container = new TileContainer();
-        container.Nodes.Add(new TileNode( "Empty", new TileNode.NColor(1.0f, 1.0f, 1.0f, 1.0f )));
-        container.Nodes.Add(new TileNode("Path"));
-
-        serializer.Serialize(stream, container);
+        var tiles = serializer.Deserialize(stream) as TileContainer;
         stream.Close();
+
+        return tiles;
     }
 
     private void load(string filename)
     {
-        XmlSerializer serializer = new XmlSerializer(typeof(TileContainer));
-        FileStream stream = new FileStream("TileNodes.xml", FileMode.Open);
 
-        var tiles = serializer.Deserialize(stream) as TileContainer;
-        stream.Close();
         Texture2D texture = Resources.Load<Texture2D>(filename);
 
         int height = texture.height;
@@ -82,14 +99,15 @@ public class World{
 
         this.grid = new EmptyTile[width, height];
 
+        var tilesTypes = getTileTypes();
+
         for (int y = 0; y < height; y++)
         {
             for (int x = 0; x < width; x++)
             {
                 Color color = texture.GetPixel(x, y);
 
-                TileNode tileType = tiles.Nodes.Find(n => new Color(n.Color.r / 255.0f, n.Color.g / 255.0f, n.Color.b / 255.0f, n.Color.a / 255.0f) == color);
-                Color test = new Color();
+                TileNode tileType = tilesTypes.Nodes.Find(n => new Color(n.Color.r / 255.0f, n.Color.g / 255.0f, n.Color.b / 255.0f, n.Color.a / 255.0f) == color);
                 EmptyTile tile = null;
 
                 if (tileType.Name.ToLower() == "empty")
