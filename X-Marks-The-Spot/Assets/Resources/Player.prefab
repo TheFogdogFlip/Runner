@@ -1168,7 +1168,7 @@ MonoBehaviour:
   runSpeed: .0500000007
   crntSpeed: 0
   deceleration: .00100000005
-  acceleration: .00499999989
+  acceleration: .00100000005
   jumpSpeed: .0500000007
   jumpHeight: 1
   rb: {fileID: 5415758}

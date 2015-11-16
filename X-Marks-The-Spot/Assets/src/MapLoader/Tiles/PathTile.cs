@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
 public class PathTile : EmptyTile {
 
@@ -45,9 +43,10 @@ public class PathTile : EmptyTile {
         get { return gameObject; }
     }
 
-    public PathTile(Vector3 position, string gameObjectTag, float rotation = 0.0f)
+    public PathTile(Vector3 position, Color color, string gameObjectTag, float rotation = 0.0f)
     {
-        GameObject = (GameObject)Instantiate(Resources.Load(gameObjectTag)); ;
+        GameObject = (GameObject)Instantiate(Resources.Load(gameObjectTag));
+        Color = color;
         Position = position;
         Rotation = rotation;
     }
