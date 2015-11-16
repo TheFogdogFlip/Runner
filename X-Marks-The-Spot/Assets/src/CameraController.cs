@@ -4,6 +4,7 @@ using System.Collections;
 public class CameraController : MonoBehaviour {
 
     public GameObject Player;
+    //private Transform LookAtPoint;
     private float distance;
     private float height;
     private float heightDamping;
@@ -14,12 +15,14 @@ public class CameraController : MonoBehaviour {
     private float wantedHeight;
     private float currentHeight;
     private Vector3 heightVec;
+    private Vector3 cameraLook;
 	// Use this for initialization
 	void Start () {
-        distance = 3.0f;
-        height = 0.1f;
+        distance = 1.5f;
+        height = 0.5f;
         heightDamping = 3.0f;
         rotationDamping = 5.0f;
+        //LookAtPoint = Player.transform;
     }
 	
 	// Update is called once per frame
@@ -32,12 +35,13 @@ public class CameraController : MonoBehaviour {
 
         currentRot = Quaternion.Euler(0, currentRotAngle, 0);
 
-        heightVec[1] = currentHeight;
-        transform.position = Player.transform.position + heightVec;
+        transform.position = Player.transform.position;
         transform.position -= currentRot * Vector3.forward * distance;
-
+        heightVec[1] = currentHeight;
+        transform.position = transform.position + heightVec;
         //transform.position.y = currentHeight;
-
+        //LookAtPoint.position = Player.transform.position;
+        //LookAtPoint.position = Player.transform.position + heightVec;
         transform.LookAt(Player.transform);
     }
 }
