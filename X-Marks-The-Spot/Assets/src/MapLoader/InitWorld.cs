@@ -7,7 +7,7 @@ public class InitWorld : MonoBehaviour {
     {
         World.Init("TestMap");
 
-        Instantiate(Resources.Load("Player", typeof(GameObject)), World.Instance.StartPosition, Quaternion.Euler(new Vector3(0, 90, 0)));
+        Instantiate(Resources.Load("Player", typeof(GameObject)), World.Instance.StartPosition, Quaternion.Euler(new Vector3(0, 0, 0)));
     }
 
 	// Use this for initialization
