@@ -1,23 +1,239 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <TileContainer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <TypeList>
+  <!-- Empty0 255,255,255,255 -->
     <TileNode>
       <Name>Empty</Name>
       <Color>
-        <r>1</r>
-        <g>1</g>
-        <b>1</b>
-        <a>1</a>
+        <r>255</r>
+        <g>255</g>
+        <b>255</b>
+        <a>255</a>
       </Color>
+      <Rotation>0</Rotation>
     </TileNode>
+	<!-- Path0 255,0,0,255-->
     <TileNode>
       <Name>Path</Name>
       <Color>
         <r>0</r>
         <g>0</g>
         <b>0</b>
-        <a>1</a>
+        <a>255</a>
       </Color>
+      <Rotation>0</Rotation>
+    </TileNode>
+	<!-- Path90 0,255,0,255-->
+    <TileNode>
+      <Name>Path</Name>
+      <Color>
+        <r>0</r>
+        <g>255</g>
+        <b>0</b>
+        <a>255</a>
+      </Color>
+      <Rotation>90</Rotation>
+    </TileNode>
+	<!-- Corner0 0,0,255,255-->
+	<TileNode>
+	   <Name>Corner</Name>
+      <Color>
+        <r>0</r>
+        <g>0</g>
+        <b>255</b>
+        <a>255</a>
+      </Color>
+      <Rotation>0</Rotation>
+    </TileNode>
+	<!-- Corner90 255,255,0,255-->
+	<TileNode>
+	   <Name>Corner</Name>
+      <Color>
+        <r>255</r>
+        <g>255</g>
+        <b>0</b>
+        <a>255</a>
+      </Color>
+      <Rotation>90</Rotation>
+    </TileNode>
+	<!-- Corner180 0,255,255,255-->
+	<TileNode>
+	   <Name>Corner</Name>
+      <Color>
+        <r>0</r>
+        <g>255</g>
+        <b>255</b>
+        <a>255</a>
+      </Color>
+      <Rotation>180</Rotation>
+    </TileNode>
+	<!-- Corner270 255,0,255,255-->
+	<TileNode>
+	   <Name>Corner</Name>
+      <Color>
+        <r>255</r>
+        <g>0</g>
+        <b>255</b>
+        <a>255</a>
+      </Color>
+      <Rotation>270</Rotation>
+    </TileNode>
+	<!-- End0 255,128,128,255-->
+	<TileNode>
+	   <Name>End</Name>
+      <Color>
+        <r>255</r>
+        <g>128</g>
+        <b>128</b>
+        <a>255</a>
+      </Color>
+      <Rotation>0</Rotation>
+    </TileNode>
+	<!-- End90 255,255,128,255-->
+	<TileNode>
+	   <Name>End</Name>
+      <Color>
+        <r>255</r>
+        <g>255</g>
+        <b>128</b>
+        <a>255</a>
+      </Color>
+      <Rotation>90</Rotation>
+    </TileNode>
+	<!-- End180 128,255,128,255-->
+	<TileNode>
+	   <Name>End</Name>
+      <Color>
+        <r>128</r>
+        <g>255</g>
+        <b>128</b>
+        <a>255</a>
+      </Color>
+      <Rotation>180</Rotation>
+    </TileNode>
+	<!-- End270 128,255,255,255-->
+	<TileNode>
+	   <Name>End</Name>
+      <Color>
+        <r>128</r>
+        <g>255</g>
+        <b>255</b>
+        <a>255</a>
+      </Color>
+      <Rotation>270</Rotation>
+    </TileNode>
+	<!-- Jump0 0,128,255,255-->
+	<TileNode>
+	   <Name>Jump</Name>
+      <Color>
+        <r>0</r>
+        <g>128</g>
+        <b>255</b>
+        <a>255</a>
+      </Color>
+      <Rotation>0</Rotation>
+    </TileNode>
+	<!-- Jump90 255,128,192,255-->
+	<TileNode>
+	   <Name>Jump</Name>
+      <Color>
+        <r>255</r>
+        <g>128</g>
+        <b>192</b>
+        <a>255</a>
+      </Color>
+      <Rotation>90</Rotation>
+    </TileNode>
+	<!-- Tilt0 128,128,192,255-->
+	<TileNode>
+	   <Name>Tilt</Name>
+      <Color>
+        <r>128</r>
+        <g>128</g>
+        <b>192</b>
+        <a>255</a>
+      </Color>
+      <Rotation>0</Rotation>
+    </TileNode>
+	<!-- Tilt90 255,0,128,255-->
+	<TileNode>
+	   <Name>Tilt</Name>
+      <Color>
+        <r>255</r>
+        <g>0</g>
+        <b>128</b>
+        <a>255</a>
+      </Color>
+      <Rotation>90</Rotation>
+    </TileNode>
+	<!-- Tilt180 64,0,128,255-->
+	<TileNode>
+	   <Name>Tilt</Name>
+      <Color>
+        <r>64</r>
+        <g>0</g>
+        <b>128</b>
+        <a>255</a>
+      </Color>
+      <Rotation>180</Rotation>
+    </TileNode>
+		<!-- Tilt270 128,0,128,255-->
+	<TileNode>
+	   <Name>Tilt</Name>
+      <Color>
+        <r>128</r>
+        <g>0</g>
+        <b>128</b>
+        <a>255</a>
+      </Color>
+      <Rotation>270</Rotation>
+    </TileNode>
+		<!-- Xroad0 255,128,0,255-->
+	<TileNode>
+	   <Name>Xroad</Name>
+      <Color>
+        <r>255</r>
+        <g>128</g>
+        <b>0</b>
+        <a>255</a>
+      </Color>
+      <Rotation>0</Rotation>
+    </TileNode>
+		<!-- Xroad90 128,128,0,255-->
+	<TileNode>
+	   <Name>Xroad</Name>
+      <Color>
+        <r>128</r>
+        <g>128</g>
+        <b>0</b>
+        <a>255</a>
+      </Color>
+      <Rotation>90</Rotation>
+    </TileNode>
+		<!-- Xroad180 64,128,128,255-->
+	<TileNode>
+	   <Name>Xroad</Name>
+      <Color>
+        <r>64</r>
+        <g>128</g>
+        <b>128</b>
+        <a>255</a>
+      </Color>
+      <Rotation>180</Rotation>
+    </TileNode>
+		<!-- Xroad270 64,128,128,255-->
+	<TileNode>
+	   <Name>Xroad</Name>
+      <Color>
+        <r>128</r>
+        <g>64</g>
+        <b>0</b>
+        <a>255</a>
+      </Color>
+      <Rotation>270</Rotation>
     </TileNode>
   </TypeList>
+  
 </TileContainer>
+
+
