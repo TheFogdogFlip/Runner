@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
 
     //For turning 90 degrees smoothly
     public float turnSpeed = 55.0f;
-    private float rotationTarget = 0.0f;
+    private float rotationTarget = 90.0f;
     private Quaternion qTo = Quaternion.identity;
     private float lastY = 0f;
     private int turnPhase = 0;
