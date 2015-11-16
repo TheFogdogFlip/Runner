@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EmptyTile {
+public class EmptyTile : Component
+{
 
     protected Vector3 position;
 

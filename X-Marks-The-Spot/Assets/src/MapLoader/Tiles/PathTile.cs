@@ -45,9 +45,9 @@ public class PathTile : EmptyTile {
         get { return gameObject; }
     }
 
-    public PathTile(Vector3 position, GameObject gameObject = null, float rotation = 0.0f)
+    public PathTile(Vector3 position, string gameObjectTag, float rotation = 0.0f)
     {
-        GameObject = gameObject;
+        GameObject = (GameObject)Instantiate(Resources.Load(gameObjectTag)); ;
         Position = position;
         Rotation = rotation;
     }

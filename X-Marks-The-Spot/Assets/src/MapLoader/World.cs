@@ -3,7 +3,7 @@ using System.Collections;
 using System.Xml.Serialization;
 using System.IO;
 
-public class World : Component{
+public class World{
 
     private static Vector3 gridDimentions = new Vector3(2, 2, 2);
 
@@ -88,21 +88,28 @@ public class World : Component{
             {
                 Color color = texture.GetPixel(x, y);
 
-                TileNode tileType = tiles.Nodes.Find(n => new Color(n.Color.r, n.Color.g, n.Color.b, n.Color.a) == color);
-
+                TileNode tileType = tiles.Nodes.Find(n => new Color(n.Color.r / 255.0f, n.Color.g / 255.0f, n.Color.b / 255.0f, n.Color.a / 255.0f) == color);
+                Color test = new Color();
                 EmptyTile tile = null;
 
-                switch (tileType.Name)
-                {
-                    case TileType.Path:
-                        tile = new PathTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y));
-                        ((PathTile)tile).GameObject = (GameObject)Instantiate(Resources.Load("Path"));
-                        break;
+                if (tileType.Name.ToLower() == "empty")
+                    tile = new EmptyTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y));
+                else
+                    tile = new PathTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y), tileType.Name, tileType.Rotation);
 
-                    case TileType.Empty:
-                        tile = new EmptyTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y));
-                        break;
-                }
+
+
+                //switch (tileType.Name)
+                //{
+                //    case TileType.Path:
+                //        tile = new PathTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y));
+                //        ((PathTile)tile).GameObject = (GameObject)Instantiate(Resources.Load("Path"));
+                //        break;
+
+                //    case TileType.Empty:
+                //        tile = new EmptyTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y));
+                //        break;
+                //}
                 this.grid[y, x] = tile;
             }
         }
