@@ -91,8 +91,14 @@ public class Player : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump") && !isJumping)
         {
+            if (isSliding)
+            {
+                bc.size += new Vector3(0, bc.size.y, 0);
+                crntSlideLength = maxSlideLength;
+                isSliding = false;
+            }
+
             isJumping = true;
-            //rb.AddForce(new Vector3(0f, 1f, 0f) * jumpForce);
         }
         if (isJumping)
         {
@@ -124,11 +130,11 @@ public class Player : MonoBehaviour
 
     void Slide()
     {
-        if (Input.GetButtonDown("Slide") && !isSliding)
+        if (Input.GetButtonDown("Slide") && !isSliding && !isJumping)
         {
             //Slide start
             isSliding = true;
-            transform.localScale += new Vector3(0, -(transform.localScale.y * 0.5f), 0);
+            bc.size += new Vector3(0, -(bc.size.y * 0.5f), 0);
             
         }
 
@@ -137,7 +143,7 @@ public class Player : MonoBehaviour
             //Slide end
             if (crntSlideLength <= 0)
             {
-                transform.localScale += new Vector3(0, transform.localScale.y, 0);
+                bc.size += new Vector3(0, bc.size.y, 0);
                 crntSlideLength = maxSlideLength;
                 isSliding = false;
             }
@@ -145,7 +151,6 @@ public class Player : MonoBehaviour
             {
                 crntSlideLength -= slideSpeed * Time.deltaTime;
             }
-                
         }
     }
 }
