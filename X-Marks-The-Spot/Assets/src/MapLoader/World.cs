@@ -109,8 +109,9 @@ public class World{
 
                 TileNode tileType = tilesTypes.Nodes.Find(n => new Color(n.Color.r / 255.0f, n.Color.g / 255.0f, n.Color.b / 255.0f, n.Color.a / 255.0f) == color);
                 EmptyTile tile = null;
-
-                if (tileType.Name.ToLower() == "empty")
+                if(tileType == null)
+                    tile = new EmptyTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y));
+                else if (tileType.Name.ToLower() == "empty")
                     tile = new EmptyTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y));
                 else
                     tile = new PathTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y), tileType.Name, tileType.Rotation);
