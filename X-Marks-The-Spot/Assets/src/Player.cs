@@ -88,7 +88,6 @@ public class Player : MonoBehaviour
             {
                 playerTimerObj.TimerRunning = true;
                 playerTimerObj.f_time = 0;
-                anim.Play("Run");
             }
 
             else

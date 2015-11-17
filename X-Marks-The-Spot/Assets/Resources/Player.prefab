@@ -1155,8 +1155,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runSpeed: .0500000007
   crntSpeed: 0
-  deceleration: .00200000009
-  acceleration: .00300000003
+  deceleration: .00100000005
+  acceleration: .00100000005
   jumpSpeed: .0500000007
   jumpHeight: 1
   rb: {fileID: 5415758}
@@ -1282,14 +1282,6 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: turnSpeed
       value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: acceleration
-      value: .00300000003
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: deceleration
-      value: .00200000009
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
