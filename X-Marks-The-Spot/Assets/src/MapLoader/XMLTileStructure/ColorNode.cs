@@ -1,11 +1,19 @@
 ﻿using UnityEngine;
 
-public class ColorNode {
-
+public class ColorNode
+{
     public float R;
     public float G;
     public float B;
     public float A;
+
+    public ColorNode()
+    {
+        R = 0.0f;
+        G = 0.0f;
+        B = 0.0f;
+        A = 0.0f;
+    }
 
     public Color ToColor()
     {

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
@@ -42,10 +43,15 @@ public class Player : MonoBehaviour
     public Animator anim;
     private bool isFirstFrame = true;
 
+    public List<TimeStamp> inputs;
 
     //Ghost Timer -- TEMPORARY, just needed somewhere to make it 
     private Timer_Ghost ghostTimerObj;
     private GameObject ghostTimerGameObj;
+
+    private Player player;
+    private List<List<TimeStamp>> ghostinputs;
+    private List<GameObject> ghosts;
 
     void Awake ()
     {
@@ -53,16 +59,19 @@ public class Player : MonoBehaviour
         bc = GetComponent<BoxCollider>();
         crntSlideLength = maxSlideLength;
         rotationTarget = transform.rotation.y;
-
         SetupCtdTimer();
+        //SetupGhostTimer();
         SetupPlayerTimer();
-        SetupGhostTimer();
         crntSpeed = runSpeed;
+      
 	}
 
     void Start ()
     {
-
+        player = GetComponent<Player>();
+        ghostinputs = new List<List<TimeStamp>>();
+        ghosts = new List<GameObject>();
+        inputs = new List<TimeStamp>();
     }
 
     void Update()
@@ -70,17 +79,11 @@ public class Player : MonoBehaviour
         if (isFirstFrame)
         {
             isFirstFrame = false;
-            anim = GameObject.Find("NinjaBob").GetComponent<Animator>();
+            anim = gameObject.GetComponentInChildren<Animator>();
         }
-        if (!ghostTimerObj.TimerRunning)
-        {
-            ghostTimerObj.TimerRunning = true;
-            ghostTimerObj.f_time = 0;
-        }
-        else
-        {
+        if(ghostTimerObj != null)
             ghostTimerObj.SetText();
-        }
+        
         //Running forward block
         if (!ctdTimerObj.TimerFirstRunning)
         {
@@ -97,8 +100,11 @@ public class Player : MonoBehaviour
             }
 
             Turn();
-            //Running forward block
             Run();
+            Falling();
+            Jump();
+            Slide();
+
         }
         if(!ctdTimerObj.TimerSecondRunning)
         {
@@ -117,8 +123,8 @@ public class Player : MonoBehaviour
     {
         ctdTimerGameObj = GameObject.Find("ctdTimer");
         ctdTimerObj = ctdTimerGameObj.GetComponent<Timer_Countdown>();
-        ctdTimerObj.f_time = 4;
-        ctdTimerObj.i_time = 4;
+        ctdTimerObj.f_time = 1;
+        ctdTimerObj.i_time = 1;
         ctdTimerObj.TimerFirstRunning = true;
         ctdTimerObj.TimerSecondRunning = true;
         ctdTimerObj.textObj.enabled = true;
@@ -136,14 +142,17 @@ public class Player : MonoBehaviour
     {
         ghostTimerGameObj = GameObject.Find("ghostTimer");
         ghostTimerObj = ghostTimerGameObj.GetComponent<Timer_Ghost>();
+        ghostTimerObj.f_time = 0;
         ghostTimerObj.textObj.text = "0";
-        ghostTimerObj.TimerRunning = false;
+        ghostTimerObj.TimerRunning = true;
+
+
     }
     void LateUpdate()
     {
         //Do this late because we want to check collisions first
-        Jump();
-        Slide();
+        
+        
     }
 
     void FixedUpdate()
@@ -154,7 +163,7 @@ public class Player : MonoBehaviour
     void Run()
     {
         //Run forward
-        transform.Translate(transform.forward * crntSpeed, Space.World);
+        transform.Translate(transform.forward * crntSpeed * 100 * Time.deltaTime, Space.World);
     }
 
     void Turn()
@@ -163,15 +172,25 @@ public class Player : MonoBehaviour
         //ACTIVATION PHASE
         if (turnPhase == 0)
         {
-
+            float time = playerTimerObj.f_time;
             if (Input.GetAxisRaw("Horizontal") == 1)
             {
+                TimeStamp ts = new TimeStamp();
+                ts.time = time;
+                ts.input = "TurnRight";
+                inputs.Add(ts);
+
                 rotationTarget += 90.0f;
                 anim.Play("TurnRight90");
                 turnPhase = 1;
             }
             if (Input.GetAxisRaw("Horizontal") == -1)
             {
+                TimeStamp ts = new TimeStamp();
+                ts.time = time;
+                ts.input = "TurnLeft";
+                inputs.Add(ts);
+
                 rotationTarget -= 90.0f;
                 anim.Play("TurnLeft90");
                 turnPhase = 1;
@@ -221,7 +240,8 @@ public class Player : MonoBehaviour
         {
             if (isSliding)
             {
-                bc.size += new Vector3(0, bc.size.y, 0);
+                //bc.size += new Vector3(0, bc.size.y, 0);
+                transform.localScale = new Vector3(transform.localScale.x, bc.size.y * 2, transform.localScale.z);
                 crntSlideLength = maxSlideLength;
                 isSliding = false;
             }
@@ -239,26 +259,17 @@ public class Player : MonoBehaviour
                     isFalling = true;
                 }
             }
-            //Going down
-            else if (isFalling)
-            {
-                transform.Translate(new Vector3(0, -jumpSpeed, 0));
-            }
+        }
+    }
+    void Falling()
+    {
+        if (isFalling)
+        {
+            transform.Translate(new Vector3(0, -jumpSpeed, 0));
         }
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Floor"))
-        {
-            isJumping = false;
-            isFalling = false;
-        }
-        else if (other.gameObject.CompareTag("Wall"))
-        {
-            Death();
-        }
-    }
+  
 
     void Slide()
     {
@@ -266,8 +277,8 @@ public class Player : MonoBehaviour
         {
             //Slide start
             isSliding = true;
-            bc.size += new Vector3(0, -(bc.size.y * 0.5f), 0);
-            
+            //bc.size += new Vector3(0, -(bc.size.y * 0.5f), 0);
+            transform.localScale = new Vector3(transform.localScale.x, bc.size.y * 0.5f, transform.localScale.z);
         }
 
         if (isSliding)
@@ -275,7 +286,8 @@ public class Player : MonoBehaviour
             //Slide end
             if (crntSlideLength <= 0)
             {
-                bc.size += new Vector3(0, bc.size.y, 0);
+                //bc.size += new Vector3(0, bc.size.y, 0);
+                transform.localScale = new Vector3(transform.localScale.x, bc.size.y * 2, transform.localScale.z);
                 crntSlideLength = maxSlideLength;
                 isSliding = false;
             }
@@ -286,8 +298,48 @@ public class Player : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Floor"))
+        {
+            isJumping = false;
+            isFalling = false;
+            transform.position = new Vector3(transform.position.x, other.transform.position.y, transform.position.z);
+        }
+        else if (other.gameObject.CompareTag("Wall"))
+        {
+
+            Death();
+            GameObject go;
+            Ghost ghost;
+            ghostinputs.Add(inputs);
+            inputs = new List<TimeStamp>();
+
+            SetupGhostTimer();
+
+            for (int i = 0; i < ghostinputs.Count; ++i)
+            {
+                go = Instantiate(Resources.Load("Ghost", typeof(GameObject)), World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection)) as GameObject;
+                ghost = go.GetComponent<Ghost>();
+                ghost.inputs = ghostinputs[i];
+                ghosts.Add(go);
+
+            }
+            
+            
+            SetupCtdTimer();
+            SetupPlayerTimer();
+        }
+        else if (other.gameObject.CompareTag("Hole"))
+        {
+            isFalling = true;
+        }
+    }
+
     void Death()
     {
+        if (isSliding)
+            transform.localScale = new Vector3(transform.localScale.x, bc.size.y * 2, transform.localScale.z);
         isJumping = false;
         isFalling = false;
         isSliding = false;
@@ -297,5 +349,13 @@ public class Player : MonoBehaviour
         transform.position = World.Instance.StartPosition;
         transform.rotation = Quaternion.Euler(World.Instance.StartDirection);
         rotationTarget = transform.rotation.y;
+        
+
+        foreach (GameObject go in ghosts)
+        {
+            Destroy(go);
+        }
+       
+
     }
 }

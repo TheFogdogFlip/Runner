@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 
-public struct TileNode {
+public class TileNode
+{
     public string TileName;
 
     [XmlArray("Rotations")]
@@ -11,4 +12,10 @@ public struct TileNode {
     [XmlArray("Directions")]
     [XmlArrayItem("DirectionNode")]
     public List<DirectionNode> Directions;
+
+    public TileNode()
+    {
+        Rotations = new List<RotationNode>();
+        Directions = new List<DirectionNode>();
+    }
 }

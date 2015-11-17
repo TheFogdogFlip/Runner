@@ -3,6 +3,7 @@ using System.Xml.Serialization;
 using System.IO;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class World{
 
@@ -35,7 +36,7 @@ public class World{
         }
     }
 
-    private EmptyTile[,] grid;
+    private Tile[,] grid;
 
     private int width;
     private int depth;
@@ -59,12 +60,12 @@ public class World{
         Instance.generate();
     }
 
-    public EmptyTile GetTile(int x, int y)
+    public Tile GetTile(int x, int y)
     {
         return grid[Mathf.FloorToInt(y / gridDimentions.y), Mathf.FloorToInt(x / gridDimentions.x)];
     }
 
-    public void SetTile(int x, int y, EmptyTile tile)
+    public void SetTile(int x, int y, Tile tile)
     {
         grid[Mathf.FloorToInt(y / gridDimentions.y), Mathf.FloorToInt(x / gridDimentions.x)] = tile;
        
@@ -133,7 +134,7 @@ public class World{
         stream.Close();
     }
 
-    private void temp()
+    private void generateTestXMLData()
     {
         TileContainer container = new TileContainer();
         container.Tiles = new List<TileNode>();
@@ -143,7 +144,7 @@ public class World{
         DirectionNode dNode = new DirectionNode();
         dNode.Direction = 1;
         dNode.Connections = new List<ConnectionNode>();
-        ConnectionNode cNode = new ConnectionNode() { TileName = "Kines" };
+        ConnectionNode cNode = new ConnectionNode() { TileName = "Corner" };
         cNode.Rotations = new List<RotationChanceNode>();
         cNode.Chance = 20;
         cNode.Rotations.Add(new RotationChanceNode() {  Chance = 20, Rotation = 0});
@@ -173,51 +174,59 @@ public class World{
 
     private void load(string filename)
     {
-        temp();
-        //Texture2D texture = Resources.Load<Texture2D>(filename);
+        Texture2D texture = Resources.Load<Texture2D>(filename);
 
-        //depth = texture.height;
-        //width = texture.width;
+        depth = texture.height;
+        width = texture.width;
 
-        //grid = new EmptyTile[width, depth];
+        grid = new Tile[width, depth];
 
-        //var tilesTypes = getTileTypes();
+        var tilesTypes = getTileTypes();
 
-        //for (int y = 0; y < depth; y++)
-        //{
-        //    for (int x = 0; x < width; x++)
-        //    {
-        //        Color color = texture.GetPixel(x, y);
+        for (int y = 0; y < depth; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                Color color = texture.GetPixel(x, y);
 
-        //        RotationNode rotationN;
+                RotationNode rotationN = null;
+                TileNode tileN = null;
 
-        //        foreach(var tileNode in tilesTypes.Tiles)
-        //        {
-        //            rotationN = tileNode.Rotations.Find(r => r.Color.ToColor() == color);
+                foreach (var tileNode in tilesTypes.Tiles)
+                {
+                    try
+                    {
+                        rotationN = tileNode.Rotations.Where(r => r.Color.ToColor() == color).First();
+                        tileN = tileNode;
+                    }
+                    catch
+                    {
+                        // No Element found
+                        continue;
+                    }
+                    break;
+                }
 
-        //            if (rotationN != null)
-        //                break;
-        //        }
+                Tile tile = null;
 
-        //        TileNode tileType = tilesTypes.Tiles.Find(n => new Color(n.Color.r / 255.0f, n.Color.g / 255.0f, n.Color.b / 255.0f, n.Color.a / 255.0f) == color);
-        //        EmptyTile tile = null;
-        //        if (tileType == null) // Color Parsing Error
-        //            tile = new EmptyTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y), new Color());
-        //        else if (tileType.Name.ToLower() == "empty")
-        //            tile = new EmptyTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y), color);
-        //        else if (tileType.Name.ToLower() == "start")
-        //        {
-        //            tile = new PathTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y), color, tileType.Name, tileType.Rotation);
-        //            start = tile.Position;
-        //            if (((PathTile)tile).Rotation == 0.0f)
-        //                startDirection = new Vector3(0, 0, 1);
-        //            else
-        //                startDirection = new Vector3(1, 0, 0);
-        //        }
-        //        else
-        //            tile = new PathTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y), color, tileType.Name, tileType.Rotation);
-        //        this.grid[y, x] = tile;
-        //    }
-        //}
+                if (rotationN != null && !String.IsNullOrEmpty(tileN.TileName))
+                {
+                    tile = new Tile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y), rotationN.Color.ToColor(), tileN.TileName, rotationN.Rotation);
+                    if (tileN.TileName.ToLower() == "start")
+                    {
+                        start = tile.Position;
+                        if (rotationN.Rotation == 0.0f)
+                            startDirection = new Vector3(0, 0, -1);
+                        else if (rotationN.Rotation == 90.0f)
+                            startDirection = new Vector3(-1, 0, 0);
+                        if (rotationN.Rotation == 180.0f)
+                            startDirection = new Vector3(0, 0, 1);
+                        else
+                            startDirection = new Vector3(1, 0, 0);
+                    }
+                }
+                this.grid[y, x] = tile;
+            }
+        }
     }
 }

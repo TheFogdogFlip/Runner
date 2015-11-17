@@ -7,4 +7,9 @@ public class TileContainer {
     [XmlArray("TileList")]
     [XmlArrayItem("TileNode")]
     public List<TileNode> Tiles;
+
+    public TileContainer()
+    {
+        Tiles = new List<TileNode>();
+    }
 }

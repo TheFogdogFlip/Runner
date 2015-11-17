@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0fc8b5cd22a6ca4db26e2ef37754bae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 107310, guid: c3ebb4d6882b03c499724523204affaa, type: 2}
+  target: {fileID: 0}
 --- !u!124 &12460034
 Behaviour:
   m_ObjectHideFlags: 1
@@ -113,6 +113,22 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: MainCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalRotation.x
+      value: .173648223
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalRotation.w
+      value: .984807789
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
