@@ -101,9 +101,11 @@ public class Player : MonoBehaviour
             }
 
             Turn();
-            //Running forward block
             Run();
             Falling();
+            Jump();
+            Slide();
+
         }
         if(!ctdTimerObj.TimerSecondRunning)
         {
@@ -150,8 +152,8 @@ public class Player : MonoBehaviour
     void LateUpdate()
     {
         //Do this late because we want to check collisions first
-        Jump();
-        Slide();
+        
+        
     }
 
     void FixedUpdate()
@@ -239,7 +241,8 @@ public class Player : MonoBehaviour
         {
             if (isSliding)
             {
-                bc.size += new Vector3(0, bc.size.y, 0);
+                //bc.size += new Vector3(0, bc.size.y, 0);
+                transform.localScale = new Vector3(transform.localScale.x, bc.size.y * 2, transform.localScale.z);
                 crntSlideLength = maxSlideLength;
                 isSliding = false;
             }
@@ -275,8 +278,8 @@ public class Player : MonoBehaviour
         {
             //Slide start
             isSliding = true;
-            bc.size += new Vector3(0, -(bc.size.y * 0.5f), 0);
-            
+            //bc.size += new Vector3(0, -(bc.size.y * 0.5f), 0);
+            transform.localScale = new Vector3(transform.localScale.x, bc.size.y * 0.5f, transform.localScale.z);
         }
 
         if (isSliding)
@@ -284,7 +287,8 @@ public class Player : MonoBehaviour
             //Slide end
             if (crntSlideLength <= 0)
             {
-                bc.size += new Vector3(0, bc.size.y, 0);
+                //bc.size += new Vector3(0, bc.size.y, 0);
+                transform.localScale = new Vector3(transform.localScale.x, bc.size.y * 2, transform.localScale.z);
                 crntSlideLength = maxSlideLength;
                 isSliding = false;
             }
@@ -301,6 +305,7 @@ public class Player : MonoBehaviour
         {
             isJumping = false;
             isFalling = false;
+            transform.position = new Vector3(transform.position.x, other.transform.position.y, transform.position.z);
         }
         else if (other.gameObject.CompareTag("Wall"))
         {
@@ -337,6 +342,8 @@ public class Player : MonoBehaviour
 
     void Death()
     {
+        if (isSliding)
+            transform.localScale = new Vector3(transform.localScale.x, bc.size.y * 2, transform.localScale.z);
         isJumping = false;
         isFalling = false;
         isSliding = false;
@@ -346,6 +353,7 @@ public class Player : MonoBehaviour
         transform.position = World.Instance.StartPosition;
         transform.rotation = Quaternion.Euler(World.Instance.StartDirection);
         rotationTarget = transform.rotation.y;
+        
 
         foreach (GameObject go in ghosts)
         {
