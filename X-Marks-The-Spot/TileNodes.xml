@@ -144,6 +144,17 @@
       </Color>
       <Rotation>90</Rotation>
     </TileNode>
+	<!-- Hole 	255,201,14,255-->
+	<TileNode>
+		<Name>Hole</Name>
+      <Color>
+        <r>255</r>
+        <g>201</g>
+        <b>14</b>
+        <a>255</a>
+      </Color>
+      <Rotation>0</Rotation>
+    </TileNode>
 	<!-- Tilt0 		128,128,192,255-->
 	<TileNode>
 	   <Name>Tilt</Name>
