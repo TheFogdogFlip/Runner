@@ -19,9 +19,8 @@ public class Player : MonoBehaviour
 
     //For turning 90 degrees smoothly
     public float turnSpeed = 55.0f;
-    private float rotationTarget = 90.0f;
+    private float rotationTarget;
     private Quaternion qTo = Quaternion.identity;
-    private float lastY = 0f;
     private int turnPhase = 0;
 
     //For sliding
@@ -53,6 +52,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         bc = GetComponent<BoxCollider>();
         crntSlideLength = maxSlideLength;
+        rotationTarget = transform.rotation.y;
 
         SetupCtdTimer();
         SetupPlayerTimer();
