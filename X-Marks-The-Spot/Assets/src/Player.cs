@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
@@ -42,10 +43,15 @@ public class Player : MonoBehaviour
     public Animator anim;
     private bool isFirstFrame = true;
 
+    public List<TimeStamp> inputs;
 
     //Ghost Timer -- TEMPORARY, just needed somewhere to make it 
     private Timer_Ghost ghostTimerObj;
     private GameObject ghostTimerGameObj;
+
+    private Player player;
+    private List<List<TimeStamp>> ghostinputs;
+    private List<GameObject> ghosts;
 
     void Awake ()
     {
@@ -55,14 +61,17 @@ public class Player : MonoBehaviour
         rotationTarget = transform.rotation.y;
         Debug.Log(World.GridDimentions);
         SetupCtdTimer();
+        //SetupGhostTimer();
         SetupPlayerTimer();
-        SetupGhostTimer();
         crntSpeed = runSpeed;
+        inputs = new List<TimeStamp>();
 	}
 
     void Start ()
     {
-
+        player = GetComponent<Player>();
+        ghostinputs = new List<List<TimeStamp>>();
+        ghosts = new List<GameObject>();
     }
 
     void Update()
@@ -72,15 +81,9 @@ public class Player : MonoBehaviour
             isFirstFrame = false;
             anim = GameObject.Find("NinjaBob").GetComponent<Animator>();
         }
-        if (!ghostTimerObj.TimerRunning)
-        {
-            ghostTimerObj.TimerRunning = true;
-            ghostTimerObj.f_time = 0;
-        }
-        else
-        {
+        if(ghostTimerObj != null)
             ghostTimerObj.SetText();
-        }
+        
         //Running forward block
         if (!ctdTimerObj.TimerFirstRunning)
         {
@@ -137,8 +140,11 @@ public class Player : MonoBehaviour
     {
         ghostTimerGameObj = GameObject.Find("ghostTimer");
         ghostTimerObj = ghostTimerGameObj.GetComponent<Timer_Ghost>();
+        ghostTimerObj.f_time = 0;
         ghostTimerObj.textObj.text = "0";
-        ghostTimerObj.TimerRunning = false;
+        ghostTimerObj.TimerRunning = true;
+
+
     }
     void LateUpdate()
     {
@@ -155,7 +161,7 @@ public class Player : MonoBehaviour
     void Run()
     {
         //Run forward
-        transform.Translate(transform.forward * crntSpeed, Space.World);
+        transform.Translate(transform.forward * crntSpeed * 100 * Time.deltaTime, Space.World);
     }
 
     void Turn()
@@ -167,12 +173,22 @@ public class Player : MonoBehaviour
 
             if (Input.GetAxisRaw("Horizontal") == 1)
             {
+                TimeStamp ts = new TimeStamp();
+                ts.time = playerTimerObj.f_time;
+                ts.input = "TurnRight";
+                inputs.Add(ts);
+
                 rotationTarget += 90.0f;
                 anim.Play("TurnRight90");
                 turnPhase = 1;
             }
             if (Input.GetAxisRaw("Horizontal") == -1)
             {
+                TimeStamp ts = new TimeStamp();
+                ts.time = playerTimerObj.f_time;
+                ts.input = "TurnLeft";
+                inputs.Add(ts);
+
                 rotationTarget -= 90.0f;
                 anim.Play("TurnLeft90");
                 turnPhase = 1;
@@ -250,22 +266,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Floor"))
-        {
-            isJumping = false;
-            isFalling = false;
-        }
-        else if (other.gameObject.CompareTag("Wall"))
-        {
-            Death();
-        }
-        else if (other.gameObject.CompareTag("Hole"))
-        {
-            isFalling = true;
-        }
-    }
+  
 
     void Slide()
     {
@@ -293,6 +294,32 @@ public class Player : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Floor"))
+        {
+            isJumping = false;
+            isFalling = false;
+        }
+        else if (other.gameObject.CompareTag("Wall"))
+        {
+
+            Death();
+            GameObject go = Instantiate(Resources.Load("Ghost", typeof(GameObject)), World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection)) as GameObject;
+            Ghost ghost = go.GetComponent<Ghost>();
+            ghost.inputs = inputs;
+            ghosts.Add(go);
+            ghostinputs.Add(inputs);
+            SetupGhostTimer();
+            SetupCtdTimer();
+            SetupPlayerTimer();
+        }
+        else if (other.gameObject.CompareTag("Hole"))
+        {
+            isFalling = true;
+        }
+    }
+
     void Death()
     {
         isJumping = false;
@@ -304,5 +331,19 @@ public class Player : MonoBehaviour
         transform.position = World.Instance.StartPosition;
         transform.rotation = Quaternion.Euler(World.Instance.StartDirection);
         rotationTarget = transform.rotation.y;
+
+        foreach (GameObject go in ghosts)
+        {
+            Destroy(go);
+        }
+        for (int i = 0; i < ghostinputs.Count; ++i)
+        {
+            GameObject go = Instantiate(Resources.Load("Ghost", typeof(GameObject)), World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection)) as GameObject;
+            Ghost ghost = go.GetComponent<Ghost>();
+            ghost.inputs = ghostinputs[i];
+            ghosts.Add(go);
+
+        }
+
     }
 }
