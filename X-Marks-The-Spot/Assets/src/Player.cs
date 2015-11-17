@@ -124,8 +124,8 @@ public class Player : MonoBehaviour
     {
         ctdTimerGameObj = GameObject.Find("ctdTimer");
         ctdTimerObj = ctdTimerGameObj.GetComponent<Timer_Countdown>();
-        ctdTimerObj.f_time = 2;
-        ctdTimerObj.i_time = 2;
+        ctdTimerObj.f_time = 1;
+        ctdTimerObj.i_time = 1;
         ctdTimerObj.TimerFirstRunning = true;
         ctdTimerObj.TimerSecondRunning = true;
         ctdTimerObj.textObj.enabled = true;
@@ -173,11 +173,11 @@ public class Player : MonoBehaviour
         //ACTIVATION PHASE
         if (turnPhase == 0)
         {
-
+            float time = playerTimerObj.f_time;
             if (Input.GetAxisRaw("Horizontal") == 1)
             {
                 TimeStamp ts = new TimeStamp();
-                ts.time = playerTimerObj.f_time;
+                ts.time = time;
                 ts.input = "TurnRight";
                 inputs.Add(ts);
 
@@ -188,7 +188,7 @@ public class Player : MonoBehaviour
             if (Input.GetAxisRaw("Horizontal") == -1)
             {
                 TimeStamp ts = new TimeStamp();
-                ts.time = playerTimerObj.f_time;
+                ts.time = time;
                 ts.input = "TurnLeft";
                 inputs.Add(ts);
 
@@ -315,7 +315,7 @@ public class Player : MonoBehaviour
             Ghost ghost;
             ghostinputs.Add(inputs);
             inputs = new List<TimeStamp>();
-            print(ghostinputs.Count);
+            SetupGhostTimer();
             for (int i = 0; i < ghostinputs.Count; ++i)
             {
                 go = Instantiate(Resources.Load("Ghost", typeof(GameObject)), World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection)) as GameObject;
@@ -324,13 +324,8 @@ public class Player : MonoBehaviour
                 ghosts.Add(go);
 
             }
-
-            //go = Instantiate(Resources.Load("Ghost", typeof(GameObject)), World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection)) as GameObject;
-            //Ghost ghost = go.GetComponent<Ghost>();
-            //ghost.inputs = inputs;
-            //ghosts.Add(go);
             
-            SetupGhostTimer();
+            
             SetupCtdTimer();
             SetupPlayerTimer();
         }
