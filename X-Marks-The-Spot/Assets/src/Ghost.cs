@@ -15,6 +15,7 @@ public class Ghost : MonoBehaviour {
     private bool isFalling = false;
     public float jumpSpeed;
     public float jumpHeight;
+    public Rigidbody rb;
 
     //Sliding
     private bool isSliding = false;
@@ -41,9 +42,12 @@ public class Ghost : MonoBehaviour {
     // Use this for initialization
     void Start () 
     {
+        print("Start");
         index = 0;
         rotationTarget = 0;
         crntSpeed = runSpeed;
+        rb = GetComponent<Rigidbody>();
+        bc = GetComponent<BoxCollider>();
         ghostTimerGameObj = GameObject.Find("ghostTimer");
         ghostTimerObj = ghostTimerGameObj.GetComponent<Timer_Ghost>();
     }
@@ -59,165 +63,110 @@ public class Ghost : MonoBehaviour {
             anim.Play("Run");
         }
         ghostTimerObj.SetText();
-        EventHandler();
+        string currEvent = null;
+        if (index < inputs.Count)
+        {
+            if (inputs[index].time <= ghostTimerObj.f_time)
+            {
+                currEvent = inputs[index].input;
+            }
+        }
+        Turn(currEvent);
+        Jump(currEvent);
+        Slide(currEvent);
         Run();
         Falling();
     }
 
-    void EventHandler()
+    void Turn(string currEvent)
     {
-        if(index < inputs.Count)
+        if (currEvent == "TurnRight")
         {
-            if (inputs[index].time <= ghostTimerObj.f_time)
-            {
-                if (inputs[index].input == "TurnRight")
-                {
-                    rotationTarget += 90.0f;
-                    anim.Play("TurnRight90");
-                    turnPhase = 1;
-                    //TurnRight();
-                }
-
-                else if (inputs[index].input == "TurnLeft")
-                {
-                    rotationTarget -= 90.0f;
-                    anim.Play("TurnLeft90");
-                    turnPhase = 1;
-                    //TurnLeft();
-                }
-
-
-                else if (inputs[index].input == "Jump")
-                {
-                    Jump();
-                }
-
-                else if (inputs[index].input == "Slide")
-                {
-                    Slide();
-                }
-                index++;
-            }
-            
-        }
-        if (rotationTarget == 360 || rotationTarget == -360)
-        {
-            rotationTarget = 0.0f;
+            index++;
+            rotationTarget += 90.0f;
+            anim.Play("TurnRight90");
+            turnPhase = 1;
         }
 
-        qTo = Quaternion.Euler(0.0f, rotationTarget, 0.0f);
-        //BRAKING PHASE
-        if (turnPhase == 1)
+        else if (currEvent == "TurnLeft")
         {
-            crntSpeed -= deceleration;
-
-            if (crntSpeed <= 0.01)
-            {
-                turnPhase = 2;
-            }
-        }
-
-        //TURNING PHASE
-        if (turnPhase == 2)
-        {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, qTo, turnSpeed * Time.deltaTime);
-
-            if (transform.rotation == qTo)
-            {
-                turnPhase = 3;
-            }
-        }
-        //AXELERATION PHASE
-        if (turnPhase == 3)
-        {
-            crntSpeed += acceleration;
-            if (crntSpeed >= runSpeed)
-            {
-                crntSpeed = runSpeed;
-                turnPhase = 0;
-            }
-        }
-    }
-
-    void TurnRight()
-    {
-        rotationTarget += 90.0f;
-        anim.Play("TurnRight90");
-        turnPhase = 1;
-        TurnPhase(turnPhase);
-    }
-
-    void TurnLeft()
-    {
-        rotationTarget -= 90.0f;
-        anim.Play("TurnLeft90");
-        turnPhase = 1;
-        TurnPhase(turnPhase);
-    }
-       
-    void TurnPhase(int turnPhase)
-    {
-        if (rotationTarget == 360 || rotationTarget == -360)
-        {
-            rotationTarget = 0.0f;
-        }
-
-        qTo = Quaternion.Euler(0.0f, rotationTarget, 0.0f);
-        //BRAKING PHASE
-        if (turnPhase == 1)
-        {
-            crntSpeed -= deceleration;
-
-            if (crntSpeed <= 0.01)
-            {
-                turnPhase = 2;
-            }
-        }
-
-        //TURNING PHASE
-        if (turnPhase == 2)
-        {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, qTo, turnSpeed * Time.deltaTime);
-
-            if (transform.rotation == qTo)
-            {
-                turnPhase = 3;
-            }
-        }
-        //AXELERATION PHASE
-        if (turnPhase == 3)
-        {
-            crntSpeed += acceleration;
-            if (crntSpeed >= runSpeed)
-            {
-                crntSpeed = runSpeed;
-                turnPhase = 0;
-            }
+            index++;
+            rotationTarget -= 90.0f;
+            anim.Play("TurnLeft90");
+            turnPhase = 1;
         }
         
-    }
-
-
-    void Jump()
-    {
-        if (isSliding)
+        if (rotationTarget == 360 || rotationTarget == -360)
         {
-            //bc.size += new Vector3(0, bc.size.y, 0);
-            transform.localScale = new Vector3(transform.localScale.x, bc.size.y * 2, transform.localScale.z);
-            crntSlideLength = maxSlideLength;
-            isSliding = false;
+            rotationTarget = 0.0f;
         }
-       
-       //Going up
-       if (!isFalling)
-       {
-           transform.Translate(new Vector3(0, jumpSpeed, 0));
-           if (transform.position.y >= jumpHeight)
-           {
-               isFalling = true;
-           }
-       }
+
+        qTo = Quaternion.Euler(0.0f, rotationTarget, 0.0f);
+        //BRAKING PHASE
+        if (turnPhase == 1)
+        {
+            crntSpeed -= deceleration;
+
+            if (crntSpeed <= 0.01)
+            {
+                turnPhase = 2;
+            }
+        }
+
+        //TURNING PHASE
+        if (turnPhase == 2)
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, qTo, turnSpeed * Time.deltaTime);
+
+            if (transform.rotation == qTo)
+            {
+                turnPhase = 3;
+            }
+        }
+        //AXELERATION PHASE
+        if (turnPhase == 3)
+        {
+            crntSpeed += acceleration;
+            if (crntSpeed >= runSpeed)
+            {
+                crntSpeed = runSpeed;
+                turnPhase = 0;
+            }
+        }
     }
+
+
+    void Jump(string currEvent)
+    {
+        if (currEvent == "Jump")
+        {
+            index++;
+            print("should jump");
+            if (isSliding)
+            {
+                //bc.size += new Vector3(0, bc.size.y, 0);
+                transform.localScale = new Vector3(transform.localScale.x, bc.size.y * 2, transform.localScale.z);
+                crntSlideLength = maxSlideLength;
+                isSliding = false;
+            }
+        
+            isJumping = true;
+            
+        }
+        if (isJumping)
+        {
+            //Going up
+            if (!isFalling)
+            {
+                transform.Translate(new Vector3(0, jumpSpeed, 0));
+                if (transform.position.y >= jumpHeight)
+                {
+                    isFalling = true;
+                }
+            }
+        }
+    }
+        
 
     void Falling()
     {
@@ -227,26 +176,33 @@ public class Ghost : MonoBehaviour {
         }
     }
 
-    void Slide()
+    void Slide(string currEvent)
     {
-        //Slide start
-        isSliding = true;
-        //bc.size += new Vector3(0, -(bc.size.y * 0.5f), 0);
-        transform.localScale = new Vector3(transform.localScale.x, bc.size.y * 0.5f, transform.localScale.z);
-        
-        //Slide end
-        if (crntSlideLength <= 0)
+        if (currEvent == "Slide")
         {
-            //bc.size += new Vector3(0, bc.size.y, 0);
-            transform.localScale = new Vector3(transform.localScale.x, bc.size.y * 2, transform.localScale.z);
-            crntSlideLength = maxSlideLength;
-            isSliding = false;
+            index++;
+            print("should slide");
+            //Slide start
+            isSliding = true;
+            //bc.size += new Vector3(0, -(bc.size.y * 0.5f), 0);
+            transform.localScale = new Vector3(transform.localScale.x, bc.size.y * 0.5f, transform.localScale.z);
         }
-        else
+
+        if (isSliding)
         {
-            crntSlideLength -= slideSpeed * Time.deltaTime;
+            //Slide end
+            if (crntSlideLength <= 0)
+            {
+                //bc.size += new Vector3(0, bc.size.y, 0);
+                transform.localScale = new Vector3(transform.localScale.x, bc.size.y * 2, transform.localScale.z);
+                crntSlideLength = maxSlideLength;
+                isSliding = false;
+            }
+            else
+            {
+                crntSlideLength -= slideSpeed * Time.deltaTime;
+            }
         }
-        
     }
 
     void Run()
