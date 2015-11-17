@@ -238,6 +238,10 @@ public class Player : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump") && !isJumping)
         {
+            TimeStamp ts = new TimeStamp();
+            ts.time = playerTimerObj.f_time;
+            ts.input = "Jump";
+            inputs.Add(ts);
             if (isSliding)
             {
                 //bc.size += new Vector3(0, bc.size.y, 0);
@@ -275,6 +279,10 @@ public class Player : MonoBehaviour
     {
         if (Input.GetButtonDown("Slide") && !isSliding && !isJumping)
         {
+            TimeStamp ts = new TimeStamp();
+            ts.time = playerTimerObj.f_time;
+            ts.input = "Slide";
+            inputs.Add(ts);
             //Slide start
             isSliding = true;
             //bc.size += new Vector3(0, -(bc.size.y * 0.5f), 0);
