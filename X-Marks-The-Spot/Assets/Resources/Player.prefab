@@ -598,7 +598,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 107310}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: -0, z: -9}
+  m_LocalPosition: {x: 91.3639984, y: .0450000018, z: 1.39219666}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 435800}
@@ -692,8 +692,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 159416}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .453999996, z: -1.01600003}
+  m_LocalRotation: {x: .173648223, y: 0, z: 0, w: .984807789}
+  m_LocalPosition: {x: 0, y: 10, z: 10}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 423766}
@@ -1109,15 +1109,15 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .246325076, y: .58188951, z: .170211792}
-  m_Center: {x: -.0211350918, y: .275592506, z: .0295391083}
+  m_Size: {x: .191998124, y: .540854812, z: .123333484}
+  m_Center: {x: .00603485107, y: .276584208, z: .013609767}
 --- !u!81 &8177300
 AudioListener:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 159416}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!92 &9200084
 Behaviour:
   m_ObjectHideFlags: 1
@@ -1284,12 +1284,36 @@ Prefab:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 0}
-      propertyPath: acceleration
-      value: .00300000003
+      propertyPath: ghostObject
+      value: 
+      objectReference: {fileID: 146540, guid: 0d89503debec5a442afb9f58db56145f, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalRotation.x
+      value: .173648223
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalRotation.w
+      value: .984807789
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.z
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: deceleration
       value: .00200000009
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: acceleration
+      value: .00300000003
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
