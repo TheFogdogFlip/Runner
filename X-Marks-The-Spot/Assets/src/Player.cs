@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
         bc = GetComponent<BoxCollider>();
         crntSlideLength = maxSlideLength;
         rotationTarget = transform.rotation.y;
-
+        Debug.Log(World.GridDimentions);
         SetupCtdTimer();
         SetupPlayerTimer();
         SetupGhostTimer();
@@ -99,6 +99,7 @@ public class Player : MonoBehaviour
             Turn();
             //Running forward block
             Run();
+            Falling();
         }
         if(!ctdTimerObj.TimerSecondRunning)
         {
@@ -239,11 +240,13 @@ public class Player : MonoBehaviour
                     isFalling = true;
                 }
             }
-            //Going down
-            else if (isFalling)
-            {
-                transform.Translate(new Vector3(0, -jumpSpeed, 0));
-            }
+        }
+    }
+    void Falling()
+    {
+        if (isFalling)
+        {
+            transform.Translate(new Vector3(0, -jumpSpeed, 0));
         }
     }
 
@@ -257,6 +260,10 @@ public class Player : MonoBehaviour
         else if (other.gameObject.CompareTag("Wall"))
         {
             Death();
+        }
+        else if (other.gameObject.CompareTag("Hole"))
+        {
+            isFalling = true;
         }
     }
 
