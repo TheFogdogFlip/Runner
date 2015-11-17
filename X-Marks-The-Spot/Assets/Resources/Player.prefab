@@ -1295,6 +1295,10 @@ Prefab:
       propertyPath: turnSpeed
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ghostObject
+      value: 
+      objectReference: {fileID: 146540, guid: 0d89503debec5a442afb9f58db56145f, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 107310}
