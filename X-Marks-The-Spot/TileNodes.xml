@@ -19,7 +19,7 @@
           <Direction>1</Direction>
           <Connections>
             <ConnectionNode>
-              <TileName>Kines</TileName>
+              <TileName>Corner</TileName>
               <Chance>20</Chance>
               <Rotations>
                 <RotationChanceNode>
