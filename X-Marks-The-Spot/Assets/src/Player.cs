@@ -59,7 +59,6 @@ public class Player : MonoBehaviour
         bc = GetComponent<BoxCollider>();
         crntSlideLength = maxSlideLength;
         rotationTarget = transform.rotation.y;
-        Debug.Log(World.GridDimentions);
         SetupCtdTimer();
         //SetupGhostTimer();
         SetupPlayerTimer();
@@ -315,7 +314,9 @@ public class Player : MonoBehaviour
             Ghost ghost;
             ghostinputs.Add(inputs);
             inputs = new List<TimeStamp>();
+
             SetupGhostTimer();
+
             for (int i = 0; i < ghostinputs.Count; ++i)
             {
                 go = Instantiate(Resources.Load("Ghost", typeof(GameObject)), World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection)) as GameObject;
