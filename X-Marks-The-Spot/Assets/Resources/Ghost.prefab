@@ -221,6 +221,7 @@ GameObject:
   - 4: {fileID: 480656}
   - 114: {fileID: 11416738}
   - 65: {fileID: 6598426}
+  - 54: {fileID: 5409634}
   m_Layer: 0
   m_Name: Ghost
   m_TagString: Untagged
@@ -955,6 +956,21 @@ Transform:
   - {fileID: 457650}
   m_Father: {fileID: 443436}
   m_RootOrder: 0
+--- !u!54 &5409634
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 146540}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0299999993
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &6598426
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -999,10 +1015,11 @@ MonoBehaviour:
   crntSpeed: 0
   deceleration: .00200000009
   acceleration: .00300000003
-  jumpSpeed: 0
-  jumpHeight: 0
-  slideSpeed: 0
-  maxSlideLength: 0
+  jumpSpeed: .0500000007
+  jumpHeight: 1
+  rb: {fileID: 5409634}
+  slideSpeed: 1
+  maxSlideLength: 1
   bc: {fileID: 6598426}
   turnSpeed: 300
   anim: {fileID: 0}
@@ -1115,6 +1132,42 @@ Prefab:
       propertyPath: bc
       value: 
       objectReference: {fileID: 6598426}
+    - target: {fileID: 0}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 5409634}
+    - target: {fileID: 0}
+      propertyPath: maxSlideLength
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: slideSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: jumpSpeed
+      value: .0500000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: jumpHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_AngularDrag
+      value: .0299999993
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 146540}
