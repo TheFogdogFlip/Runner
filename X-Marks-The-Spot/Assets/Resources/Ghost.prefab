@@ -999,6 +999,11 @@ MonoBehaviour:
   crntSpeed: 0
   deceleration: .00200000009
   acceleration: .00300000003
+  jumpSpeed: 0
+  jumpHeight: 0
+  slideSpeed: 0
+  maxSlideLength: 0
+  bc: {fileID: 6598426}
   turnSpeed: 300
   anim: {fileID: 0}
 --- !u!137 &13797022
@@ -1106,6 +1111,10 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: bc
+      value: 
+      objectReference: {fileID: 6598426}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 146540}

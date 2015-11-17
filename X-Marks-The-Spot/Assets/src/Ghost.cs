@@ -72,27 +72,70 @@ public class Ghost : MonoBehaviour {
             {
                 if (inputs[index].input == "TurnRight")
                 {
-                    TurnRight();
+                    rotationTarget += 90.0f;
+                    anim.Play("TurnRight90");
+                    turnPhase = 1;
+                    //TurnRight();
                 }
 
                 else if (inputs[index].input == "TurnLeft")
                 {
-                    TurnLeft();
+                    rotationTarget -= 90.0f;
+                    anim.Play("TurnLeft90");
+                    turnPhase = 1;
+                    //TurnLeft();
                 }
 
-                if (inputs[index].input == "Jump")
+
+                else if (inputs[index].input == "Jump")
                 {
                     Jump();
                 }
 
-                if (inputs[index].input == "Slide")
+                else if (inputs[index].input == "Slide")
                 {
                     Slide();
                 }
-
                 index++;
             }
             
+        }
+        if (rotationTarget == 360 || rotationTarget == -360)
+        {
+            rotationTarget = 0.0f;
+        }
+
+        qTo = Quaternion.Euler(0.0f, rotationTarget, 0.0f);
+        //BRAKING PHASE
+        if (turnPhase == 1)
+        {
+            crntSpeed -= deceleration;
+
+            if (crntSpeed <= 0.01)
+            {
+                turnPhase = 2;
+            }
+        }
+
+        //TURNING PHASE
+        if (turnPhase == 2)
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, qTo, turnSpeed * Time.deltaTime);
+
+            if (transform.rotation == qTo)
+            {
+                turnPhase = 3;
+            }
+        }
+        //AXELERATION PHASE
+        if (turnPhase == 3)
+        {
+            crntSpeed += acceleration;
+            if (crntSpeed >= runSpeed)
+            {
+                crntSpeed = runSpeed;
+                turnPhase = 0;
+            }
         }
     }
 
