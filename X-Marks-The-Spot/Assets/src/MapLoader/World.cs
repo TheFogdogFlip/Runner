@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Xml.Serialization;
 using System.IO;
+using System;
 
 public class World{
 
@@ -71,7 +71,36 @@ public class World{
 
     private void generate()
     {
+        var tileTypes = getTileTypes();
 
+        int width = 64;
+        int height = 64;
+
+        Texture2D generatedMap = new Texture2D(width, height, TextureFormat.RGBA32, false);
+        bool done = false;
+        System.Random rand = new System.Random(System.DateTime.Now.Millisecond);
+
+        Vector3 startTile = new Vector3(rand.Next(width), 0, rand.Next(height));
+
+        int x = 0;
+        int z = 0;
+
+        switch(rand.Next(0,1))
+        {
+            case 0:
+                x = rand.Next(0, 1) == 0 ? -1 : 1;
+                break;
+            case 1:
+                z = rand.Next(0, 1) == 0 ? -1 : 1;
+                break; 
+        }
+
+        startDirection = new Vector3(x, 0, z);
+
+        while(!done)
+        {
+
+        }
     }
 
     public void Save(string filename)
