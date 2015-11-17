@@ -70,7 +70,6 @@ GameObject:
   - 4: {fileID: 423766}
   - 54: {fileID: 5415758}
   - 114: {fileID: 11471480}
-  - 114: {fileID: 11440524}
   - 65: {fileID: 6546582}
   m_Layer: 0
   m_Name: Player
@@ -1143,17 +1142,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11440524
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 107310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81d26e720f6db8141a4c0421f64c4ad6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11471480
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1167,17 +1155,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runSpeed: .0500000007
   crntSpeed: 0
-  deceleration: .00100000005
-  acceleration: .00100000005
+  deceleration: .00200000009
+  acceleration: .00300000003
   jumpSpeed: .0500000007
   jumpHeight: 1
   rb: {fileID: 5415758}
   turnSpeed: 300
+  rotationTarget: 0
   slideSpeed: 1
   maxSlideLength: 1
   bc: {fileID: 6546582}
   anim: {fileID: 0}
-  isFirstFrame: 1
 --- !u!124 &12417382
 Behaviour:
   m_ObjectHideFlags: 1
@@ -1294,6 +1282,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: turnSpeed
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: acceleration
+      value: .00300000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: deceleration
+      value: .00200000009
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
