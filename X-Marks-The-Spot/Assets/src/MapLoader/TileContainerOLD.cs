@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 [XmlRoot("TileContainer")]
-public class TileContainer{
+public class TileContainerOLD{
 
     [XmlArray("TypeList")]
     [XmlArrayItem("TileNode")]
