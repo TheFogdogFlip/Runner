@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
 
     //For turning 90 degrees smoothly
     public float turnSpeed = 55.0f;
-    private float rotationTarget;
+    public float rotationTarget;
     private Quaternion qTo = Quaternion.identity;
     private int turnPhase = 0;
 
@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
 
     //For Animation
     public Animator anim;
-    public bool isFirstFrame = true;
+    private bool isFirstFrame = true;
 
 
     //Ghost Timer -- TEMPORARY, just needed somewhere to make it 
@@ -253,6 +253,10 @@ public class Player : MonoBehaviour
             isJumping = false;
             isFalling = false;
         }
+        else if (other.gameObject.CompareTag("Wall"))
+        {
+            Death();
+        }
     }
 
     void Slide()
@@ -279,5 +283,18 @@ public class Player : MonoBehaviour
                 crntSlideLength -= slideSpeed * Time.deltaTime;
             }
         }
+    }
+
+    void Death()
+    {
+        isJumping = false;
+        isFalling = false;
+        isSliding = false;
+        turnPhase = 0;
+        crntSpeed = runSpeed;
+        crntSlideLength = maxSlideLength;
+        transform.position = World.Instance.StartPosition;
+        transform.rotation = Quaternion.Euler(World.Instance.StartDirection);
+        rotationTarget = transform.rotation.y;
     }
 }
