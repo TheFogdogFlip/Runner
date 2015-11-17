@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
 
     //For turning 90 degrees smoothly
     public float turnSpeed = 55.0f;
-    private float rotationTarget;
+    public float rotationTarget;
     private Quaternion qTo = Quaternion.identity;
     private int turnPhase = 0;
 
@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
 
     //For Animation
     public Animator anim;
-    public bool isFirstFrame = true;
+    private bool isFirstFrame = true;
 
 
     //Ghost Timer -- TEMPORARY, just needed somewhere to make it 
@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
         bc = GetComponent<BoxCollider>();
         crntSlideLength = maxSlideLength;
         rotationTarget = transform.rotation.y;
-
+        Debug.Log(World.GridDimentions);
         SetupCtdTimer();
         SetupPlayerTimer();
         SetupGhostTimer();
@@ -88,6 +88,7 @@ public class Player : MonoBehaviour
             {
                 playerTimerObj.TimerRunning = true;
                 playerTimerObj.f_time = 0;
+                anim.Play("Run");
             }
 
             else
@@ -98,6 +99,7 @@ public class Player : MonoBehaviour
             Turn();
             //Running forward block
             Run();
+            Falling();
         }
         if(!ctdTimerObj.TimerSecondRunning)
         {
@@ -238,11 +240,13 @@ public class Player : MonoBehaviour
                     isFalling = true;
                 }
             }
-            //Going down
-            else if (isFalling)
-            {
-                transform.Translate(new Vector3(0, -jumpSpeed, 0));
-            }
+        }
+    }
+    void Falling()
+    {
+        if (isFalling)
+        {
+            transform.Translate(new Vector3(0, -jumpSpeed, 0));
         }
     }
 
@@ -252,6 +256,14 @@ public class Player : MonoBehaviour
         {
             isJumping = false;
             isFalling = false;
+        }
+        else if (other.gameObject.CompareTag("Wall"))
+        {
+            Death();
+        }
+        else if (other.gameObject.CompareTag("Hole"))
+        {
+            isFalling = true;
         }
     }
 
@@ -279,5 +291,18 @@ public class Player : MonoBehaviour
                 crntSlideLength -= slideSpeed * Time.deltaTime;
             }
         }
+    }
+
+    void Death()
+    {
+        isJumping = false;
+        isFalling = false;
+        isSliding = false;
+        turnPhase = 0;
+        crntSpeed = runSpeed;
+        crntSlideLength = maxSlideLength;
+        transform.position = World.Instance.StartPosition;
+        transform.rotation = Quaternion.Euler(World.Instance.StartDirection);
+        rotationTarget = transform.rotation.y;
     }
 }

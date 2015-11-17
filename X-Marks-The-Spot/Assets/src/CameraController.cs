@@ -3,8 +3,7 @@ using System.Collections;
 
 public class CameraController : MonoBehaviour {
 
-    public GameObject Player;
-    //private Transform LookAtPoint;
+    public Transform target;
     private float distance;
     private float height;
     private float heightDamping;
@@ -15,33 +14,38 @@ public class CameraController : MonoBehaviour {
     private float wantedHeight;
     private float currentHeight;
     private Vector3 heightVec;
-    private Vector3 cameraLook;
-	// Use this for initialization
-	void Start () {
+    private Vector3 lookAtVec;
+    private Transform lookAtPos;
+
+    // Use this for initialization
+    void Start () {
         distance = 1.5f;
         height = 0.5f;
         heightDamping = 3.0f;
         rotationDamping = 5.0f;
-        //LookAtPoint = Player.transform;
+        target = GameObject.Find("Player(Clone)").transform;
+        lookAtVec[1] = height;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        rotAngle = Player.transform.eulerAngles.y;
-        wantedHeight = Player.transform.position.y + height;
+        //target = GameObject.Find("Player(Clone)").transform;
+        rotAngle = target.eulerAngles.y;
+        wantedHeight = target.position.y + height;
+
         //smooth rot
         currentRotAngle = Mathf.LerpAngle(currentRotAngle, rotAngle, rotationDamping * Time.deltaTime);
         currentHeight = Mathf.Lerp(currentHeight, wantedHeight, heightDamping * Time.deltaTime);
 
         currentRot = Quaternion.Euler(0, currentRotAngle, 0);
 
-        transform.position = Player.transform.position;
-        transform.position -= currentRot * Vector3.forward * distance;
+
+        this.gameObject.transform.position = target.position;
+        this.gameObject.transform.position -= currentRot * Vector3.forward * distance;
         heightVec[1] = currentHeight;
-        transform.position = transform.position + heightVec;
-        //transform.position.y = currentHeight;
-        //LookAtPoint.position = Player.transform.position;
-        //LookAtPoint.position = Player.transform.position + heightVec;
-        transform.LookAt(Player.transform);
+        this.gameObject.transform.position = this.gameObject.transform.position + heightVec;
+        //LookAt
+        //lookAtPos.position = target.position + lookAtVec;
+        this.gameObject.transform.LookAt(target);
     }
 }
