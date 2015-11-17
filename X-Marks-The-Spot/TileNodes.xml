@@ -431,52 +431,54 @@
       <Directions>
 	   <DirectionNode>
 		 <!--direction 1-->
-          <Direction>1</Direction>
-          <Connections>
-		  
-		  <!--Path 15%-->
-            <ConnectionNode>
-              <TileName>Path</TileName>
-              <Chance>15</Chance>
-              <Rotations>
-                <RotationChanceNode>
-                  <Rotation>90</Rotation>
-                  <Chance>100</Chance>
-                </RotationChanceNode>
-              </Rotations>
-            </ConnectionNode>
-			
-			<!--Corner 15%-->
-            <ConnectionNode>
-              <TileName>Corner</TileName>
-              <Chance>15</Chance>
-              <Rotations>
-                <RotationChanceNode>
-                  <Rotation>180</Rotation>
-                  <Chance>50</Chance>
-                </RotationChanceNode>
-				<RotationChanceNode>
-                  <Rotation>270</Rotation>
-                  <Chance>50</Chance>
-                </RotationChanceNode>
-              </Rotations>
-            </ConnectionNode>
-			
-			<!--Corner 15%-->
-            <ConnectionNode>
-              <TileName>Corner</TileName>
-              <Chance>15</Chance>
-              <Rotations>
-                <RotationChanceNode>
-                  <Rotation>180</Rotation>
-                  <Chance>50</Chance>
-                </RotationChanceNode>
-				<RotationChanceNode>
-                  <Rotation>270</Rotation>
-                  <Chance>50</Chance>
-                </RotationChanceNode>
-              </Rotations>
-            </ConnectionNode>
+			<Direction>1</Direction>
+			<Connections>
+			  
+			  <!--Path 15%-->
+				<ConnectionNode>
+				  <TileName>Path</TileName>
+				  <Chance>15</Chance>
+				  <Rotations>
+					<RotationChanceNode>
+					  <Rotation>90</Rotation>
+					  <Chance>100</Chance>
+					</RotationChanceNode>
+				  </Rotations>
+				</ConnectionNode>
+				
+				<!--Corner 15%-->
+				<ConnectionNode>
+				  <TileName>Corner</TileName>
+				  <Chance>15</Chance>
+				  <Rotations>
+					<RotationChanceNode>
+					  <Rotation>180</Rotation>
+					  <Chance>50</Chance>
+					</RotationChanceNode>
+					<RotationChanceNode>
+					  <Rotation>270</Rotation>
+					  <Chance>50</Chance>
+					</RotationChanceNode>
+				  </Rotations>
+				</ConnectionNode>
+				
+				<!--Corner 15%-->
+				<ConnectionNode>
+				  <TileName>Corner</TileName>
+				  <Chance>15</Chance>
+				  <Rotations>
+					<RotationChanceNode>
+					  <Rotation>180</Rotation>
+					  <Chance>50</Chance>
+					</RotationChanceNode>
+					<RotationChanceNode>
+					  <Rotation>270</Rotation>
+					  <Chance>50</Chance>
+					</RotationChanceNode>
+				  </Rotations>
+				</ConnectionNode>
+			</Connections>
+		 </DirectionNode>
       </Directions>
     </TileNode>
   </TileList>

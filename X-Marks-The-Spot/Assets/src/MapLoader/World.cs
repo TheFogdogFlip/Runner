@@ -36,7 +36,7 @@ public class World{
         }
     }
 
-    private EmptyTile[,] grid;
+    private Tile[,] grid;
 
     private int width;
     private int depth;
@@ -60,12 +60,12 @@ public class World{
         Instance.generate();
     }
 
-    public EmptyTile GetTile(int x, int y)
+    public Tile GetTile(int x, int y)
     {
         return grid[Mathf.FloorToInt(y / gridDimentions.y), Mathf.FloorToInt(x / gridDimentions.x)];
     }
 
-    public void SetTile(int x, int y, EmptyTile tile)
+    public void SetTile(int x, int y, Tile tile)
     {
         grid[Mathf.FloorToInt(y / gridDimentions.y), Mathf.FloorToInt(x / gridDimentions.x)] = tile;
        
@@ -179,7 +179,7 @@ public class World{
         depth = texture.height;
         width = texture.width;
 
-        grid = new EmptyTile[width, depth];
+        grid = new Tile[width, depth];
 
         var tilesTypes = getTileTypes();
 
@@ -207,11 +207,11 @@ public class World{
                     break;
                 }
 
-                PathTile tile = null;
+                Tile tile = null;
 
-                if (rotationN != null)
+                if (rotationN != null && !String.IsNullOrEmpty(tileN.TileName))
                 {
-                    tile = new PathTile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y), rotationN.Color.ToColor(), tileN.TileName, rotationN.Rotation);
+                    tile = new Tile(new Vector3(x * gridDimentions.x, 0, y * gridDimentions.y), rotationN.Color.ToColor(), tileN.TileName, rotationN.Rotation);
                     if (tileN.TileName.ToLower() == "start")
                     {
                         start = tile.Position;
