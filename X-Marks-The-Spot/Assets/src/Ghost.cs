@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 public class Ghost : MonoBehaviour {
 
@@ -16,6 +15,10 @@ public class Ghost : MonoBehaviour {
     private float rotationTarget;
     private Quaternion qTo = Quaternion.identity;
     private int turnPhase = 0;
+
+    //For Animation
+    public Animator anim;
+    private bool isFirstFrame = true;
 
     public List<TimeStamp> inputs;
     private Timer_Ghost ghostTimerObj;
@@ -34,6 +37,13 @@ public class Ghost : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (isFirstFrame)
+        {
+            isFirstFrame = false;
+            anim = gameObject.GetComponentInChildren<Animator>();
+            //anim = GameObject.Find("Ghost(Clone)/NinjaBob").GetComponent<Animator>();
+            anim.Play("Run");
+        }
         ghostTimerObj.SetText();
         Turn();
         Run();
@@ -43,14 +53,13 @@ public class Ghost : MonoBehaviour {
     {
         if(index < inputs.Count)
         {
-            //print(inputs[index].time.ToString() + " " + ghostTimerObj.f_time.ToString());
             if (inputs[index].time <= ghostTimerObj.f_time)
             {
                 if (inputs[index].input == "TurnRight")
                 {
 
                     rotationTarget += 90.0f;
-                    //anim.Play("TurnRight90");
+                    anim.Play("TurnRight90");
                     turnPhase = 1;
 
                 }
@@ -58,7 +67,7 @@ public class Ghost : MonoBehaviour {
                 {
 
                     rotationTarget -= 90.0f;
-                    //anim.Play("TurnLeft90");
+                    anim.Play("TurnLeft90");
                     turnPhase = 1;
                 }
                 if (rotationTarget == 360 || rotationTarget == -360)
@@ -109,6 +118,7 @@ public class Ghost : MonoBehaviour {
     {
         //Run forward
         transform.Translate(transform.forward * crntSpeed * 100 * Time.deltaTime, Space.World);
+        
     }
     void OnTriggerEnter(Collider other)
     {

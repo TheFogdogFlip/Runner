@@ -64,7 +64,7 @@ public class Player : MonoBehaviour
         //SetupGhostTimer();
         SetupPlayerTimer();
         crntSpeed = runSpeed;
-        inputs = new List<TimeStamp>();
+      
 	}
 
     void Start ()
@@ -72,6 +72,7 @@ public class Player : MonoBehaviour
         player = GetComponent<Player>();
         ghostinputs = new List<List<TimeStamp>>();
         ghosts = new List<GameObject>();
+        inputs = new List<TimeStamp>();
     }
 
     void Update()
@@ -79,7 +80,7 @@ public class Player : MonoBehaviour
         if (isFirstFrame)
         {
             isFirstFrame = false;
-            anim = GameObject.Find("NinjaBob").GetComponent<Animator>();
+            anim = gameObject.GetComponentInChildren<Animator>();
         }
         if(ghostTimerObj != null)
             ghostTimerObj.SetText();
@@ -121,8 +122,8 @@ public class Player : MonoBehaviour
     {
         ctdTimerGameObj = GameObject.Find("ctdTimer");
         ctdTimerObj = ctdTimerGameObj.GetComponent<Timer_Countdown>();
-        ctdTimerObj.f_time = 4;
-        ctdTimerObj.i_time = 4;
+        ctdTimerObj.f_time = 2;
+        ctdTimerObj.i_time = 2;
         ctdTimerObj.TimerFirstRunning = true;
         ctdTimerObj.TimerSecondRunning = true;
         ctdTimerObj.textObj.enabled = true;
@@ -305,11 +306,25 @@ public class Player : MonoBehaviour
         {
 
             Death();
-            GameObject go = Instantiate(Resources.Load("Ghost", typeof(GameObject)), World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection)) as GameObject;
-            Ghost ghost = go.GetComponent<Ghost>();
-            ghost.inputs = inputs;
-            ghosts.Add(go);
+            GameObject go;
+            Ghost ghost;
             ghostinputs.Add(inputs);
+            inputs = new List<TimeStamp>();
+            print(ghostinputs.Count);
+            for (int i = 0; i < ghostinputs.Count; ++i)
+            {
+                go = Instantiate(Resources.Load("Ghost", typeof(GameObject)), World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection)) as GameObject;
+                ghost = go.GetComponent<Ghost>();
+                ghost.inputs = ghostinputs[i];
+                ghosts.Add(go);
+
+            }
+
+            //go = Instantiate(Resources.Load("Ghost", typeof(GameObject)), World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection)) as GameObject;
+            //Ghost ghost = go.GetComponent<Ghost>();
+            //ghost.inputs = inputs;
+            //ghosts.Add(go);
+            
             SetupGhostTimer();
             SetupCtdTimer();
             SetupPlayerTimer();
@@ -336,14 +351,7 @@ public class Player : MonoBehaviour
         {
             Destroy(go);
         }
-        for (int i = 0; i < ghostinputs.Count; ++i)
-        {
-            GameObject go = Instantiate(Resources.Load("Ghost", typeof(GameObject)), World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection)) as GameObject;
-            Ghost ghost = go.GetComponent<Ghost>();
-            ghost.inputs = ghostinputs[i];
-            ghosts.Add(go);
-
-        }
+       
 
     }
 }
