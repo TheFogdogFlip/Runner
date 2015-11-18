@@ -136,22 +136,10 @@
           <Direction>0</Direction>
           <Connections>
 		  
-		  <!--Path 15%-->
-            <ConnectionNode>
-              <TileName>Path</TileName>
-              <Chance>15</Chance>
-              <Rotations>
-                <RotationChanceNode>
-                  <Rotation>0</Rotation>
-                  <Chance>100</Chance>
-                </RotationChanceNode>
-              </Rotations>
-            </ConnectionNode>
-			
-			<!--3way 15%-->
+		  <!--3way 10%-->
 			 <ConnectionNode>
               <TileName>3way</TileName>
-              <Chance>15</Chance>
+              <Chance>10</Chance>
               <Rotations>
                 <RotationChanceNode>
                   <Rotation>0</Rotation>
@@ -168,10 +156,10 @@
               </Rotations>
             </ConnectionNode>
 			
-			<!--Corner 15%-->
+			<!--Corner 10%-->
 			 <ConnectionNode>
               <TileName>Corner</TileName>
-              <Chance>15</Chance>
+              <Chance>10</Chance>
               <Rotations>
                 <RotationChanceNode>
                   <Rotation>0</Rotation>
@@ -180,6 +168,18 @@
 				<RotationChanceNode>
                   <Rotation>270</Rotation>
                   <Chance>50</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+		  
+		  <!--Crouch 10%-->
+            <ConnectionNode>
+              <TileName>Crouch</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
                 </RotationChanceNode>
               </Rotations>
             </ConnectionNode>
@@ -195,11 +195,35 @@
                 </RotationChanceNode>
               </Rotations>
             </ConnectionNode>
-			
-			<!--Jump 15%-->
+		  
+		   <!--Hole 10%-->
+            <ConnectionNode>
+              <TileName>Hole</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+		  
+		  <!--Jump 10%-->
 			 <ConnectionNode>
               <TileName>Jump</TileName>
-              <Chance>15</Chance>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+		  
+		  <!--Path 20%-->
+            <ConnectionNode>
+              <TileName>Path</TileName>
+              <Chance>20</Chance>
               <Rotations>
                 <RotationChanceNode>
                   <Rotation>0</Rotation>
@@ -208,10 +232,10 @@
               </Rotations>
             </ConnectionNode>
 			
-				<!--Tilt 15%-->
+		<!--Tilt 10%-->
 			 <ConnectionNode>
               <TileName>Tilt</TileName>
-              <Chance>15</Chance>
+              <Chance>10</Chance>
               <Rotations>
                 <RotationChanceNode>
                   <Rotation>0</Rotation>
@@ -220,10 +244,10 @@
               </Rotations>
             </ConnectionNode>
 			
-			<!--Xroad 15%-->
+			<!--Xroad 10%-->
 			 <ConnectionNode>
               <TileName>Xroad</TileName>
-              <Chance>15</Chance>
+              <Chance>10</Chance>
               <Rotations>
                 <RotationChanceNode>
                   <Rotation>0</Rotation>
@@ -240,22 +264,10 @@
           <Direction>2</Direction>
           <Connections>
 		  
-		  <!--Path 15%-->
-            <ConnectionNode>
-              <TileName>Path</TileName>
-              <Chance>15</Chance>
-              <Rotations>
-                <RotationChanceNode>
-                  <Rotation>0</Rotation>
-                  <Chance>100</Chance>
-                </RotationChanceNode>
-              </Rotations>
-            </ConnectionNode>
-			
-			<!--3way 15%-->
+		  <!--3way 10%-->
 			 <ConnectionNode>
               <TileName>3way</TileName>
-              <Chance>15</Chance>
+              <Chance>10</Chance>
               <Rotations>
                 <RotationChanceNode>
                   <Rotation>180</Rotation>
@@ -271,11 +283,11 @@
                 </RotationChanceNode>
               </Rotations>
             </ConnectionNode>
-			
-			<!--Corner 15%-->
+		  
+		  <!--Corner 10%-->
 			 <ConnectionNode>
               <TileName>Corner</TileName>
-              <Chance>15</Chance>
+              <Chance>10</Chance>
               <Rotations>
                 <RotationChanceNode>
                   <Rotation>90</Rotation>
@@ -288,7 +300,19 @@
               </Rotations>
             </ConnectionNode>
 			
-			<!--End 10%-->
+			 <!--Crouch 10%-->
+            <ConnectionNode>
+              <TileName>Crouch</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+				<!--End 10%-->
 			 <ConnectionNode>
               <TileName>End</TileName>
               <Chance>10</Chance>
@@ -300,10 +324,34 @@
               </Rotations>
             </ConnectionNode>
 			
-			<!--Jump 15%-->
+			 <!--Hole 10%-->
+            <ConnectionNode>
+              <TileName>Hole</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+		  
+		  <!--Jump 10%-->
 			 <ConnectionNode>
               <TileName>Jump</TileName>
-              <Chance>15</Chance>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+		  
+		  <!--Path 20%-->
+            <ConnectionNode>
+              <TileName>Path</TileName>
+              <Chance>20</Chance>
               <Rotations>
                 <RotationChanceNode>
                   <Rotation>0</Rotation>
@@ -312,10 +360,10 @@
               </Rotations>
             </ConnectionNode>
 			
-				<!--Tilt 15%-->
+				<!--Tilt 10%-->
 			 <ConnectionNode>
               <TileName>Tilt</TileName>
-              <Chance>15</Chance>
+              <Chance>10</Chance>
               <Rotations>
                 <RotationChanceNode>
                   <Rotation>0</Rotation>
@@ -324,10 +372,10 @@
               </Rotations>
             </ConnectionNode>
 			
-			<!--Xroad 15%-->
+			<!--Xroad 10%-->
 			 <ConnectionNode>
               <TileName>Xroad</TileName>
-              <Chance>15</Chance>
+              <Chance>10</Chance>
               <Rotations>
                 <RotationChanceNode>
                   <Rotation>0</Rotation>
@@ -433,50 +481,10 @@
           <Direction>1</Direction>
           <Connections>
 		  
-		  <!--Path 15%-->
-            <ConnectionNode>
-              <TileName>Path</TileName>
-              <Chance>15</Chance>
-              <Rotations>
-                <RotationChanceNode>
-                  <Rotation>90</Rotation>
-                  <Chance>100</Chance>
-                </RotationChanceNode>
-              </Rotations>
-            </ConnectionNode>
-			
-			<!--Corner 15%-->
-            <ConnectionNode>
-              <TileName>Corner</TileName>
-              <Chance>15</Chance>
-              <Rotations>
-                <RotationChanceNode>
-                  <Rotation>180</Rotation>
-                  <Chance>50</Chance>
-                </RotationChanceNode>
-				<RotationChanceNode>
-                  <Rotation>270</Rotation>
-                  <Chance>50</Chance>
-                </RotationChanceNode>
-              </Rotations>
-            </ConnectionNode>
-			
-			<!--Xroad 15%-->
-            <ConnectionNode>
-              <TileName>Xroad</TileName>
-              <Chance>15</Chance>
-              <Rotations>
-                <RotationChanceNode>
-                  <Rotation>0</Rotation>
-                  <Chance>100</Chance>
-                </RotationChanceNode>
-              </Rotations>
-            </ConnectionNode>
-			
-			<!--3way 15%-->
+		  <!--3way 10%-->
             <ConnectionNode>
               <TileName>3way</TileName>
-              <Chance>15</Chance>
+              <Chance>10</Chance>
               <Rotations>
                 <RotationChanceNode>
                   <Rotation>0</Rotation>
@@ -489,6 +497,34 @@
 				 <RotationChanceNode>
                   <Rotation>270</Rotation>
                   <Chance>40</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+		  
+		  	<!--Corner 10%-->
+            <ConnectionNode>
+              <TileName>Corner</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>180</Rotation>
+                  <Chance>50</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>270</Rotation>
+                  <Chance>50</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			 <!--Crouch 10%-->
+            <ConnectionNode>
+              <TileName>Crouch</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>90</Rotation>
+                  <Chance>100</Chance>
                 </RotationChanceNode>
               </Rotations>
             </ConnectionNode>
@@ -505,10 +541,22 @@
               </Rotations>
             </ConnectionNode>
 			
-			<!--jump 15%-->
+			 <!--Hole 10%-->
+            <ConnectionNode>
+              <TileName>Hole</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>90</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Jump 10%-->
             <ConnectionNode>
               <TileName>Jump</TileName>
-              <Chance>15</Chance>
+              <Chance>10</Chance>
               <Rotations>
                 <RotationChanceNode>
                   <Rotation>90</Rotation>
@@ -517,10 +565,22 @@
               </Rotations>
             </ConnectionNode>
 			
-			<!--Tilt 15%-->
+		  <!--Path 10%-->
+            <ConnectionNode>
+              <TileName>Path</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>90</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+				<!--Tilt 10%-->
             <ConnectionNode>
               <TileName>Tilt</TileName>
-              <Chance>15</Chance>
+              <Chance>10</Chance>
               <Rotations>
                 <RotationChanceNode>
                   <Rotation>90</Rotation>
@@ -528,59 +588,31 @@
                 </RotationChanceNode>
               </Rotations>
             </ConnectionNode>
-			  </Connections>
-        </DirectionNode>
 			
-			
+			<!--Xroad 10%-->
+            <ConnectionNode>
+              <TileName>Xroad</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+		</Connections>
+			</DirectionNode>
+
+		
 			<DirectionNode>
 		 <!--direction 2-->
           <Direction>2</Direction>
           <Connections>
 		  
-		  <!--Path 15%-->
-            <ConnectionNode>
-              <TileName>Path</TileName>
-              <Chance>15</Chance>
-              <Rotations>
-                <RotationChanceNode>
-                  <Rotation>0</Rotation>
-                  <Chance>100</Chance>
-                </RotationChanceNode>
-              </Rotations>
-            </ConnectionNode>
-			
-			<!--Corner 15%-->
-            <ConnectionNode>
-              <TileName>Corner</TileName>
-              <Chance>15</Chance>
-              <Rotations>
-                <RotationChanceNode>
-                  <Rotation>90</Rotation>
-                  <Chance>50</Chance>
-                </RotationChanceNode>
-				<RotationChanceNode>
-                  <Rotation>180</Rotation>
-                  <Chance>50</Chance>
-                </RotationChanceNode>
-              </Rotations>
-            </ConnectionNode>
-			
-			<!--Xroad 15%-->
-            <ConnectionNode>
-              <TileName>Xroad</TileName>
-              <Chance>15</Chance>
-              <Rotations>
-                <RotationChanceNode>
-                  <Rotation>0</Rotation>
-                  <Chance>100</Chance>
-                </RotationChanceNode>
-              </Rotations>
-            </ConnectionNode>
-			
-			<!--3way 15%-->
+		  <!--3way 10%-->
             <ConnectionNode>
               <TileName>3way</TileName>
-              <Chance>15</Chance>
+              <Chance>10</Chance>
               <Rotations>
                 <RotationChanceNode>
                   <Rotation>90</Rotation>
@@ -597,6 +629,34 @@
               </Rotations>
             </ConnectionNode>
 			
+				<!--Corner 10%-->
+            <ConnectionNode>
+              <TileName>Corner</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>90</Rotation>
+                  <Chance>50</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>180</Rotation>
+                  <Chance>50</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			 <!--Crouch 10%-->
+            <ConnectionNode>
+              <TileName>Crouch</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
 			<!--End 10%-->
             <ConnectionNode>
               <TileName>End</TileName>
@@ -609,10 +669,22 @@
               </Rotations>
             </ConnectionNode>
 			
-			<!--jump 15%-->
+			 <!--Hole 10%-->
+            <ConnectionNode>
+              <TileName>Hole</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Jump 10%-->
             <ConnectionNode>
               <TileName>Jump</TileName>
-              <Chance>15</Chance>
+              <Chance>10</Chance>
               <Rotations>
                 <RotationChanceNode>
                   <Rotation>0</Rotation>
@@ -621,10 +693,22 @@
               </Rotations>
             </ConnectionNode>
 			
-			<!--Tilt 15%-->
+			<!--Path 20%-->
+            <ConnectionNode>
+              <TileName>Path</TileName>
+              <Chance>20</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Tilt 10%-->
             <ConnectionNode>
               <TileName>Tilt</TileName>
-              <Chance>15</Chance>
+              <Chance>10</Chance>
               <Rotations>
                 <RotationChanceNode>
                   <Rotation>0</Rotation>
@@ -632,59 +716,31 @@
                 </RotationChanceNode>
               </Rotations>
             </ConnectionNode>
-			  </Connections>
+			
+			
+			<!--Xroad 10%-->
+            <ConnectionNode>
+              <TileName>Xroad</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			</Connections>
 			</DirectionNode>
+			
 			<DirectionNode>
-			
-			
 		 <!--direction 3-->
           <Direction>3</Direction>
           <Connections>
 		  
-		  <!--Path 15%-->
-            <ConnectionNode>
-              <TileName>Path</TileName>
-              <Chance>15</Chance>
-              <Rotations>
-                <RotationChanceNode>
-                  <Rotation>90</Rotation>
-                  <Chance>100</Chance>
-                </RotationChanceNode>
-              </Rotations>
-            </ConnectionNode>
-			
-			<!--Corner 15%-->
-            <ConnectionNode>
-              <TileName>Corner</TileName>
-              <Chance>15</Chance>
-              <Rotations>
-                <RotationChanceNode>
-                  <Rotation>0</Rotation>
-                  <Chance>50</Chance>
-                </RotationChanceNode>
-				<RotationChanceNode>
-                  <Rotation>90</Rotation>
-                  <Chance>50</Chance>
-                </RotationChanceNode>
-              </Rotations>
-            </ConnectionNode>
-			
-			<!--Xroad 15%-->
-            <ConnectionNode>
-              <TileName>Xroad</TileName>
-              <Chance>15</Chance>
-              <Rotations>
-                <RotationChanceNode>
-                  <Rotation>0</Rotation>
-                  <Chance>100</Chance>
-                </RotationChanceNode>
-              </Rotations>
-            </ConnectionNode>
-			
-			<!--3way 15%-->
+		  <!--3way 10%-->
             <ConnectionNode>
               <TileName>3way</TileName>
-              <Chance>15</Chance>
+              <Chance>10</Chance>
               <Rotations>
                 <RotationChanceNode>
                   <Rotation>0</Rotation>
@@ -701,6 +757,35 @@
               </Rotations>
             </ConnectionNode>
 			
+			<!--Corner 10%-->
+            <ConnectionNode>
+              <TileName>Corner</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>50</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>90</Rotation>
+                  <Chance>50</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			 <!--Crouch 10%-->
+            <ConnectionNode>
+              <TileName>Crouch</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>90</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+		  
+		  
 			<!--End 10%-->
             <ConnectionNode>
               <TileName>End</TileName>
@@ -713,10 +798,10 @@
               </Rotations>
             </ConnectionNode>
 			
-			<!--jump 15%-->
+			 <!--Hole 10%-->
             <ConnectionNode>
-              <TileName>Jump</TileName>
-              <Chance>15</Chance>
+              <TileName>Hole</TileName>
+              <Chance>10</Chance>
               <Rotations>
                 <RotationChanceNode>
                   <Rotation>90</Rotation>
@@ -725,13 +810,49 @@
               </Rotations>
             </ConnectionNode>
 			
-			<!--Tilt 15%-->
+			<!--jump 10%-->
             <ConnectionNode>
-              <TileName>Tilt</TileName>
-              <Chance>15</Chance>
+              <TileName>Jump</TileName>
+              <Chance>10</Chance>
               <Rotations>
                 <RotationChanceNode>
                   <Rotation>90</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+		  
+		  <!--Path 20%-->
+            <ConnectionNode>
+              <TileName>Path</TileName>
+              <Chance>20</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>90</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Tilt 10%-->
+            <ConnectionNode>
+              <TileName>Tilt</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>90</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Xroad 10%-->
+            <ConnectionNode>
+              <TileName>Xroad</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
                   <Chance>100</Chance>
                 </RotationChanceNode>
               </Rotations>
@@ -767,14 +888,15 @@
       </Rotations>
       <Directions>
         <DirectionNode>
+		
 		 <!--direction 0-->
           <Direction>0</Direction>
           <Connections>
 		  
-		  <!--Path 15%-->
+		  <!--Path 20%-->
             <ConnectionNode>
               <TileName>Path</TileName>
-              <Chance>15</Chance>
+              <Chance>20</Chance>
               <Rotations>
                 <RotationChanceNode>
                   <Rotation>0</Rotation>
@@ -783,10 +905,10 @@
               </Rotations>
             </ConnectionNode>
 			
-			<!--3way 15%-->
+			<!--3way 10%-->
 			 <ConnectionNode>
               <TileName>3way</TileName>
-              <Chance>15</Chance>
+              <Chance>10</Chance>
               <Rotations>
                 <RotationChanceNode>
                   <Rotation>0</Rotation>
@@ -803,10 +925,10 @@
               </Rotations>
             </ConnectionNode>
 			
-			<!--Corner 15%-->
+			<!--Corner 10%-->
 			 <ConnectionNode>
               <TileName>Corner</TileName>
-              <Chance>15</Chance>
+              <Chance>10</Chance>
               <Rotations>
                 <RotationChanceNode>
                   <Rotation>0</Rotation>
@@ -831,10 +953,10 @@
               </Rotations>
             </ConnectionNode>
 			
-			<!--Jump 15%-->
+			<!--Jump 10%-->
 			 <ConnectionNode>
               <TileName>Jump</TileName>
-              <Chance>15</Chance>
+              <Chance>10</Chance>
               <Rotations>
                 <RotationChanceNode>
                   <Rotation>0</Rotation>
@@ -843,10 +965,10 @@
               </Rotations>
             </ConnectionNode>
 			
-				<!--Tilt 15%-->
+				<!--Tilt 10%-->
 			 <ConnectionNode>
               <TileName>Tilt</TileName>
-              <Chance>15</Chance>
+              <Chance>10</Chance>
               <Rotations>
                 <RotationChanceNode>
                   <Rotation>0</Rotation>
@@ -855,10 +977,34 @@
               </Rotations>
             </ConnectionNode>
 			
-			<!--Xroad 15%-->
+			<!--Xroad 10%-->
 			 <ConnectionNode>
               <TileName>Xroad</TileName>
-              <Chance>15</Chance>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Crouch 10%-->
+			 <ConnectionNode>
+              <TileName>Crouch</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!-- Hole 10%-->
+			 <ConnectionNode>
+              <TileName>Hole</TileName>
+              <Chance>10</Chance>
               <Rotations>
                 <RotationChanceNode>
                   <Rotation>0</Rotation>
@@ -875,10 +1021,10 @@
           <Direction>2</Direction>
           <Connections>
 		  
-		  <!--Path 15%-->
+		  <!--Path 20%-->
             <ConnectionNode>
               <TileName>Path</TileName>
-              <Chance>15</Chance>
+              <Chance>20</Chance>
               <Rotations>
                 <RotationChanceNode>
                   <Rotation>0</Rotation>
@@ -887,10 +1033,10 @@
               </Rotations>
             </ConnectionNode>
 			
-			<!--3way 15%-->
+			<!--3way 10%-->
 			 <ConnectionNode>
               <TileName>3way</TileName>
-              <Chance>15</Chance>
+              <Chance>10</Chance>
               <Rotations>
                 <RotationChanceNode>
                   <Rotation>180</Rotation>
@@ -907,10 +1053,10 @@
               </Rotations>
             </ConnectionNode>
 			
-			<!--Corner 15%-->
+			<!--Corner 10%-->
 			 <ConnectionNode>
               <TileName>Corner</TileName>
-              <Chance>15</Chance>
+              <Chance>10</Chance>
               <Rotations>
                 <RotationChanceNode>
                   <Rotation>90</Rotation>
@@ -935,7 +1081,597 @@
               </Rotations>
             </ConnectionNode>
 			
-			<!--Jump 15%-->
+			<!--Jump 10%-->
+			 <ConnectionNode>
+              <TileName>Jump</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+				<!--Tilt 10%-->
+			 <ConnectionNode>
+              <TileName>Tilt</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Xroad 10%-->
+			 <ConnectionNode>
+              <TileName>Xroad</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Crouch 10%-->
+			 <ConnectionNode>
+              <TileName>Crouch</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!-- Hole 10%-->
+			 <ConnectionNode>
+              <TileName>Hole</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			</Connections>
+        </DirectionNode>
+      </Directions>
+    </TileNode>
+	
+	<!--Crouch  Grå RGB:128-129-->
+	<TileNode>
+      <TileName>Crouch</TileName>
+      <Rotations>
+
+        <RotatationNode>
+          <Rotation>0</Rotation>
+          <Color>
+            <R>128</R>
+            <G>128</G>
+            <B>128</B>
+            <A>255</A>
+          </Color>
+        </RotatationNode>
+		<RotatationNode>
+          <Rotation>90</Rotation>
+          <Color>
+            <R>129</R>
+            <G>129</G>
+            <B>129</B>
+            <A>255</A>
+          </Color>
+        </RotatationNode>
+      </Rotations>
+      <Directions>
+        <DirectionNode>
+		
+		 <!--direction 0-->
+          <Direction>0</Direction>
+          <Connections>
+		  
+		  <!--Path 20%-->
+            <ConnectionNode>
+              <TileName>Path</TileName>
+              <Chance>20</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--3way 10%-->
+			 <ConnectionNode>
+              <TileName>3way</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>30</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>90</Rotation>
+                  <Chance>30</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>270</Rotation>
+                  <Chance>40</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Corner 10%-->
+			 <ConnectionNode>
+              <TileName>Corner</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>50</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>270</Rotation>
+                  <Chance>50</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--End 10%-->
+			 <ConnectionNode>
+              <TileName>End</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Jump 10%-->
+			 <ConnectionNode>
+              <TileName>Jump</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Crouch 10%-->
+			 <ConnectionNode>
+              <TileName>Crouch</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Hole 10%-->
+			 <ConnectionNode>
+              <TileName>Hole</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+				<!--Tilt 10%-->
+			 <ConnectionNode>
+              <TileName>Tilt</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Xroad 10%-->
+			 <ConnectionNode>
+              <TileName>Xroad</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+
+          </Connections>
+        </DirectionNode>
+		  <DirectionNode>
+		  
+		  <!--direction2-->
+          <Direction>2</Direction>
+          <Connections>
+		  
+		  <!--Path 20%-->
+            <ConnectionNode>
+              <TileName>Path</TileName>
+              <Chance>20</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Crouch 10%-->
+			 <ConnectionNode>
+              <TileName>Crouch</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Hole 10%-->
+			 <ConnectionNode>
+              <TileName>Hole</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--3way 10%-->
+			 <ConnectionNode>
+              <TileName>3way</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>180</Rotation>
+                  <Chance>30</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>90</Rotation>
+                  <Chance>30</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>270</Rotation>
+                  <Chance>40</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Corner 10%-->
+			 <ConnectionNode>
+              <TileName>Corner</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>90</Rotation>
+                  <Chance>50</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>180</Rotation>
+                  <Chance>50</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--End 10%-->
+			 <ConnectionNode>
+              <TileName>End</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>180</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Jump 10%-->
+			 <ConnectionNode>
+              <TileName>Jump</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+				<!--Tilt 10%-->
+			 <ConnectionNode>
+              <TileName>Tilt</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Xroad 10%-->
+			 <ConnectionNode>
+              <TileName>Xroad</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			</Connections>
+        </DirectionNode>
+      </Directions>
+    </TileNode>
+	
+	<!--Hole  Mörkgul RG:128-129-->
+	<TileNode>
+      <TileName>Hole</TileName>
+      <Rotations>
+
+        <RotatationNode>
+          <Rotation>0</Rotation>
+          <Color>
+            <R>128</R>
+            <G>128</G>
+            <B>0</B>
+            <A>255</A>
+          </Color>
+        </RotatationNode>
+		<RotatationNode>
+          <Rotation>90</Rotation>
+          <Color>
+            <R>129</R>
+            <G>129</G>
+            <B>0</B>
+            <A>255</A>
+          </Color>
+        </RotatationNode>
+      </Rotations>
+      <Directions>
+        <DirectionNode>
+		 <!--direction 0-->
+          <Direction>0</Direction>
+          <Connections>
+		  
+		  <!--Path 20%-->
+            <ConnectionNode>
+              <TileName>Path</TileName>
+              <Chance>20</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Crouch 10%-->
+			 <ConnectionNode>
+              <TileName>Crouch</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Hole 10%-->
+			 <ConnectionNode>
+              <TileName>Hole</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--3way 10%-->
+			 <ConnectionNode>
+              <TileName>3way</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>30</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>90</Rotation>
+                  <Chance>30</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>270</Rotation>
+                  <Chance>40</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Corner 10%-->
+			 <ConnectionNode>
+              <TileName>Corner</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>50</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>270</Rotation>
+                  <Chance>50</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--End 10%-->
+			 <ConnectionNode>
+              <TileName>End</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Jump 10%-->
+			 <ConnectionNode>
+              <TileName>Jump</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+				<!--Tilt 10%-->
+			 <ConnectionNode>
+              <TileName>Tilt</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Xroad 10%-->
+			 <ConnectionNode>
+              <TileName>Xroad</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+
+          </Connections>
+        </DirectionNode>
+		  <DirectionNode>
+		  
+		  <!--direction2-->
+          <Direction>2</Direction>
+          <Connections>
+		  
+		  <!--Path 20%-->
+            <ConnectionNode>
+              <TileName>Path</TileName>
+              <Chance>20</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Crouch 10%-->
+			 <ConnectionNode>
+              <TileName>Crouch</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Hole 10%-->
+			 <ConnectionNode>
+              <TileName>Hole</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--3way 10%-->
+			 <ConnectionNode>
+              <TileName>3way</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>180</Rotation>
+                  <Chance>30</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>90</Rotation>
+                  <Chance>30</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>270</Rotation>
+                  <Chance>40</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Corner 10%-->
+			 <ConnectionNode>
+              <TileName>Corner</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>90</Rotation>
+                  <Chance>50</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>180</Rotation>
+                  <Chance>50</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--End 10%-->
+			 <ConnectionNode>
+              <TileName>End</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>180</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Jump 10%-->
 			 <ConnectionNode>
               <TileName>Jump</TileName>
               <Chance>15</Chance>
@@ -947,7 +1683,7 @@
               </Rotations>
             </ConnectionNode>
 			
-				<!--Tilt 15%-->
+				<!--Tilt 10%-->
 			 <ConnectionNode>
               <TileName>Tilt</TileName>
               <Chance>15</Chance>
@@ -959,10 +1695,822 @@
               </Rotations>
             </ConnectionNode>
 			
-			<!--Xroad 15%-->
+			<!--Xroad 10%-->
 			 <ConnectionNode>
               <TileName>Xroad</TileName>
               <Chance>15</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			</Connections>
+        </DirectionNode>
+      </Directions>
+    </TileNode>
+	
+	<!--Tilt  Lila RB:128-129-->
+	<TileNode>
+      <TileName>Tilt</TileName>
+      <Rotations>
+
+        <RotatationNode>
+          <Rotation>0</Rotation>
+          <Color>
+            <R>128</R>
+            <G>0</G>
+            <B>128</B>
+            <A>255</A>
+          </Color>
+        </RotatationNode>
+		<RotatationNode>
+          <Rotation>90</Rotation>
+          <Color>
+            <R>129</R>
+            <G>0</G>
+            <B>129</B>
+            <A>255</A>
+          </Color>
+        </RotatationNode>
+      </Rotations>
+      <Directions>
+        <DirectionNode>
+		 <!--direction 0-->
+          <Direction>0</Direction>
+          <Connections>
+		  
+		  <!--Path 20%-->
+            <ConnectionNode>
+              <TileName>Path</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Crouch 10%-->
+			 <ConnectionNode>
+              <TileName>Crouch</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Hole 10%-->
+			 <ConnectionNode>
+              <TileName>Hole</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--3way 10%-->
+			 <ConnectionNode>
+              <TileName>3way</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>30</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>90</Rotation>
+                  <Chance>30</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>270</Rotation>
+                  <Chance>40</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Corner 10%-->
+			 <ConnectionNode>
+              <TileName>Corner</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>50</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>270</Rotation>
+                  <Chance>50</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--End 10%-->
+			 <ConnectionNode>
+              <TileName>End</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Jump 10%-->
+			 <ConnectionNode>
+              <TileName>Jump</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+				<!--Tilt 10%-->
+			 <ConnectionNode>
+              <TileName>Tilt</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Xroad 10%-->
+			 <ConnectionNode>
+              <TileName>Xroad</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+
+          </Connections>
+        </DirectionNode>
+		  <DirectionNode>
+		  
+		  <!--direction2-->
+          <Direction>2</Direction>
+          <Connections>
+		  
+		  <!--Path 20%-->
+            <ConnectionNode>
+              <TileName>Path</TileName>
+              <Chance>20</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Crouch 10%-->
+			 <ConnectionNode>
+              <TileName>Crouch</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Hole 10%-->
+			 <ConnectionNode>
+              <TileName>Hole</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--3way 10%-->
+			 <ConnectionNode>
+              <TileName>3way</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>180</Rotation>
+                  <Chance>30</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>90</Rotation>
+                  <Chance>30</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>270</Rotation>
+                  <Chance>40</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Corner 10%-->
+			 <ConnectionNode>
+              <TileName>Corner</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>90</Rotation>
+                  <Chance>50</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>180</Rotation>
+                  <Chance>50</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--End 10%-->
+			 <ConnectionNode>
+              <TileName>End</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>180</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Jump 10%-->
+			 <ConnectionNode>
+              <TileName>Jump</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+				<!--Tilt 10%-->
+			 <ConnectionNode>
+              <TileName>Tilt</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Xroad 10%-->
+			 <ConnectionNode>
+              <TileName>Xroad</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			</Connections>
+        </DirectionNode>
+      </Directions>
+    </TileNode>
+	
+	<!--Xroad  Mörkturkos GB:128-->
+	<TileNode>
+      <TileName>Xroad</TileName>
+      <Rotations>
+
+        <RotatationNode>
+          <Rotation>0</Rotation>
+          <Color>
+            <R>0</R>
+            <G>128</G>
+            <B>128</B>
+            <A>255</A>
+          </Color>
+        </RotatationNode>
+      </Rotations>
+      <Directions>
+        <DirectionNode>
+		 <!--direction 0-->
+          <Direction>0</Direction>
+          <Connections>
+		  
+		  <!--Path 20%-->
+            <ConnectionNode>
+              <TileName>Path</TileName>
+              <Chance>20</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Crouch 10%-->
+			 <ConnectionNode>
+              <TileName>Crouch</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Hole 10%-->
+			 <ConnectionNode>
+              <TileName>Hole</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--3way 10%-->
+			 <ConnectionNode>
+              <TileName>3way</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>30</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>90</Rotation>
+                  <Chance>30</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>270</Rotation>
+                  <Chance>40</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Corner 10%-->
+			 <ConnectionNode>
+              <TileName>Corner</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>50</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>270</Rotation>
+                  <Chance>50</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--End 10%-->
+			 <ConnectionNode>
+              <TileName>End</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Jump 10%-->
+			 <ConnectionNode>
+              <TileName>Jump</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+				<!--Tilt 10%-->
+			 <ConnectionNode>
+              <TileName>Tilt</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Xroad 10%-->
+			 <ConnectionNode>
+              <TileName>Xroad</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+
+          </Connections>
+        </DirectionNode>
+		
+		<DirectionNode>
+		  
+		  <!--direction1-->
+          <Direction>1</Direction>
+          <Connections>
+		  
+		  <!--Path 20%-->
+            <ConnectionNode>
+              <TileName>Path</TileName>
+              <Chance>20</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>90</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Crouch 10%-->
+			 <ConnectionNode>
+              <TileName>Crouch</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>90</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Hole 10%-->
+			 <ConnectionNode>
+              <TileName>Hole</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>90</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--3way 10%-->
+			 <ConnectionNode>
+              <TileName>3way</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>180</Rotation>
+                  <Chance>30</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>30</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>270</Rotation>
+                  <Chance>40</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Corner 10%-->
+			 <ConnectionNode>
+              <TileName>Corner</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>180</Rotation>
+                  <Chance>50</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>270</Rotation>
+                  <Chance>50</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--End 10%-->
+			 <ConnectionNode>
+              <TileName>End</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>270</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Jump 10%-->
+			 <ConnectionNode>
+              <TileName>Jump</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>90</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+				<!--Tilt 10%-->
+			 <ConnectionNode>
+              <TileName>Tilt</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>90</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Xroad 10%-->
+			 <ConnectionNode>
+              <TileName>Xroad</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			</Connections>
+        </DirectionNode>
+		
+		
+		  <DirectionNode>
+		  <!--direction2-->
+          <Direction>2</Direction>
+          <Connections>
+		  
+		  <!--Path 20%-->
+            <ConnectionNode>
+              <TileName>Path</TileName>
+              <Chance>20</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Crouch 10%-->
+			 <ConnectionNode>
+              <TileName>Crouch</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Hole 10%-->
+			 <ConnectionNode>
+              <TileName>Hole</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--3way 10%-->
+			 <ConnectionNode>
+              <TileName>3way</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>180</Rotation>
+                  <Chance>30</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>90</Rotation>
+                  <Chance>30</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>270</Rotation>
+                  <Chance>40</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Corner 10%-->
+			 <ConnectionNode>
+              <TileName>Corner</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>90</Rotation>
+                  <Chance>50</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>180</Rotation>
+                  <Chance>50</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--End 10%-->
+			 <ConnectionNode>
+              <TileName>End</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>180</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Jump 10%-->
+			 <ConnectionNode>
+              <TileName>Jump</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+				<!--Tilt 10%-->
+			 <ConnectionNode>
+              <TileName>Tilt</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Xroad 15%-->
+			 <ConnectionNode>
+              <TileName>Xroad</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			</Connections>
+        </DirectionNode>
+		
+		
+		 <DirectionNode>
+		  <!--direction3-->
+          <Direction>3</Direction>
+          <Connections>
+		  
+		  <!--Path 20%-->
+            <ConnectionNode>
+              <TileName>Path</TileName>
+              <Chance>20</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>90</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Crouch 10%-->
+			 <ConnectionNode>
+              <TileName>Crouch</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>90</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Hole 10%-->
+			 <ConnectionNode>
+              <TileName>Hole</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>90</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--3way 10%-->
+			 <ConnectionNode>
+              <TileName>3way</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>30</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>90</Rotation>
+                  <Chance>30</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>180</Rotation>
+                  <Chance>40</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Corner 10%-->
+			 <ConnectionNode>
+              <TileName>Corner</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>0</Rotation>
+                  <Chance>50</Chance>
+                </RotationChanceNode>
+				<RotationChanceNode>
+                  <Rotation>900</Rotation>
+                  <Chance>50</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--End 10%-->
+			 <ConnectionNode>
+              <TileName>End</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>90</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Jump 10%-->
+			 <ConnectionNode>
+              <TileName>Jump</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>90</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+				<!--Tilt 10%-->
+			 <ConnectionNode>
+              <TileName>Tilt</TileName>
+              <Chance>10</Chance>
+              <Rotations>
+                <RotationChanceNode>
+                  <Rotation>90</Rotation>
+                  <Chance>100</Chance>
+                </RotationChanceNode>
+              </Rotations>
+            </ConnectionNode>
+			
+			<!--Xroad 10%-->
+			 <ConnectionNode>
+              <TileName>Xroad</TileName>
+              <Chance>10</Chance>
               <Rotations>
                 <RotationChanceNode>
                   <Rotation>0</Rotation>
@@ -1096,7 +2644,7 @@
               </Rotations>
             </ConnectionNode>
 			
-					<!--Jump 10%-->
+			<!--Jump 10%-->
 			 <ConnectionNode>
               <TileName>Jump</TileName>
               <Chance>10</Chance>
@@ -1144,6 +2692,7 @@
                 </RotationChanceNode>
               </Rotations>
             </ConnectionNode>
+			</Connections>
 	   </DirectionNode>
 	   
 	      <DirectionNode>
@@ -1223,7 +2772,7 @@
               </Rotations>
             </ConnectionNode>
 			
-					<!--Jump 10%-->
+			<!--Jump 10%-->
 			 <ConnectionNode>
               <TileName>Jump</TileName>
               <Chance>10</Chance>
@@ -1271,19 +2820,10 @@
                 </RotationChanceNode>
               </Rotations>
             </ConnectionNode>
+			</Connections>
 	   </DirectionNode>
       </Directions>
     </TileNode>
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
 	
   </TileList>
 </TileContainer>
