@@ -42,7 +42,6 @@ public class Ghost : MonoBehaviour {
     // Use this for initialization
     void Start () 
     {
-        print("Start");
         index = 0;
         rotationTarget = 0;
         crntSpeed = runSpeed;
@@ -141,7 +140,6 @@ public class Ghost : MonoBehaviour {
         if (currEvent == "Jump")
         {
             index++;
-            print("should jump");
             if (isSliding)
             {
                 //bc.size += new Vector3(0, bc.size.y, 0);
@@ -181,7 +179,6 @@ public class Ghost : MonoBehaviour {
         if (currEvent == "Slide")
         {
             index++;
-            print("should slide");
             //Slide start
             isSliding = true;
             //bc.size += new Vector3(0, -(bc.size.y * 0.5f), 0);
