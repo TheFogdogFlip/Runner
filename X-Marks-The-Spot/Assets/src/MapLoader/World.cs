@@ -5,6 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+public struct TileDirectionNode
+{
+    public DirectionNode Direction;
+    public int X;
+    public int Y;
+}
+
 public class World{
 
     private static Vector3 gridDimentions = new Vector3(2, 2, 2);
@@ -73,45 +80,133 @@ public class World{
 
     private void generate()
     {
-        //var tileTypes = getTileTypes();
+        var tileTypes = getTileTypes();
 
-        //int width = 64;
-        //int height = 64;
+        width = 64;
+        depth = 64;
 
-        //Texture2D generatedMap = new Texture2D(width, height, TextureFormat.RGBA32, false);
-        //bool done = false;
-        //System.Random rand = new System.Random(System.DateTime.Now.Millisecond);
+        Texture2D generatedMap = new Texture2D(width, depth, TextureFormat.RGBA32, false);
 
-        //Vector3 startTile = new Vector3(rand.Next(width), 0, rand.Next(height));
+        for (int y = 0; y < depth; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                generatedMap.SetPixel(y, x, new Color(1, 1, 1, 1));
+            }
+        }
 
-        //Dictionary<string, Color> colorLookupTable = new Dictionary<string, Color>();
+        System.Random rand = new System.Random(System.DateTime.Now.Millisecond);
 
-        //foreach(var tile in tileTypes.Nodes)
-        //{
+        Vector3 startTilePos = new Vector3(rand.Next(width), 0, rand.Next(depth));
 
-        //}
+        var startTile = tileTypes.Tiles.Find(n => n.TileName.ToLower() == "start");
 
-        ////generatedMap[startTile.x, startTile.z] = new Color();
+        int direction = rand.Next(0, 3);
 
-        //int x = 0;
-        //int z = 0;
+        float angle = 0.0f;
 
-        //switch(rand.Next(0,1))
-        //{
-        //    case 0:
-        //        x = rand.Next(0, 1) == 0 ? -1 : 1;
-        //        break;
-        //    case 1:
-        //        z = rand.Next(0, 1) == 0 ? -1 : 1;
-        //        break; 
-        //}
+        switch (direction)
+        {
+            case 0:
+                startDirection = new Vector3(0, 0, -1);
+                angle = 0.0f;
+                break;
+            case 1:
+                startDirection = new Vector3(-1, 0, 0);
+                angle = 90.0f;
+                break;
+            case 2:
+                startDirection = new Vector3(0, 0, 1);
+                angle = 180.0f;
+                break;
+            case 3:
+                startDirection = new Vector3(1, 0, 0);
+                angle = 270.0f;
+                break;
+        }
+        startDirection = new Vector3(0, 0, angle);
+        generatedMap.SetPixel((int)startTilePos.x, (int)startTilePos.z, startTile.Rotations.Find(c => c.Rotation == angle).Color.ToColor());
 
-        //startDirection = new Vector3(x, 0, z);
+        List<TileDirectionNode> directions = new List<TileDirectionNode>();
 
-        //while(!done)
-        //{
+        TileNode currentTile = startTile;
+        int currentX = (int)startTilePos.x;
+        int currentY = (int)startTilePos.y;
+        int currentDirection = -1;
 
-        //}
+        int dirX;
+        int dirZ;
+
+        while (true)
+        {
+            foreach (var item in currentTile.Directions)
+            {
+                if(item.Direction != currentDirection)
+                    directions.Add(new TileDirectionNode { Direction = item, X = currentX, Y = currentY });
+            }
+
+            if (directions.Count == 0)
+                break;
+
+            var dir = directions[0];
+
+            currentX = dir.X;
+            currentY = dir.Y;
+
+            dirX = 0;
+            dirZ = 0;
+
+            switch(dir.Direction.Direction)
+            {
+                case 0:
+                    dirZ = -1;
+                    break;
+                case 1:
+                    dirX = -1;
+                    break;
+                case 2:
+                    dirZ = 1;
+                    break;
+                case 3:
+                    dirX = 1;
+                    break;
+            }
+
+            currentX += dirX;
+            currentY += dirZ;
+
+            if (currentX > width || currentY > depth || currentX < 0 || currentY < 0)
+            {
+                
+            }
+            else
+            {
+                int randomNumber = rand.Next(0, 100);
+
+                ConnectionNode connection = null;
+
+                for (int i = 0; i < dir.Direction.Connections.Count; i++)
+                {
+                    connection = dir.Direction.Connections[i];
+                    if (randomNumber < (int)connection.Chance)
+                        break;
+                }
+                currentTile = tileTypes.Tiles.Find(n => n.TileName == connection.TileName);
+                generatedMap.SetPixel(currentX, currentY, currentTile.Rotations.Find(r => r.Rotation == connection.Rotations[0].Rotation).Color.ToColor());
+            }
+            directions.Remove(dir);
+        }
+        save("Temp.png", generatedMap);
+        load("Temp.png");
+    }
+
+    private void save(string filename, Texture2D texture)
+    {
+        var rawMap = texture.EncodeToPNG();
+        FileStream stream = new FileStream(filename, FileMode.OpenOrCreate);
+        stream.Write(rawMap, 0, rawMap.Length);
+        stream.Flush();
+        stream.Close();
     }
 
     public void Save(string filename)
@@ -124,7 +219,14 @@ public class World{
         {
             for (int x = 0; x < width; x++)
             {
-                generatedMap.SetPixel(x, y, grid[y, x].Color);
+                try
+                {
+                    generatedMap.SetPixel(x, y, grid[y, x].Color);
+                }
+                catch
+                {
+                    generatedMap.SetPixel(x, y, new Color(1, 1, 1, 1));
+                }
             }
         }
         var rawMap = generatedMap.EncodeToPNG();
@@ -172,10 +274,22 @@ public class World{
         return tiles;
     }
 
+    private Texture2D loadTexture2D(string filename)
+    {
+        FileStream stream = new FileStream(filename, FileMode.Open);
+        byte[] buffer = new byte[width * depth * 4];
+        stream.Read(buffer, 0, buffer.Length);
+        Texture2D texture = new Texture2D(width, depth, TextureFormat.RGBA32, false);
+        texture.LoadImage(buffer);
+        stream.Flush();
+        stream.Close();
+
+        return texture;
+    }
+
     private void load(string filename)
     {
-        Texture2D texture = Resources.Load<Texture2D>(filename);
-
+        Texture2D texture = loadTexture2D(filename);
         depth = texture.height;
         width = texture.width;
 
