@@ -316,32 +316,35 @@ public class Player : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Wall"))
         {
-
             Death();
-            GameObject go;
-            Ghost ghost;
-            ghostinputs.Add(inputs);
-            inputs = new List<TimeStamp>();
-
-            SetupGhostTimer();
-
-            for (int i = 0; i < ghostinputs.Count; ++i)
-            {
-                go = Instantiate(Resources.Load("Ghost", typeof(GameObject)), World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection)) as GameObject;
-                ghost = go.GetComponent<Ghost>();
-                ghost.inputs = ghostinputs[i];
-                ghosts.Add(go);
-
-            }
-            
-            
-            SetupCtdTimer();
-            SetupPlayerTimer();
+            SetupNextGame();
         }
+
         else if (other.gameObject.CompareTag("Hole"))
         {
             isFalling = true;
         }
+    }
+
+    void SetupNextGame()
+    {
+        GameObject go;
+        Ghost ghost;
+        ghostinputs.Add(inputs);
+        inputs = new List<TimeStamp>();
+
+        for (int i = 0; i < ghostinputs.Count; ++i)
+        {
+            go = Instantiate(Resources.Load("Ghost", typeof(GameObject)), World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection)) as GameObject;
+            ghost = go.GetComponent<Ghost>();
+            ghost.inputs = ghostinputs[i];
+            ghosts.Add(go);
+
+        }
+
+        SetupGhostTimer();
+        SetupCtdTimer();
+        SetupPlayerTimer();
     }
 
     void Death()

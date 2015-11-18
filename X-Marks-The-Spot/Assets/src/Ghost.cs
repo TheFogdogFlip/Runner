@@ -213,9 +213,19 @@ public class Ghost : MonoBehaviour {
     }
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Wall"))
+        if (other.gameObject.CompareTag("Floor"))
+        {
+            isJumping = false;
+            isFalling = false;
+            transform.position = new Vector3(transform.position.x, other.transform.position.y, transform.position.z);
+        }
+        else if (other.gameObject.CompareTag("Wall"))
         {
             Destroy(gameObject);
+        }
+        else if (other.gameObject.CompareTag("Hole"))
+        {
+            isFalling = true;
         }
     }
 }
