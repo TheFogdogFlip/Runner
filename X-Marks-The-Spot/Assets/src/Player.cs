@@ -3,33 +3,8 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Player : MonoBehaviour
+public class Player : PlayerBase
 {
-    //For moving forward
-    public float runSpeed;
-    public float crntSpeed;
-    public float deceleration;
-    public float acceleration;
-
-    //For jumping
-    private bool isJumping = false;
-    private bool isFalling = false;
-    public float jumpSpeed;
-    public float jumpHeight;
-    public Rigidbody rb;
-
-    //For turning 90 degrees smoothly
-    public float turnSpeed = 55.0f;
-    public float rotationTarget;
-    private Quaternion qTo = Quaternion.identity;
-    private int turnPhase = 0;
-
-    //For sliding
-    private bool isSliding = false;
-    public float slideSpeed;
-    public float maxSlideLength;
-    private float crntSlideLength;
-    public BoxCollider bc;
 
     //Ctd Timer
     private GameObject ctdTimerGameObj;
@@ -39,36 +14,29 @@ public class Player : MonoBehaviour
     private Timer_Player playerTimerObj;
     private GameObject playerTimerGameObj;
 
-    //For Animation
-    public Animator anim;
-    private bool isFirstFrame = true;
-
     public List<TimeStamp> inputs;
 
     //Ghost Timer -- TEMPORARY, just needed somewhere to make it 
     private Timer_Ghost ghostTimerObj;
     private GameObject ghostTimerGameObj;
 
-    private Player player;
     private List<List<TimeStamp>> ghostinputs;
     private List<GameObject> ghosts;
 
+    //For Animation
+    public Animator anim;
+    private bool isFirstFrame = true;
+
     void Awake ()
     {
-        rb = GetComponent<Rigidbody>();
-        bc = GetComponent<BoxCollider>();
-        crntSlideLength = maxSlideLength;
-        rotationTarget = transform.rotation.y;
         SetupCtdTimer();
         //SetupGhostTimer();
         SetupPlayerTimer();
         crntSpeed = runSpeed;
-      
 	}
 
     void Start ()
     {
-        player = GetComponent<Player>();
         ghostinputs = new List<List<TimeStamp>>();
         ghosts = new List<GameObject>();
         inputs = new List<TimeStamp>();
@@ -81,7 +49,7 @@ public class Player : MonoBehaviour
             isFirstFrame = false;
             anim = gameObject.GetComponentInChildren<Animator>();
         }
-        if(ghostTimerObj != null)
+        if (ghostTimerObj != null)
             ghostTimerObj.SetText();
         
         //Running forward block
@@ -99,11 +67,9 @@ public class Player : MonoBehaviour
                 playerTimerObj.SetText();
             }
 
-            Turn();
-            Run();
-            Falling();
-            Jump();
-            Slide();
+            KeyInputs();
+            MovementUpdate();
+            
 
         }
         if(!ctdTimerObj.TimerSecondRunning)
@@ -114,9 +80,48 @@ public class Player : MonoBehaviour
         {
             ctdTimerObj.SetText();
         }
-        
-        
-       
+    }
+
+    void KeyInputs()
+    {
+        float time = playerTimerObj.f_time;
+        if (Input.GetAxisRaw("Horizontal") == 1)
+        {
+            TimeStamp ts = new TimeStamp();
+            ts.time = time;
+            ts.input = "TurnRight";
+            inputs.Add(ts);
+            anim.Play("TurnRight90");
+            TurnRight();
+        }
+
+        if (Input.GetAxisRaw("Horizontal") == -1)
+        {
+            TimeStamp ts = new TimeStamp();
+            ts.time = time;
+            ts.input = "TurnLeft";
+            inputs.Add(ts);
+            anim.Play("TurnLeft90");
+            TurnLeft();
+        }
+
+        if (Input.GetButtonDown("Slide") && !isSliding && !isJumping)
+        {
+            TimeStamp ts = new TimeStamp();
+            ts.time = playerTimerObj.f_time;
+            ts.input = "Slide";
+            inputs.Add(ts);
+            Slide();
+        }
+
+        if (Input.GetButtonDown("Jump") && !isJumping)
+        {
+            TimeStamp ts = new TimeStamp();
+            ts.time = playerTimerObj.f_time;
+            ts.input = "Jump";
+            inputs.Add(ts);
+            Jump();
+        }
     }
 
     void SetupCtdTimer()
@@ -148,183 +153,6 @@ public class Player : MonoBehaviour
 
 
     }
-    void LateUpdate()
-    {
-        //Do this late because we want to check collisions first
-        
-        
-    }
-
-    void FixedUpdate()
-    {
-        
-    }
-
-    void Run()
-    {
-        //Run forward
-        transform.Translate(transform.forward * crntSpeed * 100 * Time.deltaTime, Space.World);
-    }
-
-    void Turn()
-    {
-        
-        //ACTIVATION PHASE
-        if (turnPhase == 0)
-        {
-            float time = playerTimerObj.f_time;
-            if (Input.GetAxisRaw("Horizontal") == 1)
-            {
-                TimeStamp ts = new TimeStamp();
-                ts.time = time;
-                ts.input = "TurnRight";
-                inputs.Add(ts);
-
-                rotationTarget += 90.0f;
-                anim.Play("TurnRight90");
-                turnPhase = 1;
-            }
-            if (Input.GetAxisRaw("Horizontal") == -1)
-            {
-                TimeStamp ts = new TimeStamp();
-                ts.time = time;
-                ts.input = "TurnLeft";
-                inputs.Add(ts);
-
-                rotationTarget -= 90.0f;
-                anim.Play("TurnLeft90");
-                turnPhase = 1;
-            }
-            if (rotationTarget == 360 || rotationTarget == -360)
-            {
-                rotationTarget = 0.0f;
-            }
-            qTo = Quaternion.Euler(0.0f, rotationTarget, 0.0f);
-        }
-        //BRAKING PHASE
-        if (turnPhase == 1)
-        {
-            crntSpeed -= deceleration;
-
-            if (crntSpeed <= 0.01)
-            {
-                turnPhase = 2;
-            }
-        }
-
-        //TURNING PHASE
-        if (turnPhase == 2)
-        {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, qTo, turnSpeed * Time.deltaTime);
-
-            if (transform.rotation == qTo)
-            {
-                turnPhase = 3;
-            }
-        }
-        //AXELERATION PHASE
-        if (turnPhase == 3)
-        {
-            crntSpeed += acceleration;
-            if (crntSpeed >= runSpeed)
-            {
-                crntSpeed = runSpeed;
-                turnPhase = 0;
-            }
-        }
-    }
-
-    void Jump()
-    {
-        if (Input.GetButtonDown("Jump") && !isJumping)
-        {
-            TimeStamp ts = new TimeStamp();
-            ts.time = playerTimerObj.f_time;
-            ts.input = "Jump";
-            inputs.Add(ts);
-            if (isSliding)
-            {
-                //bc.size += new Vector3(0, bc.size.y, 0);
-                transform.localScale = new Vector3(transform.localScale.x, bc.size.y * 2, transform.localScale.z);
-                crntSlideLength = maxSlideLength;
-                isSliding = false;
-            }
-
-            isJumping = true;
-        }
-        if (isJumping)
-        {
-            //Going up
-            if (!isFalling)
-            {
-                transform.Translate(new Vector3(0, jumpSpeed, 0));
-                if (transform.position.y >= jumpHeight)
-                {
-                    isFalling = true;
-                }
-            }
-        }
-    }
-    void Falling()
-    {
-        if (isFalling)
-        {
-            transform.Translate(new Vector3(0, -jumpSpeed, 0));
-        }
-    }
-
-  
-
-    void Slide()
-    {
-        if (Input.GetButtonDown("Slide") && !isSliding && !isJumping)
-        {
-            TimeStamp ts = new TimeStamp();
-            ts.time = playerTimerObj.f_time;
-            ts.input = "Slide";
-            inputs.Add(ts);
-            //Slide start
-            isSliding = true;
-            //bc.size += new Vector3(0, -(bc.size.y * 0.5f), 0);
-            transform.localScale = new Vector3(transform.localScale.x, bc.size.y * 0.5f, transform.localScale.z);
-        }
-
-        if (isSliding)
-        {
-            //Slide end
-            if (crntSlideLength <= 0)
-            {
-                //bc.size += new Vector3(0, bc.size.y, 0);
-                transform.localScale = new Vector3(transform.localScale.x, bc.size.y * 2, transform.localScale.z);
-                crntSlideLength = maxSlideLength;
-                isSliding = false;
-            }
-            else
-            {
-                crntSlideLength -= slideSpeed * Time.deltaTime;
-            }
-        }
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Floor"))
-        {
-            isJumping = false;
-            isFalling = false;
-            transform.position = new Vector3(transform.position.x, other.transform.position.y, transform.position.z);
-        }
-        else if (other.gameObject.CompareTag("Wall"))
-        {
-            Death();
-            SetupNextGame();
-        }
-
-        else if (other.gameObject.CompareTag("Hole"))
-        {
-            isFalling = true;
-        }
-    }
 
     void SetupNextGame()
     {
@@ -347,10 +175,13 @@ public class Player : MonoBehaviour
         SetupPlayerTimer();
     }
 
-    void Death()
+    protected override void Death()
     {
         if (isSliding)
-            transform.localScale = new Vector3(transform.localScale.x, bc.size.y * 2, transform.localScale.z);
+        {
+            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 2, transform.localScale.z);
+        }
+
         isJumping = false;
         isFalling = false;
         isSliding = false;
@@ -366,7 +197,7 @@ public class Player : MonoBehaviour
         {
             Destroy(go);
         }
-       
 
+        SetupNextGame();
     }
 }
