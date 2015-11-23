@@ -6,8 +6,6 @@ public class Ghost : PlayerBase
 {
 
     //For Animation
-    public Animator anim;
-    private bool isFirstFrame = true;
 
     public List<TimeStamp> inputs;
     private Timer_Ghost ghostTimerObj;
@@ -29,12 +27,7 @@ public class Ghost : PlayerBase
     // Update is called once per frame
     void Update()
     {
-        if (isFirstFrame)
-        {
-            isFirstFrame = false;
-            anim = gameObject.GetComponentInChildren<Animator>();
-            anim.Play("Run");
-        }
+        MovementUpdate();
         ghostTimerObj.SetText();
         string currEvent = null;
         if (index < inputs.Count)
@@ -49,6 +42,6 @@ public class Ghost : PlayerBase
         if (currEvent == "Jump") Jump();
         if (currEvent == "Slide") Slide();
         if (currEvent != null) index++;
-        MovementUpdate();
+        
     }
 }
