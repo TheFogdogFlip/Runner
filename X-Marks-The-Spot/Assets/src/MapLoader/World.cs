@@ -131,23 +131,23 @@ public class World{
 
         TileNode currentTile = startTile;
         int currentX = (int)startTilePos.x;
-        int currentY = (int)startTilePos.y;
+        int currentY = (int)startTilePos.z;
         int currentDirection = -1;
 
         int dirX;
         int dirZ;
-
-        while (true)
+        foreach (var item in currentTile.Directions)
         {
-            foreach (var item in currentTile.Directions)
-            {
-                if(item.Direction != currentDirection)
-                    directions.Add(new TileDirectionNode { Direction = item, X = currentX, Y = currentY });
-            }
+            if (item.Direction != currentDirection)
+                directions.Add(new TileDirectionNode { Direction = item, X = currentX, Y = currentY });
+        }
 
+        int i = 0;
+        while (i < 50)
+        {
             if (directions.Count == 0)
                 break;
-
+            i++;
             var dir = directions[0];
 
             currentX = dir.X;
@@ -156,7 +156,7 @@ public class World{
             dirX = 0;
             dirZ = 0;
 
-            switch(dir.Direction.Direction)
+            switch (dir.Direction.Direction)
             {
                 case 0:
                     dirZ = -1;
@@ -175,29 +175,40 @@ public class World{
             currentX += dirX;
             currentY += dirZ;
 
+            var connection = getRandomConnection(dir, rand);
+            currentTile = tileTypes.Tiles.Find(n => n.TileName == connection.TileName);
+
             if (currentX > width || currentY > depth || currentX < 0 || currentY < 0)
             {
-                
+
             }
             else
             {
-                int randomNumber = rand.Next(0, 100);
-
-                ConnectionNode connection = null;
-
-                for (int i = 0; i < dir.Direction.Connections.Count; i++)
+                foreach (var item in currentTile.Directions)
                 {
-                    connection = dir.Direction.Connections[i];
-                    if (randomNumber < (int)connection.Chance)
-                        break;
+                    if (item.Direction != currentDirection)
+                        directions.Add(new TileDirectionNode { Direction = item, X = currentX, Y = currentY });
                 }
-                currentTile = tileTypes.Tiles.Find(n => n.TileName == connection.TileName);
                 generatedMap.SetPixel(currentX, currentY, currentTile.Rotations.Find(r => r.Rotation == connection.Rotations[0].Rotation).Color.ToColor());
             }
             directions.Remove(dir);
         }
         save("Temp.png", generatedMap);
         load("Temp.png");
+    }
+
+    private ConnectionNode getRandomConnection(TileDirectionNode dir, System.Random rand)
+    {
+
+        int randomNumber = rand.Next(0, 100);
+        ConnectionNode connection = null;
+        for (int i = 0; i < dir.Direction.Connections.Count; i++)
+        {
+            connection = dir.Direction.Connections[i];
+            if (randomNumber < (int)connection.Chance)
+                break;
+        }
+        return connection;
     }
 
     private void save(string filename, Texture2D texture)
