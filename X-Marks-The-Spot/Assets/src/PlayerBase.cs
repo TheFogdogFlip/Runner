@@ -156,6 +156,11 @@ public class PlayerBase : MonoBehaviour
             Death();
         }
 
+        if (other.gameObject.CompareTag("Goal"))
+        {
+            GoalFunc();
+        }
+
         if (other.gameObject.CompareTag("Hole"))
         {
             isFalling = true;
@@ -194,6 +199,11 @@ public class PlayerBase : MonoBehaviour
     protected virtual void Death()
     {
         Destroy(gameObject);
+    }
+
+    protected virtual void GoalFunc()
+    {
+
     }
 
     protected void MovementUpdate()

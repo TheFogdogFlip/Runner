@@ -248,4 +248,9 @@ public class Player : PlayerBase
 
         SetupNextGame();
     }
+    protected override void GoalFunc()
+    {
+        print("you win!");
+
+    }
 }

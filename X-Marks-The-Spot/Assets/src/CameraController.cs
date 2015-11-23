@@ -50,7 +50,7 @@ public class CameraController : MonoBehaviour {
         heightVec[1] = height;
         this.gameObject.transform.position = this.gameObject.transform.position + heightVec;
         tiltVec[1] = currentHeight - tilt;
-        //LookAt
+        //LookAt operator = is weird!
         //lookAtTrans = target;
         //lookAtVec[0] = target.position.x;
         //lookAtVec[2] = target.position.z;
