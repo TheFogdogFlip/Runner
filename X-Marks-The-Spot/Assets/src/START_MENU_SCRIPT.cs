@@ -4,7 +4,8 @@ using System.Collections;
 
 public class START_MENU_SCRIPT : MonoBehaviour
 {
-    
+    public GameObject background;
+
     public Canvas quitMenu;
     public Canvas optionsMenu;
     public Canvas loadLevelMenu;
@@ -19,6 +20,12 @@ public class START_MENU_SCRIPT : MonoBehaviour
 
 	void Start ()
     {
+
+        background = GameObject.Find("Background");
+        if(background.name =="Background")
+        { 
+            print("hej");
+        }
         quitMenu = quitMenu.GetComponent<Canvas>();
         optionsMenu = optionsMenu.GetComponent<Canvas>();
         loadLevelMenu = loadLevelMenu.GetComponent<Canvas>();
