@@ -67,12 +67,12 @@ public class Recorder : MonoBehaviour {
         timer2 += Time.deltaTime;
         if (timer >= 0.033f)
         {
-            string filename = "C:/Users/eriset-4-local.A6284/Desktop/captured images/img" + imageNumber.ToString() + ".png";
+            //string filename = System.IO.Directory.GetCurrentDirectory() + "/captured images/img" + imageNumber.ToString() + ".png";
 
             imageNumber++;
             fps++;
 
-            Application.CaptureScreenshot(filename);
+            //Application.CaptureScreenshot(filename);
             timer = 0;
         }
         if(timer2 >= 1.0f)
