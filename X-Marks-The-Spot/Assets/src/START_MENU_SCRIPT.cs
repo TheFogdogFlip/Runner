@@ -5,6 +5,11 @@ using System.Collections;
 public class START_MENU_SCRIPT : MonoBehaviour
 {
     public Canvas quitMenu;
+    public Canvas optionsMenu;
+    public Canvas loadLevelMenu;
+    public Canvas helpMenu;
+    public Canvas startMenu;
+
     public Button startText;
     public Button exitText;
     public Button optionsText;
@@ -14,6 +19,12 @@ public class START_MENU_SCRIPT : MonoBehaviour
 	void Start ()
     {
         quitMenu = quitMenu.GetComponent<Canvas>();
+        optionsMenu = optionsMenu.GetComponent<Canvas>();
+        loadLevelMenu = loadLevelMenu.GetComponent<Canvas>();
+        helpMenu = helpMenu.GetComponent<Canvas>();
+        startMenu = startMenu.GetComponent<Canvas>();
+        //globalMenu = globalMenu.GetComponent<Canvas>();
+        
         startText = startText.GetComponent<Button>();
         exitText = exitText.GetComponent<Button>();
         optionsText = optionsText.GetComponent<Button>();
@@ -21,6 +32,10 @@ public class START_MENU_SCRIPT : MonoBehaviour
         testGameText = testGameText.GetComponent<Button>();
 
         quitMenu.enabled = false;
+        optionsMenu.enabled = false;
+        loadLevelMenu.enabled = false;
+        helpMenu.enabled = false;
+        startMenu.enabled = true;
 	}
 	
 	public void ExitPress()
@@ -49,11 +64,19 @@ public class START_MENU_SCRIPT : MonoBehaviour
     }
     public void LoadLevelPress()
     {
-        Application.LoadLevel(3);
+        startMenu.enabled = false;
+        loadLevelMenu.enabled = true;
     }
     public void OptionsPress()
     {
-        Application.LoadLevel(2);
+        startMenu.enabled = false;
+        optionsMenu.enabled = true;
+    }
+
+    public void HelpMenuPress()
+    {
+        startMenu.enabled = false;
+        helpMenu.enabled = true;
     }
     public void StartLevel()
     {

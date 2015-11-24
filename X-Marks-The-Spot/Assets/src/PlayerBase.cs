@@ -4,14 +4,12 @@ using System.Collections;
 public class PlayerBase : MonoBehaviour
 {
     //WORKABLE
-    protected float deceleration = 0.002f;
-    protected float acceleration = 0.003f;
-    protected float runSpeed = 0.05f;
-    protected float jumpSpeed = 0.05f;
-    protected float jumpHeight = 1.0f;
+    public float deceleration;
+    protected float acceleration;
+    protected float runSpeed = 2f; //tiles per second.
+    protected float jumpSpeed;
+    protected float jumpHeight = 1f;
     protected float turnSpeed = 300.0f;
-    protected float slideSpeed = 1.0f;
-    protected float maxSlideLength = 1.0f;
 
     //DONT TOUCH
     protected float crntSpeed;
@@ -24,22 +22,26 @@ public class PlayerBase : MonoBehaviour
     protected bool isSliding = false;
     protected float crntSlideLength;
     protected BoxCollider bc;
-
+    protected Animator anim;
+    protected bool isFirstFrame = true;
 
 
     // Use this for initialization
     void Awake ()
     {
+        deceleration = runSpeed * runSpeed;
+        acceleration = runSpeed * runSpeed;
         rb = GetComponent<Rigidbody>();
         bc = GetComponent<BoxCollider>();
-        crntSlideLength = maxSlideLength;
+        crntSlideLength = 1 / runSpeed;
+        jumpSpeed = jumpHeight / (1 / (2 * runSpeed));
         rotationTarget = transform.rotation.y;
     }
 
     protected void UpdateRun()
     {
         //Run forward
-        transform.Translate(transform.forward * crntSpeed * 100 * Time.deltaTime, Space.World);
+        transform.Translate(transform.forward * 2.0f *crntSpeed * Time.deltaTime, Space.World);
     }
 
     protected void TurnLeft()
@@ -47,6 +49,8 @@ public class PlayerBase : MonoBehaviour
         //ACTIVATION PHASE
         if (turnPhase == 0)
         {
+            anim.Play("TurnLeft90");
+
             rotationTarget -= 90.0f;
             turnPhase = 1;
 
@@ -55,6 +59,7 @@ public class PlayerBase : MonoBehaviour
                 rotationTarget = 0.0f;
             }
             qTo = Quaternion.Euler(0.0f, rotationTarget, 0.0f);
+
         }
     }
 
@@ -63,6 +68,8 @@ public class PlayerBase : MonoBehaviour
         //ACTIVATION PHASE
         if (turnPhase == 0)
         {
+            anim.Play("TurnRight90");
+
             rotationTarget += 90.0f;
             turnPhase = 1;
 
@@ -79,9 +86,9 @@ public class PlayerBase : MonoBehaviour
         //BRAKING PHASE
         if (turnPhase == 1)
         {
-            crntSpeed -= deceleration;
+            crntSpeed -= deceleration * Time.deltaTime;
 
-            if (crntSpeed <= 0.01)
+            if (crntSpeed <= 0)
             {
                 turnPhase = 2;
             }
@@ -100,7 +107,7 @@ public class PlayerBase : MonoBehaviour
         //AXELERATION PHASE
         if (turnPhase == 3)
         {
-            crntSpeed += acceleration;
+            crntSpeed += acceleration * Time.deltaTime;
             if (crntSpeed >= runSpeed)
             {
                 crntSpeed = runSpeed;
@@ -121,16 +128,16 @@ public class PlayerBase : MonoBehaviour
         if (isSliding)
         {
             //Slide end
-            if (crntSlideLength <= 0)
+            if (crntSlideLength <= 0.1)
             {
                 //bc.size += new Vector3(0, bc.size.y, 0);
                 transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 2, transform.localScale.z);
-                crntSlideLength = maxSlideLength;
+                crntSlideLength = 1  / runSpeed;
                 isSliding = false;
             }
             else
             {
-                crntSlideLength -= slideSpeed * Time.deltaTime;
+                crntSlideLength -= 1.0f * Time.deltaTime;
             }
         }
     }
@@ -149,6 +156,11 @@ public class PlayerBase : MonoBehaviour
             Death();
         }
 
+        if (other.gameObject.CompareTag("Goal"))
+        {
+            GoalFunc();
+        }
+
         if (other.gameObject.CompareTag("Hole"))
         {
             isFalling = true;
@@ -157,15 +169,6 @@ public class PlayerBase : MonoBehaviour
 
     protected void Jump()
     {
-
-        if (isSliding)
-        {
-            //bc.size += new Vector3(0, bc.size.y, 0);
-            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 2, transform.localScale.z);
-            crntSlideLength = maxSlideLength;
-            isSliding = false;
-        }
-
         isJumping = true; 
     }
 
@@ -176,8 +179,8 @@ public class PlayerBase : MonoBehaviour
             //Going up
             if (!isFalling)
             {
-                transform.Translate(new Vector3(0, jumpSpeed, 0));
-                if (transform.position.y >= jumpHeight)
+                transform.Translate(new Vector3(0, jumpSpeed * Time.deltaTime, 0));
+                if (transform.position.y >= jumpHeight-0.05)
                 {
                     isFalling = true;
                 }
@@ -189,7 +192,7 @@ public class PlayerBase : MonoBehaviour
     {
         if (isFalling)
         {
-            transform.Translate(new Vector3(0, -jumpSpeed, 0));
+            transform.Translate(new Vector3(0, 1.5f * -jumpSpeed * Time.deltaTime, 0));
         }
     }
 
@@ -198,8 +201,19 @@ public class PlayerBase : MonoBehaviour
         Destroy(gameObject);
     }
 
+    protected virtual void GoalFunc()
+    {
+
+    }
+
     protected void MovementUpdate()
     {
+        if (isFirstFrame)
+        {
+            isFirstFrame = false;
+            anim = gameObject.GetComponentInChildren<Animator>();
+            anim.Play("Run");
+        }
         UpdateJump();
         UpdateSlide();
         UpdateFalling();
