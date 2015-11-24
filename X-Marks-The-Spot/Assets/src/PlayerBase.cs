@@ -6,7 +6,7 @@ public class PlayerBase : MonoBehaviour
     //WORKABLE
     public float deceleration;
     protected float acceleration;
-    protected float runSpeed = 2f; //tiles per second.
+    protected float runSpeed = 4f; //tiles per second.
     protected float jumpSpeed;
     protected float jumpHeight = 1f;
     protected float turnSpeed = 300.0f;

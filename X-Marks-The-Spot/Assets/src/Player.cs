@@ -63,56 +63,58 @@ public class Player : PlayerBase
             {
                 playerTimerObj.SetText();
             }
-
-            Vector3 tempVec = transform.position;
-            if (tempVec.z < 0) tempVec.z *= -1;
-            if (tempVec.x < 0) tempVec.x *= -1;
-            if (rotationTarget == 0)
+            if (turnPhase == 0)
             {
-                if (tempVec.z % 2 <= 1 && !isJumping && !isSliding)
+                Vector3 tempVec = transform.position;
+                if (tempVec.z < 0) tempVec.z *= -1;
+                if (tempVec.x < 0) tempVec.x *= -1;
+                if (rotationTarget == 0)
                 {
-                    isActionActive = false;
+                    if (tempVec.z % 2 <= 1 && !isJumping && !isSliding)
+                    {
+                        isActionActive = false;
+                    }
+                    else if (tempVec.z % 2 >= 1 && !isActionActive)
+                    {
+                        ActivateNextAction();
+                        isActionActive = true;
+                    }
                 }
-                else if (tempVec.z % 2 >= 1 && !isActionActive)
+                if (rotationTarget == 90 || rotationTarget == -270)
                 {
-                    ActivateNextAction();
-                    isActionActive = true;
+                    if (tempVec.x % 2 <= 1 && !isJumping && !isSliding)
+                    {
+                        isActionActive = false;
+                    }
+                    else if (tempVec.x % 2 >= 1 && !isActionActive)
+                    {
+                        ActivateNextAction();
+                        isActionActive = true;
+                    }
                 }
-            }
-            else if (rotationTarget == 90 || rotationTarget == -270)
-            {
-                if (tempVec.x % 2 <= 1 && !isJumping && !isSliding)
+                if (rotationTarget == 180 || rotationTarget == -180)
                 {
-                    isActionActive = false;
+                    if (tempVec.z % 2 >= 1 && !isJumping && !isSliding)
+                    {
+                        isActionActive = false;
+                    }
+                    else if (tempVec.z % 2 < 1 && !isActionActive)
+                    {
+                        ActivateNextAction();
+                        isActionActive = true;
+                    }
                 }
-                else if (tempVec.x % 2 >= 1 && !isActionActive)
+                if (rotationTarget == 270 || rotationTarget == -90)
                 {
-                    ActivateNextAction();
-                    isActionActive = true;
-                }
-            }
-            else if (rotationTarget == 180 || rotationTarget == -180)
-            {
-                if (tempVec.z % 2 >= 1 && !isJumping && !isSliding)
-                {
-                    isActionActive = false;
-                }
-                else if (tempVec.z % 2 <= 1 && !isActionActive)
-                {
-                    ActivateNextAction();
-                    isActionActive = true;
-                }
-            }
-            else if (rotationTarget == 270 || rotationTarget == -90)
-            {
-                if (tempVec.x % 2 >= 1 && !isJumping && !isSliding)
-                {
-                    isActionActive = false;
-                }
-                else if (tempVec.x % 2 <= 1 && !isActionActive)
-                {
-                    ActivateNextAction();
-                    isActionActive = true;
+                    if (tempVec.x % 2 >= 1 && !isJumping && !isSliding)
+                    {
+                        isActionActive = false;
+                    }
+                    else if (tempVec.x % 2 <= 1 && !isActionActive)
+                    {
+                        ActivateNextAction();
+                        isActionActive = true;
+                    }
                 }
             }
             KeyInputs();
