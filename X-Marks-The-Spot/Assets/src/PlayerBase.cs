@@ -6,9 +6,9 @@ public class PlayerBase : MonoBehaviour
     //WORKABLE
     public float deceleration;
     protected float acceleration;
-    protected float runSpeed = 4f; //tiles per second.
+    public float runSpeed; //tiles per second.
     protected float jumpSpeed;
-    protected float jumpHeight = 1f;
+    public float jumpHeight;
     protected float turnSpeed = 300.0f;
 
     //DONT TOUCH
@@ -34,7 +34,7 @@ public class PlayerBase : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         bc = GetComponent<BoxCollider>();
         crntSlideLength = 1 / runSpeed;
-        jumpSpeed = jumpHeight / (1 / (2 * runSpeed));
+        jumpSpeed = jumpHeight / (1 / ( runSpeed));
         rotationTarget = transform.rotation.y;
     }
 

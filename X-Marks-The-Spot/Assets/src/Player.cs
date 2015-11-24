@@ -142,7 +142,7 @@ public class Player : PlayerBase
             SetNextAction("TurnLeft");
         }
 
-        if (turnPhase == 0)
+        if (turnPhase == 0 || turnPhase == 3)
         {
             if (Input.GetButtonDown("Slide") && !isSliding && !isJumping)
             {
