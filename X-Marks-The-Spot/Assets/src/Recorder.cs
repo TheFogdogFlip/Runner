@@ -50,9 +50,11 @@ public class Recorder : MonoBehaviour {
         ghost.inputs = inputs;
         playerObject.GetComponent<Player>().SetupGhostTimer();
         Destroy(playerObject);
-        GameObject.Find("PlayerCamera(Clone)").GetComponent<CameraController>().enabled = false;
+        GameObject cam = GameObject.Find("PlayerCamera(Clone)");
+        cam.GetComponent<CameraController>().enabled = false;
+        Destroy(cam);
         
-        
+     
     }
    
 
