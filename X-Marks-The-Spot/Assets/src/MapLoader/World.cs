@@ -5,12 +5,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public struct TileDirectionNode
+public class TileDirectionNode : DirectionNode
 {
-    public DirectionNode Direction;
     public int X;
     public int Y;
     public int Rotation;
+
+    public TileDirectionNode(int direction, int x, int y, int rotation, List<ConnectionNode> connections)
+    {
+        this.Direction = direction;
+        this.X = x;
+        this.Y = y;
+        this.Rotation = rotation;
+        this.Connections = connections;
+    }
 }
 
 public class World{
@@ -78,280 +86,134 @@ public class World{
         grid[Mathf.FloorToInt(y / gridDimentions.y), Mathf.FloorToInt(x / gridDimentions.x)] = tile;
        
     }
+    private static TileContainer tiles = null;
+
+    private TileNode findTile(string name)
+    {
+        if (tiles == null)
+            tiles = getTileTypes();
+        return tiles.Tiles.Find(n => n.TileName.ToLower() == name.ToLower());
+    }
+
+    private ColorNode findColor(TileNode tile, float rotation)
+    {
+        var r = tile.Rotations.Find(c => c.Rotation == rotation);
+
+        if (r == null)
+        {
+            switch ((int)rotation)
+            {
+                case 0:
+                    rotation = 180;
+                    break;
+                case 90:
+                    rotation = 270;
+                    break;
+                case 180:
+                    rotation = 0;
+                    break;
+                case 270:
+                    rotation = 90;
+                    break;
+            }
+            r = tile.Rotations.Find(c => c.Rotation == rotation);
+        }
+        return r.Color;
+    }
 
     private void generate()
     {
-        var tileTypes = getTileTypes();
-
         width = 64;
         depth = 64;
 
         Texture2D generatedMap = new Texture2D(width, depth, TextureFormat.RGBA32, false);
 
+        Color white = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+
         for (int y = 0; y < depth; y++)
         {
             for (int x = 0; x < width; x++)
-            {
-                generatedMap.SetPixel(y, x, new Color(1, 1, 1, 1));
-            }
+                generatedMap.SetPixel(y, x, white);
         }
 
         System.Random rand = new System.Random();
 
-        Vector3 startTilePos = new Vector3(rand.Next(width), rand.Next(depth), 0);
+        int startX = rand.Next(width);
+        int startZ = rand.Next(depth);
 
-        var startTile = tileTypes.Tiles.Find(n => n.TileName.ToLower() == "start");
+        start = new Vector3(startX, 0, startZ);
 
-        int direction = 0;//rand.Next(0, 3);
+        var startTile = findTile("start");
 
-        float angle = 0.0f;
+        int direction = rand.Next(0, 3);
 
-        switch (direction)
-        {
-            case 0:
-                startDirection = new Vector3(0, 0, 1);
-                angle = 0.0f;
-                break;
-            case 1:
-                startDirection = new Vector3(1, 0, 0);
-                angle = 90.0f;
-                break;
-            case 2:
-                startDirection = new Vector3(0, 0, -1);
-                angle = 180.0f;
-                break;
-            case 3:
-                startDirection = new Vector3(-1, 0, 0);
-                angle = 270.0f;
-                break;
-        }
+        int angle = direction * 90;
         startDirection = new Vector3(0, 0, angle);
-        generatedMap.SetPixel((int)startTilePos.x, (int)startTilePos.y, startTile.Rotations.Find(c => c.Rotation == angle).Color.ToColor());
+
+
+        var color = findColor(startTile, angle).ToColor();
+        generatedMap.SetPixel(startX, startZ, color);
 
         List<TileDirectionNode> directions = new List<TileDirectionNode>();
 
-        int currentRotation = (int)angle;
-        TileNode currentTile = startTile;
-        int currentX = (int)startTilePos.x;
-        int currentY = (int)startTilePos.y;
-        int currentDirection = -1;
+        DirectionNode directionNode = startTile.Directions.Find(node => node.Direction == 0);
+        var newTileDirection = new TileDirectionNode(direction, startX, startZ, angle, directionNode.Connections);
 
-        int dirX;
-        int dirZ;
-        foreach (var item in currentTile.Directions)
-        {
-            if (item.Direction != currentDirection)
-            {
-                switch (currentRotation)
-                {
-                    case 0:
-                        break;
-                    case 90:
-                        if (item.Direction == 0)
-                            item.Direction = 3;
-                        else
-                            item.Direction -= 1;
-                        currentRotation = 0;
-                        break;
-                    case 180:
-                        switch(item.Direction)
-                        {
-                            case 0:
-                                item.Direction = 2;
-                                currentRotation = 90;
-                                break;
-                            case 1:
-                                item.Direction = 3;
-                                currentRotation = 90;
-                                break;
-                            case 2:
-                                item.Direction = 0;
-                                currentRotation = 90;
-                                break;
-                            case 3:
-                                item.Direction = 1;
-                                currentRotation = 90;
-                                break;
-                        }
-                        break;
-                    case 270:
-                        switch (item.Direction)
-                        {
-                            case 0:
-                                item.Direction = 1;
-                                currentRotation = 180;
-                                break;
-                            case 1:
-                                item.Direction = 2;
-                                currentRotation = 180;
-                                break;
-                            case 2:
-                                item.Direction = 3;
-                                currentRotation = 180;
-                                break;
-                            case 3:
-                                item.Direction = 0;
-                                currentRotation = 180;
-                                break;
-                        }
-                        break;
-                }
-
-                directions.Add(new TileDirectionNode { Direction = item, X = currentX, Y = currentY , Rotation = currentRotation});
-            }
-        }
-
+        directions.Add(newTileDirection);
         int i = 0;
+
         while (i < 50)
         {
+            i++;
             if (directions.Count == 0)
                 break;
-            i++;
+
             var dir = directions[0];
 
-            currentX = dir.X;
-            currentY = dir.Y;
+            var connection = getRandomConnection(dir, rand);
+            var rotation = getRandomRotation(connection, rand, dir.Rotation);
+            var tile = findTile(connection.TileName);
+            color = findColor(tile, rotation).ToColor();
 
-            dirX = 0;
-            dirZ = 0;
-
-            switch (dir.Direction.Direction)
+            switch (dir.Direction)
             {
                 case 0:
-                    dirZ = 1;
+                    dir.Y += 1;
                     break;
                 case 1:
-                    dirX = 1;
+                    dir.X += 1;
                     break;
                 case 2:
-                    dirZ = -1;
+                    dir.Y -= 1;
                     break;
                 case 3:
-                    dirX = -1;
+                    dir.X -= 1;
                     break;
             }
 
-            currentX += dirX;
-            currentY += dirZ;
-            var oldTile = currentTile;
-            var connection = getRandomConnection(dir, rand);
-            currentTile = tileTypes.Tiles.Find(n => n.TileName == connection.TileName);
-
-            if (currentX > width || currentY > depth || currentX < 0 || currentY < 0)
+            if (generatedMap.GetPixel(dir.X, dir.Y) == white)
             {
+                generatedMap.SetPixel(dir.X, dir.Y, color);
 
-            }
-            else
-            {
-                Color mapColor = generatedMap.GetPixel(currentX, currentY);
-                int delDir = -1;
-                if (mapColor == new Color(1, 1, 1, 1))
+                foreach (var item in tile.Directions)
                 {
-                    if(oldTile != null)
-                        if(oldTile.TileName.ToLower() == "corner")
-                            switch(currentRotation)
-                            {
-                                case 0:
-                                    currentRotation = 180;
-                                    break;
-                                case 90:
-                                    currentRotation = 270;
-                                    break;
-                                case 180:
-                                    currentRotation = 0;
-                                    break;
-                                case 270:
-                                    currentRotation = 90;
-                                    break;
-                            }
-                    float randomRotation = getRandomRotation(connection, rand, currentRotation);
-                    RotationNode tile = currentTile.Rotations.Find(r => r.Rotation == randomRotation);
-
-                    if (tile == null)
-                    {
-                        switch ((int)randomRotation)
-                        {
-                            case 0:
-                                randomRotation = 180;
-                                break;
-                            case 90:
-                                randomRotation = 270;
-                                break;
-                            case 180:
-                                randomRotation = 0;
-                                break;
-                            case 270:
-                                randomRotation = 90;
-                                break;
-                        }
-                        tile = currentTile.Rotations.Find(r => r.Rotation == randomRotation);
-                    }
-
-                    generatedMap.SetPixel(currentX, currentY, tile.Color.ToColor());
-                    foreach (var item in currentTile.Directions)
-                    {
-                        if (currentTile.TileName.ToLower() == "corner")
-                        {
-
-                        }
-                        else
-                        {
-                            switch (dir.Direction.Direction)
-                            {
-                                case 0:
-                                    delDir = 2;
-                                    break;
-                                case 1:
-                                    delDir = 3;
-                                    break;
-                                case 2:
-                                    delDir = 0;
-                                    break;
-                                case 3:
-                                    delDir = 1;
-                                    break;
-                            }
-                        }
-
-                        if (item.Direction != delDir)
-                        {
-                            if(currentTile.TileName.ToLower() == "corner")
-                            {
-                                switch (item.Direction)
-                                {
-                                    case 0:
-                                        item.Direction = 2;
-                                        break;
-                                    case 1:
-                                        item.Direction = 3;
-                                        break;
-                                    case 2:
-                                        item.Direction = 0;
-                                        break;
-                                    case 3:
-                                        item.Direction = 1;
-                                        break;
-                                }
-                                directions.Add(new TileDirectionNode { Direction = item, X = currentX, Y = currentY });
-                            }
-                            else
-                                directions.Add(new TileDirectionNode { Direction = item, X = currentX, Y = currentY });
-                        }
-                    }
+                    newTileDirection = new TileDirectionNode(item.Direction, dir.X, dir.Y, (int)rotation, item.Connections);
+                    directions.Add(newTileDirection);
                 }
             }
+           
             directions.Remove(dir);
         }
         save("Temp.png", generatedMap);
         load("Temp.png");
     }
 
-    private float getRandomRotation(ConnectionNode connection, System.Random rand, int currentRotation)
+    private float getRandomRotation(ConnectionNode connection, System.Random rand, float parentRotation)
     {
 
         int randomNumber = rand.Next(0, 100);
         RotationChanceNode rotation = null;
-
+        
         float chance = 0.0f;
 
         for (int i = 0; i < connection.Rotations.Count; i++)
@@ -361,18 +223,19 @@ public class World{
                 break;
             chance += rotation.Chance;
         }
-        rotation.Rotation -= currentRotation;
-
-        switch((int)rotation.Rotation)
+        rotation.Rotation -= parentRotation;
+        switch ((int)rotation.Rotation)
         {
             case -90:
-                rotation.Rotation = 270;
+                rotation.Rotation = 270.0f;
                 break;
             case -180:
-                rotation.Rotation = 180;
+                rotation.Rotation = 180.0f;
                 break;
             case -270:
-                rotation.Rotation = 90;
+                rotation.Rotation = 90.0f;
+                break;
+            default:
                 break;
         }
 
@@ -387,9 +250,9 @@ public class World{
 
         float chance = 0.0f;
 
-        for (int i = 0; i < dir.Direction.Connections.Count; i++)
+        for (int i = 0; i < dir.Connections.Count; i++)
         {
-            connection = dir.Direction.Connections[i];
+            connection = dir.Connections[i];
             if (randomNumber >= chance && randomNumber <= (int)connection.Chance + chance)
                 break;
             chance += connection.Chance;
