@@ -253,4 +253,8 @@ public class Player : PlayerBase
         print("you win!");
 
     }
+    public int GetTurn()
+    {
+        return turnPhase;
+    }
 }

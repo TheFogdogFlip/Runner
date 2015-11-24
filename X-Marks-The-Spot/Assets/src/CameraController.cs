@@ -3,11 +3,12 @@ using System.Collections;
 
 public class CameraController : MonoBehaviour {
 
-    public Transform target;
+    public GameObject target;
     private float distance;
     private float height;
     private float heightDamping;
     private float rotationDamping;
+    private float distanceDamping;
 
     private float rotAngleY;
     private float rotAngleX;
@@ -22,22 +23,24 @@ public class CameraController : MonoBehaviour {
     private float tilt;
     private Transform lookAtTrans;
     private Vector3 lookAtVec;
+    private int isTurning;
     // Use this for initialization
     void Start () {
-        distance = 1.2f;
-        height = 0.7f;
+        distance = 1.5f;
+        height = 0.8f;
         heightDamping = 5.0f;
         rotationDamping = 5.0f;
-        target = GameObject.Find("Player(Clone)").transform;
-        tilt = 0.2f;
+        distanceDamping = 3.0f;
+        target = GameObject.Find("Player(Clone)");
+        tilt = 0.3f;
     }
 	
 	// Update is called once per frame
 	void Update () {
         //wanted rotation and height
-        rotAngleY = target.eulerAngles.y;
-        wantedHeight = target.position.y*0f + height;
-
+        rotAngleY = target.transform.eulerAngles.y;
+        wantedHeight = target.transform.position.y + height;
+        isTurning = target.GetComponent<Player>().GetTurn();
         //smooth rot
         currentRotAngleY = Mathf.LerpAngle(currentRotAngleY, rotAngleY, rotationDamping * Time.deltaTime);
         currentHeight = Mathf.Lerp(currentHeight, wantedHeight, heightDamping * Time.deltaTime);
@@ -45,17 +48,21 @@ public class CameraController : MonoBehaviour {
         currentRot = Quaternion.Euler(0, currentRotAngleY, 0);
 
         //camera transform
-        this.gameObject.transform.position = target.position;
+        this.gameObject.transform.position = target.transform.position;
         this.gameObject.transform.position -= (currentRot * Vector3.forward * distance);
         heightVec[1] = height;
-        this.gameObject.transform.position = this.gameObject.transform.position + heightVec;
+        this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, height, this.gameObject.transform.position.z);
         tiltVec[1] = currentHeight - tilt;
-        //LookAt operator = is weird!
-        //lookAtTrans = target;
-        //lookAtVec[0] = target.position.x;
-        //lookAtVec[2] = target.position.z;
-        //lookAtTrans.position = lookAtVec;
-        //lookAtTrans.position = new Vector3(target.position.x, 0, target.position.z);
-        this.gameObject.transform.LookAt(target.position + tiltVec);
+
+        if (isTurning != 0)
+        {
+            distance = Mathf.Lerp(distance, 1.0f, distanceDamping * Time.deltaTime);
+        }
+        else
+        {
+            distance = Mathf.Lerp(distance, 1.5f, distanceDamping * Time.deltaTime);
+        }
+        this.gameObject.transform.LookAt(new Vector3(target.transform.position.x, 0, target.transform.position.z) + tiltVec);
+       
     }
 }
