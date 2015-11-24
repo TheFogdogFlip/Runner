@@ -8,7 +8,7 @@ public class PlayerBase : MonoBehaviour
     protected float acceleration;
     protected float runSpeed = 2f; //tiles per second.
     protected float jumpSpeed;
-    protected float jumpHeight = 1f;
+    protected float jumpHeight = 0.8f;
     protected float turnSpeed = 300.0f;
 
     //DONT TOUCH
@@ -155,12 +155,12 @@ public class PlayerBase : MonoBehaviour
         {
             Death();
         }
-
-        if (other.gameObject.CompareTag("Goal"))
+		
+		if (other.gameObject.CompareTag("Goal"))
         {
             GoalFunc();
         }
-
+		
         if (other.gameObject.CompareTag("Hole"))
         {
             isFalling = true;
@@ -180,7 +180,7 @@ public class PlayerBase : MonoBehaviour
             if (!isFalling)
             {
                 transform.Translate(new Vector3(0, jumpSpeed * Time.deltaTime, 0));
-                if (transform.position.y >= jumpHeight-0.05)
+                if (transform.position.y >= jumpHeight-0.1)
                 {
                     isFalling = true;
                 }
@@ -201,11 +201,11 @@ public class PlayerBase : MonoBehaviour
         Destroy(gameObject);
     }
 
-    protected virtual void GoalFunc()
+	 protected virtual void GoalFunc()
     {
 
     }
-
+	
     protected void MovementUpdate()
     {
         if (isFirstFrame)
