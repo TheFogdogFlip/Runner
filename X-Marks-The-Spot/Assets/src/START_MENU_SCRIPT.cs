@@ -1,10 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+
 using System.Collections;
 
 public class START_MENU_SCRIPT : MonoBehaviour
 {
-    public GameObject background;
+    private Sprite[] sprites;
+    private GameObject Timer_GO;
+    private Timer_Menu menuTimer;
+    private int currentSprite;
+    private string resourceName = "Backgrounds";
 
     public Canvas quitMenu;
     public Canvas optionsMenu;
@@ -18,14 +23,22 @@ public class START_MENU_SCRIPT : MonoBehaviour
     public Button loadLevelText;
     public Button testGameText;
 
+
 	void Start ()
     {
+        currentSprite = 0;
+        Timer_GO = GameObject.Find("menuTimer");
+        menuTimer = Timer_GO.GetComponent<Timer_Menu>();
+        sprites = Resources.LoadAll<Sprite>(resourceName);
+        if (sprites != null)
+            print("great");
 
-        background = GameObject.Find("Background");
-        if(background.name =="Background")
-        { 
-            print("hej");
+        for (int i = 0; i < sprites.Length; i++ )
+        {
+            print(i);
         }
+        print(sprites.Length);
+
         quitMenu = quitMenu.GetComponent<Canvas>();
         optionsMenu = optionsMenu.GetComponent<Canvas>();
         loadLevelMenu = loadLevelMenu.GetComponent<Canvas>();
@@ -45,6 +58,23 @@ public class START_MENU_SCRIPT : MonoBehaviour
         helpMenu.enabled = false;
         startMenu.enabled = true;
 	}
+
+    void Update()
+    {
+        if (menuTimer.f_time > 5)
+        {
+            if(currentSprite >= sprites.Length-1)
+            {
+                currentSprite = 0;
+            }
+            else
+            {
+                currentSprite++;
+            }
+            SetBackground();
+            ResetTimer();            
+        }
+    }
 	
 	public void ExitPress()
     {
@@ -64,6 +94,16 @@ public class START_MENU_SCRIPT : MonoBehaviour
         optionsText.enabled = true;
         loadLevelText.enabled = true;
         testGameText.enabled = true;
+    }
+
+    public void ResetTimer()
+    {
+        menuTimer.f_time = 0;
+    }
+
+    public void SetBackground()
+    {
+        GameObject.Find("Panel").GetComponent<Image>().sprite = sprites[currentSprite];
     }
 
     public void TestGamePress()
