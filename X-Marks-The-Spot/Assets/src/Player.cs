@@ -250,8 +250,8 @@ public class Player : PlayerBase
     }
     protected override void GoalFunc()
     {
-        print("you win!");
-
+        ctdTimerObj.textObj.enabled = true;
+        ctdTimerObj.textObj.text = "Victory!";
     }
     public int GetTurn()
     {
