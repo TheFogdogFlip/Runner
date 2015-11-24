@@ -4,6 +4,7 @@ using System.Collections;
 
 public class START_MENU_SCRIPT : MonoBehaviour
 {
+    
     public Canvas quitMenu;
     public Canvas optionsMenu;
     public Canvas loadLevelMenu;
