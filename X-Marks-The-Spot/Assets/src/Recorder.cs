@@ -67,6 +67,7 @@ public class Recorder : MonoBehaviour {
         timer2 += Time.deltaTime;
         if (timer >= 0.033f)
         {
+            
             //string filename = System.IO.Directory.GetCurrentDirectory() + "/captured images/img" + imageNumber.ToString() + ".png";
 
             imageNumber++;
@@ -77,7 +78,7 @@ public class Recorder : MonoBehaviour {
         }
         if(timer2 >= 1.0f)
         {
-            print(fps);
+            //print(fps);
             fps = 0;
             timer2 = 0;
         }

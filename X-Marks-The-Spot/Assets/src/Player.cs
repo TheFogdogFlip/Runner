@@ -131,15 +131,6 @@ public class Player : PlayerBase
 
     void KeyInputs()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Camera cam = Instantiate(Resources.Load("ReplayCamera", typeof(Camera)), World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection)) as Camera;
-            Recorder rec = cam.GetComponent<Recorder>();
-            rec.inputs = inputs;
-            rec.ghostinputs = ghostinputs;
-            
-        }
-        
        
         if (Input.GetButtonDown("Right"))
         {
@@ -275,6 +266,12 @@ public class Player : PlayerBase
     {
         ctdTimerObj.textObj.enabled = true;
         ctdTimerObj.textObj.text = "Victory!";
+
+        Camera cam = Instantiate(Resources.Load("ReplayCamera", typeof(Camera)), World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection)) as Camera;
+        Recorder rec = cam.GetComponent<Recorder>();
+        rec.inputs = inputs;
+        rec.ghostinputs = ghostinputs;
+
     }
     public int GetTurn()
     {
