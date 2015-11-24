@@ -81,7 +81,7 @@ public class START_MENU_SCRIPT : MonoBehaviour
     }
     public void StartLevel()
     {
-        Application.LoadLevel(1);
+        Application.LoadLevel("Scene");
     }
 
     public void ExitGame()
