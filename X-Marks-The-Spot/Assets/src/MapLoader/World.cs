@@ -233,7 +233,7 @@ public class World{
 
             currentX += dirX;
             currentY += dirZ;
-
+            var oldTile = currentTile;
             var connection = getRandomConnection(dir, rand);
             currentTile = tileTypes.Tiles.Find(n => n.TileName == connection.TileName);
 
@@ -244,9 +244,26 @@ public class World{
             else
             {
                 Color mapColor = generatedMap.GetPixel(currentX, currentY);
-                int delDir = 0;
+                int delDir = -1;
                 if (mapColor == new Color(1, 1, 1, 1))
                 {
+                    if(oldTile != null)
+                        if(oldTile.TileName.ToLower() == "corner")
+                            switch(currentRotation)
+                            {
+                                case 0:
+                                    currentRotation = 180;
+                                    break;
+                                case 90:
+                                    currentRotation = 270;
+                                    break;
+                                case 180:
+                                    currentRotation = 0;
+                                    break;
+                                case 270:
+                                    currentRotation = 90;
+                                    break;
+                            }
                     float randomRotation = getRandomRotation(connection, rand, currentRotation);
                     RotationNode tile = currentTile.Rotations.Find(r => r.Rotation == randomRotation);
 
@@ -298,7 +315,27 @@ public class World{
 
                         if (item.Direction != delDir)
                         {
-                            directions.Add(new TileDirectionNode { Direction = item, X = currentX, Y = currentY });
+                            if(currentTile.TileName.ToLower() == "corner")
+                            {
+                                switch (item.Direction)
+                                {
+                                    case 0:
+                                        item.Direction = 2;
+                                        break;
+                                    case 1:
+                                        item.Direction = 3;
+                                        break;
+                                    case 2:
+                                        item.Direction = 0;
+                                        break;
+                                    case 3:
+                                        item.Direction = 1;
+                                        break;
+                                }
+                                directions.Add(new TileDirectionNode { Direction = item, X = currentX, Y = currentY });
+                            }
+                            else
+                                directions.Add(new TileDirectionNode { Direction = item, X = currentX, Y = currentY });
                         }
                     }
                 }
