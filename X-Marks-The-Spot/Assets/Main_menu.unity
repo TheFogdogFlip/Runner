@@ -167,7 +167,7 @@ GameObject:
   - 4: {fileID: 89976092}
   - 114: {fileID: 89976091}
   m_Layer: 0
-  m_Name: Timer
+  m_Name: menuTimer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -185,6 +185,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8c647111000a004684723c3c32d36e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  f_time: 0
+  i_time: 0
 --- !u!4 &89976092
 Transform:
   m_ObjectHideFlags: 0
@@ -196,7 +198,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
 --- !u!1 &94533926
 GameObject:
   m_ObjectHideFlags: 0
@@ -1092,33 +1094,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!1 &431144649
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 431144650}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &431144650
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 431144649}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 482.118958, y: 770.96344, z: -552.320557}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
 --- !u!1 &434706372
 GameObject:
   m_ObjectHideFlags: 0
@@ -1566,7 +1541,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a17d572b53a9eda41a56c4936382b32a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pictures: {fileID: 0}
   quitMenu: {fileID: 914987535}
   optionsMenu: {fileID: 355717676}
   loadLevelMenu: {fileID: 563419951}
