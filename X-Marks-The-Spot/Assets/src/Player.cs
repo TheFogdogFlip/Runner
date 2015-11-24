@@ -277,4 +277,9 @@ public class Player : PlayerBase
     {
         return turnPhase;
     }
+
+    public string GetNextAction()
+    {
+        return nextAction;
+    }
 }
