@@ -84,6 +84,12 @@ public class Player : PlayerBase
 
     void KeyInputs()
     {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Instantiate(Resources.Load("ReplayCamera", typeof(Camera)), World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection));
+        }
+
+
         float time = playerTimerObj.f_time;
         if (Input.GetAxisRaw("Horizontal") == 1)
         {
@@ -128,8 +134,8 @@ public class Player : PlayerBase
     {
         ctdTimerGameObj = GameObject.Find("ctdTimer");
         ctdTimerObj = ctdTimerGameObj.GetComponent<Timer_Countdown>();
-        ctdTimerObj.f_time = 1;
-        ctdTimerObj.i_time = 1;
+        ctdTimerObj.f_time = 2;
+        ctdTimerObj.i_time = 2;
         ctdTimerObj.TimerFirstRunning = true;
         ctdTimerObj.TimerSecondRunning = true;
         ctdTimerObj.textObj.enabled = true;
