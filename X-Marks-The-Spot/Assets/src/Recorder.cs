@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Recorder : MonoBehaviour {
     int imageNumber;
@@ -9,22 +10,56 @@ public class Recorder : MonoBehaviour {
     int width;
     int height;
     Rect rectangle;
-    public Transform target;
+
+    GameObject target;
+
+    public List<TimeStamp> inputs;
+    public List<List<TimeStamp>> ghostinputs;
+
     // Use this for initialization
     void Start () {
         imageNumber = 0;
         fps = 0;
         timer = 0;
-        width = Screen.width;
-        height = Screen.height;
         rectangle = new Rect(0, 0, width, height);
-        target = GameObject.Find("Player(Clone)").transform;
+        GameObject playerObject = GameObject.Find("Player(Clone)");
+
+        //target = playerObject.transform;
+
+        //Player player = playerObject.GetComponent<Player>();
+        //player.enabled = false;
+        //playerObject.transform.position = World.Instance.StartPosition;
+        //playerObject.transform.rotation = Quaternion.Euler(World.Instance.StartDirection);
+        //Ghost ghost = playerObject.AddComponent<Ghost>();
+        //ghost.inputs = inputs;
+
+        transform.position = World.Instance.StartPosition;
+        transform.rotation = Quaternion.Euler(World.Instance.StartDirection);
+
+        Ghost ghost;
+        GameObject go;
+        for (int i = 0; i < ghostinputs.Count - 1; ++i)
+        {
+            go = Instantiate(Resources.Load("Ghost", typeof(GameObject)), World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection)) as GameObject;
+            ghost = go.GetComponent<Ghost>();
+            ghost.inputs = ghostinputs[i];
+
+        }
+        target = Instantiate(Resources.Load("ReplayPlayer", typeof(GameObject)), World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection)) as GameObject;
+        ghost = target.GetComponent<Ghost>();
+        ghost.inputs = inputs;
+        playerObject.GetComponent<Player>().SetupGhostTimer();
+        Destroy(playerObject);
+        GameObject.Find("PlayerCamera(Clone)").GetComponent<CameraController>().enabled = false;
+        
         
     }
-    
+   
+
     void Update()
     {
-        gameObject.transform.position = new Vector3(target.position.x, 20, target.position.z);
+        if (target != null)
+            gameObject.transform.position = new Vector3(target.transform.position.x, 20, target.transform.position.z);
         gameObject.transform.rotation = Quaternion.Euler(new Vector3(70, 0, 0));
         timer += Time.deltaTime;
         timer2 += Time.deltaTime;
@@ -37,20 +72,6 @@ public class Recorder : MonoBehaviour {
 
             Application.CaptureScreenshot(filename);
             timer = 0;
-
-            //RenderTexture rt = new RenderTexture(width, height, 24);
-            //cam.targetTexture = rt;
-            //cam.Render();
-            //RenderTexture.active = rt;
-
-            //Texture2D image = new Texture2D(width, height);
-            //image.ReadPixels(rectangle, 0, 0);
-            //RenderTexture.active = null;
-            //cam.targetTexture = null;
-            //byte[] bytes;
-            //bytes = image.EncodeToPNG();
-            //System.IO.File.WriteAllBytes(filename, bytes);
-            //timer = 0;
         }
         if(timer2 >= 1.0f)
         {

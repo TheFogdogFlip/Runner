@@ -29,7 +29,7 @@ public class Player : PlayerBase
     //Turn finetuning
     private float turnDelay = 0.1f;
 
-
+   
     void Start ()
     {
         SetupCtdTimer();
@@ -44,6 +44,7 @@ public class Player : PlayerBase
 
     void Update()
     {
+        
         if (ghostTimerObj != null)
             ghostTimerObj.SetText();
 
@@ -128,6 +129,15 @@ public class Player : PlayerBase
 
     void KeyInputs()
     {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Camera cam = Instantiate(Resources.Load("ReplayCamera", typeof(Camera)), World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection)) as Camera;
+            Recorder rec = cam.GetComponent<Recorder>();
+            rec.inputs = inputs;
+            rec.ghostinputs = ghostinputs;
+            
+        }
+        
        
         if (Input.GetButtonDown("Right"))
         {
@@ -150,7 +160,7 @@ public class Player : PlayerBase
         }
     }
 
-    void SetupCtdTimer()
+    public void SetupCtdTimer()
     {
         ctdTimerGameObj = GameObject.Find("ctdTimer");
         ctdTimerObj = ctdTimerGameObj.GetComponent<Timer_Countdown>();
@@ -161,7 +171,7 @@ public class Player : PlayerBase
         ctdTimerObj.textObj.enabled = true;
     }
 
-    void SetupPlayerTimer()
+    public void SetupPlayerTimer()
     {
         playerTimerGameObj = GameObject.Find("playerTimer");
         playerTimerObj = playerTimerGameObj.GetComponent<Timer_Player>();
@@ -169,7 +179,7 @@ public class Player : PlayerBase
         playerTimerObj.TimerRunning = false;
     }
 
-    void SetupGhostTimer()
+    public void SetupGhostTimer()
     {
         ghostTimerGameObj = GameObject.Find("ghostTimer");
         ghostTimerObj = ghostTimerGameObj.GetComponent<Timer_Ghost>();

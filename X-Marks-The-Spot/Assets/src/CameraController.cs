@@ -34,7 +34,7 @@ public class CameraController : MonoBehaviour {
         target = GameObject.Find("Player(Clone)");
         tilt = 0.3f;
     }
-	
+
 	// Update is called once per frame
 	void Update () {
         //wanted rotation and height
