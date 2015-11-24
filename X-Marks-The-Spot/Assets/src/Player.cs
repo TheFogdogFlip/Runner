@@ -176,8 +176,8 @@ public class Player : PlayerBase
     {
         ctdTimerGameObj = GameObject.Find("ctdTimer");
         ctdTimerObj = ctdTimerGameObj.GetComponent<Timer_Countdown>();
-        ctdTimerObj.f_time = 1;
-        ctdTimerObj.i_time = 1;
+        ctdTimerObj.f_time = 3;
+        ctdTimerObj.i_time = 3;
         ctdTimerObj.TimerFirstRunning = true;
         ctdTimerObj.TimerSecondRunning = true;
         ctdTimerObj.textObj.enabled = true;
