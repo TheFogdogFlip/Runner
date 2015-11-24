@@ -69,7 +69,7 @@ public class Player : PlayerBase
             if (tempVec.x < 0) tempVec.x *= -1;
             if (rotationTarget == 0)
             {
-                if (tempVec.z % 2 <= 1)
+                if (tempVec.z % 2 <= 1 && !isJumping && !isSliding)
                 {
                     isActionActive = false;
                 }
@@ -81,7 +81,7 @@ public class Player : PlayerBase
             }
             else if (rotationTarget == 90 || rotationTarget == -270)
             {
-                if (tempVec.x % 2 <= 1)
+                if (tempVec.x % 2 <= 1 && !isJumping && !isSliding)
                 {
                     isActionActive = false;
                 }
@@ -93,7 +93,7 @@ public class Player : PlayerBase
             }
             else if (rotationTarget == 180 || rotationTarget == -180)
             {
-                if (tempVec.z % 2 >= 1)
+                if (tempVec.z % 2 >= 1 && !isJumping && !isSliding)
                 {
                     isActionActive = false;
                 }
@@ -105,7 +105,7 @@ public class Player : PlayerBase
             }
             else if (rotationTarget == 270 || rotationTarget == -90)
             {
-                if (tempVec.x % 2 >= 1)
+                if (tempVec.x % 2 >= 1 && !isJumping && !isSliding)
                 {
                     isActionActive = false;
                 }
@@ -149,14 +149,27 @@ public class Player : PlayerBase
             SetNextAction("TurnLeft");
         }
 
-        if (Input.GetButtonDown("Slide") && !isSliding && !isJumping)
+        if (turnPhase == 0)
         {
-            SetNextAction("Slide");
-        }
+            if (Input.GetButtonDown("Slide") && !isSliding && !isJumping)
+            {
+                Slide();
+                float time = playerTimerObj.f_time;
+                TimeStamp ts = new TimeStamp();
+                ts.time = time;
+                ts.input = "Slide";
+                inputs.Add(ts);
+            }
 
-        if (Input.GetButtonDown("Jump") && !isJumping)
-        {
-            SetNextAction("Jump");
+            if (Input.GetButtonDown("Jump") && !isJumping && !isSliding)
+            {
+                Jump();
+                float time = playerTimerObj.f_time;
+                TimeStamp ts = new TimeStamp();
+                ts.time = time;
+                ts.input = "Jump";
+                inputs.Add(ts);
+            }
         }
     }
 
@@ -227,8 +240,6 @@ public class Player : PlayerBase
 
             if (nextAction == "TurnLeft") TurnLeft();
             if (nextAction == "TurnRight") TurnRight();
-            if (nextAction == "Jump") Jump();
-            if (nextAction == "Slide") Slide();
 
             nextAction = "";
         }
