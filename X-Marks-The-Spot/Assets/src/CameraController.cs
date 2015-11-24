@@ -11,9 +11,7 @@ public class CameraController : MonoBehaviour {
     private float distanceDamping;
 
     private float rotAngleY;
-    private float rotAngleX;
     private float currentRotAngleY;
-    private float currentRotAngleX;
     private Quaternion currentRot;
 
     private float wantedHeight;
@@ -22,16 +20,21 @@ public class CameraController : MonoBehaviour {
     private Vector3 tiltVec;
     private float tilt;
     private Transform lookAtTrans;
-    private Vector3 lookAtVec;
     private int isTurning;
+    private GameObject timer;
+    private Timer_Countdown timerObj;
+
+
     // Use this for initialization
     void Start () {
-        distance = 1.5f;
+        //distance = 1.5f;
         height = 0.8f;
         heightDamping = 5.0f;
         rotationDamping = 5.0f;
         distanceDamping = 3.0f;
         target = GameObject.Find("Player(Clone)");
+        timer = GameObject.Find("ctdTimer");
+        timerObj = timer.GetComponent<Timer_Countdown>();
         tilt = 0.3f;
     }
 
@@ -54,7 +57,11 @@ public class CameraController : MonoBehaviour {
         this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, height, this.gameObject.transform.position.z);
         tiltVec[1] = currentHeight - tilt;
 
-        if (isTurning != 0)
+        if(timerObj.TimerFirstRunning)
+        {
+            distance = 1.0f;
+        }
+        else if (isTurning != 0)
         {
             distance = Mathf.Lerp(distance, 1.0f, distanceDamping * Time.deltaTime);
         }
