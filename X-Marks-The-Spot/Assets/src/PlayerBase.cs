@@ -127,6 +127,7 @@ public class PlayerBase : MonoBehaviour
     {
         if (isSliding)
         {
+            crntSlideLength -= 1.0f * Time.deltaTime;
             //Slide end
             if (crntSlideLength <= 0.1)
             {
@@ -134,10 +135,6 @@ public class PlayerBase : MonoBehaviour
                 transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 2, transform.localScale.z);
                 crntSlideLength = 1  / runSpeed;
                 isSliding = false;
-            }
-            else
-            {
-                crntSlideLength -= 1.0f * Time.deltaTime;
             }
         }
     }
@@ -219,5 +216,6 @@ public class PlayerBase : MonoBehaviour
         UpdateFalling();
         UpdateTurn();
         UpdateRun();
+        if (transform.position.y <= -5) Death();
     }
 }

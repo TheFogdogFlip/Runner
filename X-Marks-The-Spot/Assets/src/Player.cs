@@ -62,59 +62,9 @@ public class Player : PlayerBase
             {
                 playerTimerObj.SetText();
             }
-
-            Vector3 tempVec = transform.position;
-            if (tempVec.z < 0) tempVec.z *= -1;
-            if (tempVec.x < 0) tempVec.x *= -1;
-            if (rotationTarget == 0)
-            {
-                if (tempVec.z % 2 <= 1)
-                {
-                    isActionActive = false;
-                }
-                else if (tempVec.z % 2 >= 1 && !isActionActive)
-                {
-                    ActivateNextAction();
-                    isActionActive = true;
-                }
-            }
-            else if (rotationTarget == 90 || rotationTarget == -270)
-            {
-                if (tempVec.x % 2 <= 1)
-                {
-                    isActionActive = false;
-                }
-                else if (tempVec.x % 2 >= 1 && !isActionActive)
-                {
-                    ActivateNextAction();
-                    isActionActive = true;
-                }
-            }
-            else if (rotationTarget == 180 || rotationTarget == -180)
-            {
-                if (tempVec.z % 2 >= 1)
-                {
-                    isActionActive = false;
-                }
-                else if (tempVec.z % 2 <= 1 && !isActionActive)
-                {
-                    ActivateNextAction();
-                    isActionActive = true;
-                }
-            }
-            else if (rotationTarget == 270 || rotationTarget == -90)
-            {
-                if (tempVec.x % 2 >= 1)
-                {
-                    isActionActive = false;
-                }
-                else if (tempVec.x % 2 <= 1 && !isActionActive)
-                {
-                    ActivateNextAction();
-                    isActionActive = true;
-                }
-            }
-            KeyInputs();
+           
+            KeyInputsTurns();
+            KeyInputsActions();
         }
         if(!ctdTimerObj.TimerSecondRunning)
         {
@@ -126,9 +76,9 @@ public class Player : PlayerBase
         }
     }
 
-    void KeyInputs()
+    void KeyInputsTurns()
     {
-       
+        //SET NEXT TURNING ACTION
         if (Input.GetButtonDown("Right"))
         {
             SetNextAction("TurnRight");
@@ -139,14 +89,86 @@ public class Player : PlayerBase
             SetNextAction("TurnLeft");
         }
 
-        if (Input.GetButtonDown("Slide") && !isSliding && !isJumping)
+        //ACTIVATE NEXT TURNING ACTION
+        Vector3 tempVec = transform.position;
+        if (tempVec.z < 0) tempVec.z *= -1;
+        if (tempVec.x < 0) tempVec.x *= -1;
+        if (rotationTarget == 0)
         {
-            SetNextAction("Slide");
+            if (tempVec.z % 2 <= 1)
+            {
+                isActionActive = false;
+            }
+            else if (tempVec.z % 2 >= 1 && !isActionActive)
+            {
+                ActivateNextAction();
+                isActionActive = true;
+            }
         }
-
-        if (Input.GetButtonDown("Jump") && !isJumping)
+        else if (rotationTarget == 90 || rotationTarget == -270)
         {
-            SetNextAction("Jump");
+            if (tempVec.x % 2 <= 1)
+            {
+                isActionActive = false;
+            }
+            else if (tempVec.x % 2 >= 1 && !isActionActive)
+            {
+                ActivateNextAction();
+                isActionActive = true;
+            }
+        }
+        else if (rotationTarget == 180 || rotationTarget == -180)
+        {
+            if (tempVec.z % 2 >= 1)
+            {
+                isActionActive = false;
+            }
+            else if (tempVec.z % 2 <= 1 && !isActionActive)
+            {
+                ActivateNextAction();
+                isActionActive = true;
+            }
+        }
+        else if (rotationTarget == 270 || rotationTarget == -90)
+        {
+            if (tempVec.x % 2 >= 1)
+            {
+                isActionActive = false;
+            }
+            else if (tempVec.x % 2 <= 1 && !isActionActive)
+            {
+                ActivateNextAction();
+                isActionActive = true;
+            }
+        }
+        
+    }
+
+    void KeyInputsActions()
+    {
+        if (turnPhase == 0 && !isSliding && !isJumping)
+        {
+            if (Input.GetButtonDown("Slide"))
+            {
+                Slide();
+
+                float time = playerTimerObj.f_time;
+                TimeStamp ts = new TimeStamp();
+                ts.time = time;
+                ts.input = "Slide";
+                inputs.Add(ts);
+            }
+
+            if (Input.GetButtonDown("Jump"))
+            {
+                Jump();
+
+                float time = playerTimerObj.f_time;
+                TimeStamp ts = new TimeStamp();
+                ts.time = time;
+                ts.input = "Jump";
+                inputs.Add(ts);
+            }
         }
     }
 
@@ -217,9 +239,6 @@ public class Player : PlayerBase
 
             if (nextAction == "TurnLeft") TurnLeft();
             if (nextAction == "TurnRight") TurnRight();
-            if (nextAction == "Jump") Jump();
-            if (nextAction == "Slide") Slide();
-
             nextAction = "";
         }
     }
