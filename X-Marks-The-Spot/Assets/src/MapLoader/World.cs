@@ -156,24 +156,23 @@ public class World{
 
         List<TileDirectionNode> directions = new List<TileDirectionNode>();
 
-        DirectionNode directionNode = startTile.Directions.Find(node => node.Direction == 0);
-        var newTileDirection = new TileDirectionNode(direction, startX, startZ, angle, directionNode.Connections);
+        RotationNode rotationNode = startTile.Rotations.Find(node => node.Rotation == angle);
+        var newTileDirection = new TileDirectionNode(direction, startX, startZ, angle, rotationNode.Directions[0].Connections);
 
         directions.Add(newTileDirection);
-        int i = 0;
 
-        while (i < 50)
+        while (true)
         {
-            i++;
             if (directions.Count == 0)
                 break;
 
             var dir = directions[0];
-
             var connection = getRandomConnection(dir, rand);
-            var rotation = getRandomRotation(connection, rand, dir.Rotation);
             var tile = findTile(connection.TileName);
+            var rotation = getRandomRotation(connection, rand);
             color = findColor(tile, rotation).ToColor();
+            var rN = tile.Rotations.Find(r => r.Rotation == rotation);
+
 
             switch (dir.Direction)
             {
@@ -195,20 +194,20 @@ public class World{
             {
                 generatedMap.SetPixel(dir.X, dir.Y, color);
 
-                foreach (var item in tile.Directions)
+                foreach (var item in rN.Directions)
                 {
                     newTileDirection = new TileDirectionNode(item.Direction, dir.X, dir.Y, (int)rotation, item.Connections);
                     directions.Add(newTileDirection);
                 }
             }
-           
+
             directions.Remove(dir);
         }
         save("Temp.png", generatedMap);
         load("Temp.png");
     }
 
-    private float getRandomRotation(ConnectionNode connection, System.Random rand, float parentRotation)
+    private float getRandomRotation(ConnectionNode connection, System.Random rand)
     {
 
         int randomNumber = rand.Next(0, 100);
@@ -223,22 +222,6 @@ public class World{
                 break;
             chance += rotation.Chance;
         }
-        rotation.Rotation -= parentRotation;
-        switch ((int)rotation.Rotation)
-        {
-            case -90:
-                rotation.Rotation = 270.0f;
-                break;
-            case -180:
-                rotation.Rotation = 180.0f;
-                break;
-            case -270:
-                rotation.Rotation = 90.0f;
-                break;
-            default:
-                break;
-        }
-
         return rotation.Rotation;
     }
 
@@ -298,30 +281,30 @@ public class World{
 
     private void generateTestXMLData()
     {
-        TileContainer container = new TileContainer();
-        container.Tiles = new List<TileNode>();
-        TileNode node = new TileNode();
-        node.TileName = "Path";
-        node.Directions = new List<DirectionNode>();
-        DirectionNode dNode = new DirectionNode();
-        dNode.Direction = 1;
-        dNode.Connections = new List<ConnectionNode>();
-        ConnectionNode cNode = new ConnectionNode() { TileName = "Corner" };
-        cNode.Rotations = new List<RotationChanceNode>();
-        cNode.Chance = 20;
-        cNode.Rotations.Add(new RotationChanceNode() {  Chance = 20, Rotation = 0});
-        dNode.Connections.Add(cNode);
-        node.Rotations = new List<RotationNode>();
-        RotationNode rNode = new RotationNode();
-        rNode.Rotation = 0;
-        rNode.Color = new ColorNode() { R = 0, G = 0, B = 0, A = 255 };
-        node.Rotations.Add(rNode);
-        node.Directions.Add(dNode);
-        container.Tiles.Add(node);
-        FileStream stream = new FileStream("TileNodes.xml", FileMode.Open);
-        XmlSerializer serializer = new XmlSerializer(typeof(TileContainer));
-        serializer.Serialize(stream, container);
-        stream.Close();
+        //TileContainer container = new TileContainer();
+        //container.Tiles = new List<TileNode>();
+        //TileNode node = new TileNode();
+        //node.TileName = "Path";
+        //node.Directions = new List<DirectionNode>();
+        //DirectionNode dNode = new DirectionNode();
+        //dNode.Direction = 1;
+        //dNode.Connections = new List<ConnectionNode>();
+        //ConnectionNode cNode = new ConnectionNode() { TileName = "Corner" };
+        //cNode.Rotations = new List<RotationChanceNode>();
+        //cNode.Chance = 20;
+        //cNode.Rotations.Add(new RotationChanceNode() {  Chance = 20, Rotation = 0});
+        //dNode.Connections.Add(cNode);
+        //node.Rotations = new List<RotationNode>();
+        //RotationNode rNode = new RotationNode();
+        //rNode.Rotation = 0;
+        //rNode.Color = new ColorNode() { R = 0, G = 0, B = 0, A = 255 };
+        //node.Rotations.Add(rNode);
+        //node.Directions.Add(dNode);
+        //container.Tiles.Add(node);
+        //FileStream stream = new FileStream("TileNodes.xml", FileMode.Open);
+        //XmlSerializer serializer = new XmlSerializer(typeof(TileContainer));
+        //serializer.Serialize(stream, container);
+        //stream.Close();
     }
 
     private TileContainer getTileTypes()

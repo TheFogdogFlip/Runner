@@ -9,13 +9,8 @@ public class TileNode
     [XmlArrayItem("RotatationNode")]
     public List<RotationNode> Rotations;
 
-    [XmlArray("Directions")]
-    [XmlArrayItem("DirectionNode")]
-    public List<DirectionNode> Directions;
-
     public TileNode()
     {
         Rotations = new List<RotationNode>();
-        Directions = new List<DirectionNode>();
     }
 }
