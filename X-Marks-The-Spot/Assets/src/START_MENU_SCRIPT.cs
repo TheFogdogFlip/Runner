@@ -7,9 +7,16 @@ public class START_MENU_SCRIPT : MonoBehaviour
 {
     private Sprite[] sprites;
     private GameObject Timer_GO;
+    private GameObject panelTop;
+    private GameObject panelBot;
+
     private Timer_Menu menuTimer;
     private int currentSprite;
+    private int nextSprite;
     private string resourceName = "Backgrounds";
+    private bool needAlphaChanged;
+    private bool firstAlpha;
+    private bool secondAlpha;
 
     public Canvas quitMenu;
     public Canvas optionsMenu;
@@ -26,8 +33,14 @@ public class START_MENU_SCRIPT : MonoBehaviour
 
 	void Start ()
     {
+        needAlphaChanged = false;
+        firstAlpha = false;
+        secondAlpha = false;
         currentSprite = 0;
+        nextSprite = currentSprite + 1;
         Timer_GO = GameObject.Find("menuTimer");
+        panelBot = GameObject.Find("PANEL_BACKGROUND_BOT");
+        panelTop = GameObject.Find("PANEL_BACKGROUND_TOP");
         menuTimer = Timer_GO.GetComponent<Timer_Menu>();
         sprites = Resources.LoadAll<Sprite>(resourceName);
         if (sprites != null)
@@ -61,18 +74,68 @@ public class START_MENU_SCRIPT : MonoBehaviour
 
     void Update()
     {
-        if (menuTimer.f_time > 5)
+        
+        if (menuTimer.f_time > 10)
         {
-            if(currentSprite >= sprites.Length-1)
+            if(currentSprite >= sprites.Length - 1)
             {
                 currentSprite = 0;
             }
             else
             {
                 currentSprite++;
+                nextSprite = currentSprite + 1;
+                if (nextSprite >= sprites.Length - 1)
+                {
+                    nextSprite = 0;
+                }
             }
+            
+            
             SetBackground();
             ResetTimer();            
+        }
+        
+        if(menuTimer.f_time > 4 && !firstAlpha)
+        {
+            needAlphaChanged = true;
+            firstAlpha = true;
+        }
+        if (menuTimer.f_time > 9 && !secondAlpha)
+        {
+            needAlphaChanged = true;
+            secondAlpha = true;
+        }
+        if (needAlphaChanged)
+        {
+            ReduceAlpha();
+            needAlphaChanged = false;
+        }
+    }
+
+    public void ReduceAlpha()
+    {
+        int layerBot = panelBot.layer;
+        int layerTop = panelTop.layer;
+        print("layer bot: " + layerBot + " layer top: " + layerTop);
+
+        if (layerBot < layerTop)
+        {
+            //Panel Bot is currently being shown
+            panelTop.GetComponent<Image>().CrossFadeAlpha(0, 1.0f, false);
+            panelBot.GetComponent<Image>().CrossFadeAlpha(1, 0f, false);
+
+            panelBot.layer = layerTop;
+            panelTop.layer = layerBot;
+        }
+        else if (layerTop < layerBot)
+        {
+            //Panel Top is currently being shown
+            panelBot.GetComponent<Image>().CrossFadeAlpha(0, 1.0f, false);
+            panelTop.GetComponent<Image>().CrossFadeAlpha(1, 0f, false);
+            panelBot.layer = layerTop;
+            panelTop.layer = layerBot;
+
         }
     }
 	
@@ -103,12 +166,28 @@ public class START_MENU_SCRIPT : MonoBehaviour
 
     public void SetBackground()
     {
-        GameObject.Find("Panel").GetComponent<Image>().sprite = sprites[currentSprite];
+
+        int layerBot = panelBot.layer;
+        int layerTop = panelTop.layer;
+        print("layer bot: " + layerBot + " layer top: " + layerTop);
+
+        if (layerBot < layerTop)
+        {
+            panelTop.GetComponent<Image>().sprite = sprites[nextSprite];
+            panelBot.GetComponent<Image>().sprite = sprites[currentSprite];
+        }
+        else if (layerTop < layerBot)
+        {
+            panelTop.GetComponent<Image>().sprite = sprites[currentSprite];
+            panelBot.GetComponent<Image>().sprite = sprites[nextSprite];
+        }
     }
+
+    
 
     public void TestGamePress()
     {
-        Application.LoadLevel(4);
+        Application.LoadLevel("Test_game");
     }
     public void LoadLevelPress()
     {
