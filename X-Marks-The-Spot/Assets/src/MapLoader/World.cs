@@ -9,14 +9,12 @@ public class TileDirectionNode : DirectionNode
 {
     public int X;
     public int Y;
-    public int Rotation;
 
-    public TileDirectionNode(int direction, int x, int y, int rotation, List<ConnectionNode> connections)
+    public TileDirectionNode(int direction, int x, int y, List<ConnectionNode> connections)
     {
         this.Direction = direction;
         this.X = x;
         this.Y = y;
-        this.Rotation = rotation;
         this.Connections = connections;
     }
 }
@@ -157,7 +155,7 @@ public class World{
         List<TileDirectionNode> directions = new List<TileDirectionNode>();
 
         RotationNode rotationNode = startTile.Rotations.Find(node => node.Rotation == angle);
-        var newTileDirection = new TileDirectionNode(direction, startX, startZ, angle, rotationNode.Directions[0].Connections);
+        var newTileDirection = new TileDirectionNode(direction, startX, startZ, rotationNode.Directions[0].Connections);
 
         directions.Add(newTileDirection);
 
@@ -167,6 +165,7 @@ public class World{
                 break;
 
             var dir = directions[0];
+            
             var connection = getRandomConnection(dir, rand);
             var tile = findTile(connection.TileName);
             var rotation = getRandomRotation(connection, rand);
@@ -190,13 +189,16 @@ public class World{
                     break;
             }
 
+            if (tile.TileName.ToLower() == "path" && (rotation == 90 || rotation == 270))
+                tile.TileName = tile.TileName;
+
             if (generatedMap.GetPixel(dir.X, dir.Y) == white)
             {
                 generatedMap.SetPixel(dir.X, dir.Y, color);
 
                 foreach (var item in rN.Directions)
                 {
-                    newTileDirection = new TileDirectionNode(item.Direction, dir.X, dir.Y, (int)rotation, item.Connections);
+                    newTileDirection = new TileDirectionNode(item.Direction, dir.X, dir.Y, item.Connections);
                     directions.Add(newTileDirection);
                 }
             }
