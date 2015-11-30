@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 
-public class PathTile : EmptyTile {
-
+public class Tile : Object
+{
     private GameObject gameObject = null;
     private float rotation = 0.0f;
+    private Vector3 position;
+    private Color color;
 
-    public override Vector3 Position {
+    public Vector3 Position {
         get
         {
             return position;
@@ -15,6 +17,18 @@ public class PathTile : EmptyTile {
             position = value;
             if(gameObject != null)
                 gameObject.transform.position = position;
+        }
+    }
+
+    public Color Color
+    {
+        get
+        {
+            return color;
+        }
+        set
+        {
+            color = value;
         }
     }
 
@@ -43,7 +57,7 @@ public class PathTile : EmptyTile {
         get { return gameObject; }
     }
 
-    public PathTile(Vector3 position, Color color, string gameObjectTag, float rotation = 0.0f)
+    public Tile(Vector3 position, Color color, string gameObjectTag, float rotation = 0.0f)
     {
         GameObject = (GameObject)Instantiate(Resources.Load(gameObjectTag));
         Color = color;
