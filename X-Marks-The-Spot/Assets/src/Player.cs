@@ -29,7 +29,11 @@ public class Player : PlayerBase
     //Turn finetuning
     private float turnDelay = 0.1f;
 
-   
+    //Joystick cooldown
+    private int cooldownCount = 2000;
+    private bool coolingDown = false;
+
+
     void Start ()
     {
         SetupCtdTimer();
@@ -124,7 +128,7 @@ public class Player : PlayerBase
                 }
                 Debug.Log(rotationTarget);
             }
-            KeyInputs();
+           
         }
         if(!ctdTimerObj.TimerSecondRunning)
         {
@@ -136,18 +140,41 @@ public class Player : PlayerBase
         }
     }
 
+    void FixedUpdate()
+    {
+        KeyInputs();
+    }
+
     void KeyInputs()
     {
-       
-        if (Input.GetButtonDown("Right"))
-        {
-            SetNextAction("TurnRight");
-        }
 
-        if (Input.GetButtonDown("Left"))
-        {
-            SetNextAction("TurnLeft");
-        }
+            if (coolingDown)
+            {
+                //SetNextAction("");
+                cooldownCount -= 1;
+            }
+
+            if (cooldownCount == 0)
+            {
+                coolingDown = false;
+                cooldownCount = 2000;
+            }
+            else
+            {
+                if (Input.GetButtonDown("Right") || Input.GetAxisRaw("Horizontal") == 1)
+                {
+                    SetNextAction("TurnRight");
+                    coolingDown = true;
+
+                }
+
+                if (Input.GetButtonDown("Left") || Input.GetAxisRaw("Horizontal") == -1)
+                {
+                    SetNextAction("TurnLeft");
+                    coolingDown = true;
+
+                }
+            }
 
         if (turnPhase == 0 || turnPhase == 3)
         {
