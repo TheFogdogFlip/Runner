@@ -27,7 +27,6 @@ public class Ghost : PlayerBase
     // Update is called once per frame
     void Update()
     {
-        MovementUpdate();
         ghostTimerObj.SetText();
         string currEvent = null;
         if (index < inputs.Count)
@@ -43,6 +42,7 @@ public class Ghost : PlayerBase
         if (currEvent == "Fall") isFalling = false;
         if (currEvent == "Slide") Slide();
         if (currEvent != null) index++;
-        
+        MovementUpdate();
+
     }
 }

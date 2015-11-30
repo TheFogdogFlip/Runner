@@ -4,12 +4,12 @@ using System.Collections;
 public class PlayerBase : MonoBehaviour
 {
     //WORKABLE
-    public float deceleration;
+    protected float deceleration;
     protected float acceleration;
-    public float runSpeed = 3f; //tiles per second.
+    protected float runSpeed = 3f; //tiles per second.
     protected float jumpSpeed;
-    public float jumpHeight = 0.5f;
-    protected float turnSpeed = 300.0f;
+    protected float jumpHeight = 0.5f;
+    protected float turnSpeed;
 
     //DONT TOUCH
     protected float crntSpeed;
@@ -19,6 +19,7 @@ public class PlayerBase : MonoBehaviour
     protected float rotationTarget;
     protected Quaternion qTo = Quaternion.identity;
     protected int turnPhase = 0;
+    protected bool turnRotation;
     protected bool isSliding = false;
     protected float crntSlideLength;
     protected BoxCollider bc;
@@ -29,19 +30,25 @@ public class PlayerBase : MonoBehaviour
     // Use this for initialization
     void Awake ()
     {
-        deceleration = runSpeed * runSpeed;
-        acceleration = runSpeed * runSpeed;
+        crntSpeed = runSpeed;
+        turnSpeed = (90 * 24 * runSpeed) / 9;
+        deceleration =  (runSpeed * runSpeed * -8) / 9;
+        acceleration = (runSpeed * runSpeed * -8) / 9;
         rb = GetComponent<Rigidbody>();
         bc = GetComponent<BoxCollider>();
         crntSlideLength = 1 / runSpeed;
         jumpSpeed = jumpHeight / (1 / ( runSpeed));
         rotationTarget = transform.rotation.y;
+
+        isFirstFrame = false;
+        anim = gameObject.GetComponentInChildren<Animator>();
+        anim.Play("Run");
     }
 
     protected void UpdateRun()
     {
         //Run forward
-        transform.Translate(transform.forward * 2.0f *crntSpeed * Time.deltaTime, Space.World);
+        transform.Translate(transform.forward * 2.0f * crntSpeed * Time.deltaTime, Space.World);
     }
 
     protected void TurnLeft()
@@ -86,34 +93,44 @@ public class PlayerBase : MonoBehaviour
         //BRAKING PHASE
         if (turnPhase == 1)
         {
-            crntSpeed -= deceleration * Time.deltaTime;
+            crntSpeed += deceleration * Time.deltaTime;
 
-            if (crntSpeed <= 0)
+            if (crntSpeed <= (2*runSpeed)/3) turnRotation = true;
+            if (crntSpeed <= runSpeed/3)
             {
+                crntSpeed = runSpeed/3;
                 turnPhase = 2;
             }
         }
 
         //TURNING PHASE
-        if (turnPhase == 2)
+        if (turnRotation)
         {
             transform.rotation = Quaternion.RotateTowards(transform.rotation, qTo, turnSpeed * Time.deltaTime);
 
             if (transform.rotation == qTo)
             {
-                turnPhase = 3;
+                turnRotation = false;
             }
         }
         //AXELERATION PHASE
-        if (turnPhase == 3)
+        if (turnPhase == 2)
         {
-            crntSpeed += acceleration * Time.deltaTime;
+            /*if (turnRotation)
+            {
+                turnRotation = false;
+                transform.rotation = qTo;
+            }*/
+            crntSpeed -= acceleration * Time.deltaTime;
             if (crntSpeed >= runSpeed)
             {
                 crntSpeed = runSpeed;
                 turnPhase = 0;
             }
         }
+
+        Debug.Log(turnSpeed);
+
     }
 
     protected void Slide()
@@ -208,12 +225,6 @@ public class PlayerBase : MonoBehaviour
 
     protected void MovementUpdate()
     {
-        if (isFirstFrame)
-        {
-            isFirstFrame = false;
-            anim = gameObject.GetComponentInChildren<Animator>();
-            anim.Play("Run");
-        }
         UpdateJump();
         UpdateSlide();
         UpdateFalling();

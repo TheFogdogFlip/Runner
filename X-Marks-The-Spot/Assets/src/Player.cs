@@ -35,7 +35,6 @@ public class Player : PlayerBase
         SetupCtdTimer();
         //SetupGhostTimer();
         SetupPlayerTimer();
-        crntSpeed = runSpeed;
 
         ghostinputs = new List<List<TimeStamp>>();
         ghosts = new List<GameObject>();
@@ -255,6 +254,7 @@ public class Player : PlayerBase
             transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 2, transform.localScale.z);
         }
 
+        turnRotation = false;
         isJumping = false;
         isFalling = false;
         isSliding = false;
