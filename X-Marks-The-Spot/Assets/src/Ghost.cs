@@ -16,7 +16,7 @@ public class Ghost : PlayerBase
     void Start () 
     {
         index = 0;
-        rotationTarget = 0;
+        rotationTarget = World.Instance.StartDirection.y;
         crntSpeed = runSpeed;
         rb = GetComponent<Rigidbody>();
         bc = GetComponent<BoxCollider>();

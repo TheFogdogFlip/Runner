@@ -67,14 +67,21 @@ public class Player : PlayerBase
                 Vector3 tempVec = transform.position;
                 if (tempVec.z < 0) tempVec.z *= -1;
                 if (tempVec.x < 0) tempVec.x *= -1;
+                if (rotationTarget <= 1 && rotationTarget >= -1)
+                {
+                    rotationTarget = 0;
+                }
+                    
                 if (rotationTarget == 0)
                 {
                     if (tempVec.z % 2 <= 1 && !isJumping && !isSliding)
                     {
+                        Debug.Log("Varför?");
                         isActionActive = false;
                     }
                     else if (tempVec.z % 2 >= 1 && !isActionActive)
                     {
+                        Debug.Log("Kom hit ffs");
                         ActivateNextAction();
                         isActionActive = true;
                     }
@@ -115,6 +122,7 @@ public class Player : PlayerBase
                         isActionActive = true;
                     }
                 }
+                Debug.Log(rotationTarget);
             }
             KeyInputs();
         }
@@ -261,7 +269,7 @@ public class Player : PlayerBase
         crntSpeed = runSpeed;
         transform.position = World.Instance.StartPosition;
         transform.rotation = Quaternion.Euler(World.Instance.StartDirection);
-        rotationTarget = transform.rotation.y;
+        rotationTarget = World.Instance.StartDirection.y;
         nextAction = "";
 
         foreach (GameObject go in ghosts)

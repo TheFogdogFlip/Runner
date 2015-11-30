@@ -38,7 +38,8 @@ public class PlayerBase : MonoBehaviour
         bc = GetComponent<BoxCollider>();
         crntSlideLength = 1 / runSpeed;
         jumpSpeed = jumpHeight / (1 / ( runSpeed));
-        rotationTarget = transform.rotation.y;
+        rotationTarget = World.Instance.StartDirection.y;
+        Debug.Log("Initial rotation: " + rotationTarget);
 
         isFirstFrame = false;
         anim = gameObject.GetComponentInChildren<Animator>();
@@ -128,8 +129,6 @@ public class PlayerBase : MonoBehaviour
                 turnPhase = 0;
             }
         }
-
-        Debug.Log(turnSpeed);
 
     }
 
