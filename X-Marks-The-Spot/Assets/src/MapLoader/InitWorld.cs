@@ -5,7 +5,7 @@ public class InitWorld : MonoBehaviour {
 
     void Awake()
     {
-        World.Init();
+        World.Instance.Generate();
 
         Instantiate(Resources.Load("Player", typeof(GameObject)), World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection));
         Instantiate(Resources.Load("PlayerCamera", typeof(GameObject)), World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection));
