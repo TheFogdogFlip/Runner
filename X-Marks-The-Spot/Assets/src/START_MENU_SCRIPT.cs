@@ -9,8 +9,7 @@ public class START_MENU_SCRIPT : MonoBehaviour
     private GameObject Timer_GO;
     private GameObject panelTop;
     private GameObject panelBot;
-    private Image imageTop;
-    private Image imageBot;
+
     private Timer_Menu menuTimer;
     private int currentSprite;
     private int nextSprite;
@@ -18,7 +17,9 @@ public class START_MENU_SCRIPT : MonoBehaviour
     private int botPanelLayer;
     private string resourceName = "Backgrounds";
     private bool needAlphaChanged;
-    private bool backFadedIn;
+    private bool firstAlpha;
+    private bool secondAlpha;
+
     public Canvas quitMenu;
     public Canvas optionsMenu;
     public Canvas loadLevelMenu;
@@ -35,28 +36,18 @@ public class START_MENU_SCRIPT : MonoBehaviour
 	void Start ()
     {
         needAlphaChanged = true;
-        backFadedIn = false;
+        firstAlpha = false;
+        secondAlpha = false;
         currentSprite = 0;
-        nextSprite = 1;
+        nextSprite = currentSprite + 1;
         Timer_GO = GameObject.Find("menuTimer");
-        //panelBot = GameObject.Find("PANEL_BACKGROUND_BOT");
-        //panelBot.layer = 8;
+        panelBot = GameObject.Find("PANEL_BACKGROUND_BOT");
         panelTop = GameObject.Find("PANEL_BACKGROUND_TOP");
-        panelTop.layer = 9;
         menuTimer = Timer_GO.GetComponent<Timer_Menu>();
-        //sprites = Resources.LoadAll<Sprite>(resourceName);
-        //imageTop = panelTop.GetComponent<Image>();
-        //imageBot = panelBot.GetComponent<Image>();
+        sprites = Resources.LoadAll<Sprite>(resourceName);
 
-        //imageBot.sprite = sprites[currentSprite];
-        //imageTop.sprite = sprites[nextSprite];
-        
-        
-        //panelTop.GetComponent<Image>().sprite = sprites[nextSprite];
-        //panelBot.GetComponent<Image>().sprite = sprites[currentSprite];
-
-        //print("panelTop: " + " layer: " + panelTop.layer + " name: " + imageTop.sprite.name);
-        //print("panelBot: " + " layer: " + panelBot.layer + " name: " + imageBot.sprite.name);
+        panelTop.GetComponent<Image>().sprite = sprites[currentSprite];
+        panelBot.GetComponent<Image>().sprite = sprites[nextSprite];
 
         quitMenu = quitMenu.GetComponent<Canvas>();
         optionsMenu = optionsMenu.GetComponent<Canvas>();
@@ -82,109 +73,83 @@ public class START_MENU_SCRIPT : MonoBehaviour
     {
         
 
-        //if (menuTimer.f_time > 3 && needAlphaChanged)
-        //{
-        //    needAlphaChanged = false;
-        //    print("here: " + menuTimer.f_time);
-        //    ReduceAlpha();
-        //}
-        //if(menuTimer.f_time > 5)
-        //{
-        //    ResetTimer();
-        //    currentSprite++;
-        //    if (currentSprite == sprites.Length)
-        //    {
-        //        currentSprite = 0;
-        //    }
-        //    nextSprite = currentSprite + 1;
-        //    if (nextSprite == sprites.Length)
-        //    {
-        //        nextSprite = 0;
-        //    }
-
-        //    print("curr: " + currentSprite);
-        //    print("next: " + nextSprite);
-        //    SetBackground();
-            
-        //    needAlphaChanged = true;
-        //    backFadedIn = false;
-            
-        //}
-        //print("panelTop: " + " layer: " + panelTop.layer + " name: " + panelTop.GetComponent<Image>().sprite.name);
-        //print("panelBot: " + " layer: " + panelBot.layer + " name: " + panelBot.GetComponent<Image>().sprite.name);
+        if (menuTimer.f_time > 3 && needAlphaChanged)
+        {
+            topPanelLayer = panelTop.layer;
+            botPanelLayer = panelBot.layer;
+            needAlphaChanged = false;
+            ReduceAlpha();
+        }
+        if(menuTimer.f_time > 4)
+        {
+            if (currentSprite >= sprites.Length - 1)
+            {
+                currentSprite = 0;
+            }
+            else
+            {
+                currentSprite++;
+                nextSprite = currentSprite + 1;
+                if (nextSprite >= sprites.Length - 1)
+                {
+                    nextSprite = 0;
+                }
+            }
+            SetBackground();
+            ResetTimer();
+            needAlphaChanged = true;
+        }
+        
         
     }
 
     public void ReduceAlpha()
     {
-        if (panelBot.layer == 8 && panelTop.layer == 9)
+        //print("reduce alpha; layer bot: " + layerBot + " layer top: " + layerTop);
+
+        if (botPanelLayer < topPanelLayer)
         {
             //Panel Bot is currently infront and needs to be faded
-            print("fading bot");
-            FadeImages(imageBot, imageTop);
+            print("fading bot; layer bot: " + botPanelLayer + " layer top: " + topPanelLayer);
+            panelBot.GetComponent<Image>().CrossFadeAlpha(0, 1.0f, false);
         }
 
-        else if (panelBot.layer == 9 && panelTop.layer == 8)
+        else if (topPanelLayer < botPanelLayer)
         {
             //Panel Top is currently infront and needs to be faded
-            print("fading top");
-            FadeImages(imageTop, imageBot);
-            
-        }
-    }
+            print("fading top; layer bot: " + botPanelLayer + " layer top: " + topPanelLayer);
+            panelTop.GetComponent<Image>().CrossFadeAlpha(0, 1.0f, false);
 
-    public void SwapLayers()
-    {
-        int temp = panelBot.layer;
-        panelBot.layer = panelTop.layer;
-        panelTop.layer = temp;
-    }
-    public void FadeImages(Image toBeShown, Image toBeFaded)
-    {
-        toBeShown.CrossFadeAlpha(1.0f, 1.0f, false);
-        toBeFaded.CrossFadeAlpha(0f, 1.0f, false);
+        }
     }
 
     public void SetBackground()
     {
 
-        if (panelBot.layer == 8 && panelTop.layer == 9)
+        
+        //print("set background; layer bot: " + botPanelLayer + " layer top: " + topPanelLayer);
+
+        if (botPanelLayer < topPanelLayer)
         {
             //Panel Bot is currently infront and needs to be moved and set new background and then have it's alpha set to 1
-            print("layer bot: " + panelBot.layer + " layer top: " + panelTop.layer + " ; setting bot bg, moving back bot, fading in bot behind top");
-            imageBot.sprite = sprites[nextSprite];
-/*
-//             Color col = imageBot.color;
-//             col.a = 1.0f;
-//             imageBot.color = col;
-//             col = imageBot.color;
-//             float a = col.a;
-//             print(a);
-*/
-            SwapLayers();
-            //imageBot.CrossFadeAlpha(1.0f, 0f, true);
+            //print("swapping ");
+            print("layer bot: " + botPanelLayer + " layer top: " + topPanelLayer + " ; setting bot bg, moving back bot, fading in bot behind top");
+            panelBot.GetComponent<Image>().sprite = sprites[nextSprite];
+            panelBot.layer = topPanelLayer;
+            panelTop.layer = botPanelLayer;
+            panelBot.GetComponent<Image>().CrossFadeAlpha(1, 0, false);
             print("after: layer bot: " + panelBot.layer + " layer top: " + panelTop.layer);
         }
-        else if (panelBot.layer == 9 && panelTop.layer == 8)
+        else if (topPanelLayer < botPanelLayer)
         {
             //Panel Top is currently infront and needs to be moved and set new background and then have it's alpha set to 1
-            print("layer bot: " + panelBot.layer + " layer top: " + panelTop.layer + " ; setting top bg, moving back top, fading in top behind bot");
-            imageTop.sprite = sprites[nextSprite];
-/*
-//             Color col = imageTop.color;
-//             col.a = 1.0f;
-//             imageTop.color = col;
-//             col = imageTop.color;
-//             float a = col.a;
-//             print(a);
-*/
-            SwapLayers();
-            //imageTop.CrossFadeAlpha(1.0f, 0f, true);
+            print("layer bot: " + botPanelLayer + " layer top: " + topPanelLayer + " ; setting top bg, moving back top, fading in top behind bot");
+            panelTop.GetComponent<Image>().sprite = sprites[nextSprite];
+            panelTop.layer = botPanelLayer;
+            panelBot.layer = topPanelLayer;
+            panelTop.GetComponent<Image>().CrossFadeAlpha(1, 0, false);
             print("after: layer bot: " + panelBot.layer + " layer top: " + panelTop.layer);
         }
-
-        print("panelTop: " + " layer: " + panelTop.layer + " name: " + imageTop.sprite.name);
-        print("panelBot: " + " layer: " + panelBot.layer + " name: " + imageBot.sprite.name);
     }
 	
 	public void ExitPress()
