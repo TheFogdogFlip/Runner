@@ -189,9 +189,6 @@ public class World{
                     break;
             }
 
-            if (tile.TileName.ToLower() == "path" && (rotation == 90 || rotation == 270))
-                tile.TileName = tile.TileName;
-
             if (generatedMap.GetPixel(dir.X, dir.Y) == white)
             {
                 generatedMap.SetPixel(dir.X, dir.Y, color);
@@ -279,34 +276,6 @@ public class World{
         stream.Write(rawMap, 0, rawMap.Length);
         stream.Flush();
         stream.Close();
-    }
-
-    private void generateTestXMLData()
-    {
-        //TileContainer container = new TileContainer();
-        //container.Tiles = new List<TileNode>();
-        //TileNode node = new TileNode();
-        //node.TileName = "Path";
-        //node.Directions = new List<DirectionNode>();
-        //DirectionNode dNode = new DirectionNode();
-        //dNode.Direction = 1;
-        //dNode.Connections = new List<ConnectionNode>();
-        //ConnectionNode cNode = new ConnectionNode() { TileName = "Corner" };
-        //cNode.Rotations = new List<RotationChanceNode>();
-        //cNode.Chance = 20;
-        //cNode.Rotations.Add(new RotationChanceNode() {  Chance = 20, Rotation = 0});
-        //dNode.Connections.Add(cNode);
-        //node.Rotations = new List<RotationNode>();
-        //RotationNode rNode = new RotationNode();
-        //rNode.Rotation = 0;
-        //rNode.Color = new ColorNode() { R = 0, G = 0, B = 0, A = 255 };
-        //node.Rotations.Add(rNode);
-        //node.Directions.Add(dNode);
-        //container.Tiles.Add(node);
-        //FileStream stream = new FileStream("TileNodes.xml", FileMode.Open);
-        //XmlSerializer serializer = new XmlSerializer(typeof(TileContainer));
-        //serializer.Serialize(stream, container);
-        //stream.Close();
     }
 
     private TileContainer getTileTypes()
