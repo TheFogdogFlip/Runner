@@ -29,7 +29,11 @@ public class Player : PlayerBase
     //Turn finetuning
     private float turnDelay = 0.1f;
 
-   
+    //Joystick cooldown
+    private int cooldownCount = 25;
+    private bool coolingDown = false;
+
+
     void Start ()
     {
         SetupCtdTimer();
@@ -142,15 +146,33 @@ public class Player : PlayerBase
 
     void KeyInputs()
     {
-       
-        if (Input.GetButtonDown("Right"))
+
+        if (coolingDown)
         {
-            SetNextAction("TurnRight");
+            Input.ResetInputAxes();
+            cooldownCount -= 1;
         }
 
-        if (Input.GetButtonDown("Left"))
+        if (cooldownCount == 0)
         {
-            SetNextAction("TurnLeft");
+            coolingDown = false;
+            cooldownCount = 25;
+        }
+        else
+        {
+            if (Input.GetButtonDown("Right") || Input.GetAxisRaw("Horizontal") == 1)
+            {
+                SetNextAction("TurnRight");
+                coolingDown = true;
+
+            }
+
+            if (Input.GetButtonDown("Left") || Input.GetAxisRaw("Horizontal") == -1)
+            {
+                SetNextAction("TurnLeft");
+                coolingDown = true;
+
+            }
         }
 
         if (turnPhase == 0 || turnPhase == 2)
