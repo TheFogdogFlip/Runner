@@ -130,8 +130,8 @@ public class World
     {
         System.Random rand = new System.Random();
 
-        width = 64;
-        depth = 64;
+        width = 256;
+        depth = 256;
 
         map = new Texture2D(width, depth, TextureFormat.RGBA32, false);
 
@@ -141,8 +141,8 @@ public class World
                 map.SetPixel(y, x, Color.white);
         }
 
-        int startX = rand.Next(width);
-        int startZ = rand.Next(depth);
+        int startX = 128;//rand.Next(width);
+        int startZ = 128;//rand.Next(depth);
 
         start = new Vector3(startX, 0, startZ);
 
