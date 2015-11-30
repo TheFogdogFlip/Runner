@@ -6,12 +6,13 @@ public class PlayerBase : MonoBehaviour
     //WORKABLE
     protected float deceleration;
     protected float acceleration;
-    protected float runSpeed = 3f; //tiles per second.
+    protected float runSpeed = 2f; //tiles per second.
     protected float jumpSpeed;
     protected float jumpHeight = 0.5f;
-    protected float turnSpeed;
+
 
     //DONT TOUCH
+    protected float turnSpeed;
     protected float crntSpeed;
     protected bool isJumping = false;
     protected bool isFalling = false;
@@ -33,7 +34,7 @@ public class PlayerBase : MonoBehaviour
         crntSpeed = runSpeed;
         turnSpeed = (90 * 24 * runSpeed) / 9;
         deceleration =  (runSpeed * runSpeed * -8) / 9;
-        acceleration = (runSpeed * runSpeed * -8) / 9;
+        acceleration = -1 * runSpeed * runSpeed;
         rb = GetComponent<Rigidbody>();
         bc = GetComponent<BoxCollider>();
         crntSlideLength = 1 / runSpeed;
@@ -128,9 +129,6 @@ public class PlayerBase : MonoBehaviour
                 turnPhase = 0;
             }
         }
-
-        Debug.Log(turnSpeed);
-
     }
 
     protected void Slide()
