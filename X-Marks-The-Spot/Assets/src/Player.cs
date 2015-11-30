@@ -162,6 +162,8 @@ public class Player : PlayerBase
                 ts.time = time;
                 ts.input = "Jump";
                 inputs.Add(ts);
+                AudioManager sound = new AudioManager();
+                sound.JumpSound();
             }
         }
     }
