@@ -43,7 +43,6 @@ public class Player : PlayerBase
 
     void Update()
     {
-        
         if (ghostTimerObj != null)
             ghostTimerObj.SetText();
 
@@ -51,6 +50,7 @@ public class Player : PlayerBase
         if (!ctdTimerObj.TimerFirstRunning)
         {
             MovementUpdate();
+            KeyInputs();
             if (!playerTimerObj.TimerRunning)
             {
                 playerTimerObj.TimerRunning = true;
@@ -62,11 +62,13 @@ public class Player : PlayerBase
             {
                 playerTimerObj.SetText();
             }
-            if (turnPhase == 0)
+
+            if (turnPhase == 0 || turnPhase == 2)
             {
                 Vector3 tempVec = transform.position;
                 if (tempVec.z < 0) tempVec.z *= -1;
                 if (tempVec.x < 0) tempVec.x *= -1;
+
                 if (rotationTarget <= 1 && rotationTarget >= -1)
                 {
                     rotationTarget = 0;
@@ -74,14 +76,14 @@ public class Player : PlayerBase
                     
                 if (rotationTarget == 0)
                 {
+
                     if (tempVec.z % 2 <= 1 && !isJumping && !isSliding)
                     {
-                        Debug.Log("Varför?");
                         isActionActive = false;
                     }
-                    else if (tempVec.z % 2 >= 1 && !isActionActive)
+
+                    if (tempVec.z % 2 >= 1 && !isActionActive)
                     {
-                        Debug.Log("Kom hit ffs");
                         ActivateNextAction();
                         isActionActive = true;
                     }
@@ -92,7 +94,8 @@ public class Player : PlayerBase
                     {
                         isActionActive = false;
                     }
-                    else if (tempVec.x % 2 >= 1 && !isActionActive)
+
+                    if (tempVec.x % 2 >= 1 && !isActionActive)
                     {
                         ActivateNextAction();
                         isActionActive = true;
@@ -100,11 +103,13 @@ public class Player : PlayerBase
                 }
                 if (rotationTarget == 180 || rotationTarget == -180)
                 {
+
                     if (tempVec.z % 2 >= 1 && !isJumping && !isSliding)
                     {
                         isActionActive = false;
                     }
-                    else if (tempVec.z % 2 < 1 && !isActionActive)
+
+                    if (tempVec.z % 2 < 1 && !isActionActive)
                     {
                         ActivateNextAction();
                         isActionActive = true;
@@ -112,19 +117,18 @@ public class Player : PlayerBase
                 }
                 if (rotationTarget == 270 || rotationTarget == -90)
                 {
+
                     if (tempVec.x % 2 >= 1 && !isJumping && !isSliding)
                     {
                         isActionActive = false;
                     }
-                    else if (tempVec.x % 2 <= 1 && !isActionActive)
+                    if (tempVec.x % 2 <= 1 && !isActionActive)
                     {
                         ActivateNextAction();
                         isActionActive = true;
                     }
                 }
-                Debug.Log(rotationTarget);
-            }
-            KeyInputs();
+            }      
         }
         if(!ctdTimerObj.TimerSecondRunning)
         {
@@ -149,7 +153,7 @@ public class Player : PlayerBase
             SetNextAction("TurnLeft");
         }
 
-        if (turnPhase == 0 || turnPhase == 3)
+        if (turnPhase == 0 || turnPhase == 2)
         {
             if (Input.GetButtonDown("Slide") && !isSliding && !isJumping)
             {

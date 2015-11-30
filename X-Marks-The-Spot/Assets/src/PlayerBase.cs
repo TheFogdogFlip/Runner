@@ -34,13 +34,12 @@ public class PlayerBase : MonoBehaviour
         crntSpeed = runSpeed;
         turnSpeed = (90 * 24 * runSpeed) / 9;
         deceleration =  (runSpeed * runSpeed * -8) / 9;
-        acceleration = -1 * runSpeed * runSpeed;
+        acceleration = -1 * runSpeed * runSpeed * runSpeed * runSpeed;
         rb = GetComponent<Rigidbody>();
         bc = GetComponent<BoxCollider>();
         crntSlideLength = 1 / runSpeed;
         jumpSpeed = jumpHeight / (1 / ( runSpeed));
         rotationTarget = World.Instance.StartDirection.y;
-        Debug.Log("Initial rotation: " + rotationTarget);
 
         isFirstFrame = false;
         anim = gameObject.GetComponentInChildren<Animator>();
@@ -56,38 +55,35 @@ public class PlayerBase : MonoBehaviour
     protected void TurnLeft()
     {
         //ACTIVATION PHASE
-        if (turnPhase == 0)
+
+        anim.Play("TurnLeft90");
+
+        rotationTarget -= 90.0f;
+        turnPhase = 1;
+
+        if (rotationTarget == 360 || rotationTarget == -360)
         {
-            anim.Play("TurnLeft90");
-
-            rotationTarget -= 90.0f;
-            turnPhase = 1;
-
-            if (rotationTarget == 360 || rotationTarget == -360)
-            {
-                rotationTarget = 0.0f;
-            }
-            qTo = Quaternion.Euler(0.0f, rotationTarget, 0.0f);
-
+            rotationTarget = 0.0f;
         }
+        qTo = Quaternion.Euler(0.0f, rotationTarget, 0.0f);
+
     }
 
     protected void TurnRight()
     {
         //ACTIVATION PHASE
-        if (turnPhase == 0)
+
+        anim.Play("TurnRight90");
+
+        rotationTarget += 90.0f;
+        turnPhase = 1;
+
+        if (rotationTarget == 360 || rotationTarget == -360)
         {
-            anim.Play("TurnRight90");
-
-            rotationTarget += 90.0f;
-            turnPhase = 1;
-
-            if (rotationTarget == 360 || rotationTarget == -360)
-            {
-                rotationTarget = 0.0f;
-            }
-            qTo = Quaternion.Euler(0.0f, rotationTarget, 0.0f);
+            rotationTarget = 0.0f;
         }
+        qTo = Quaternion.Euler(0.0f, rotationTarget, 0.0f);
+
     }
 
     private void UpdateTurn()
