@@ -19,6 +19,13 @@ public class TileDirectionNode : DirectionNode
     }
 }
 
+public class EndPosition
+{
+    public int X;
+    public int Y;
+    public float Rotation;
+}
+
 public class World
 {
     private static World instance;
@@ -150,6 +157,8 @@ public class World
         map.SetPixel(startX, startZ, color);
 
         List<TileDirectionNode> directions = new List<TileDirectionNode>();
+        List<EndPosition> ends = new List<EndPosition>();
+
 
         RotationNode rotationNode = startTile.Rotations.Find(node => node.Rotation == angle);
         directions.Add(new TileDirectionNode(direction, startX, startZ, rotationNode.Directions[0].Connections));
@@ -187,12 +196,38 @@ public class World
             if (map.GetPixel(dir.X, dir.Y) == Color.white)
             {
                 map.SetPixel(dir.X, dir.Y, color);
+                if (tile.TileName.ToLower() == "end".ToLower())
+                    ends.Add(new EndPosition() { X = dir.X, Y = dir.Y, Rotation = rN.Rotation });
                 foreach (var item in rN.Directions)
                     directions.Add(new TileDirectionNode(item.Direction, dir.X, dir.Y, item.Connections));
             }
             directions.Remove(dir);
         }
+
+        var end = getRandomEnd(ends, rand);
+        var finishTile = findTile("finish");
+        color = findColor(finishTile, end.Rotation).ToColor();
+        map.SetPixel(end.X, end.Y, color);
+
         loadFromMemory();
+    }
+
+    private EndPosition getRandomEnd(List<EndPosition> ends, System.Random rand)
+    {
+        float randomNumber = (float)rand.NextDouble() * 100.0f;
+        float itemChance = 100.0f / ends.Count;
+        float chance = 0.0f;
+
+        EndPosition end = null;
+
+        for (int i = 0; i < ends.Count; i++)
+        {
+            end = ends[i];
+            if (randomNumber >= chance && randomNumber <= itemChance + chance)
+                break;
+            chance += itemChance;
+        }
+        return end;
     }
 
     private float getRandomRotation(ConnectionNode connection, System.Random rand)
