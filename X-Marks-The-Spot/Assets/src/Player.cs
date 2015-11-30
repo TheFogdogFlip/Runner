@@ -163,6 +163,15 @@ public class Player : PlayerBase
                 ts.input = "Jump";
                 inputs.Add(ts);
             }
+            if (Input.GetButtonUp("Jump") && isJumping && !isSliding)
+            {
+                isFalling = true;
+                float time = playerTimerObj.f_time;
+                TimeStamp ts = new TimeStamp();
+                ts.time = time;
+                ts.input = "Fall";
+                inputs.Add(ts);
+            }
         }
     }
 

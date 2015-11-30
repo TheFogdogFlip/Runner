@@ -40,6 +40,7 @@ public class Ghost : PlayerBase
         if (currEvent == "TurnLeft") TurnLeft();
         if (currEvent == "TurnRight") TurnRight();
         if (currEvent == "Jump") Jump();
+        if (currEvent == "Fall") isFalling = false;
         if (currEvent == "Slide") Slide();
         if (currEvent != null) index++;
         

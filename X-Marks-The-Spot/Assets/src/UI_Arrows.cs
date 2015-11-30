@@ -20,11 +20,14 @@ public class UI_Arrows : MonoBehaviour {
     {
 	    if (pl.GetNextAction() == "TurnLeft")
         {
+            riRight.enabled = false;
             riLeft.enabled = true;
+
         }
 
         if (pl.GetNextAction() == "TurnRight")
         {
+            riLeft.enabled = false;
             riRight.enabled = true;
         }
 
