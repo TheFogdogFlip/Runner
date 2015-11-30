@@ -19,8 +19,8 @@ public class TileDirectionNode : DirectionNode
     }
 }
 
-public class World{
-
+public class World
+{
     private static Vector3 gridDimentions = new Vector3(2, 2, 2);
     private Vector3 start;
     private Vector3 startDirection;
@@ -146,7 +146,7 @@ public class World{
         int direction = rand.Next(0, 3);
 
         int angle = direction * 90;
-        startDirection = new Vector3(0, 0, angle);
+        startDirection = new Vector3(0.0f, angle, 0.0f);
 
 
         var color = findColor(startTile, angle).ToColor();
@@ -343,14 +343,7 @@ public class World{
                     if (tileN.TileName.ToLower() == "start")
                     {
                         start = tile.Position;
-                        if (rotationN.Rotation == 0.0f)
-                            startDirection = new Vector3(0, 0, -1);
-                        else if (rotationN.Rotation == 90.0f)
-                            startDirection = new Vector3(-1, 0, 0);
-                        if (rotationN.Rotation == 180.0f)
-                            startDirection = new Vector3(0, 0, 1);
-                        else
-                            startDirection = new Vector3(1, 0, 0);
+                        startDirection = new Vector3(0.0f, rotationN.Rotation, 0.0f);
                     }
                 }
                 this.grid[y, x] = tile;
