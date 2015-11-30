@@ -51,6 +51,7 @@ public class Player : PlayerBase
         //Running forward block
         if (!ctdTimerObj.TimerFirstRunning)
         {
+            KeyInputs();
             MovementUpdate();
             if (!playerTimerObj.TimerRunning)
             {
@@ -117,7 +118,7 @@ public class Player : PlayerBase
                     }
                 }
             }
-            KeyInputs();
+
         }
         if(!ctdTimerObj.TimerSecondRunning)
         {
