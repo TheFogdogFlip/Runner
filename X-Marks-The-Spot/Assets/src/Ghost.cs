@@ -16,7 +16,7 @@ public class Ghost : PlayerBase
     void Start () 
     {
         index = 0;
-        rotationTarget = 0;
+        rotationTarget = World.Instance.StartDirection.y;
         crntSpeed = runSpeed;
         rb = GetComponent<Rigidbody>();
         bc = GetComponent<BoxCollider>();
@@ -27,7 +27,6 @@ public class Ghost : PlayerBase
     // Update is called once per frame
     void Update()
     {
-        MovementUpdate();
         ghostTimerObj.SetText();
         string currEvent = null;
         if (index < inputs.Count)
@@ -40,8 +39,10 @@ public class Ghost : PlayerBase
         if (currEvent == "TurnLeft") TurnLeft();
         if (currEvent == "TurnRight") TurnRight();
         if (currEvent == "Jump") Jump();
+        if (currEvent == "Fall") isFalling = false;
         if (currEvent == "Slide") Slide();
         if (currEvent != null) index++;
-        
+        MovementUpdate();
+
     }
 }

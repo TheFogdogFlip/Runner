@@ -29,13 +29,16 @@ public class Player : PlayerBase
     //Turn finetuning
     private float turnDelay = 0.1f;
 
-   
+    //Joystick cooldown
+    private int cooldownCount = 2000;
+    private bool coolingDown = false;
+
+
     void Start ()
     {
         SetupCtdTimer();
         //SetupGhostTimer();
         SetupPlayerTimer();
-        crntSpeed = runSpeed;
 
         ghostinputs = new List<List<TimeStamp>>();
         ghosts = new List<GameObject>();
@@ -68,14 +71,21 @@ public class Player : PlayerBase
                 Vector3 tempVec = transform.position;
                 if (tempVec.z < 0) tempVec.z *= -1;
                 if (tempVec.x < 0) tempVec.x *= -1;
+                if (rotationTarget <= 1 && rotationTarget >= -1)
+                {
+                    rotationTarget = 0;
+                }
+                    
                 if (rotationTarget == 0)
                 {
                     if (tempVec.z % 2 <= 1 && !isJumping && !isSliding)
                     {
+                        Debug.Log("Varför?");
                         isActionActive = false;
                     }
                     else if (tempVec.z % 2 >= 1 && !isActionActive)
                     {
+                        Debug.Log("Kom hit ffs");
                         ActivateNextAction();
                         isActionActive = true;
                     }
@@ -116,8 +126,9 @@ public class Player : PlayerBase
                         isActionActive = true;
                     }
                 }
+                Debug.Log(rotationTarget);
             }
-            KeyInputs();
+           
         }
         if(!ctdTimerObj.TimerSecondRunning)
         {
@@ -129,18 +140,41 @@ public class Player : PlayerBase
         }
     }
 
+    void FixedUpdate()
+    {
+        KeyInputs();
+    }
+
     void KeyInputs()
     {
-       
-        if (Input.GetButtonDown("Right"))
-        {
-            SetNextAction("TurnRight");
-        }
 
-        if (Input.GetButtonDown("Left"))
-        {
-            SetNextAction("TurnLeft");
-        }
+            if (coolingDown)
+            {
+                //SetNextAction("");
+                cooldownCount -= 1;
+            }
+
+            if (cooldownCount == 0)
+            {
+                coolingDown = false;
+                cooldownCount = 2000;
+            }
+            else
+            {
+                if (Input.GetButtonDown("Right") || Input.GetAxisRaw("Horizontal") == 1)
+                {
+                    SetNextAction("TurnRight");
+                    coolingDown = true;
+
+                }
+
+                if (Input.GetButtonDown("Left") || Input.GetAxisRaw("Horizontal") == -1)
+                {
+                    SetNextAction("TurnLeft");
+                    coolingDown = true;
+
+                }
+            }
 
         if (turnPhase == 0 || turnPhase == 3)
         {
@@ -164,6 +198,15 @@ public class Player : PlayerBase
                 inputs.Add(ts);
                 AudioManager sound = new AudioManager();
                 sound.JumpSound();
+            }
+            if (Input.GetButtonUp("Jump") && isJumping && !isSliding)
+            {
+                isFalling = true;
+                float time = playerTimerObj.f_time;
+                TimeStamp ts = new TimeStamp();
+                ts.time = time;
+                ts.input = "Fall";
+                inputs.Add(ts);
             }
         }
     }
@@ -247,6 +290,7 @@ public class Player : PlayerBase
             transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 2, transform.localScale.z);
         }
 
+        turnRotation = false;
         isJumping = false;
         isFalling = false;
         isSliding = false;
@@ -254,7 +298,7 @@ public class Player : PlayerBase
         crntSpeed = runSpeed;
         transform.position = World.Instance.StartPosition;
         transform.rotation = Quaternion.Euler(World.Instance.StartDirection);
-        rotationTarget = transform.rotation.y;
+        rotationTarget = World.Instance.StartDirection.y;
         nextAction = "";
 
         foreach (GameObject go in ghosts)
