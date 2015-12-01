@@ -28,7 +28,7 @@ public class Ghost : PlayerBase
     void Update()
     {
         ghostTimerObj.SetText();
-        string currEvent = null;
+        PlayerState currEvent = PlayerState.Idle;
         if (index < inputs.Count)
         {
             if (inputs[index].time <= ghostTimerObj.f_time)
@@ -36,13 +36,29 @@ public class Ghost : PlayerBase
                 currEvent = inputs[index].input;
             }
         }
-        if (currEvent == "TurnLeft") TurnLeft();
-        if (currEvent == "TurnRight") TurnRight();
-        if (currEvent == "Jump") Jump();
-        if (currEvent == "Fall") isFalling = false;
-        if (currEvent == "Slide") Slide();
-        if (currEvent != null) index++;
-        MovementUpdate();
 
+        switch(currEvent)
+        {
+            case PlayerState.TurnRight:
+                TurnRight();
+                break;
+            case PlayerState.TurnLeft:
+                TurnLeft();
+                break;
+            case PlayerState.Jump:
+                Jump();
+                break;
+            case PlayerState.Fall:
+                isFalling = false;
+                break;
+            case PlayerState.Slide:
+                Slide();
+                break;
+        }
+
+        if(currEvent != PlayerState.Idle)
+            index++;
+
+        MovementUpdate();
     }
 }

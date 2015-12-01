@@ -18,20 +18,20 @@ public class UI_Arrows : MonoBehaviour {
 	
 	void Update ()
     {
-	    if (pl.GetNextAction() == "TurnLeft")
+	    if (pl.GetNextAction() == PlayerState.TurnLeft)
         {
             riRight.enabled = false;
             riLeft.enabled = true;
 
         }
 
-        if (pl.GetNextAction() == "TurnRight")
+        if (pl.GetNextAction() == PlayerState.TurnRight)
         {
             riLeft.enabled = false;
             riRight.enabled = true;
         }
 
-        if (pl.GetNextAction() == "")
+        if (pl.GetNextAction() == PlayerState.Idle)
         {
             riRight.enabled = false;
             riLeft.enabled = false;
