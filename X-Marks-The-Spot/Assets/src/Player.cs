@@ -147,8 +147,37 @@ public class Player : PlayerBase
         }
     }
 
+    Vector2 startPosition = -Vector2.one;
+
     void KeyInputs()
     {
+        int horizontal = 0;
+        int vertical = 0;
+
+        if(Input.touches.Length > 0)
+        {
+            Touch firstFinger = Input.touches[0];
+
+            if(firstFinger.phase == TouchPhase.Began)
+            {
+                startPosition = firstFinger.position;
+            }
+
+            else if (firstFinger.phase == TouchPhase.Ended && startPosition.x >= 0)
+            {
+                Vector2 endPosition = firstFinger.position;
+
+                float x = endPosition.x - startPosition.x;
+                float y = endPosition.y - startPosition.y;
+
+                startPosition.x = -1;
+
+                if (Mathf.Abs(x) > Mathf.Abs(y))
+                    horizontal = x > 0 ? 1 : -1;
+                else
+                    vertical = y > 0 ? 1 : -1;
+            }
+        }
 
         if (coolingDown)
         {
@@ -163,14 +192,14 @@ public class Player : PlayerBase
         }
         else
         {
-            if (Input.GetButtonDown("Right") || Input.GetAxisRaw("Horizontal") == 1)
+            if (Input.GetButtonDown("Right") || Input.GetAxisRaw("Horizontal") == 1 || horizontal == 1)
             {
                 SetNextAction("TurnRight");
                 coolingDown = true;
 
             }
 
-            if (Input.GetButtonDown("Left") || Input.GetAxisRaw("Horizontal") == -1)
+            if (Input.GetButtonDown("Left") || Input.GetAxisRaw("Horizontal") == -1 || horizontal == -1)
             {
                 SetNextAction("TurnLeft");
                 coolingDown = true;
@@ -180,7 +209,7 @@ public class Player : PlayerBase
 
         if (turnPhase == 0 || turnPhase == 2)
         {
-            if (Input.GetButtonDown("Slide") && !isSliding && !isJumping)
+            if ((Input.GetButtonDown("Slide") || vertical == -1) && !isSliding && !isJumping)
             {
                 Slide();
                 float time = playerTimerObj.f_time;
@@ -191,7 +220,7 @@ public class Player : PlayerBase
                 sound.SlideSound();
             }
 
-            if (Input.GetButtonDown("Jump") && !isJumping && !isSliding)
+            if ((Input.GetButtonDown("Jump") || vertical == 1) && !isJumping && !isSliding)
             {
                 Jump();
                 float time = playerTimerObj.f_time;
