@@ -2,16 +2,29 @@
 using System.Collections;
 
 public class AudioManager : Object{
-    GameObject SoundObject;
+
+    AudioSource jumpSound; AudioSource slideSound;
+ 
+
     public void JumpSound()
     {
-        AudioSource JumpSound = new AudioSource();
-        //JumpSound = Instantiate(Resources.Load<AudioSource>("Resources/Audio/JumpSound"));
-        //SoundObject = GameObject.Find("Player(Clone)");
-        JumpSound = GameObject.Find("Player(Clone)").GetComponent<AudioSource>();
-        if (!JumpSound.isPlaying);
+        var aSources = GameObject.Find("Player(Clone)").GetComponents<AudioSource>();
+        jumpSound = new AudioSource();
+        jumpSound = aSources[0];
+        if (!jumpSound.isPlaying);
         {
-            JumpSound.Play();
+            jumpSound.Play();
+        }
+    }
+    
+    public void SlideSound()
+    {
+        var aSources = GameObject.Find("Player(Clone)").GetComponents<AudioSource>();
+        slideSound = new AudioSource();
+        slideSound = aSources[1];
+        if (!slideSound.isPlaying);
+        {
+            slideSound.Play();
         }
     }
 }

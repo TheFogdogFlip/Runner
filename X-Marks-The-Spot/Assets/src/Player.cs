@@ -33,6 +33,8 @@ public class Player : PlayerBase
     private int cooldownCount = 25;
     private bool coolingDown = false;
 
+    //Audio
+    private AudioManager sound;
 
     void Start ()
     {
@@ -43,6 +45,7 @@ public class Player : PlayerBase
         ghostinputs = new List<List<TimeStamp>>();
         ghosts = new List<GameObject>();
         inputs = new List<TimeStamp>();
+        sound = new AudioManager();
     }
 
     void Update()
@@ -188,6 +191,7 @@ public class Player : PlayerBase
                 ts.time = time;
                 ts.input = "Slide";
                 inputs.Add(ts);
+                sound.SlideSound();
             }
 
             if (Input.GetButtonDown("Jump") && !isJumping && !isSliding)
@@ -198,6 +202,7 @@ public class Player : PlayerBase
                 ts.time = time;
                 ts.input = "Jump";
                 inputs.Add(ts);
+                sound.JumpSound();
             }
             if (Input.GetButtonUp("Jump") && isJumping && !isSliding)
             {
