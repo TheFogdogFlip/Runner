@@ -147,6 +147,9 @@ public class Player : PlayerBase
     void KeyInputs()
     {
 
+        if (Input.GetKeyDown(KeyCode.R))
+            GoalFunc();
+
         if (coolingDown)
         {
             Input.ResetInputAxes();
@@ -314,6 +317,7 @@ public class Player : PlayerBase
         Recorder rec = cam.GetComponent<Recorder>();
         rec.inputs = inputs;
         rec.ghostinputs = ghostinputs;
+        rec.finishedTime = playerTimerObj.f_time;
 
     }
     public int GetTurn()
