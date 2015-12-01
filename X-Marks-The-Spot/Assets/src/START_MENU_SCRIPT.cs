@@ -6,20 +6,25 @@ using System.Collections;
 public class START_MENU_SCRIPT : MonoBehaviour
 {
     private Sprite[] sprites;
+
     private GameObject Timer_GO;
     private GameObject panelFront;
     private GameObject panelBack;
+
     private Image imageBack;
     private Image imageFront;
+
     private Timer_Menu menuTimer;
+
     private int currentSprite;
     private int nextSprite;
     private int topPanelLayer;
     private int botPanelLayer;
+
     private string resourceName = "Backgrounds";
-    private bool needAlphaChanged;
-    private bool firstAlpha;
-    private bool secondAlpha;
+
+    private bool needAlphaReduced;
+    private bool needPictureChanged;
 
     public Canvas quitMenu;
     public Canvas optionsMenu;
@@ -36,21 +41,22 @@ public class START_MENU_SCRIPT : MonoBehaviour
 
 	void Start ()
     {
-        needAlphaChanged = true;
-        firstAlpha = false;
-        secondAlpha = false;
+        needAlphaReduced = true;
+        needPictureChanged = true;
+
         currentSprite = 0;
-        nextSprite = currentSprite + 1;
         Timer_GO = GameObject.Find("menuTimer");
         panelBack = GameObject.Find("PANEL_BACKGROUND_BOT");
         panelFront = GameObject.Find("PANEL_BACKGROUND_TOP");
+
+        //panelBack.layer = 9;
+        panelFront.layer = 8;
         menuTimer = Timer_GO.GetComponent<Timer_Menu>();
         sprites = Resources.LoadAll<Sprite>(resourceName);
-        imageBack = panelFront.GetComponent<Image>();
-        imageFront = panelBack.GetComponent<Image>();
+        //imageBack = panelFront.GetComponent<Image>();
+        imageFront = panelFront.GetComponent<Image>();
 
         imageFront.sprite = sprites[currentSprite];
-        imageBack.sprite = sprites[nextSprite];
 
         quitMenu = quitMenu.GetComponent<Canvas>();
         optionsMenu = optionsMenu.GetComponent<Canvas>();
@@ -74,85 +80,52 @@ public class START_MENU_SCRIPT : MonoBehaviour
 
     void Update()
     {
-        
-        /*
-        if (menuTimer.f_time > 3 && needAlphaChanged)
+
+
+        if (menuTimer.f_time > 4 && needAlphaReduced)
         {
-            needAlphaChanged = false;
+            needAlphaReduced = false;
             ReduceAlpha();
         }
-        if(menuTimer.f_time > 5)
+        if (menuTimer.f_time > 4.5 && needPictureChanged)
         {
-            if (currentSprite >= sprites.Length - 1)
-            {
-                currentSprite = 0;
-            }
-            else
-            {
-                currentSprite++;
-                nextSprite = currentSprite + 1;
-                if (nextSprite >= sprites.Length - 1)
-                {
-                    nextSprite = 0;
-                }
-            }
+            needPictureChanged = false;
             SetBackground();
+        }
+
+        if(menuTimer.f_time > 4.6)
+        {
+            IncreaseAlpha();
             ResetTimer();
-            needAlphaChanged = true;
+
+            needAlphaReduced = true;
+            needPictureChanged = true;
         }
         
-       */
+       
     }
 
     public void ReduceAlpha()
     {
-        //print("reduce alpha; layer bot: " + layerBot + " layer top: " + layerTop);
+        imageFront.CrossFadeAlpha(0, 0.5f, false);
+    }
 
-        if (botPanelLayer < topPanelLayer)
-        {
-            //Panel Bot is currently infront and needs to be faded
-            print("fading bot; layer bot: " + botPanelLayer + " layer top: " + topPanelLayer);
-            imageBack.CrossFadeAlpha(0, 1.0f, false);
-        }
-
-        else if (topPanelLayer < botPanelLayer)
-        {
-            //Panel Top is currently infront and needs to be faded
-            print("fading top; layer bot: " + botPanelLayer + " layer top: " + topPanelLayer);
-            imageFront.CrossFadeAlpha(0, 1.0f, false);
-
-        }
+    public void IncreaseAlpha()
+    {
+        imageFront.CrossFadeAlpha(1, 0.5f, false);
     }
 
     public void SetBackground()
     {
+        currentSprite++;
 
-        
-        //print("set background; layer bot: " + botPanelLayer + " layer top: " + topPanelLayer);
-
-        if (botPanelLayer < topPanelLayer)
+        if (currentSprite == sprites.Length)
         {
-            //Panel Bot is currently infront and needs to be moved and set new background and then have it's alpha set to 1
-            //print("swapping ");
-            print("layer bot: " + botPanelLayer + " layer top: " + topPanelLayer + " ; setting bot bg, moving back bot, fading in bot behind top");
-            imageBack.sprite = sprites[nextSprite];
-            panelBack.layer = topPanelLayer;
-            panelFront.layer = botPanelLayer;
-            imageBack.CrossFadeAlpha(1, 0, false);
-            print("after: layer bot: " + panelBack.layer + " layer top: " + panelFront.layer);
+            currentSprite = 0;
         }
-        else if (topPanelLayer < botPanelLayer)
-        {
-            //Panel Top is currently infront and needs to be moved and set new background and then have it's alpha set to 1
-            print("layer bot: " + botPanelLayer + " layer top: " + topPanelLayer + " ; setting top bg, moving back top, fading in top behind bot");
-            imageFront.sprite = sprites[nextSprite];
-            panelFront.layer = botPanelLayer;
-            panelBack.layer = topPanelLayer;
-            imageFront.CrossFadeAlpha(1, 0, false);
-            print("after: layer bot: " + panelBack.layer + " layer top: " + panelFront.layer);
-        }
+        imageFront.sprite = sprites[currentSprite];
     }
-	
+
 	public void ExitPress()
     {
         quitMenu.enabled = true;
@@ -177,10 +150,6 @@ public class START_MENU_SCRIPT : MonoBehaviour
     {
         menuTimer.f_time = 0;
     }
-
-    
-
-    
 
     public void TestGamePress()
     {
