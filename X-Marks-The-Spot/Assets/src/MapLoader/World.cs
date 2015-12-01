@@ -279,10 +279,8 @@ public class World
     private TileContainer getTileTypes()
     {
         TextAsset textAsset = Resources.Load<TextAsset>("TileNodes");
-
         StringReader stringStream = new StringReader(textAsset.text);
 
-        //FileStream stream = new FileStream("TileNodes.xml", FileMode.Open);
         XmlSerializer serializer = new XmlSerializer(typeof(TileContainer));
         var tiles = serializer.Deserialize(stringStream) as TileContainer;
         stringStream.Close();
