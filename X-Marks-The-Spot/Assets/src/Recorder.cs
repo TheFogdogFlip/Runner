@@ -20,8 +20,6 @@ public class Recorder : MonoBehaviour {
     public List<GameObject> ghosts;
 
     //For RenderTexuter screenshot
-    public bool recording = false;
-    private bool loading = false;
     private Camera replayCam;
     private int width;
     private int height;
@@ -33,7 +31,9 @@ public class Recorder : MonoBehaviour {
     private Text loadText;
     private Timer_Ghost ghostTimerObj;
     public float finishedTime;
-    private bool generating;
+    private bool generating = false;
+    public bool recording = false;
+    private bool loading = false;
     Process process;
     StreamReader reader;
 
@@ -160,10 +160,10 @@ public class Recorder : MonoBehaviour {
                 generating = true;
                 loadText.text = "Generating Video";
                 string filepath = Application.persistentDataPath;
-                print(System.IO.File.Exists("ffmpeg.exe"));
-                print(System.IO.File.Exists(filepath + "/captured_images/img00001.png"));
-                print(System.IO.File.Exists(filepath + "/captured_audio/Kalimba.mp3"));
-                print(fps);
+                //print(System.IO.File.Exists("ffmpeg.exe"));
+                //print(System.IO.File.Exists(filepath + "/captured_images/img00001.png"));
+                //print(System.IO.File.Exists(filepath + "/captured_audio/Kalimba.mp3"));
+                //print(fps);
 
                 try
                 {
