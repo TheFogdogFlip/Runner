@@ -171,7 +171,7 @@ public class Recorder : MonoBehaviour {
 
                     process.EnableRaisingEvents = true;
                     process.StartInfo.FileName = "ffmpeg.exe";
-                    process.StartInfo.Arguments = "-framerate " + fps.ToString() + " -i \"" + filepath + "/captured_images/img%05d.png\" -i \"" + filepath + "/captured_audio/Kalimba.mp3\" -c:v libx264 -vf fps=" + fps.ToString() + " -pix_fmt yuv420p -shortest \"" + filepath + "/out.mp4\" -y";
+                    process.StartInfo.Arguments = "-framerate " + fps.ToString() + " -i \"" + filepath + "/captured_images/img%05d.png\" -i Kalimba.mp3 -c:v libx264 -vf fps=" + fps.ToString() + " -pix_fmt yuv420p -shortest \"" + filepath + "/out.mp4\" -y";
 
                     process.StartInfo.UseShellExecute = false;
                     process.StartInfo.RedirectStandardError = true;
