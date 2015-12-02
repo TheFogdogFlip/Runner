@@ -14,14 +14,16 @@ public static class GlobalGameSettings
     //Can be a value between 0 and 100
     private static int Sound_Master_Volume;
 
+    /*
     //Can be a value between 80 and 110
     private static int Field_Of_View;
     
     //Bool which checks if player will be using Game pad. Not needed??
     private static bool Using_Game_Pad;
-
+    */
 
     /*------------------------------------Keyboard------------------------------------*/
+    /*
     //Keyboard key bind for moving right
     private static string kb_Move_Right_Key;
 
@@ -33,9 +35,10 @@ public static class GlobalGameSettings
 
     //Keyboard key bind for sliding
     private static string kb_Slide_Key;
-
+    */
 
     /*------------------------------------Game Pad------------------------------------*/
+    /*
     //Game pad key bind for moving right
     private static string gp_Move_Right_Key;
 
@@ -47,19 +50,22 @@ public static class GlobalGameSettings
 
     //Game pad key bind for sliding
     private static string gp_Slide_Key;
-
+    */
 
     public static void LoadSettings()
     {
-        string filename = "config.xml";
-        //load settings from file config.xml here
+        Sound_Master_Volume = PlayerPrefs.GetInt("MasterVol");
+        Sound_Music_Volume = PlayerPrefs.GetInt("MusicVol");
+        Sound_Effects_Volume = PlayerPrefs.GetInt("EffectsVol");
     }
 
     public static void SaveSettings()
     {
-        string filename = "config.xml";
-        //save settings to file config.xml here
+        PlayerPrefs.SetInt("MasterVol", Sound_Master_Volume);
+        PlayerPrefs.SetInt("EffectsVol", Sound_Effects_Volume);
+        PlayerPrefs.SetInt("MusicVol", Sound_Music_Volume);
     }
+
     //Set and Get Master Volume
     public static void SetMasterVolume(int val)     { Sound_Master_Volume = val; }
     public static int GetMasterVolume()             { return Sound_Master_Volume; }
@@ -72,6 +78,7 @@ public static class GlobalGameSettings
     public static void SetEffectsVolume(int val)    { Sound_Effects_Volume = val; }
     public static int GetEffectsVolume()            { return Sound_Effects_Volume; }
 
+    /*
     //Set and Get Field of View
     public static void SetFieldOfView(int val)      { Field_Of_View = val; }
     public static int GetFieldOfView()              { return Field_Of_View; }
@@ -107,5 +114,5 @@ public static class GlobalGameSettings
     //Set and Get Gp Slide
     public static void SetGpSlide(string key)       { gp_Slide_Key = key; }
     public static string GetGpSlide()               { return gp_Slide_Key; }
-
+    */
 }

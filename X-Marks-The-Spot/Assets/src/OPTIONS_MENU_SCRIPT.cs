@@ -18,13 +18,10 @@ public class OPTIONS_MENU_SCRIPT : MonoBehaviour
     public Slider musicVolSlider;
     public Text musicVolText;
 
-    public Slider fieldOfViewSlider; 
-    public Text fieldOfViewText;
-
 	// Use this for initialization
 	void Start() 
     {
-        SetSettings();
+        GlobalGameSettings.LoadSettings();
         startMenu               = startMenu.GetComponent<Canvas>();
         optionsMenu             = optionsMenu.GetComponent<Canvas>();
 
@@ -33,22 +30,18 @@ public class OPTIONS_MENU_SCRIPT : MonoBehaviour
         masterVolSlider         = masterVolSlider.GetComponent<Slider>();
         effectsVolSlider        = effectsVolSlider.GetComponent<Slider>();
         musicVolSlider          = musicVolSlider.GetComponent<Slider>();
-        fieldOfViewSlider       = fieldOfViewSlider.GetComponent<Slider>();
 
         int masterVol           = GlobalGameSettings.GetMasterVolume();
         int effectsVol          = GlobalGameSettings.GetEffectsVolume();
         int musicVol            = GlobalGameSettings.GetMusicVolume();
-        int fov                 = GlobalGameSettings.GetFieldOfView();
         
         masterVolSlider.value   = masterVol;
         effectsVolSlider.value  = effectsVol;
         musicVolSlider.value    = musicVol;
-        fieldOfViewSlider.value = fov;
 
         masterVolText.text      = masterVol.ToString();
         effectsVolText.text     = effectsVol.ToString();
         musicVolText.text       = musicVol.ToString();
-        fieldOfViewText.text    = fov.ToString();
 	}
 
     public void SetSettings()
@@ -56,7 +49,6 @@ public class OPTIONS_MENU_SCRIPT : MonoBehaviour
         GlobalGameSettings.SetMasterVolume(40);
         GlobalGameSettings.SetEffectsVolume(30);
         GlobalGameSettings.SetMusicVolume(20);
-        GlobalGameSettings.SetFieldOfView(10);
     }
 
     public void BackPress()
@@ -70,6 +62,7 @@ public class OPTIONS_MENU_SCRIPT : MonoBehaviour
         int val = (int)masterVolSlider.value;
         masterVolText.text = val.ToString();
         GlobalGameSettings.SetMasterVolume(val);
+        GlobalGameSettings.SaveSettings();
     }
 
     public void SetSoundEffectsVolume()
@@ -77,6 +70,7 @@ public class OPTIONS_MENU_SCRIPT : MonoBehaviour
         int val = (int)effectsVolSlider.value;
         effectsVolText.text = val.ToString();
         GlobalGameSettings.SetEffectsVolume(val);
+        GlobalGameSettings.SaveSettings();
     }
 
     public void SetMusicVolume()
@@ -84,13 +78,6 @@ public class OPTIONS_MENU_SCRIPT : MonoBehaviour
         int val = (int)musicVolSlider.value;
         musicVolText.text = val.ToString();
         GlobalGameSettings.SetMusicVolume(val);
+        GlobalGameSettings.SaveSettings();
     }
-
-    public void SetFieldOfView()
-    {
-        int val = (int)fieldOfViewSlider.value;
-        fieldOfViewText.text = val.ToString();
-        GlobalGameSettings.SetFieldOfView(val);
-    }
-
 }
