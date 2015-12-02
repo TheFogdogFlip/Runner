@@ -4,6 +4,7 @@ using System.IO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml;
 
 public class TileDirectionNode : DirectionNode
 {
@@ -277,10 +278,12 @@ public class World
 
     private TileContainer getTileTypes()
     {
-        FileStream stream = new FileStream("TileNodes.xml", FileMode.Open);
+        TextAsset textAsset = Resources.Load<TextAsset>("TileNodes");
+        StringReader stringStream = new StringReader(textAsset.text);
+
         XmlSerializer serializer = new XmlSerializer(typeof(TileContainer));
-        var tiles = serializer.Deserialize(stream) as TileContainer;
-        stream.Close();
+        var tiles = serializer.Deserialize(stringStream) as TileContainer;
+        stringStream.Close();
 
         return tiles;
     }

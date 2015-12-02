@@ -21,6 +21,7 @@ public class PauseMenu : MonoBehaviour {
     {
 	    if (Input.GetButtonDown("Cancel"))
         {
+            Time.timeScale = 0;
             pauseMenu.enabled = true;
         }
 	}
@@ -34,6 +35,7 @@ public class PauseMenu : MonoBehaviour {
     public void ResumeGamePress()
     {
         pauseMenu.enabled = false;
+        Time.timeScale = 1;
     }
 
     public void AudioSettingsPress()

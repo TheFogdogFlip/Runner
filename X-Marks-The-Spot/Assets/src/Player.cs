@@ -3,9 +3,18 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
+public enum PlayerState
+{
+    Idle,
+    TurnRight,
+    TurnLeft,
+    Jump,
+    Fall,
+    Slide
+}
+
 public class Player : PlayerBase
 {
-
     //Ctd Timer
     private GameObject ctdTimerGameObj;
     private Timer_Countdown ctdTimerObj;
@@ -23,7 +32,7 @@ public class Player : PlayerBase
     private List<List<TimeStamp>> ghostinputs;
     private List<GameObject> ghosts;
 
-    private string nextAction = "";
+    private PlayerState nextAction = PlayerState.Idle;
     private bool isActionActive = false;
 
     //Turn finetuning
@@ -147,8 +156,34 @@ public class Player : PlayerBase
         }
     }
 
+    Vector2 startPosition = -Vector2.one;
+
     void KeyInputs()
     {
+        int horizontal = 0;
+        int vertical = 0;
+
+        if(Input.touches.Length > 0)
+        {
+            Touch firstFinger = Input.touches[0];
+
+            if(firstFinger.phase == TouchPhase.Began)
+                startPosition = firstFinger.position;
+            else if (firstFinger.phase == TouchPhase.Ended && startPosition != -Vector2.one)
+            {
+                Vector2 endPosition = firstFinger.position;
+
+                float x = endPosition.x - startPosition.x;
+                float y = endPosition.y - startPosition.y;
+
+                startPosition = -Vector2.one;
+
+                if (Mathf.Abs(x) > Mathf.Abs(y))
+                    horizontal = x > 0 ? 1 : -1;
+                else
+                    vertical = y > 0 ? 1 : -1;
+            }
+        }
 
         if (Input.GetKeyDown(KeyCode.R))
             GoalFunc();
@@ -166,16 +201,16 @@ public class Player : PlayerBase
         }
         else
         {
-            if (Input.GetButtonDown("Right") || Input.GetAxisRaw("Horizontal") == 1)
+            if (Input.GetButtonDown("Right") || Input.GetAxisRaw("Horizontal") == 1 || horizontal == 1)
             {
-                SetNextAction("TurnRight");
+                SetNextAction(PlayerState.TurnRight);
                 coolingDown = true;
 
             }
 
-            if (Input.GetButtonDown("Left") || Input.GetAxisRaw("Horizontal") == -1)
+            if (Input.GetButtonDown("Left") || Input.GetAxisRaw("Horizontal") == -1 || horizontal == -1)
             {
-                SetNextAction("TurnLeft");
+                SetNextAction(PlayerState.TurnLeft);
                 coolingDown = true;
 
             }
@@ -183,24 +218,24 @@ public class Player : PlayerBase
 
         if (turnPhase == 0 || turnPhase == 2)
         {
-            if (Input.GetButtonDown("Slide") && !isSliding && !isJumping)
+            if ((Input.GetButtonDown("Slide") || vertical == -1) && !isSliding && !isJumping)
             {
                 Slide();
                 float time = playerTimerObj.f_time;
                 TimeStamp ts = new TimeStamp();
                 ts.time = time;
-                ts.input = "Slide";
+                ts.input = PlayerState.Slide;
                 inputs.Add(ts);
                 sound.SlideSound();
             }
 
-            if (Input.GetButtonDown("Jump") && !isJumping && !isSliding)
+            if ((Input.GetButtonDown("Jump") || vertical == 1) && !isJumping && !isSliding)
             {
                 Jump();
                 float time = playerTimerObj.f_time;
                 TimeStamp ts = new TimeStamp();
                 ts.time = time;
-                ts.input = "Jump";
+                ts.input = PlayerState.Jump;
                 inputs.Add(ts);
                 sound.JumpSound();
             }
@@ -210,7 +245,7 @@ public class Player : PlayerBase
                 float time = playerTimerObj.f_time;
                 TimeStamp ts = new TimeStamp();
                 ts.time = time;
-                ts.input = "Fall";
+                ts.input = PlayerState.Fall;
                 inputs.Add(ts);
             }
         }
@@ -258,7 +293,6 @@ public class Player : PlayerBase
             ghost = go.GetComponent<Ghost>();
             ghost.inputs = ghostinputs[i];
             ghosts.Add(go);
-
         }
 
         SetupGhostTimer();
@@ -266,14 +300,14 @@ public class Player : PlayerBase
         SetupPlayerTimer();
     }
 
-    void SetNextAction(string input)
+    void SetNextAction(PlayerState input)
     {
         nextAction = input;
     }
 
     void ActivateNextAction()
     {
-        if (nextAction != "")
+        if (nextAction != PlayerState.Idle)
         {
             float time = playerTimerObj.f_time;
             TimeStamp ts = new TimeStamp();
@@ -281,10 +315,10 @@ public class Player : PlayerBase
             ts.input = nextAction;
             inputs.Add(ts);
 
-            if (nextAction == "TurnLeft") TurnLeft();
-            if (nextAction == "TurnRight") TurnRight();
+            if (nextAction == PlayerState.TurnLeft) TurnLeft();
+            if (nextAction == PlayerState.TurnRight) TurnRight();
 
-            nextAction = "";
+            nextAction = PlayerState.Idle;
         }
     }
 
@@ -304,7 +338,7 @@ public class Player : PlayerBase
         transform.position = World.Instance.StartPosition;
         transform.rotation = Quaternion.Euler(World.Instance.StartDirection);
         rotationTarget = World.Instance.StartDirection.y;
-        nextAction = "";
+        nextAction = PlayerState.Idle;
 
         foreach (GameObject go in ghosts)
         {
@@ -330,7 +364,7 @@ public class Player : PlayerBase
         return turnPhase;
     }
 
-    public string GetNextAction()
+    public PlayerState GetNextAction()
     {
         return nextAction;
     }
