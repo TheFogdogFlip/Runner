@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
 public class UI_Arrows : MonoBehaviour {
@@ -14,7 +13,6 @@ public class UI_Arrows : MonoBehaviour {
         isFirstFrame = true;
         riLeft = GameObject.Find("UI_Left").GetComponent<RawImage>();
         riRight = GameObject.Find("UI_Right").GetComponent<RawImage>();
-        
 	}
 	
 	

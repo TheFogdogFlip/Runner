@@ -80,8 +80,6 @@ public class START_MENU_SCRIPT : MonoBehaviour
 
     void Update()
     {
-
-
         if (menuTimer.f_time > 4 && needAlphaReduced)
         {
             needAlphaReduced = false;
@@ -101,8 +99,6 @@ public class START_MENU_SCRIPT : MonoBehaviour
             needAlphaReduced = true;
             needPictureChanged = true;
         }
-        
-       
     }
 
     public void ReduceAlpha()

@@ -13,10 +13,10 @@ public class TileDirectionNode : DirectionNode
 
     public TileDirectionNode(int direction, int x, int y, List<ConnectionNode> connections)
     {
-        this.Direction = direction;
-        this.X = x;
-        this.Y = y;
-        this.Connections = connections;
+        Direction = direction;
+        X = x;
+        Y = y;
+        Connections = connections;
     }
 }
 
@@ -41,7 +41,18 @@ public class World
     private Vector3 start;
     private Vector3 startDirection;
 
-    private static TileContainer tiles = null;
+    private TileContainer tileContainer = null;
+
+    private TileContainer tileTypes
+    {
+        get
+        {
+            if (tileContainer == null)
+                tileContainer = getTileTypes();
+
+            return tileContainer;
+        }
+    }
 
     public static World Instance
     {
@@ -78,6 +89,11 @@ public class World
         }
     }
 
+    public void LoadXML()
+    {
+        tileContainer = getTileTypes();
+    }
+
     private World()
     {
 
@@ -91,14 +107,11 @@ public class World
     public void SetTile(int x, int y, Tile tile)
     {
         grid[Mathf.FloorToInt(y / gridDimentions.y), Mathf.FloorToInt(x / gridDimentions.x)] = tile;
-       
     }
 
     private TileNode findTile(string name)
     {
-        if (tiles == null)
-            tiles = getTileTypes();
-        return tiles.Tiles.Find(n => n.TileName.ToLower() == name.ToLower());
+        return tileTypes.Tiles.Find(n => n.TileName.ToLower() == name.ToLower());
     }
 
     private ColorNode findColor(TileNode tile, float rotation)
@@ -295,7 +308,6 @@ public class World
         stream.Read(buffer, 0, buffer.Length);
         Texture2D texture = new Texture2D(width, depth, TextureFormat.RGBA32, false);
         texture.LoadImage(buffer);
-        stream.Flush();
         stream.Close();
 
         return texture;
@@ -308,8 +320,6 @@ public class World
 
         grid = new Tile[width, depth];
 
-        var tilesTypes = getTileTypes();
-
         for (int y = 0; y < depth; y++)
         {
             for (int x = 0; x < width; x++)
@@ -319,7 +329,7 @@ public class World
                 RotationNode rotationN = null;
                 TileNode tileN = null;
 
-                foreach (var tileNode in tilesTypes.Tiles)
+                foreach (var tileNode in tileTypes.Tiles)
                 {
                     try
                     {
@@ -358,8 +368,6 @@ public class World
 
         grid = new Tile[width, depth];
 
-        var tilesTypes = getTileTypes();
-
         for (int y = 0; y < depth; y++)
         {
             for (int x = 0; x < width; x++)
@@ -369,7 +377,7 @@ public class World
                 RotationNode rotationN = null;
                 TileNode tileN = null;
 
-                foreach (var tileNode in tilesTypes.Tiles)
+                foreach (var tileNode in tileTypes.Tiles)
                 {
                     try
                     {
