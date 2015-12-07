@@ -10,12 +10,13 @@ public class Timer_Player : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
     {
-	
+        print("start playertimer");
 	}
 	
 	// Update is called once per frame
 	void Update () 
     {
+        print("update playertimer");
         f_time += Time.deltaTime;
 	}
 

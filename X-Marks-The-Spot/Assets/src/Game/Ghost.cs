@@ -40,19 +40,16 @@ public class Ghost : PlayerBase
         switch(currEvent)
         {
             case PlayerState.TurnRight:
-                TurnRight();
+                SetNextAction(PlayerState.TurnRight);
                 break;
             case PlayerState.TurnLeft:
-                TurnLeft();
+                SetNextAction(PlayerState.TurnLeft);
                 break;
             case PlayerState.Jump:
-                Jump();
-                break;
-            case PlayerState.Fall:
-                isFalling = false;
+                SetNextAction(PlayerState.Jump);
                 break;
             case PlayerState.Slide:
-                Slide();
+                SetNextAction(PlayerState.Slide);
                 break;
         }
 

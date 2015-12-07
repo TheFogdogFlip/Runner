@@ -6,13 +6,14 @@ public class Timer_Countdown : MonoBehaviour
 {
     public float f_time;
     public int i_time;
-    public bool TimerFirstRunning = true;
-    public bool TimerSecondRunning = true;
+    public bool TimerFirstRunning;
+    public bool TimerSecondRunning;
     public Text textObj;
 
     void Start()
     {
-
+        TimerFirstRunning = true;
+        TimerSecondRunning = true;
     }
 
     void Update()

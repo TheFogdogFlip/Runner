@@ -12,7 +12,7 @@ public class Recorder : MonoBehaviour {
     public string imageFolder = "captured_images";
     public string audioFolder = "captured_audio";
     public float timer;
-
+    
     GameObject target = null;
 
     public List<TimeStamp> inputs;
@@ -25,7 +25,7 @@ public class Recorder : MonoBehaviour {
     private int height;
     private Rect rectangle;
 
-    //For Overlay/Loading
+    //For Overlay/Recording/Generating
     private float loadValue;
     private Image loadBarImage;
     private Text loadText;
@@ -37,6 +37,10 @@ public class Recorder : MonoBehaviour {
     Process process;
     StreamReader reader;
 
+    //For Soundrecording
+    
+    float[] audioData;
+
     // Use this for initialization
     void Start () {
 
@@ -46,8 +50,6 @@ public class Recorder : MonoBehaviour {
         loadValue = 0.0f;
         rectangle = new Rect(0, 0, width, height);
         replayCam = gameObject.GetComponent<Camera>();
-
-      
 
         GameObject playerObject = GameObject.Find("Player(Clone)");
         Destroy(playerObject);
@@ -149,7 +151,6 @@ public class Recorder : MonoBehaviour {
             {
                 loadText.text = "Recording Video";
                 loadValue = 0.5f * ghostTimerObj.f_time / finishedTime;
-
             }
             else
             {
@@ -160,10 +161,6 @@ public class Recorder : MonoBehaviour {
                 generating = true;
                 loadText.text = "Generating Video";
                 string filepath = Application.persistentDataPath;
-                //print(System.IO.File.Exists("ffmpeg.exe"));
-                //print(System.IO.File.Exists(filepath + "/captured_images/img00001.png"));
-                //print(System.IO.File.Exists(filepath + "/captured_audio/Kalimba.mp3"));
-                //print(fps);
 
                 try
                 {
@@ -201,9 +198,7 @@ public class Recorder : MonoBehaviour {
                         Match match = Regex.Match(line, "frame=\\s+(\\d+)");
                         if (match.Captures.Count > 0)
                         {
-                            //print(match.Groups[1]);
                             loadValue = 0.5f + 0.5f * int.Parse(match.Groups[1].Value) / imageNumber;
-                            print(loadValue);
                         }
                     }
                     else
@@ -224,6 +219,14 @@ public class Recorder : MonoBehaviour {
 
             loadBarImage.fillAmount = loadValue;
         }
+       
+    }
+
+    void OnAudioFilterRead(float[] data, int channels)
+    {
+        AudioClip clip = new AudioClip();
+        clip.SetData(data, 0);
+        SavWav.Save("test.wav", clip);
     }
 
     void LateUpdate()
@@ -235,13 +238,12 @@ public class Recorder : MonoBehaviour {
         {
             screenShot();
         }
-
     }
    
 
     void screenShot()
     {
-        
+       
         int n = (int)System.Math.Floor(System.Math.Log10(imageNumber) + 1.0);
         string zeros = new string('0', 5 - n);
         string filename = Application.persistentDataPath + "/" + imageFolder + "/img" + zeros + imageNumber.ToString() + ".png";
@@ -260,8 +262,5 @@ public class Recorder : MonoBehaviour {
 
         byte[] bytes = image.EncodeToPNG();
         System.IO.File.WriteAllBytes(filename, bytes);
-
-        //Application.CaptureScreenshot(filename);
-        
     }
 }

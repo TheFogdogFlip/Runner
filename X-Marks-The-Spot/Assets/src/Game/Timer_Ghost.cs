@@ -10,12 +10,13 @@ public class Timer_Ghost : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
     {
-	
+        print("start ghosttimer");
 	}
 	
 	// Update is called once per frame
 	void Update () 
     {
+        print("update ghosttimer");
         f_time += Time.deltaTime;
 	}
     public void SetText()
