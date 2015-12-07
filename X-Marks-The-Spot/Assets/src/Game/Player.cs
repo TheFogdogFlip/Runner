@@ -3,15 +3,6 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public enum PlayerState
-{
-    Idle,
-    TurnRight,
-    TurnLeft,
-    Jump,
-    Fall,
-    Slide
-}
 
 public class Player : PlayerBase
 {
@@ -31,12 +22,6 @@ public class Player : PlayerBase
 
     private List<List<TimeStamp>> ghostinputs;
     private List<GameObject> ghosts;
-
-    private PlayerState nextAction = PlayerState.Idle;
-    private bool isActionActive = false;
-
-    //Turn finetuning
-    private float turnDelay = 0.1f;
 
     //Joystick cooldown
     private int cooldownCount = 25;
@@ -81,73 +66,6 @@ public class Player : PlayerBase
             {
                 playerTimerObj.SetText();
             }
-
-            if (turnPhase == 0 || turnPhase == 2)
-            {
-                Vector3 tempVec = transform.position;
-                if (tempVec.z < 0) tempVec.z *= -1;
-                if (tempVec.x < 0) tempVec.x *= -1;
-
-                if (rotationTarget <= 1 && rotationTarget >= -1)
-                {
-                    rotationTarget = 0;
-                }
-                    
-                if (rotationTarget == 0)
-                {
-
-                    if (tempVec.z % 2 <= 1 && !isJumping && !isSliding)
-                    {
-                        isActionActive = false;
-                    }
-
-                    if (tempVec.z % 2 >= 1 && !isActionActive)
-                    {
-                        ActivateNextAction();
-                        isActionActive = true;
-                    }
-                }
-                if (rotationTarget == 90 || rotationTarget == -270)
-                {
-                    if (tempVec.x % 2 <= 1 && !isJumping && !isSliding)
-                    {
-                        isActionActive = false;
-                    }
-
-                    if (tempVec.x % 2 >= 1 && !isActionActive)
-                    {
-                        ActivateNextAction();
-                        isActionActive = true;
-                    }
-                }
-                if (rotationTarget == 180 || rotationTarget == -180)
-                {
-
-                    if (tempVec.z % 2 >= 1 && !isJumping && !isSliding)
-                    {
-                        isActionActive = false;
-                    }
-
-                    if (tempVec.z % 2 < 1 && !isActionActive)
-                    {
-                        ActivateNextAction();
-                        isActionActive = true;
-                    }
-                }
-                if (rotationTarget == 270 || rotationTarget == -90)
-                {
-
-                    if (tempVec.x % 2 >= 1 && !isJumping && !isSliding)
-                    {
-                        isActionActive = false;
-                    }
-                    if (tempVec.x % 2 <= 1 && !isActionActive)
-                    {
-                        ActivateNextAction();
-                        isActionActive = true;
-                    }
-                }
-            }      
         }
         if(!ctdTimerObj.TimerSecondRunning)
         {
@@ -208,48 +126,22 @@ public class Player : PlayerBase
             {
                 SetNextAction(PlayerState.TurnRight);
                 coolingDown = true;
-
             }
 
             if (Input.GetButtonDown("Left") || Input.GetAxisRaw("Horizontal") == -1 || horizontal == -1)
             {
                 SetNextAction(PlayerState.TurnLeft);
                 coolingDown = true;
-
             }
-        }
 
-        if (turnPhase == 0 || turnPhase == 2)
-        {
             if ((Input.GetButtonDown("Slide") || vertical == -1) && !isSliding && !isJumping)
             {
-                Slide();
-                float time = playerTimerObj.f_time;
-                TimeStamp ts = new TimeStamp();
-                ts.time = time;
-                ts.input = PlayerState.Slide;
-                inputs.Add(ts);
-                sound.SlideSound();
+                SetNextAction(PlayerState.Slide);
             }
 
             if ((Input.GetButtonDown("Jump") || vertical == 1) && !isJumping && !isSliding)
             {
-                Jump();
-                float time = playerTimerObj.f_time;
-                TimeStamp ts = new TimeStamp();
-                ts.time = time;
-                ts.input = PlayerState.Jump;
-                inputs.Add(ts);
-                sound.JumpSound();
-            }
-            if (Input.GetButtonUp("Jump") && isJumping && !isSliding)
-            {
-                isFalling = true;
-                float time = playerTimerObj.f_time;
-                TimeStamp ts = new TimeStamp();
-                ts.time = time;
-                ts.input = PlayerState.Fall;
-                inputs.Add(ts);
+                SetNextAction(PlayerState.Jump);
             }
         }
     }
@@ -303,12 +195,7 @@ public class Player : PlayerBase
         SetupPlayerTimer();
     }
 
-    void SetNextAction(PlayerState input)
-    {
-        nextAction = input;
-    }
-
-    void ActivateNextAction()
+    protected override void ActivateNextAction()
     {
         if (nextAction != PlayerState.Idle)
         {
@@ -320,6 +207,8 @@ public class Player : PlayerBase
 
             if (nextAction == PlayerState.TurnLeft) TurnLeft();
             if (nextAction == PlayerState.TurnRight) TurnRight();
+            if (nextAction == PlayerState.Slide) { Slide(); sound.SlideSound(); }
+            if (nextAction == PlayerState.Jump) { Jump(); sound.JumpSound(); }
 
             nextAction = PlayerState.Idle;
         }
@@ -338,6 +227,7 @@ public class Player : PlayerBase
         isSliding = false;
         turnPhase = 0;
         crntSpeed = runSpeed;
+        crntJumpForce = jumpForce;
         transform.position = World.Instance.StartPosition;
         transform.rotation = Quaternion.Euler(World.Instance.StartDirection);
         rotationTarget = World.Instance.StartDirection.y;
