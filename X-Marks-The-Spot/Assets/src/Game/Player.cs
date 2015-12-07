@@ -47,6 +47,8 @@ public class Player : PlayerBase
 
     void Start ()
     {
+        
+
         SetupCtdTimer();
         //SetupGhostTimer();
         SetupPlayerTimer();
@@ -55,6 +57,7 @@ public class Player : PlayerBase
         ghosts = new List<GameObject>();
         inputs = new List<TimeStamp>();
         sound = new AudioManager();
+        sound.InitAudio();
     }
 
     void Update()
