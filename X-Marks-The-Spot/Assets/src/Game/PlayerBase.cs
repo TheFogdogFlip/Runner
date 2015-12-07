@@ -169,27 +169,24 @@ public class PlayerBase : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Floor"))
+        switch(other.gameObject.tag)
         {
-            isJumping = false;
-            isFalling = false;
-            transform.position = new Vector3(transform.position.x, other.transform.position.y, transform.position.z);
-        }
-
-        if (other.gameObject.CompareTag("Wall"))
-        {
-            Death();
-        }
-
-        if (other.gameObject.CompareTag("Goal"))
-        {
-            GoalFunc();
-        }
-
-        if (other.gameObject.CompareTag("Hole"))
-        {
-            Falling();
-            isFalling = true;
+            case "Floor":
+                isJumping = false;
+                isFalling = false;
+                transform.position = new Vector3(transform.position.x, other.transform.position.y, transform.position.z);
+                break;
+            case "Pole":
+            case "Wall":
+                Death();
+                break;
+            case "Goal":
+                GoalFunc();
+                break;
+            case "Hole":
+                Falling();
+                isFalling = true;
+                break;
         }
     }
 
