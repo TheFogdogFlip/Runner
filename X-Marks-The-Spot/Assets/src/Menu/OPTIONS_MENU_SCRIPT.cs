@@ -18,9 +18,14 @@ public class OPTIONS_MENU_SCRIPT : MonoBehaviour
     public Slider musicVolSlider;
     public Text musicVolText;
 
-	// Use this for initialization
+    public START_MENU_SCRIPT startMenuObj;
+    public OPTIONS_MENU_SCRIPT optionsMenuObj;
+
 	void Start() 
     {
+        startMenuObj = GameObject.Find("START_MENU_CANVAS").GetComponent<START_MENU_SCRIPT>();
+        optionsMenuObj = GameObject.Find("OPTIONS_MENU_CANVAS").GetComponent<OPTIONS_MENU_SCRIPT>();
+
         GlobalGameSettings.LoadSettings();
         startMenu               = startMenu.GetComponent<Canvas>();
         optionsMenu             = optionsMenu.GetComponent<Canvas>();
@@ -55,6 +60,8 @@ public class OPTIONS_MENU_SCRIPT : MonoBehaviour
     {
         optionsMenu.enabled = false;
         startMenu.enabled = true;
+        DisableOptions();
+        startMenuObj.EnableStart();
     }
 
     public void SetMasterVolume()
@@ -79,5 +86,21 @@ public class OPTIONS_MENU_SCRIPT : MonoBehaviour
         musicVolText.text = val.ToString();
         GlobalGameSettings.SetMusicVolume(val);
         GlobalGameSettings.SaveSettings();
+    }
+
+    public void DisableOptions()
+    {
+        backText.enabled = false;
+        masterVolSlider.enabled = false;
+        musicVolSlider.enabled = false;
+        effectsVolSlider.enabled = false;
+    }
+
+    public void EnableOptions()
+    {
+        backText.enabled = true;
+        masterVolSlider.enabled = true;
+        musicVolSlider.enabled = true;
+        effectsVolSlider.enabled = true;
     }
 }
