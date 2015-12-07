@@ -25,16 +25,16 @@ public class HELP_MENU_SCRIPT : MonoBehaviour
 
 	public void LoadComponents()
     {
-        startMenuGameObj = GameObject.Find("START_MENU_CANVAS");
-        helpMenuGameObj = GameObject.Find("HELP_MENU_CANVAS");
-        backGameObj = GameObject.Find("HELP_BACK_TEXT");
+        startMenuGameObj            = GameObject.Find("START_MENU_CANVAS");
+        helpMenuGameObj             = GameObject.Find("HELP_MENU_CANVAS");
+        backGameObj                 = GameObject.Find("HELP_BACK_TEXT");
 
-        startMenuObj = startMenuGameObj.GetComponent<START_MENU_SCRIPT>();
-        helpMenuObj = helpMenuGameObj.GetComponent<HELP_MENU_SCRIPT>();
+        startMenuObj                = startMenuGameObj.GetComponent<START_MENU_SCRIPT>();
+        helpMenuObj                 = helpMenuGameObj.GetComponent<HELP_MENU_SCRIPT>();
 
-        startMenu = startMenuGameObj.GetComponent<Canvas>();
-        helpMenu = helpMenuGameObj.GetComponent<Canvas>();
-        backText = backGameObj.GetComponent<Button>();
+        startMenu                   = startMenuGameObj.GetComponent<Canvas>();
+        helpMenu                    = helpMenuGameObj.GetComponent<Canvas>();
+        backText                    = backGameObj.GetComponent<Button>();
     }
 
     public void BackPress()

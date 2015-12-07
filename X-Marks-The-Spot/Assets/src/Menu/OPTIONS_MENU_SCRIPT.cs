@@ -40,35 +40,35 @@ public class OPTIONS_MENU_SCRIPT : MonoBehaviour
     public void LoadComponents()
     {
         GlobalGameSettings.LoadSettings();
-        startMenuGameObj = GameObject.Find("START_MENU_CANVAS");
-        optionsMenuGameObj = GameObject.Find("OPTIONS_MENU_CANVAS");
-        backGameObj = GameObject.Find("OPTIONS_BACK_TEXT");
-        masterVolGameObj = GameObject.Find("SOUND_MASTER_SLIDER");
-        musicVolGameObj = GameObject.Find("SOUND_MUSIC_SLIDER");
-        effectsVolGameObj = GameObject.Find("SOUND_EFFECTS_SLIDER");
+        startMenuGameObj            = GameObject.Find("START_MENU_CANVAS");
+        optionsMenuGameObj          = GameObject.Find("OPTIONS_MENU_CANVAS");
+        backGameObj                 = GameObject.Find("OPTIONS_BACK_TEXT");
+        masterVolGameObj            = GameObject.Find("SOUND_MASTER_SLIDER");
+        musicVolGameObj             = GameObject.Find("SOUND_MUSIC_SLIDER");
+        effectsVolGameObj           = GameObject.Find("SOUND_EFFECTS_SLIDER");
 
-        startMenu = startMenuGameObj.GetComponent<Canvas>();
-        optionsMenu = optionsMenuGameObj.GetComponent<Canvas>();
+        startMenu                   = startMenuGameObj.GetComponent<Canvas>();
+        optionsMenu                 = optionsMenuGameObj.GetComponent<Canvas>();
 
-        startMenuObj = startMenuGameObj.GetComponent<START_MENU_SCRIPT>();
-        optionsMenuObj = optionsMenuGameObj.GetComponent<OPTIONS_MENU_SCRIPT>();
+        startMenuObj                = startMenuGameObj.GetComponent<START_MENU_SCRIPT>();
+        optionsMenuObj              = optionsMenuGameObj.GetComponent<OPTIONS_MENU_SCRIPT>();
 
-        backText = backGameObj.GetComponent<Button>();
-        masterVolSlider = masterVolGameObj.GetComponent<Slider>();
-        effectsVolSlider = effectsVolGameObj.GetComponent<Slider>();
-        musicVolSlider = musicVolGameObj.GetComponent<Slider>();
+        backText                    = backGameObj.GetComponent<Button>();
+        masterVolSlider             = masterVolGameObj.GetComponent<Slider>();
+        effectsVolSlider            = effectsVolGameObj.GetComponent<Slider>();
+        musicVolSlider              = musicVolGameObj.GetComponent<Slider>();
 
-        int masterVol = GlobalGameSettings.GetMasterVolume();
-        int effectsVol = GlobalGameSettings.GetEffectsVolume();
-        int musicVol = GlobalGameSettings.GetMusicVolume();
+        int masterVol               = GlobalGameSettings.GetMasterVolume();
+        int effectsVol              = GlobalGameSettings.GetEffectsVolume();
+        int musicVol                = GlobalGameSettings.GetMusicVolume();
 
-        masterVolSlider.value = masterVol;
-        effectsVolSlider.value = effectsVol;
-        musicVolSlider.value = musicVol;
+        masterVolSlider.value       = masterVol;
+        effectsVolSlider.value      = effectsVol;
+        musicVolSlider.value        = musicVol;
 
-        masterVolText.text = masterVol.ToString();
-        effectsVolText.text = effectsVol.ToString();
-        musicVolText.text = musicVol.ToString();
+        masterVolText.text          = masterVol.ToString();
+        effectsVolText.text         = effectsVol.ToString();
+        musicVolText.text           = musicVol.ToString();
     }
 
     public void SetSettings()

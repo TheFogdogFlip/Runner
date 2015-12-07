@@ -77,55 +77,55 @@ public class START_MENU_SCRIPT : MonoBehaviour
 	}
     public void LoadComponents()
     {
-        needAlphaReduced = true;
-        needPictureChanged = true;
+        needAlphaReduced            = true;
+        needPictureChanged          = true;
 
-        currentSprite = 0;
-        Timer_GO = GameObject.Find("menuTimer");
-        panelBack = GameObject.Find("PANEL_BACKGROUND_BOT");
-        panelFront = GameObject.Find("PANEL_BACKGROUND_TOP");
-        panelFront.layer = 8;
-        menuTimer = Timer_GO.GetComponent<Timer_Menu>();
-        sprites = Resources.LoadAll<Sprite>(resourceName);
-        imageFront = panelFront.GetComponent<Image>();
-        imageFront.sprite = sprites[currentSprite];
+        currentSprite               = 0;
+        Timer_GO                    = GameObject.Find("menuTimer");
+        panelBack                   = GameObject.Find("PANEL_BACKGROUND_BOT");
+        panelFront                  = GameObject.Find("PANEL_BACKGROUND_TOP");
+        panelFront.layer            = 8;
+        menuTimer                   = Timer_GO.GetComponent<Timer_Menu>();
+        sprites                     = Resources.LoadAll<Sprite>(resourceName);
+        imageFront                  = panelFront.GetComponent<Image>();
+        imageFront.sprite           = sprites[currentSprite];
 
-        startMenuGameObj = GameObject.Find("START_MENU_CANVAS");
-        helpMenuGameObj = GameObject.Find("HELP_MENU_CANVAS");
-        loadMenuGameObj = GameObject.Find("LOAD_LEVEL_CANVAS");
-        optionsMenuGameObj = GameObject.Find("OPTIONS_MENU_CANVAS");
+        startMenuGameObj            = GameObject.Find("START_MENU_CANVAS");
+        helpMenuGameObj             = GameObject.Find("HELP_MENU_CANVAS");
+        loadMenuGameObj             = GameObject.Find("LOAD_LEVEL_CANVAS");
+        optionsMenuGameObj          = GameObject.Find("OPTIONS_MENU_CANVAS");
 
-        helpMenuObj = helpMenuGameObj.GetComponent<HELP_MENU_SCRIPT>();
-        loadMenuObj = loadMenuGameObj.GetComponent<LOAD_LEVEL_SCRIPT>();
-        optionsMenuObj = optionsMenuGameObj.GetComponent<OPTIONS_MENU_SCRIPT>();
+        helpMenuObj                 = helpMenuGameObj.GetComponent<HELP_MENU_SCRIPT>();
+        loadMenuObj                 = loadMenuGameObj.GetComponent<LOAD_LEVEL_SCRIPT>();
+        optionsMenuObj              = optionsMenuGameObj.GetComponent<OPTIONS_MENU_SCRIPT>();
 
-        quitMenu = quitMenu.GetComponent<Canvas>();
-        optionsMenu = optionsMenu.GetComponent<Canvas>();
-        loadLevelMenu = loadLevelMenu.GetComponent<Canvas>();
-        helpMenu = helpMenu.GetComponent<Canvas>();
-        startMenu = startMenu.GetComponent<Canvas>();
+        quitMenu                    = quitMenu.GetComponent<Canvas>();
+        optionsMenu                 = optionsMenu.GetComponent<Canvas>();
+        loadLevelMenu               = loadLevelMenu.GetComponent<Canvas>();
+        helpMenu                    = helpMenu.GetComponent<Canvas>();
+        startMenu                   = startMenu.GetComponent<Canvas>();
 
-        playGameObj = GameObject.Find("PLAY_TEXT");
-        optionsGameObj = GameObject.Find("OPTIONS_TEXT");
-        helpGameObj = GameObject.Find("HELP_TEXT");
-        loadGameObj = GameObject.Find("LOAD_LEVEL_TEXT");
-        exitGameObj = GameObject.Find("QUIT_TEXT");
-        yesGameObj = GameObject.Find("YES");
-        noGameObj = GameObject.Find("NO");
+        playGameObj                 = GameObject.Find("PLAY_TEXT");
+        optionsGameObj              = GameObject.Find("OPTIONS_TEXT");
+        helpGameObj                 = GameObject.Find("HELP_TEXT");
+        loadGameObj                 = GameObject.Find("LOAD_LEVEL_TEXT");
+        exitGameObj                 = GameObject.Find("QUIT_TEXT");
+        yesGameObj                  = GameObject.Find("YES");
+        noGameObj                   = GameObject.Find("NO");
 
-        startText = playGameObj.GetComponent<Button>();
-        exitText = exitGameObj.GetComponent<Button>();
-        optionsText = optionsGameObj.GetComponent<Button>();
-        loadLevelText = loadGameObj.GetComponent<Button>();
-        helpText = helpGameObj.GetComponent<Button>();
-        yesText = yesGameObj.GetComponent<Button>();
-        noText = noGameObj.GetComponent<Button>();
+        startText                   = playGameObj.GetComponent<Button>();
+        exitText                    = exitGameObj.GetComponent<Button>();
+        optionsText                 = optionsGameObj.GetComponent<Button>();
+        loadLevelText               = loadGameObj.GetComponent<Button>();
+        helpText                    = helpGameObj.GetComponent<Button>();
+        yesText                     = yesGameObj.GetComponent<Button>();
+        noText                      = noGameObj.GetComponent<Button>();
 
-        quitMenu.enabled = false;
-        optionsMenu.enabled = false;
-        loadLevelMenu.enabled = false;
-        helpMenu.enabled = false;
-        startMenu.enabled = true;
+        quitMenu.enabled            = false;
+        optionsMenu.enabled         = false;
+        loadLevelMenu.enabled       = false;
+        helpMenu.enabled            = false;
+        startMenu.enabled           = true;
     }
 
     void Update()

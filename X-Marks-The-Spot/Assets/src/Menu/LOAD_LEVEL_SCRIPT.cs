@@ -25,16 +25,16 @@ public class LOAD_LEVEL_SCRIPT : MonoBehaviour
 
     public void LoadComponents()
     {
-        startMenuGameObj = GameObject.Find("START_MENU_CANVAS");
-        loadMenuGameObj = GameObject.Find("LOAD_LEVEL_CANVAS");
-        backGameObj = GameObject.Find("LOAD_BACK_TEXT");
+        startMenuGameObj            = GameObject.Find("START_MENU_CANVAS");
+        loadMenuGameObj             = GameObject.Find("LOAD_LEVEL_CANVAS");
+        backGameObj                 = GameObject.Find("LOAD_BACK_TEXT");
 
-        startMenuObj = startMenuGameObj.GetComponent<START_MENU_SCRIPT>();
-        loadMenuObj = loadMenuGameObj.GetComponent<LOAD_LEVEL_SCRIPT>();
+        startMenuObj                = startMenuGameObj.GetComponent<START_MENU_SCRIPT>();
+        loadMenuObj                 = loadMenuGameObj.GetComponent<LOAD_LEVEL_SCRIPT>();
 
-        startMenu = startMenuGameObj.GetComponent<Canvas>();
-        loadLevelMenu = loadMenuGameObj.GetComponent<Canvas>();
-        backText = backGameObj.GetComponent<Button>();
+        startMenu                   = startMenuGameObj.GetComponent<Canvas>();
+        loadLevelMenu               = loadMenuGameObj.GetComponent<Canvas>();
+        backText                    = backGameObj.GetComponent<Button>();
     }
 
     public void BackPress()
