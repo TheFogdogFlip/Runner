@@ -187,6 +187,7 @@ public class PlayerBase : MonoBehaviour
 
         if (other.gameObject.CompareTag("Hole"))
         {
+            Falling();
             isFalling = true;
         }
     }
@@ -316,6 +317,10 @@ public class PlayerBase : MonoBehaviour
     }
 
     protected virtual void GoalFunc()
+    {
+
+    }
+    protected virtual void Falling()
     {
 
     }

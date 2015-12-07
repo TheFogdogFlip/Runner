@@ -232,6 +232,7 @@ public class Player : PlayerBase
         transform.rotation = Quaternion.Euler(World.Instance.StartDirection);
         rotationTarget = World.Instance.StartDirection.y;
         nextAction = PlayerState.Idle;
+        sound.CollisionSound();
 
         foreach (GameObject go in ghosts)
         {
@@ -239,6 +240,10 @@ public class Player : PlayerBase
         }
 
         SetupNextGame();
+    }
+    protected override void Falling()
+    {
+        sound.FallingSound();
     }
     protected override void GoalFunc()
     {
