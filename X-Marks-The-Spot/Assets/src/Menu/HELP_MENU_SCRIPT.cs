@@ -1,27 +1,42 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using System.Collections;
 
-public class HELP_MENU_SCRIPT : MonoBehaviour {
+public class HELP_MENU_SCRIPT : MonoBehaviour 
+{
+    private Canvas startMenu;
+    private Canvas helpMenu;
 
-    public Canvas startMenu;
-    public Canvas helpMenu;
+    private Button backText;
 
-    public Button backText;
+    private START_MENU_SCRIPT startMenuObj;
+    private HELP_MENU_SCRIPT helpMenuObj;
 
-    public START_MENU_SCRIPT startMenuObj;
-    public HELP_MENU_SCRIPT helpMenuObj;
+    public EventSystem eventSys;
+    private GameObject backGameObj;
+    private GameObject startMenuGameObj;
+    private GameObject helpMenuGameObj;
 
 	void Start() 
     {
-        startMenuObj = GameObject.Find("START_MENU_CANVAS").GetComponent<START_MENU_SCRIPT>();
-        helpMenuObj = GameObject.Find("HELP_MENU_CANVAS").GetComponent<HELP_MENU_SCRIPT>();
-
-        startMenu = startMenu.GetComponent<Canvas>();
-        helpMenu = helpMenu.GetComponent<Canvas>();
-        backText = backText.GetComponent<Button>();
+        
 	}
-	
+
+	public void LoadComponents()
+    {
+        startMenuGameObj = GameObject.Find("START_MENU_CANVAS");
+        helpMenuGameObj = GameObject.Find("HELP_MENU_CANVAS");
+        backGameObj = GameObject.Find("HELP_BACK_TEXT");
+
+        startMenuObj = startMenuGameObj.GetComponent<START_MENU_SCRIPT>();
+        helpMenuObj = helpMenuGameObj.GetComponent<HELP_MENU_SCRIPT>();
+
+        startMenu = startMenuGameObj.GetComponent<Canvas>();
+        helpMenu = helpMenuGameObj.GetComponent<Canvas>();
+        backText = backGameObj.GetComponent<Button>();
+    }
+
     public void BackPress()
     {
         helpMenu.enabled = false;
@@ -38,6 +53,7 @@ public class HELP_MENU_SCRIPT : MonoBehaviour {
     public void EnableHelp()
     {
         backText.enabled = true;
+        eventSys.SetSelectedGameObject(backGameObj);
     }
 
 }

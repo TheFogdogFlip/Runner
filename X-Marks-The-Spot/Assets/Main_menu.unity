@@ -921,15 +921,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ac3d028d83a1ca43856afba04fc5b1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startMenu: {fileID: 656565303}
-  optionsMenu: {fileID: 355717676}
-  backText: {fileID: 729835416}
-  masterVolSlider: {fileID: 166118181}
   masterVolText: {fileID: 1663078165}
-  effectsVolSlider: {fileID: 416200349}
   effectsVolText: {fileID: 1190452252}
-  musicVolSlider: {fileID: 980673781}
   musicVolText: {fileID: 293216159}
+  eventSys: {fileID: 398801315}
 --- !u!1 &362166797
 GameObject:
   m_ObjectHideFlags: 0
@@ -1128,7 +1123,7 @@ MonoBehaviour:
   m_Script: {fileID: -619905303, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 774142029}
+  m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 5
 --- !u!4 &398801316
@@ -1415,9 +1410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46a415eed2e1b3341ae66e2141c65d9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startMenu: {fileID: 656565303}
-  loadLevelMenu: {fileID: 563419951}
-  backText: {fileID: 1640000973}
+  eventSys: {fileID: 398801315}
 --- !u!1 &577237533
 GameObject:
   m_ObjectHideFlags: 0
@@ -1697,11 +1690,7 @@ MonoBehaviour:
   loadLevelMenu: {fileID: 563419951}
   helpMenu: {fileID: 1466914740}
   startMenu: {fileID: 656565303}
-  startText: {fileID: 774142033}
-  exitText: {fileID: 1307103768}
-  optionsText: {fileID: 2040690266}
-  loadLevelText: {fileID: 730646331}
-  helpText: {fileID: 1696214600}
+  eventSys: {fileID: 398801315}
 --- !u!1 &683628682
 GameObject:
   m_ObjectHideFlags: 0
@@ -1848,7 +1837,7 @@ GameObject:
   - 114: {fileID: 729835416}
   - 132: {fileID: 729835420}
   m_Layer: 5
-  m_Name: BACK_TEXT
+  m_Name: OPTIONS_BACK_TEXT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3531,9 +3520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5efce0bfb468e7b49bc2168979c0b10c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startMenu: {fileID: 656565303}
-  helpMenu: {fileID: 1466914740}
-  backText: {fileID: 1814796933}
+  eventSys: {fileID: 398801315}
 --- !u!1 &1640000972
 GameObject:
   m_ObjectHideFlags: 0
@@ -3546,7 +3533,7 @@ GameObject:
   - 114: {fileID: 1640000974}
   - 114: {fileID: 1640000973}
   m_Layer: 5
-  m_Name: BACK_TEXT
+  m_Name: LOAD_BACK_TEXT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4065,7 +4052,7 @@ GameObject:
   - 114: {fileID: 1814796934}
   - 114: {fileID: 1814796933}
   m_Layer: 5
-  m_Name: BACK_TEXT
+  m_Name: HELP_BACK_TEXT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

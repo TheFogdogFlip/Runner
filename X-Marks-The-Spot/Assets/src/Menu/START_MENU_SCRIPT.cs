@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.EventSystems;
 using System.Collections;
 
 public class START_MENU_SCRIPT : MonoBehaviour
@@ -26,10 +26,22 @@ public class START_MENU_SCRIPT : MonoBehaviour
     private bool needAlphaReduced;
     private bool needPictureChanged;
 
-    public START_MENU_SCRIPT startMenuObj;
-    public OPTIONS_MENU_SCRIPT optionsMenuObj;
-    public LOAD_LEVEL_SCRIPT loadMenuObj;
-    public HELP_MENU_SCRIPT helpMenuObj;
+    private GameObject playGameObj;
+    private GameObject loadGameObj;
+    private GameObject helpGameObj;
+    private GameObject optionsGameObj;
+    private GameObject exitGameObj;
+    private GameObject yesGameObj;
+    private GameObject noGameObj;
+    private GameObject startMenuGameObj;
+    private GameObject helpMenuGameObj;
+    private GameObject loadMenuGameObj;
+    private GameObject optionsMenuGameObj;
+
+    private START_MENU_SCRIPT startMenuObj;
+    private OPTIONS_MENU_SCRIPT optionsMenuObj;
+    private LOAD_LEVEL_SCRIPT loadMenuObj;
+    private HELP_MENU_SCRIPT helpMenuObj;
 
     public Canvas quitMenu;
     public Canvas optionsMenu;
@@ -37,58 +49,84 @@ public class START_MENU_SCRIPT : MonoBehaviour
     public Canvas helpMenu;
     public Canvas startMenu;
 
-    public Button startText;
-    public Button exitText;
-    public Button optionsText;
-    public Button loadLevelText;
-    public Button helpText;
+    private Button startText;
+    private Button exitText;
+    private Button optionsText;
+    private Button loadLevelText;
+    private Button helpText;
+    private Button noText;
+    private Button yesText;
+
+    public EventSystem eventSys;
 
 	void Start ()
     {
-        needAlphaReduced        = true;
-        needPictureChanged      = true;
-
-        currentSprite           = 0;
-        Timer_GO                = GameObject.Find("menuTimer");
-        panelBack               = GameObject.Find("PANEL_BACKGROUND_BOT");
-        panelFront              = GameObject.Find("PANEL_BACKGROUND_TOP");
-        panelFront.layer        = 8;
-        menuTimer               = Timer_GO.GetComponent<Timer_Menu>();
-        sprites                 = Resources.LoadAll<Sprite>(resourceName);
-        imageFront              = panelFront.GetComponent<Image>();
-        imageFront.sprite       = sprites[currentSprite];
-
-        helpMenuObj             = GameObject.Find("HELP_MENU_CANVAS").GetComponent<HELP_MENU_SCRIPT>();
-        loadMenuObj             = GameObject.Find("LOAD_LEVEL_CANVAS").GetComponent<LOAD_LEVEL_SCRIPT>();
-        optionsMenuObj          = GameObject.Find("OPTIONS_MENU_CANVAS").GetComponent<OPTIONS_MENU_SCRIPT>();
-
-        quitMenu                = quitMenu.GetComponent<Canvas>();
-        optionsMenu             = optionsMenu.GetComponent<Canvas>();
-        loadLevelMenu           = loadLevelMenu.GetComponent<Canvas>();
-        helpMenu                = helpMenu.GetComponent<Canvas>();
-        startMenu               = startMenu.GetComponent<Canvas>();
-
-        startText               = startText.GetComponent<Button>();
-        exitText                = exitText.GetComponent<Button>();
-        optionsText             = optionsText.GetComponent<Button>();
-        loadLevelText           = loadLevelText.GetComponent<Button>();
-        helpText                = helpText.GetComponent<Button>();
-
-        quitMenu.enabled        = false;
-        optionsMenu.enabled     = false;
-        loadLevelMenu.enabled   = false;
-        helpMenu.enabled        = false;
-        startMenu.enabled       = true;
+        LoadComponents();
+        loadMenuObj.LoadComponents();
+        helpMenuObj.LoadComponents();
+        optionsMenuObj.LoadComponents();
 
         EnableStart();
-
         loadMenuObj.DisableLoadLevel();
         optionsMenuObj.DisableOptions();
         helpMenuObj.DisableHelp();
 
+        eventSys.SetSelectedGameObject(playGameObj);
 
 
 	}
+    public void LoadComponents()
+    {
+        needAlphaReduced = true;
+        needPictureChanged = true;
+
+        currentSprite = 0;
+        Timer_GO = GameObject.Find("menuTimer");
+        panelBack = GameObject.Find("PANEL_BACKGROUND_BOT");
+        panelFront = GameObject.Find("PANEL_BACKGROUND_TOP");
+        panelFront.layer = 8;
+        menuTimer = Timer_GO.GetComponent<Timer_Menu>();
+        sprites = Resources.LoadAll<Sprite>(resourceName);
+        imageFront = panelFront.GetComponent<Image>();
+        imageFront.sprite = sprites[currentSprite];
+
+        startMenuGameObj = GameObject.Find("START_MENU_CANVAS");
+        helpMenuGameObj = GameObject.Find("HELP_MENU_CANVAS");
+        loadMenuGameObj = GameObject.Find("LOAD_LEVEL_CANVAS");
+        optionsMenuGameObj = GameObject.Find("OPTIONS_MENU_CANVAS");
+
+        helpMenuObj = helpMenuGameObj.GetComponent<HELP_MENU_SCRIPT>();
+        loadMenuObj = loadMenuGameObj.GetComponent<LOAD_LEVEL_SCRIPT>();
+        optionsMenuObj = optionsMenuGameObj.GetComponent<OPTIONS_MENU_SCRIPT>();
+
+        quitMenu = quitMenu.GetComponent<Canvas>();
+        optionsMenu = optionsMenu.GetComponent<Canvas>();
+        loadLevelMenu = loadLevelMenu.GetComponent<Canvas>();
+        helpMenu = helpMenu.GetComponent<Canvas>();
+        startMenu = startMenu.GetComponent<Canvas>();
+
+        playGameObj = GameObject.Find("PLAY_TEXT");
+        optionsGameObj = GameObject.Find("OPTIONS_TEXT");
+        helpGameObj = GameObject.Find("HELP_TEXT");
+        loadGameObj = GameObject.Find("LOAD_LEVEL_TEXT");
+        exitGameObj = GameObject.Find("QUIT_TEXT");
+        yesGameObj = GameObject.Find("YES");
+        noGameObj = GameObject.Find("NO");
+
+        startText = playGameObj.GetComponent<Button>();
+        exitText = exitGameObj.GetComponent<Button>();
+        optionsText = optionsGameObj.GetComponent<Button>();
+        loadLevelText = loadGameObj.GetComponent<Button>();
+        helpText = helpGameObj.GetComponent<Button>();
+        yesText = yesGameObj.GetComponent<Button>();
+        noText = noGameObj.GetComponent<Button>();
+
+        quitMenu.enabled = false;
+        optionsMenu.enabled = false;
+        loadLevelMenu.enabled = false;
+        helpMenu.enabled = false;
+        startMenu.enabled = true;
+    }
 
     void Update()
     {
@@ -137,12 +175,17 @@ public class START_MENU_SCRIPT : MonoBehaviour
 	public void ExitPress()
     {
         quitMenu.enabled = true;
+        yesText.enabled = true;
+        noText.enabled = true;
+        eventSys.SetSelectedGameObject(noGameObj);
         DisableStart();
     }
 
     public void NoPress()
     {
         quitMenu.enabled = false;
+        yesText.enabled = false;
+        noText.enabled = false;
         EnableStart();
     }
 
@@ -199,5 +242,8 @@ public class START_MENU_SCRIPT : MonoBehaviour
         helpText.enabled = true;
         optionsText.enabled = true;
         loadLevelText.enabled = true;
+        yesText.enabled = false;
+        noText.enabled = false;
+        eventSys.SetSelectedGameObject(playGameObj);
     }
 }
