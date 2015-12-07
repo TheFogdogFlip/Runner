@@ -247,6 +247,7 @@ public class Player : PlayerBase
     }
     protected override void GoalFunc()
     {
+        sound.WinSound();
         ctdTimerObj.textObj.enabled = true;
         ctdTimerObj.textObj.text = "Victory!";
 

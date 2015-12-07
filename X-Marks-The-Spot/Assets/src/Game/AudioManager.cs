@@ -8,6 +8,7 @@ public class AudioManager : Object{
     AudioSource slideSound;
     AudioSource collisionSound;
     AudioSource fallingSound;
+    AudioSource winSound;
     public void InitAudio()
     {
         GameObject audioHolder = Instantiate(Resources.Load("AudioHolder", typeof(GameObject))) as GameObject;
@@ -16,11 +17,12 @@ public class AudioManager : Object{
         slideSound = audioSources[2];
         collisionSound = audioSources[3];
         fallingSound = audioSources[4];
+        winSound = audioSources[5];
     }
 
     public void JumpSound()
     {
-        if (!jumpSound.isPlaying);
+        if (!jumpSound.isPlaying)
         {
             jumpSound.Play();
         }
@@ -28,23 +30,30 @@ public class AudioManager : Object{
     
     public void SlideSound()
     {
-        if (!slideSound.isPlaying);
+        if (!slideSound.isPlaying)
         {
             slideSound.Play();
         }
     }
     public void CollisionSound()
     {
-        if (!collisionSound.isPlaying);
+        if (!collisionSound.isPlaying)
         {
             collisionSound.Play();
         }
     }
     public void FallingSound()
     {
-        if (!fallingSound.isPlaying);
+        if (!fallingSound.isPlaying)
         {
             fallingSound.Play();
+        }
+    }
+    public void WinSound()
+    {
+        if (!winSound.isPlaying)
+        {
+            winSound.Play();
         }
     }
 }

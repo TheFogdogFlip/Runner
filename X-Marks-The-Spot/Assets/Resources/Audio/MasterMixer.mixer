@@ -10,6 +10,7 @@ AudioMixerController:
   m_MasterGroup: {fileID: 24300001}
   m_Snapshots:
   - {fileID: 24500003}
+  - {fileID: 24548570}
   m_StartSnapshot: {fileID: 24500003}
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
@@ -37,6 +38,7 @@ AudioMixerGroupController:
   m_Pitch: 0429ff3be6c453c419f68a8e001b1667
   m_Effects:
   - {fileID: 24400002}
+  - {fileID: 24435744}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -114,16 +116,45 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!244 &24435744
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_EffectID: 07f5d54e3f926d04ea616bf83091d903
+  m_EffectName: Lowpass Simple
+  m_MixLevel: aae026950ad994d4ea8e5cbf09917438
+  m_Parameters:
+  - m_ParameterName: Cutoff freq
+    m_GUID: 6e3e416b13192c141b5d90b9a0b3b55a
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!245 &24500003
 AudioMixerSnapshotController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Snapshot
+  m_Name: Unpaused
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 927f0bcf6ebed3e4bbdff96018140da3
   m_FloatValues:
-    d603e3e46be067b40bbf41f76804da0e: -.0257765595
+    d603e3e46be067b40bbf41f76804da0e: -9.83328629
     bc246baa089f6f048ae256d7427c50d5: -.0257765595
-    2b0d238ea1e5c534a8e48444cb7cad19: -.0257765576
+    2b0d238ea1e5c534a8e48444cb7cad19: 0
+  m_TransitionOverrides: {}
+--- !u!245 &24548570
+AudioMixerSnapshotController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Paused
+  m_AudioMixer: {fileID: 24100000}
+  m_SnapshotID: 263e9854fa887334c823cae4f75918cd
+  m_FloatValues:
+    d603e3e46be067b40bbf41f76804da0e: -10.3452072
+    bc246baa089f6f048ae256d7427c50d5: -.0257765595
+    6e3e416b13192c141b5d90b9a0b3b55a: 718
+    2b0d238ea1e5c534a8e48444cb7cad19: -4.93667936
   m_TransitionOverrides: {}
