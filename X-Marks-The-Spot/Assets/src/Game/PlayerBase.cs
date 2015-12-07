@@ -68,7 +68,7 @@ public class PlayerBase : MonoBehaviour
     {
         //ACTIVATION PHASE
 
-        anim.Play("TurnLeft90");
+        //anim.SetTrigger("TurnLeft90");
 
         rotationLast = rotationTarget;
         rotationTarget -= 90.0f;
@@ -87,7 +87,7 @@ public class PlayerBase : MonoBehaviour
     {
         //ACTIVATION PHASE
 
-        anim.Play("TurnRight90");
+        //anim.SetTrigger("TurnRight90");
 
         rotationLast = rotationTarget;
         rotationTarget += 90.0f;
@@ -146,7 +146,8 @@ public class PlayerBase : MonoBehaviour
     {
         //Slide start
         isSliding = true;
-        transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 0.5f, transform.localScale.z);
+        anim.SetTrigger("Slide");
+        bc.size = new Vector3(0.5f * bc.size.x, 0.5f * bc.size.y, 0.5f * bc.size.z);
         
     }
     private void UpdateSlide()
@@ -155,7 +156,7 @@ public class PlayerBase : MonoBehaviour
         {
             if (crntSlideLength <= 0.1)
             {
-                transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 2, transform.localScale.z);
+                bc.size = new Vector3(2.0f * bc.size.x, 2.0f * bc.size.y, 2.0f * bc.size.z);
                 crntSlideLength = 1  / runSpeed;
                 isSliding = false;
             }
@@ -195,6 +196,7 @@ public class PlayerBase : MonoBehaviour
     protected void Jump()
     {
         isJumping = true;
+        anim.SetTrigger("Jump");
     }
     private void UpdateJump()
     {

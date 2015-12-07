@@ -218,7 +218,7 @@ public class Player : PlayerBase
     {
         if (isSliding)
         {
-            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 2, transform.localScale.z);
+            bc.size = new Vector3(2.0f * bc.size.x, 2.0f * bc.size.y, 2.0f * bc.size.z);
         }
 
         turnRotation = false;
