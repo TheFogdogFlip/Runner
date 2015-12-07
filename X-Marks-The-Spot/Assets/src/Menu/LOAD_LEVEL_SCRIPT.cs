@@ -1,25 +1,40 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using System.Collections;
 
 public class LOAD_LEVEL_SCRIPT : MonoBehaviour 
 {
-    public Canvas startMenu;
-    public Canvas loadLevelMenu;
+    private Canvas startMenu;
+    private Canvas loadLevelMenu;
 
-    public Button backText;
+    private Button backText;
 
-    public START_MENU_SCRIPT startMenuObj;
-    public LOAD_LEVEL_SCRIPT loadMenuObj;
+    private START_MENU_SCRIPT startMenuObj;
+    private LOAD_LEVEL_SCRIPT loadMenuObj;
+    
+    public EventSystem eventSys;
 
+    private GameObject backGameObj;
+    private GameObject startMenuGameObj;
+    private GameObject loadMenuGameObj;
     void Start()
     {
-        startMenuObj = GameObject.Find("START_MENU_CANVAS").GetComponent<START_MENU_SCRIPT>();
-        loadMenuObj = GameObject.Find("LOAD_LEVEL_CANVAS").GetComponent<LOAD_LEVEL_SCRIPT>();
+        
+    }
 
-        startMenu = startMenu.GetComponent<Canvas>();
-        loadLevelMenu = loadLevelMenu.GetComponent<Canvas>();
-        backText = backText.GetComponent<Button>();
+    public void LoadComponents()
+    {
+        startMenuGameObj = GameObject.Find("START_MENU_CANVAS");
+        loadMenuGameObj = GameObject.Find("LOAD_LEVEL_CANVAS");
+        backGameObj = GameObject.Find("LOAD_BACK_TEXT");
+
+        startMenuObj = startMenuGameObj.GetComponent<START_MENU_SCRIPT>();
+        loadMenuObj = loadMenuGameObj.GetComponent<LOAD_LEVEL_SCRIPT>();
+
+        startMenu = startMenuGameObj.GetComponent<Canvas>();
+        loadLevelMenu = loadMenuGameObj.GetComponent<Canvas>();
+        backText = backGameObj.GetComponent<Button>();
     }
 
     public void BackPress()
@@ -33,10 +48,12 @@ public class LOAD_LEVEL_SCRIPT : MonoBehaviour
     public void DisableLoadLevel()
     {
         backText.enabled = false;
+        print("here");
     }
 
     public void EnableLoadLevel()
     {
         backText.enabled = true;
+        eventSys.SetSelectedGameObject(backGameObj);
     }
 }

@@ -1,53 +1,75 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using System.Collections;
 
 public class OPTIONS_MENU_SCRIPT : MonoBehaviour 
 {
-    public Canvas startMenu;
-    public Canvas optionsMenu;
-
-    public Button backText;
-
-    public Slider masterVolSlider;
+    private Canvas startMenu;
+    private Canvas optionsMenu;
+    
+    private Button backText;
+    
+    private Slider masterVolSlider;
     public Text masterVolText;
-
-    public Slider effectsVolSlider;
+    
+    private Slider effectsVolSlider;
     public Text effectsVolText;
-
-    public Slider musicVolSlider;
+    
+    private Slider musicVolSlider;
     public Text musicVolText;
+    
+    private START_MENU_SCRIPT startMenuObj;
+    private OPTIONS_MENU_SCRIPT optionsMenuObj;
 
-    public START_MENU_SCRIPT startMenuObj;
-    public OPTIONS_MENU_SCRIPT optionsMenuObj;
+    private GameObject backGameObj;
+    private GameObject masterVolGameObj;
+    private GameObject effectsVolGameObj;
+    private GameObject musicVolGameObj;
+    private GameObject startMenuGameObj;
+    private GameObject optionsMenuGameObj;
+
+
+    public EventSystem eventSys;
 
 	void Start() 
     {
-        startMenuObj = GameObject.Find("START_MENU_CANVAS").GetComponent<START_MENU_SCRIPT>();
-        optionsMenuObj = GameObject.Find("OPTIONS_MENU_CANVAS").GetComponent<OPTIONS_MENU_SCRIPT>();
-
-        GlobalGameSettings.LoadSettings();
-        startMenu               = startMenu.GetComponent<Canvas>();
-        optionsMenu             = optionsMenu.GetComponent<Canvas>();
-
-        backText                = backText.GetComponent<Button>();
-
-        masterVolSlider         = masterVolSlider.GetComponent<Slider>();
-        effectsVolSlider        = effectsVolSlider.GetComponent<Slider>();
-        musicVolSlider          = musicVolSlider.GetComponent<Slider>();
-
-        int masterVol           = GlobalGameSettings.GetMasterVolume();
-        int effectsVol          = GlobalGameSettings.GetEffectsVolume();
-        int musicVol            = GlobalGameSettings.GetMusicVolume();
         
-        masterVolSlider.value   = masterVol;
-        effectsVolSlider.value  = effectsVol;
-        musicVolSlider.value    = musicVol;
-
-        masterVolText.text      = masterVol.ToString();
-        effectsVolText.text     = effectsVol.ToString();
-        musicVolText.text       = musicVol.ToString();
 	}
+
+    public void LoadComponents()
+    {
+        GlobalGameSettings.LoadSettings();
+        startMenuGameObj = GameObject.Find("START_MENU_CANVAS");
+        optionsMenuGameObj = GameObject.Find("OPTIONS_MENU_CANVAS");
+        backGameObj = GameObject.Find("OPTIONS_BACK_TEXT");
+        masterVolGameObj = GameObject.Find("SOUND_MASTER_SLIDER");
+        musicVolGameObj = GameObject.Find("SOUND_MUSIC_SLIDER");
+        effectsVolGameObj = GameObject.Find("SOUND_EFFECTS_SLIDER");
+
+        startMenu = startMenuGameObj.GetComponent<Canvas>();
+        optionsMenu = optionsMenuGameObj.GetComponent<Canvas>();
+
+        startMenuObj = startMenuGameObj.GetComponent<START_MENU_SCRIPT>();
+        optionsMenuObj = optionsMenuGameObj.GetComponent<OPTIONS_MENU_SCRIPT>();
+
+        backText = backGameObj.GetComponent<Button>();
+        masterVolSlider = masterVolGameObj.GetComponent<Slider>();
+        effectsVolSlider = effectsVolGameObj.GetComponent<Slider>();
+        musicVolSlider = musicVolGameObj.GetComponent<Slider>();
+
+        int masterVol = GlobalGameSettings.GetMasterVolume();
+        int effectsVol = GlobalGameSettings.GetEffectsVolume();
+        int musicVol = GlobalGameSettings.GetMusicVolume();
+
+        masterVolSlider.value = masterVol;
+        effectsVolSlider.value = effectsVol;
+        musicVolSlider.value = musicVol;
+
+        masterVolText.text = masterVol.ToString();
+        effectsVolText.text = effectsVol.ToString();
+        musicVolText.text = musicVol.ToString();
+    }
 
     public void SetSettings()
     {
@@ -94,6 +116,7 @@ public class OPTIONS_MENU_SCRIPT : MonoBehaviour
         masterVolSlider.enabled = false;
         musicVolSlider.enabled = false;
         effectsVolSlider.enabled = false;
+        print("also here");
     }
 
     public void EnableOptions()
@@ -102,5 +125,6 @@ public class OPTIONS_MENU_SCRIPT : MonoBehaviour
         masterVolSlider.enabled = true;
         musicVolSlider.enabled = true;
         effectsVolSlider.enabled = true;
+        eventSys.SetSelectedGameObject(backGameObj);
     }
 }
