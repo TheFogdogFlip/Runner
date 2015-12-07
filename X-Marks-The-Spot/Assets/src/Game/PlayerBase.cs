@@ -47,7 +47,7 @@ public class PlayerBase : MonoBehaviour
         crntSpeed = runSpeed;
         turnSpeed =  runSpeed * 90;
         deceleration =  runSpeed;
-        acceleration =  runSpeed * runSpeed;
+        acceleration =  runSpeed * runSpeed * runSpeed;
         rb = GetComponent<Rigidbody>();
         bc = GetComponent<BoxCollider>();
         crntSlideLength = 1 / runSpeed;
@@ -203,7 +203,6 @@ public class PlayerBase : MonoBehaviour
             //Going up
             if (!isFalling)
             {
-                Debug.Log(crntJumpForce);
                 crntJumpForce -= gravity * Time.deltaTime;
                 transform.Translate(transform.up * crntJumpForce * Time.deltaTime, Space.World);
                 if (crntJumpForce <= 0)
