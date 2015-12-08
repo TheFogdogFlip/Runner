@@ -100,7 +100,7 @@ public class PauseMenu : MonoBehaviour
     
     public void SaveMapPress()
     {
-        World.Instance.Save("SavedMap.png");
+        World.Instance.Save("c:\\mapsave.png");
     }
 
     public void AudioSettingsPress()
