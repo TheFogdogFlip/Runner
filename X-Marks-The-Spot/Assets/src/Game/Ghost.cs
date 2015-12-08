@@ -17,7 +17,6 @@ public class Ghost : PlayerBase
     {
         index = 0;
         rotationTarget = World.Instance.StartDirection.y;
-        crntSpeed = runSpeed;
         rb = GetComponent<Rigidbody>();
         bc = GetComponent<BoxCollider>();
         ghostTimerGameObj = GameObject.Find("ghostTimer");
