@@ -1,14 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Audio;
 
-public class AudioManager : Object{
+public class AudioManager : MonoBehaviour{
 
+    public AudioMixer MasterMixer;
 
-    AudioSource jumpSound;
-    AudioSource slideSound;
-    AudioSource collisionSound;
-    AudioSource fallingSound;
-    AudioSource winSound;
+    public AudioMixerSnapshot paused;
+    public AudioMixerSnapshot unPaused;
+
+    private AudioSource jumpSound;
+    private AudioSource slideSound;
+    private AudioSource collisionSound;
+    private AudioSource fallingSound;
+    private AudioSource winSound;
     public void InitAudio()
     {
         GameObject audioHolder = Instantiate(Resources.Load("AudioHolder", typeof(GameObject))) as GameObject;
@@ -35,6 +40,7 @@ public class AudioManager : Object{
             slideSound.Play();
         }
     }
+
     public void CollisionSound()
     {
         if (!collisionSound.isPlaying)
@@ -42,6 +48,7 @@ public class AudioManager : Object{
             collisionSound.Play();
         }
     }
+
     public void FallingSound()
     {
         if (!fallingSound.isPlaying)
@@ -49,11 +56,37 @@ public class AudioManager : Object{
             fallingSound.Play();
         }
     }
+
     public void WinSound()
     {
         if (!winSound.isPlaying)
         {
             winSound.Play();
         }
+    }
+
+    public void pauseVolume()
+    {
+        paused.TransitionTo(0.01f);
+    }
+
+    public void UnPauseVolume()
+    {
+        unPaused.TransitionTo(0.01f);
+    }
+
+    public void SetMasterVolume(float masterVolume)
+    {
+        MasterMixer.SetFloat("masterVolume", masterVolume);
+    }
+
+    public void SetMusicVolume(float musicVolume)
+    {
+        MasterMixer.SetFloat("musicVolume", musicVolume);
+    }
+
+    public void SetSoundFXVolume(float soundFXVolume)
+    {
+        MasterMixer.SetFloat("soundFXVolume", soundFXVolume);
     }
 }
