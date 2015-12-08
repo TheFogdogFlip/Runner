@@ -38,7 +38,7 @@ public class PlayerBase : MonoBehaviour
     protected Animator anim;
     protected bool isFirstFrame = true;
     protected PlayerState nextAction = PlayerState.Idle;
-    protected bool isActionActive = false;
+    protected bool isActionActive = true;
     protected float crntJumpForce;
 
 
