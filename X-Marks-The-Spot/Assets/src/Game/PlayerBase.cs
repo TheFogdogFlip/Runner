@@ -15,13 +15,14 @@ public class PlayerBase : MonoBehaviour
 {
     //WORKABLE
     protected float runSpeed = 2f; //tiles per second.
-    protected float jumpForce = 1f;
-    protected float gravity = 2f;
+    protected float deceleration = 2f;
+    protected float turnSpeed = 150;
+    protected float jumpForce = 2.2f;
+    protected float gravity = 5f;
     protected bool isJumpLocked = true;
-    protected float turnSpeed = 180;
+    
 
     //DONT TOUCH
-    protected float deceleration;
     protected float acceleration;
     protected float crntSpeed;
     protected bool isJumping = false;
@@ -46,7 +47,6 @@ public class PlayerBase : MonoBehaviour
     void Awake ()
     {
         crntSpeed = runSpeed;
-        deceleration =  runSpeed/2;
         acceleration =  runSpeed * runSpeed * runSpeed;
         rb = GetComponent<Rigidbody>();
         bc = GetComponent<BoxCollider>();
@@ -199,16 +199,16 @@ public class PlayerBase : MonoBehaviour
     {
         if (isJumping)
         {
+            if (crntJumpForce <= 0)
+            {
+                crntJumpForce = jumpForce;
+                isFalling = true;
+            }
             //Going up
-            if (!isFalling)
+            else if (!isFalling)
             {
                 crntJumpForce -= gravity * Time.deltaTime;
                 transform.Translate(transform.up * crntJumpForce * Time.deltaTime, Space.World);
-                if (crntJumpForce <= 0)
-                {
-                    crntJumpForce = jumpForce;
-                    isFalling = true;
-                }
             }
         }
     }
