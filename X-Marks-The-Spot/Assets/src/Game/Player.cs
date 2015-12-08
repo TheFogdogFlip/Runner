@@ -133,15 +133,42 @@ public class Player : PlayerBase
                 SetNextAction(PlayerState.TurnLeft);
                 coolingDown = true;
             }
+            if (isJumpLocked)
+            {
+                if ((Input.GetButtonDown("Slide") || vertical == -1) && !isSliding && !isJumping)
+                {
+                    SetNextAction(PlayerState.Slide);
+                }
 
+                if ((Input.GetButtonDown("Jump") || vertical == 1) && !isJumping && !isSliding)
+                {
+                    SetNextAction(PlayerState.Jump);
+                }
+            }
+        }
+
+        if (!isJumpLocked)
+        {
             if ((Input.GetButtonDown("Slide") || vertical == -1) && !isSliding && !isJumping)
             {
-                SetNextAction(PlayerState.Slide);
+                float time = playerTimerObj.f_time;
+                TimeStamp ts = new TimeStamp();
+                ts.time = time;
+                ts.input = PlayerState.Slide;
+                inputs.Add(ts);
+                Slide();
+                sound.SlideSound();
             }
 
             if ((Input.GetButtonDown("Jump") || vertical == 1) && !isJumping && !isSliding)
             {
-                SetNextAction(PlayerState.Jump);
+                float time = playerTimerObj.f_time;
+                TimeStamp ts = new TimeStamp();
+                ts.time = time;
+                ts.input = PlayerState.Jump;
+                inputs.Add(ts);
+                Jump();
+                sound.JumpSound();
             }
         }
     }

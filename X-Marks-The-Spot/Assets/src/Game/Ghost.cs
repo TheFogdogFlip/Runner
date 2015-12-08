@@ -37,20 +37,41 @@ public class Ghost : PlayerBase
             }
         }
 
-        switch(currEvent)
+        if (isJumpLocked)
         {
-            case PlayerState.TurnRight:
-                SetNextAction(PlayerState.TurnRight);
-                break;
-            case PlayerState.TurnLeft:
-                SetNextAction(PlayerState.TurnLeft);
-                break;
-            case PlayerState.Jump:
-                SetNextAction(PlayerState.Jump);
-                break;
-            case PlayerState.Slide:
-                SetNextAction(PlayerState.Slide);
-                break;
+            switch (currEvent)
+            {
+                case PlayerState.TurnRight:
+                    SetNextAction(PlayerState.TurnRight);
+                    break;
+                case PlayerState.TurnLeft:
+                    SetNextAction(PlayerState.TurnLeft);
+                    break;
+                case PlayerState.Jump:
+                    SetNextAction(PlayerState.Jump);
+                    break;
+                case PlayerState.Slide:
+                    SetNextAction(PlayerState.Slide);
+                    break;
+            }
+        }
+        else
+        {
+            switch (currEvent)
+            {
+                case PlayerState.TurnRight:
+                    SetNextAction(PlayerState.TurnRight);
+                    break;
+                case PlayerState.TurnLeft:
+                    SetNextAction(PlayerState.TurnLeft);
+                    break;
+                case PlayerState.Jump:
+                    Jump();
+                    break;
+                case PlayerState.Slide:
+                    Slide();
+                    break;
+            }
         }
 
         if(currEvent != PlayerState.Idle)

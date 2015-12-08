@@ -17,11 +17,12 @@ public class PlayerBase : MonoBehaviour
     protected float runSpeed = 2f; //tiles per second.
     protected float jumpForce = 1f;
     protected float gravity = 2f;
+    public bool isJumpLocked = false;
+    protected float turnSpeed = 180;
 
     //DONT TOUCH
     protected float deceleration;
     protected float acceleration;
-    protected float turnSpeed;
     protected float crntSpeed;
     protected bool isJumping = false;
     protected bool isFalling = false;
@@ -45,8 +46,7 @@ public class PlayerBase : MonoBehaviour
     void Awake ()
     {
         crntSpeed = runSpeed;
-        turnSpeed =  runSpeed * 90;
-        deceleration =  runSpeed;
+        deceleration =  runSpeed/2;
         acceleration =  runSpeed * runSpeed * runSpeed;
         rb = GetComponent<Rigidbody>();
         bc = GetComponent<BoxCollider>();
