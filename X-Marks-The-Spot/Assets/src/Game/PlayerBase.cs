@@ -17,7 +17,7 @@ public class PlayerBase : MonoBehaviour
     protected float runSpeed = 2f; //tiles per second.
     protected float jumpForce = 1f;
     protected float gravity = 2f;
-    public bool isJumpLocked = true;
+    protected bool isJumpLocked = true;
     protected float turnSpeed = 180;
 
     //DONT TOUCH
@@ -38,7 +38,7 @@ public class PlayerBase : MonoBehaviour
     protected Animator anim;
     protected bool isFirstFrame = true;
     protected PlayerState nextAction = PlayerState.Idle;
-    protected bool isActionActive = false;
+    protected bool isActionActive = true;
     protected float crntJumpForce;
 
 
