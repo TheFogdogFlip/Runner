@@ -13,7 +13,7 @@ public static class GlobalGameSettings
 
     //Can be a value between 0 and 100
     private static int Sound_Master_Volume;
-
+    
     /*
     //Can be a value between 80 and 110
     private static int Field_Of_View;
