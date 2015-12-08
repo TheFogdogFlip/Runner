@@ -43,6 +43,7 @@ public class Player : PlayerBase
         inputs = new List<TimeStamp>();
         sound = new AudioManager();
         sound.InitAudio();
+        anim.Play("Idle");
     }
 
     void Update()
@@ -59,7 +60,7 @@ public class Player : PlayerBase
             {
                 playerTimerObj.TimerRunning = true;
                 playerTimerObj.f_time = 0;
-                anim.Play("Run");
+                anim.SetTrigger("Run");
             }
 
             else
@@ -259,6 +260,7 @@ public class Player : PlayerBase
         transform.rotation = Quaternion.Euler(World.Instance.StartDirection);
         rotationTarget = World.Instance.StartDirection.y;
         nextAction = PlayerState.Idle;
+        anim.Play("Idle");
         sound.CollisionSound();
 
         foreach (GameObject go in ghosts)

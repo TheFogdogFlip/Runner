@@ -17,7 +17,7 @@ public class PlayerBase : MonoBehaviour
     protected float runSpeed = 2f; //tiles per second.
     protected float jumpForce = 1f;
     protected float gravity = 2f;
-    protected bool isJumpLocked = true;
+    protected bool isJumpLocked = false;
     protected float turnSpeed = 180;
 
     //DONT TOUCH
