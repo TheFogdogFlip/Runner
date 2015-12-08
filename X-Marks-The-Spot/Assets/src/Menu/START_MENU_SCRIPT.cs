@@ -65,7 +65,7 @@ public class START_MENU_SCRIPT : MonoBehaviour
         loadMenuObj.LoadComponents();
         helpMenuObj.LoadComponents();
         optionsMenuObj.LoadComponents();
-
+       
         EnableStart();
         loadMenuObj.DisableLoadLevel();
         optionsMenuObj.DisableOptions();
