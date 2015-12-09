@@ -74,7 +74,18 @@ public class PauseMenu : MonoBehaviour
         masterVolSlider = masterVolGameObject.GetComponent<Slider>();
         effectsVolSlider = effectsVolGameObject.GetComponent<Slider>();
         musicVolSlider = musicVolGameObject.GetComponent<Slider>();
-        
+
+        int masterVol = GlobalGameSettings.GetMasterVolume();
+        int effectsVol = GlobalGameSettings.GetEffectsVolume();
+        int musicVol = GlobalGameSettings.GetMusicVolume();
+
+        masterVolSlider.value = masterVol;
+        effectsVolSlider.value = effectsVol;
+        musicVolSlider.value = musicVol;
+
+        masterVolText.text = masterVol.ToString();
+        effectsVolText.text = effectsVol.ToString();
+        musicVolText.text = musicVol.ToString();        
     }
 
 	void Update () 
@@ -110,6 +121,30 @@ public class PauseMenu : MonoBehaviour
         DisablePauseMenu();
         EnableAudioSettings();
         eventSys.SetSelectedGameObject(backGameObject);
+    }
+
+    public void SetMasterVolume()
+    {
+        int val = (int)masterVolSlider.value;
+        masterVolText.text = val.ToString();
+        GlobalGameSettings.SetMasterVolume(val);
+        GlobalGameSettings.SaveSettings();
+    }
+
+    public void SetSoundEffectsVolume()
+    {
+        int val = (int)effectsVolSlider.value;
+        effectsVolText.text = val.ToString();
+        GlobalGameSettings.SetEffectsVolume(val);
+        GlobalGameSettings.SaveSettings();
+    }
+
+    public void SetMusicVolume()
+    {
+        int val = (int)musicVolSlider.value;
+        musicVolText.text = val.ToString();
+        GlobalGameSettings.SetMusicVolume(val);
+        GlobalGameSettings.SaveSettings();
     }
 
     public void BackPress()
