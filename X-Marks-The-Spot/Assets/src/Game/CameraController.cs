@@ -20,7 +20,7 @@ public class CameraController : MonoBehaviour {
     private Vector3 tiltVec;
     private float tilt;
     private Transform lookAtTrans;
-    private int isTurning;
+    private bool isTurning;
     private GameObject timer;
     private Timer_Countdown timerObj;
 
@@ -61,7 +61,7 @@ public class CameraController : MonoBehaviour {
         {
             distance = 1.0f;
         }
-        else if (isTurning != 0)
+        else if (isTurning)
         {
             distance = Mathf.Lerp(distance, 1.0f, distanceDamping * Time.deltaTime);
         }

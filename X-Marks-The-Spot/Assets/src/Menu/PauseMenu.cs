@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
+using System.IO;
 
 public class PauseMenu : MonoBehaviour 
 {
@@ -40,8 +41,10 @@ public class PauseMenu : MonoBehaviour
     public EventSystem eventSys;
 
 
+
 	void Start () 
     {
+        Time.timeScale = 1;
         LoadComponents();
         DisablePauseMenu();
         DisableAudioSettings();
@@ -75,6 +78,18 @@ public class PauseMenu : MonoBehaviour
         effectsVolSlider = effectsVolGameObject.GetComponent<Slider>();
         musicVolSlider = musicVolGameObject.GetComponent<Slider>();
 
+        int masterVol = GlobalGameSettings.GetMasterVolume();
+        int effectsVol = GlobalGameSettings.GetEffectsVolume();
+        int musicVol = GlobalGameSettings.GetMusicVolume();
+
+        masterVolSlider.value = masterVol;
+        effectsVolSlider.value = effectsVol;
+        musicVolSlider.value = musicVol;
+
+        masterVolText.text = masterVol.ToString();
+        effectsVolText.text = effectsVol.ToString();
+        musicVolText.text = musicVol.ToString();        
+
     }
 
 	void Update () 
@@ -90,6 +105,7 @@ public class PauseMenu : MonoBehaviour
 
     public void ExitGamePress()
     {
+        Time.timeScale = 1;
         Application.LoadLevel("Main_Menu");
     }
 
@@ -103,7 +119,32 @@ public class PauseMenu : MonoBehaviour
     
     public void SaveMapPress()
     {
-        World.Instance.Save("c:\\mapsave.png");
+        //check all files MAPSAVE*.PNG in current directory
+        string path = Directory.GetCurrentDirectory();
+        //DirectoryInfo dir = new DirectoryInfo(path);
+        string[] info = Directory.GetFiles(path, "MAPSAVE*.PNG");
+
+        //save the current map as the last one in the list
+        World.Instance.Save("MAPSAVE" +  info.Length + ".PNG");
+
+        //Another way to do it that might be better in the long run
+        //Save it to C:\Users\user\AppData\LocalLow\DefaultCompany instead
+
+        //check all files MAPSAVE*.PNG in current directory
+        //string path = Application.persistentDataPath;
+
+        //DirectoryInfo dir = new DirectoryInfo(path);
+        //string[] info = Directory.GetFiles(path, "MAPSAVE*.PNG");
+
+        //save the current map as the last one in the list
+        //World.Instance.Save("MAPSAVE" +  info.Length + ".PNG");
+        //World.Instance.Save(path + "MAPSAVE" + info.Length + ".PNG");
+  
+    }
+
+    private void GetCurrentDirectory()
+    {
+        throw new System.NotImplementedException();
     }
 
     public void AudioSettingsPress()
@@ -111,6 +152,30 @@ public class PauseMenu : MonoBehaviour
         DisablePauseMenu();
         EnableAudioSettings();
         eventSys.SetSelectedGameObject(backGameObject);
+    }
+
+    public void SetMasterVolume()
+    {
+        int val = (int)masterVolSlider.value;
+        masterVolText.text = val.ToString();
+        GlobalGameSettings.SetMasterVolume(val);
+        GlobalGameSettings.SaveSettings();
+    }
+
+    public void SetSoundEffectsVolume()
+    {
+        int val = (int)effectsVolSlider.value;
+        effectsVolText.text = val.ToString();
+        GlobalGameSettings.SetEffectsVolume(val);
+        GlobalGameSettings.SaveSettings();
+    }
+
+    public void SetMusicVolume()
+    {
+        int val = (int)musicVolSlider.value;
+        musicVolText.text = val.ToString();
+        GlobalGameSettings.SetMusicVolume(val);
+        GlobalGameSettings.SaveSettings();
     }
 
     public void BackPress()

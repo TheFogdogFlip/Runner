@@ -114,7 +114,7 @@ public class Player : PlayerBase
         if (cooldownCount == 0)
         {
             coolingDown = false;
-            cooldownCount = 25;
+            cooldownCount = 15;
         }
         else
         {
@@ -244,12 +244,10 @@ public class Player : PlayerBase
             bc.size = new Vector3(2.0f * bc.size.x, 2.0f * bc.size.y, 2.0f * bc.size.z);
         }
 
-        turnRotation = false;
+        isTurning = false;
         isJumping = false;
         isFalling = false;
         isSliding = false;
-        turnPhase = 0;
-        crntSpeed = runSpeed;
         crntJumpForce = jumpForce;
         transform.position = World.Instance.StartPosition;
         transform.rotation = Quaternion.Euler(World.Instance.StartDirection);
@@ -268,6 +266,7 @@ public class Player : PlayerBase
     protected override void Falling()
     {
         AudioManager.Instance.FallingSound();
+        anim.SetTrigger("Slide");
     }
     protected override void GoalFunc()
     {
@@ -282,9 +281,9 @@ public class Player : PlayerBase
         rec.finishedTime = playerTimerObj.f_time;
 
     }
-    public int GetTurn()
+    public bool GetTurn()
     {
-        return turnPhase;
+        return isTurning;
     }
 
     public PlayerState GetNextAction()

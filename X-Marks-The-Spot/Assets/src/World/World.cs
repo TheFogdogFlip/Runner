@@ -176,9 +176,12 @@ public class World
 
         RotationNode rotationNode = startTile.Rotations.Find(node => node.Rotation == angle);
         directions.Add(new TileDirectionNode(direction, startX, startZ, rotationNode.Directions[0].Connections));
-
+        int i = 0;
         while (true)
         {
+            if (i > 200)
+                break;
+            i++;
             if (directions.Count == 0)
                 break;
 
@@ -216,6 +219,37 @@ public class World
                     directions.Add(new TileDirectionNode(item.Direction, dir.X, dir.Y, item.Connections));
             }
             directions.Remove(dir);
+        }
+
+        foreach(var dir in directions)
+        {
+            var connection = dir.Connections.Find(t => t.TileName.ToLower() == "end");
+            var tile = findTile(connection.TileName);
+            var rotation = getRandomRotation(connection, rand);
+            color = findColor(tile, rotation).ToColor();
+            var rN = tile.Rotations.Find(r => r.Rotation == rotation);
+
+            switch (dir.Direction)
+            {
+                case 0:
+                    dir.Y += 1;
+                    break;
+                case 1:
+                    dir.X += 1;
+                    break;
+                case 2:
+                    dir.Y -= 1;
+                    break;
+                case 3:
+                    dir.X -= 1;
+                    break;
+            }
+
+            if (map.GetPixel(dir.X, dir.Y) == Color.white)
+            {
+                map.SetPixel(dir.X, dir.Y, color);
+                ends.Add(new EndPosition() { X = dir.X, Y = dir.Y, Rotation = rN.Rotation });
+            }
         }
 
         var end = getRandomEnd(ends, rand);
