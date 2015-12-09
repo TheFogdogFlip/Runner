@@ -179,7 +179,7 @@ public class World
         int i = 0;
         while (true)
         {
-            if (i > 100)
+            if (i > 200)
                 break;
             i++;
             if (directions.Count == 0)
@@ -227,6 +227,7 @@ public class World
             var tile = findTile(connection.TileName);
             var rotation = getRandomRotation(connection, rand);
             color = findColor(tile, rotation).ToColor();
+            var rN = tile.Rotations.Find(r => r.Rotation == rotation);
 
             switch (dir.Direction)
             {
@@ -245,7 +246,10 @@ public class World
             }
 
             if (map.GetPixel(dir.X, dir.Y) == Color.white)
+            {
                 map.SetPixel(dir.X, dir.Y, color);
+                ends.Add(new EndPosition() { X = dir.X, Y = dir.Y, Rotation = rN.Rotation });
+            }
         }
 
         var end = getRandomEnd(ends, rand);
