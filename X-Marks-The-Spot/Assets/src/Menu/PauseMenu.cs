@@ -118,11 +118,25 @@ public class PauseMenu : MonoBehaviour
     {
         //check all files MAPSAVE*.PNG in current directory
         string path = Directory.GetCurrentDirectory();
-        DirectoryInfo dir = new DirectoryInfo(path);
+        //DirectoryInfo dir = new DirectoryInfo(path);
         string[] info = Directory.GetFiles(path, "MAPSAVE*.PNG");
 
         //save the current map as the last one in the list
         World.Instance.Save("MAPSAVE" +  info.Length + ".PNG");
+
+        //Another way to do it that might be better in the long run
+        //Save it to C:\Users\user\AppData\LocalLow\DefaultCompany instead
+
+        //check all files MAPSAVE*.PNG in current directory
+        //string path = Application.persistentDataPath;
+
+        //DirectoryInfo dir = new DirectoryInfo(path);
+        //string[] info = Directory.GetFiles(path, "MAPSAVE*.PNG");
+
+        //save the current map as the last one in the list
+        //World.Instance.Save("MAPSAVE" +  info.Length + ".PNG");
+        //World.Instance.Save(path + "MAPSAVE" + info.Length + ".PNG");
+  
     }
 
     private void GetCurrentDirectory()
