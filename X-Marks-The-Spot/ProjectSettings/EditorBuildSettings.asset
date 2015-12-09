@@ -13,7 +13,7 @@ EditorBuildSettings:
     path: Assets/Options_menu.unity
   - enabled: 0
     path: Assets/Load_level.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Test_game.unity
   - enabled: 0
     path: Assets/Game_Scene.unity

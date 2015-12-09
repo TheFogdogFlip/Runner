@@ -41,6 +41,7 @@ public class PauseMenu : MonoBehaviour
 
 	void Start () 
     {
+        Time.timeScale = 1;
         LoadComponents();
         DisablePauseMenu();
         DisableAudioSettings();
@@ -88,6 +89,7 @@ public class PauseMenu : MonoBehaviour
 
     public void ExitGamePress()
     {
+        Time.timeScale = 1;
         Application.LoadLevel("Main_Menu");
     }
 
