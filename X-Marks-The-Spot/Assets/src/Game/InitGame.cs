@@ -7,11 +7,9 @@ public class InitGame : MonoBehaviour {
 
     public Canvas gameUI;
     public Canvas loadingScreen;
-    public Camera loadingScreenCamera;
     public Text loadingText;
     void Awake()
     {
-        loadingScreenCamera.enabled = true;
         loadingScreen.enabled = true;
         gameUI.enabled = false;
 
@@ -31,7 +29,6 @@ public class InitGame : MonoBehaviour {
         loadingText.text = "Done!";
         loadingScreen.enabled = false;
         gameUI.enabled = true;
-        loadingScreenCamera.enabled = false;
     }
 
 	// Use this for initialization
