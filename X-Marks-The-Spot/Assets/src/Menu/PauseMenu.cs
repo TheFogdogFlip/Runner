@@ -39,6 +39,7 @@ public class PauseMenu : MonoBehaviour
     
     public EventSystem eventSys;
 
+
 	void Start () 
     {
         LoadComponents();
@@ -73,7 +74,7 @@ public class PauseMenu : MonoBehaviour
         masterVolSlider = masterVolGameObject.GetComponent<Slider>();
         effectsVolSlider = effectsVolGameObject.GetComponent<Slider>();
         musicVolSlider = musicVolGameObject.GetComponent<Slider>();
-        
+
     }
 
 	void Update () 
@@ -82,7 +83,8 @@ public class PauseMenu : MonoBehaviour
         {
             Time.timeScale = 0;
             EnablePauseMenu();
-            eventSys.SetSelectedGameObject(resumeGameObject);            
+            eventSys.SetSelectedGameObject(resumeGameObject);
+            AudioManager.Instance.pauseVolume();
         }
 	}
 
@@ -96,6 +98,7 @@ public class PauseMenu : MonoBehaviour
         DisablePauseMenu();
 
         Time.timeScale = 1;
+        AudioManager.Instance.UnPauseVolume();
     }
     
     public void SaveMapPress()

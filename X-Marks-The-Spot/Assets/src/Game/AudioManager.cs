@@ -2,18 +2,37 @@
 using System.Collections;
 using UnityEngine.Audio;
 
-public class AudioManager : MonoBehaviour{
+public class AudioManager : Object{
 
-    public AudioMixer MasterMixer;
+    public static AudioMixer MasterMixer;
 
-    public AudioMixerSnapshot paused;
-    public AudioMixerSnapshot unPaused;
+    public static AudioMixerSnapshot paused;
+    public static AudioMixerSnapshot unPaused;
 
-    private AudioSource jumpSound;
-    private AudioSource slideSound;
-    private AudioSource collisionSound;
-    private AudioSource fallingSound;
-    private AudioSource winSound;
+    private static AudioSource jumpSound;
+    private static AudioSource slideSound;
+    private static AudioSource collisionSound;
+    private static AudioSource fallingSound;
+    private static AudioSource winSound;
+
+    private static AudioManager audioManager;
+
+    public static AudioManager Instance 
+    {
+        get 
+        {
+            if (audioManager == null)
+                audioManager = new AudioManager();
+
+            return audioManager;
+        }
+    }
+
+    private AudioManager()
+    { 
+        
+    }
+
     public void InitAudio()
     {
         GameObject audioHolder = Instantiate(Resources.Load("AudioHolder", typeof(GameObject))) as GameObject;

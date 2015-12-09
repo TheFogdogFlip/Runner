@@ -18,11 +18,15 @@ public class InitGame : MonoBehaviour {
         loadingText.text = "Generating World...";
         World.Instance.Generate();
 
+        AudioManager.Instance.InitAudio();
+
         loadingText.text = "Loading Player...";
         Instantiate(Resources.Load("Player", typeof(GameObject)), World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection));
 
         loadingText.text = "Loading Camera...";
         Instantiate(Resources.Load("PlayerCamera", typeof(GameObject)), World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection));
+
+        
 
         loadingText.text = "Done!";
         loadingScreen.enabled = false;

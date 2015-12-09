@@ -27,9 +27,6 @@ public class Player : PlayerBase
     private int cooldownCount = 25;
     private bool coolingDown = false;
 
-    //Audio
-    private AudioManager sound;
-
     void Start ()
     {
         
@@ -41,8 +38,6 @@ public class Player : PlayerBase
         ghostinputs = new List<List<TimeStamp>>();
         ghosts = new List<GameObject>();
         inputs = new List<TimeStamp>();
-        sound = new AudioManager();
-        sound.InitAudio();
         anim.Play("Idle");
     }
 
@@ -158,7 +153,7 @@ public class Player : PlayerBase
                 ts.input = PlayerState.Slide;
                 inputs.Add(ts);
                 Slide();
-                sound.SlideSound();
+                AudioManager.Instance.SlideSound();
             }
 
             if ((Input.GetButtonDown("Jump") || vertical == 1) && !isJumping && !isSliding)
@@ -169,7 +164,7 @@ public class Player : PlayerBase
                 ts.input = PlayerState.Jump;
                 inputs.Add(ts);
                 Jump();
-                sound.JumpSound();
+                AudioManager.Instance.JumpSound();
             }
         }
     }
@@ -235,8 +230,8 @@ public class Player : PlayerBase
 
             if (nextAction == PlayerState.TurnLeft) TurnLeft();
             if (nextAction == PlayerState.TurnRight) TurnRight();
-            if (nextAction == PlayerState.Slide) { Slide(); sound.SlideSound(); }
-            if (nextAction == PlayerState.Jump) { Jump(); sound.JumpSound(); }
+            if (nextAction == PlayerState.Slide) { Slide(); AudioManager.Instance.SlideSound(); }
+            if (nextAction == PlayerState.Jump) { Jump(); AudioManager.Instance.JumpSound(); }
 
             nextAction = PlayerState.Idle;
         }
@@ -261,7 +256,7 @@ public class Player : PlayerBase
         rotationTarget = World.Instance.StartDirection.y;
         nextAction = PlayerState.Idle;
         anim.Play("Idle");
-        sound.CollisionSound();
+        AudioManager.Instance.CollisionSound();
 
         foreach (GameObject go in ghosts)
         {
@@ -272,11 +267,11 @@ public class Player : PlayerBase
     }
     protected override void Falling()
     {
-        sound.FallingSound();
+        AudioManager.Instance.FallingSound();
     }
     protected override void GoalFunc()
     {
-        sound.WinSound();
+        AudioManager.Instance.WinSound();
         ctdTimerObj.textObj.enabled = true;
         ctdTimerObj.textObj.text = "Victory!";
 

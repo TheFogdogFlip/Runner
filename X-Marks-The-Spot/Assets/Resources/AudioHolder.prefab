@@ -14,7 +14,6 @@ GameObject:
   - 82: {fileID: 8250056}
   - 82: {fileID: 8215940}
   - 82: {fileID: 8217008}
-  - 114: {fileID: 11471024}
   m_Layer: 0
   m_Name: AudioHolder
   m_TagString: Untagged
@@ -458,19 +457,6 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
---- !u!114 &11471024
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 172388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5be82375b9b8ddb4fb176540d5e32c86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  paused: {fileID: 24548570, guid: 1b6981bdb0afc784d94178e3341d88f3, type: 2}
-  unPaused: {fileID: 24500003, guid: 1b6981bdb0afc784d94178e3341d88f3, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -512,6 +498,11 @@ Prefab:
       propertyPath: unPaused
       value: 
       objectReference: {fileID: 24500003, guid: 1b6981bdb0afc784d94178e3341d88f3,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: MasterMixer
+      value: 
+      objectReference: {fileID: 24100000, guid: 1b6981bdb0afc784d94178e3341d88f3,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
