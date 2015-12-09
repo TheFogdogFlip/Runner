@@ -99,7 +99,7 @@ public class PauseMenu : MonoBehaviour
             Time.timeScale = 0;
             EnablePauseMenu();
             eventSys.SetSelectedGameObject(resumeGameObject);
-            AudioManager.Instance.pauseVolume();
+            //AudioManager.Instance.pauseVolume();
         }
 	}
 
@@ -114,7 +114,7 @@ public class PauseMenu : MonoBehaviour
         DisablePauseMenu();
 
         Time.timeScale = 1;
-        AudioManager.Instance.UnPauseVolume();
+        //AudioManager.Instance.UnPauseVolume();
     }
     
     public void SaveMapPress()
