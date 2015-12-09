@@ -103,6 +103,12 @@ public class PauseMenu : MonoBehaviour
         }
 	}
 
+    public void ReloadGamePress()
+    {
+        Time.timeScale = 1;
+        Application.LoadLevel("Scene");
+    }
+
     public void ExitGamePress()
     {
         Time.timeScale = 1;
