@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
+using System.IO;
 
 public class PauseMenu : MonoBehaviour 
 {
@@ -38,6 +39,8 @@ public class PauseMenu : MonoBehaviour
     private Button backText;
     
     public EventSystem eventSys;
+
+
 
 	void Start () 
     {
@@ -113,7 +116,18 @@ public class PauseMenu : MonoBehaviour
     
     public void SaveMapPress()
     {
-        World.Instance.Save("mapsave.png");
+        //check all files MAPSAVE*.PNG in current directory
+        string path = Directory.GetCurrentDirectory();
+        DirectoryInfo dir = new DirectoryInfo(path);
+        string[] info = Directory.GetFiles(path, "MAPSAVE*.PNG");
+
+        //save the current map as the last one in the list
+        World.Instance.Save("MAPSAVE" +  info.Length + ".PNG");
+    }
+
+    private void GetCurrentDirectory()
+    {
+        throw new System.NotImplementedException();
     }
 
     public void AudioSettingsPress()
