@@ -151,6 +151,12 @@ public class START_MENU_SCRIPT : MonoBehaviour
         }
     }
 
+  
+    public void HighlightItem(GameObject gameObj)
+    {
+        eventSys.SetSelectedGameObject(gameObj);
+    }
+
     public void ReduceAlpha()
     {
         imageFront.CrossFadeAlpha(0, 0.5f, false);

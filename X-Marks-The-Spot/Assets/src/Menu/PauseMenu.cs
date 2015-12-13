@@ -103,6 +103,11 @@ public class PauseMenu : MonoBehaviour
         }
 	}
 
+    public void HightlightItem(GameObject gameObj)
+    {
+        eventSys.SetSelectedGameObject(gameObj);
+    }
+
     public void ReloadGamePress()
     {
         Time.timeScale = 1;

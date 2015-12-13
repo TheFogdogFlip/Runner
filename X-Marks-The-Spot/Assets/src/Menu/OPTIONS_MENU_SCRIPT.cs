@@ -116,7 +116,6 @@ public class OPTIONS_MENU_SCRIPT : MonoBehaviour
         masterVolSlider.enabled = false;
         musicVolSlider.enabled = false;
         effectsVolSlider.enabled = false;
-        print("also here");
     }
 
     public void EnableOptions()

@@ -48,7 +48,6 @@ public class LOAD_LEVEL_SCRIPT : MonoBehaviour
     public void DisableLoadLevel()
     {
         backText.enabled = false;
-        print("here");
     }
 
     public void EnableLoadLevel()

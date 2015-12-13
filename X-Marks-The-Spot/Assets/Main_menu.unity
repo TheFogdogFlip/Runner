@@ -280,6 +280,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 166118180}
   - 114: {fileID: 166118181}
+  - 114: {fileID: 166118182}
   m_Layer: 5
   m_Name: SOUND_MASTER_SLIDER
   m_TagString: Untagged
@@ -333,7 +334,7 @@ MonoBehaviour:
     m_PressedColor: {r: .784313738, g: .784313738, b: .784313738, a: 1}
     m_DisabledColor: {r: .784313738, g: .784313738, b: .784313738, a: .501960814}
     m_ColorMultiplier: 1
-    m_FadeDuration: .100000001
+    m_FadeDuration: .5
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -368,6 +369,36 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &166118182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 166118179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 656565305}
+          m_MethodName: HighlightItem
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 166118179}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &174497556
 GameObject:
   m_ObjectHideFlags: 0
@@ -1147,6 +1178,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 416200348}
   - 114: {fileID: 416200349}
+  - 114: {fileID: 416200350}
   m_Layer: 5
   m_Name: SOUND_EFFECTS_SLIDER
   m_TagString: Untagged
@@ -1200,7 +1232,7 @@ MonoBehaviour:
     m_PressedColor: {r: .784313738, g: .784313738, b: .784313738, a: 1}
     m_DisabledColor: {r: .784313738, g: .784313738, b: .784313738, a: .501960814}
     m_ColorMultiplier: 1
-    m_FadeDuration: .100000001
+    m_FadeDuration: .5
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -1235,6 +1267,36 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &416200350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 416200347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 656565305}
+          m_MethodName: HighlightItem
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 416200347}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &474489173
 GameObject:
   m_ObjectHideFlags: 0
@@ -1835,7 +1897,7 @@ GameObject:
   - 222: {fileID: 729835419}
   - 114: {fileID: 729835417}
   - 114: {fileID: 729835416}
-  - 132: {fileID: 729835420}
+  - 114: {fileID: 729835420}
   m_Layer: 5
   m_Name: OPTIONS_BACK_TEXT
   m_TagString: Untagged
@@ -1950,29 +2012,36 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 729835415}
---- !u!132 &729835420
-GUIText:
+--- !u!114 &729835420
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 729835415}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Text: 
-  m_Anchor: 0
-  m_Alignment: 0
-  m_PixelOffset: {x: 0, y: 0}
-  m_LineSpacing: 1
-  m_TabSize: 4
-  m_Font: {fileID: 12800000, guid: f706e2d022864b04183fdefabcf00aa6, type: 3}
-  m_Material: {fileID: 0}
-  m_FontSize: 0
-  m_FontStyle: 0
-  m_Color:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_PixelCorrect: 1
-  m_RichText: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 656565305}
+          m_MethodName: HighlightItem
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 729835415}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &730646330
 GameObject:
   m_ObjectHideFlags: 0
@@ -1984,6 +2053,7 @@ GameObject:
   - 222: {fileID: 730646334}
   - 114: {fileID: 730646332}
   - 114: {fileID: 730646331}
+  - 114: {fileID: 730646335}
   m_Layer: 5
   m_Name: LOAD_LEVEL_TEXT
   m_TagString: Untagged
@@ -2098,6 +2168,36 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 730646330}
+--- !u!114 &730646335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 730646330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 656565305}
+          m_MethodName: HighlightItem
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 730646330}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &774142029
 GameObject:
   m_ObjectHideFlags: 0
@@ -2109,6 +2209,7 @@ GameObject:
   - 222: {fileID: 774142032}
   - 114: {fileID: 774142031}
   - 114: {fileID: 774142033}
+  - 114: {fileID: 774142034}
   m_Layer: 5
   m_Name: PLAY_TEXT
   m_TagString: Untagged
@@ -2225,6 +2326,36 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &774142034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 774142029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 656565305}
+          m_MethodName: HighlightItem
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 774142029}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &831951408
 GameObject:
   m_ObjectHideFlags: 0
@@ -2465,6 +2596,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 980673780}
   - 114: {fileID: 980673781}
+  - 114: {fileID: 980673782}
   m_Layer: 5
   m_Name: SOUND_MUSIC_SLIDER
   m_TagString: Untagged
@@ -2518,7 +2650,7 @@ MonoBehaviour:
     m_PressedColor: {r: .784313738, g: .784313738, b: .784313738, a: 1}
     m_DisabledColor: {r: .784313738, g: .784313738, b: .784313738, a: .501960814}
     m_ColorMultiplier: 1
-    m_FadeDuration: .100000001
+    m_FadeDuration: .5
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -2553,6 +2685,36 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &980673782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 980673779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 656565305}
+          m_MethodName: HighlightItem
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 980673779}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &1103807016
 GameObject:
   m_ObjectHideFlags: 0
@@ -2803,6 +2965,7 @@ GameObject:
   - 222: {fileID: 1221040882}
   - 114: {fileID: 1221040881}
   - 114: {fileID: 1221040880}
+  - 114: {fileID: 1221040884}
   m_Layer: 5
   m_Name: NO
   m_TagString: Untagged
@@ -2917,6 +3080,36 @@ RectTransform:
   m_AnchoredPosition: {x: 190, y: 15}
   m_SizeDelta: {x: 68, y: 30}
   m_Pivot: {x: .5, y: .5}
+--- !u!114 &1221040884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1221040879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 656565305}
+          m_MethodName: HighlightItem
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1221040879}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &1234657432
 GameObject:
   m_ObjectHideFlags: 0
@@ -3088,6 +3281,7 @@ GameObject:
   - 222: {fileID: 1307103771}
   - 114: {fileID: 1307103769}
   - 114: {fileID: 1307103768}
+  - 114: {fileID: 1307103772}
   m_Layer: 5
   m_Name: QUIT_TEXT
   m_TagString: Untagged
@@ -3202,6 +3396,36 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1307103767}
+--- !u!114 &1307103772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1307103767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 656565305}
+          m_MethodName: HighlightItem
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1307103767}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &1374020579
 GameObject:
   m_ObjectHideFlags: 0
@@ -3532,6 +3756,7 @@ GameObject:
   - 222: {fileID: 1640000975}
   - 114: {fileID: 1640000974}
   - 114: {fileID: 1640000973}
+  - 114: {fileID: 1640000977}
   m_Layer: 5
   m_Name: LOAD_BACK_TEXT
   m_TagString: Untagged
@@ -3646,6 +3871,36 @@ RectTransform:
   m_AnchoredPosition: {x: 278, y: 96.5}
   m_SizeDelta: {x: 73, y: 31}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1640000977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1640000972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 656565305}
+          m_MethodName: HighlightItem
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1640000972}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &1663078163
 GameObject:
   m_ObjectHideFlags: 0
@@ -3729,6 +3984,7 @@ GameObject:
   - 222: {fileID: 1696214602}
   - 114: {fileID: 1696214601}
   - 114: {fileID: 1696214600}
+  - 114: {fileID: 1696214603}
   m_Layer: 5
   m_Name: HELP_TEXT
   m_TagString: Untagged
@@ -3843,6 +4099,36 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1696214598}
+--- !u!114 &1696214603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1696214598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 656565305}
+          m_MethodName: HighlightItem
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1696214598}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &1798502323
 GameObject:
   m_ObjectHideFlags: 0
@@ -3854,6 +4140,7 @@ GameObject:
   - 222: {fileID: 1798502327}
   - 114: {fileID: 1798502326}
   - 114: {fileID: 1798502325}
+  - 114: {fileID: 1798502328}
   m_Layer: 5
   m_Name: YES
   m_TagString: Untagged
@@ -3968,6 +4255,36 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1798502323}
+--- !u!114 &1798502328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1798502323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 656565305}
+          m_MethodName: HighlightItem
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1798502323}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &1813137373
 GameObject:
   m_ObjectHideFlags: 0
@@ -4051,6 +4368,7 @@ GameObject:
   - 222: {fileID: 1814796935}
   - 114: {fileID: 1814796934}
   - 114: {fileID: 1814796933}
+  - 114: {fileID: 1814796937}
   m_Layer: 5
   m_Name: HELP_BACK_TEXT
   m_TagString: Untagged
@@ -4165,6 +4483,36 @@ RectTransform:
   m_AnchoredPosition: {x: 278, y: 96.5}
   m_SizeDelta: {x: 73, y: 31}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1814796937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1814796932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 656565305}
+          m_MethodName: HighlightItem
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1814796932}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &1869071379
 GameObject:
   m_ObjectHideFlags: 0
@@ -4212,7 +4560,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .742647052, g: .742647052, b: .742647052, a: .772000015}
+  m_Color: {r: .132352948, g: .132352948, b: .132352948, a: .772000015}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -4457,6 +4805,7 @@ GameObject:
   - 222: {fileID: 2040690268}
   - 114: {fileID: 2040690267}
   - 114: {fileID: 2040690266}
+  - 114: {fileID: 2040690269}
   m_Layer: 5
   m_Name: OPTIONS_TEXT
   m_TagString: Untagged
@@ -4573,6 +4922,36 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2040690264}
+--- !u!114 &2040690269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2040690264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 656565305}
+          m_MethodName: HighlightItem
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 2040690264}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &2044404085
 GameObject:
   m_ObjectHideFlags: 0
