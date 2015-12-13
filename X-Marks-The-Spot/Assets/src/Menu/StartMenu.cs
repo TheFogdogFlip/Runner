@@ -3,27 +3,8 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class START_MENU_SCRIPT : MonoBehaviour
+public class StartMenu : MonoBehaviour
 {
-    private Sprite[] sprites;
-
-    private GameObject Timer_GO;
-    //private GameObject panelFront;
-    //private GameObject panelBack;
-
-    //private Image imageBack;
-   //private Image imageFront;
-
-    private Timer_Menu menuTimer;
-
-    private int currentSprite;
-    private int nextSprite;
-
-    private string resourceName = "Backgrounds";
-
-    private bool needAlphaReduced;
-    private bool needPictureChanged;
-
     private GameObject playGameObj;
     private GameObject loadGameObj;
     private GameObject helpGameObj;
@@ -36,10 +17,10 @@ public class START_MENU_SCRIPT : MonoBehaviour
     private GameObject loadMenuGameObj;
     private GameObject optionsMenuGameObj;
 
-    private START_MENU_SCRIPT startMenuObj;
-    private OPTIONS_MENU_SCRIPT optionsMenuObj;
-    private LOAD_LEVEL_SCRIPT loadMenuObj;
-    private HELP_MENU_SCRIPT helpMenuObj;
+    private StartMenu startMenuObj;
+    private OptionsMenu optionsMenuObj;
+    private LoadLevel loadMenuObj;
+    private HelpMenu helpMenuObj;
 
     public Canvas quitMenu;
     public Canvas optionsMenu;
@@ -55,9 +36,15 @@ public class START_MENU_SCRIPT : MonoBehaviour
     private Button noText;
     private Button yesText;
 
+    private TimerMenu menuTimer;
+
     public EventSystem eventSys;
 
-	void Start ()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+	void 
+    Start ()
     {
         LoadComponents();
         loadMenuObj.LoadComponents();
@@ -73,29 +60,23 @@ public class START_MENU_SCRIPT : MonoBehaviour
 
 
 	}
-    public void LoadComponents()
+
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    LoadComponents()
     {
-        needAlphaReduced            = true;
-        needPictureChanged          = true;
-
-        currentSprite               = 0;
-        Timer_GO                    = GameObject.Find("menuTimer");
-        //panelBack                   = GameObject.Find("PANEL_BACKGROUND_BOT");
-        //panelFront                  = GameObject.Find("PANEL_BACKGROUND_TOP");
-        //panelFront.layer            = 8;
-        menuTimer                   = Timer_GO.GetComponent<Timer_Menu>();
-        sprites                     = Resources.LoadAll<Sprite>(resourceName);
-        //imageFront                  = panelFront.GetComponent<Image>();
-        //imageFront.sprite           = sprites[currentSprite];
-
         startMenuGameObj            = GameObject.Find("START_MENU_CANVAS");
         helpMenuGameObj             = GameObject.Find("HELP_MENU_CANVAS");
         loadMenuGameObj             = GameObject.Find("LOAD_LEVEL_CANVAS");
         optionsMenuGameObj          = GameObject.Find("OPTIONS_MENU_CANVAS");
 
-        helpMenuObj                 = helpMenuGameObj.GetComponent<HELP_MENU_SCRIPT>();
-        loadMenuObj                 = loadMenuGameObj.GetComponent<LOAD_LEVEL_SCRIPT>();
-        optionsMenuObj              = optionsMenuGameObj.GetComponent<OPTIONS_MENU_SCRIPT>();
+        menuTimer                   = GameObject.Find("menuTimer").GetComponent<TimerMenu>();
+
+        helpMenuObj                 = helpMenuGameObj.GetComponent<HelpMenu>();
+        loadMenuObj                 = loadMenuGameObj.GetComponent<LoadLevel>();
+        optionsMenuObj              = optionsMenuGameObj.GetComponent<OptionsMenu>();
 
         quitMenu                    = quitMenu.GetComponent<Canvas>();
         optionsMenu                 = optionsMenu.GetComponent<Canvas>();
@@ -126,7 +107,11 @@ public class START_MENU_SCRIPT : MonoBehaviour
         startMenu.enabled           = true;
     }
 
-    void Update()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    void 
+    Update()
     {
         if (menuTimer.f_time > 0.77 && menuTimer.isActive)
         {
@@ -135,13 +120,20 @@ public class START_MENU_SCRIPT : MonoBehaviour
         
     }
 
-  
-    public void HighlightItem(GameObject gameObj)
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    HighlightItem(GameObject gameObj)
     {
         eventSys.SetSelectedGameObject(gameObj);
     }
 
-	public void ExitPress()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+	public void 
+    ExitPress()
     {
         quitMenu.enabled = true;
         yesText.enabled = true;
@@ -150,7 +142,11 @@ public class START_MENU_SCRIPT : MonoBehaviour
         DisableStart();
     }
 
-    public void NoPress()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    NoPress()
     {
         quitMenu.enabled = false;
         yesText.enabled = false;
@@ -158,19 +154,32 @@ public class START_MENU_SCRIPT : MonoBehaviour
         EnableStart();
     }
 
-    public void ResetTimer()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    ResetTimer()
     {
         menuTimer.f_time = 0;
     }
 
-    public void LoadLevelPress()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    LoadLevelPress()
     {
         startMenu.enabled = false;
         loadLevelMenu.enabled = true;
         loadMenuObj.EnableLoadLevel();
         DisableStart();
     }
-    public void OptionsPress()
+
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void
+    OptionsPress()
     {
         startMenu.enabled = false;
         optionsMenu.enabled = true;
@@ -178,33 +187,49 @@ public class START_MENU_SCRIPT : MonoBehaviour
         DisableStart();
     }
 
-    public void HelpMenuPress()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    HelpMenuPress()
     {
         startMenu.enabled = false;
         helpMenu.enabled = true;
         helpMenuObj.EnableHelp();
         DisableStart();
     }
-    public void StartLevel()
+
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    StartLevel()
     {
 
         GameObject playerGameObject = GameObject.Find("Player");
         Animator anim;
         anim = playerGameObject.GetComponentInChildren<Animator>();
-        
-        Timer_Menu timerObject = GameObject.Find("menuTimer").GetComponent<Timer_Menu>();
-        timerObject.f_time = 0;
-        timerObject.isActive = true;
+
+        menuTimer.f_time = 0;
+        menuTimer.isActive = true;
         anim.Play("Jump");
         DisableStart();
     }
 
-    public void ExitGame()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    ExitGame()
     {
         Application.Quit();
     }
 
-    public void DisableStart()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    DisableStart()
     {
         exitText.enabled = false;
         startText.enabled = false;
@@ -213,7 +238,11 @@ public class START_MENU_SCRIPT : MonoBehaviour
         loadLevelText.enabled = false;
     }
 
-    public void EnableStart()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    EnableStart()
     {
         exitText.enabled = true;
         startText.enabled = true;

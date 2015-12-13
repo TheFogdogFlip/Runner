@@ -6,7 +6,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
 
-public class Recorder : MonoBehaviour {
+public class Recorder : MonoBehaviour 
+{
     int imageNumber;
     public int fps = 30;
     public string imageFolder = "captured_images";
@@ -29,7 +30,7 @@ public class Recorder : MonoBehaviour {
     private float loadValue;
     private Image loadBarImage;
     private Text loadText;
-    private Timer_Ghost ghostTimerObj;
+    private TimerGhost ghostTimerObj;
     public float finishedTime;
     private bool generating = false;
     public bool recording = false;
@@ -38,11 +39,13 @@ public class Recorder : MonoBehaviour {
     StreamReader reader;
 
     //For Soundrecording
-    
     float[] audioData;
 
-    // Use this for initialization
-    void Start () {
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    void Start () 
+    {
 
         width = Screen.width;
         height = Screen.height;
@@ -58,19 +61,24 @@ public class Recorder : MonoBehaviour {
         cam.GetComponent<CameraController>().enabled = false;
         Destroy(cam);
 
-        
+
         if (!System.IO.Directory.Exists(Application.persistentDataPath + "/" + imageFolder))
+        {
             System.IO.Directory.CreateDirectory(Application.persistentDataPath + "/" + imageFolder);
+        }
+
         else
         {
-            foreach(string path in System.IO.Directory.GetFiles(Application.persistentDataPath + "/" + imageFolder))
+            foreach (string path in System.IO.Directory.GetFiles(Application.persistentDataPath + "/" + imageFolder))
             {
                 System.IO.File.Delete(path);
             }
         }
 
         if (!System.IO.Directory.Exists(Application.persistentDataPath + "/" + audioFolder))
+        {
             System.IO.Directory.CreateDirectory(Application.persistentDataPath + "/" + audioFolder);
+        }
         //else
         //{
         //    foreach (string path in System.IO.Directory.GetFiles(Application.persistentDataPath + "/" + audioFolder))
@@ -82,6 +90,9 @@ public class Recorder : MonoBehaviour {
         setupRun(false);
     }
 
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     void setupRun(bool r)
     {
         recording = r;
@@ -93,6 +104,7 @@ public class Recorder : MonoBehaviour {
 
         Ghost ghost;
         GameObject go;
+
         for (int i = 0; i < ghostinputs.Count - 1; ++i)
         {
             go = Instantiate(Resources.Load("Ghost", typeof(GameObject)), World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection)) as GameObject;
@@ -100,37 +112,50 @@ public class Recorder : MonoBehaviour {
             ghost.inputs = ghostinputs[i];
             ghosts.Add(go);
         }
+
         if (target == null)
+        {
             target = Instantiate(Resources.Load("ReplayPlayer", typeof(GameObject)), World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection)) as GameObject;
+        }
+
         else
         {
             GameObject temp = target;
             target = Instantiate(Resources.Load("ReplayPlayer", typeof(GameObject)), World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection)) as GameObject;
             Destroy(temp);
         }
+
         gameObject.transform.position = new Vector3(target.transform.position.x, 20, target.transform.position.z);
         gameObject.transform.rotation = Quaternion.Euler(new Vector3(70, 0, 0));
         ghost = target.GetComponent<Ghost>();
         ghost.inputs = inputs;
 
         SetupGhostTimer();
-        
-     
+
+
         if (recording)
+        {
             Time.captureFramerate = fps;
+        }
 
     }
 
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     public void SetupGhostTimer()
     {
         GameObject ghostTimerGameObj = GameObject.Find("ghostTimer");
-        ghostTimerObj = ghostTimerGameObj.GetComponent<Timer_Ghost>();
+        ghostTimerObj = ghostTimerGameObj.GetComponent<TimerGhost>();
         ghostTimerObj.f_time = 0;
         ghostTimerObj.textObj.text = "0";
         ghostTimerObj.TimerRunning = true;
 
     }
 
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
@@ -145,6 +170,7 @@ public class Recorder : MonoBehaviour {
             loadBarImage = GameObject.Find("LoadBar").GetComponent<Image>();
             loadText = GameObject.Find("LoadText").GetComponent<Text>();
         }
+
         if (loading)
         {
             if (ghostTimerObj.f_time <= finishedTime && recording)
@@ -152,10 +178,12 @@ public class Recorder : MonoBehaviour {
                 loadText.text = "Recording Video";
                 loadValue = 0.5f * ghostTimerObj.f_time / finishedTime;
             }
+
             else
             {
                 recording = false;
             }
+
             if (!recording && !generating)
             {
                 generating = true;
@@ -183,11 +211,13 @@ public class Recorder : MonoBehaviour {
                     reader = process.StandardError;
 
                 }
+
                 catch
                 {
                     print("Error generating file");
                 }
             }
+
             if (generating)
             {
                 string line;
@@ -201,6 +231,7 @@ public class Recorder : MonoBehaviour {
                             loadValue = 0.5f + 0.5f * int.Parse(match.Groups[1].Value) / imageNumber;
                         }
                     }
+
                     else
                     {
                         generating = false;
@@ -222,6 +253,9 @@ public class Recorder : MonoBehaviour {
        
     }
 
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     void OnAudioFilterRead(float[] data, int channels)
     {
         AudioClip clip = new AudioClip();
@@ -229,18 +263,25 @@ public class Recorder : MonoBehaviour {
         SavWav.Save("test.wav", clip);
     }
 
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     void LateUpdate()
-    {  
+    {
         if (target != null)
+        {
             gameObject.transform.position = new Vector3(target.transform.position.x, 20, target.transform.position.z);
+        }
 
         if (recording)
         {
             screenShot();
         }
     }
-   
 
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     void screenShot()
     {
        

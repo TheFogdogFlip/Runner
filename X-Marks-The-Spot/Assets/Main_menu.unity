@@ -3196,7 +3196,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46a415eed2e1b3341ae66e2141c65d9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startMenu: {fileID: 0}
+  loadLevelMenu: {fileID: 0}
+  backText: {fileID: 0}
+  startMenuObj: {fileID: 0}
+  loadMenuObj: {fileID: 0}
   eventSys: {fileID: 398801315}
+  backGameObj: {fileID: 0}
+  startMenuGameObj: {fileID: 0}
+  loadMenuGameObj: {fileID: 0}
 --- !u!1 &577237533
 GameObject:
   m_ObjectHideFlags: 0
@@ -3581,11 +3589,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a17d572b53a9eda41a56c4936382b32a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playGameObj: {fileID: 0}
+  loadGameObj: {fileID: 0}
+  helpGameObj: {fileID: 0}
+  optionsGameObj: {fileID: 0}
+  exitGameObj: {fileID: 0}
+  yesGameObj: {fileID: 0}
+  noGameObj: {fileID: 0}
+  startMenuGameObj: {fileID: 0}
+  helpMenuGameObj: {fileID: 0}
+  loadMenuGameObj: {fileID: 0}
+  optionsMenuGameObj: {fileID: 0}
+  startMenuObj: {fileID: 0}
+  optionsMenuObj: {fileID: 0}
+  loadMenuObj: {fileID: 0}
+  helpMenuObj: {fileID: 0}
   quitMenu: {fileID: 914987535}
   optionsMenu: {fileID: 355717676}
   loadLevelMenu: {fileID: 563419951}
   helpMenu: {fileID: 1466914740}
   startMenu: {fileID: 656565303}
+  startText: {fileID: 0}
+  exitText: {fileID: 0}
+  optionsText: {fileID: 0}
+  loadLevelText: {fileID: 0}
+  helpText: {fileID: 0}
+  noText: {fileID: 0}
+  yesText: {fileID: 0}
+  menuTimer: {fileID: 0}
   eventSys: {fileID: 398801315}
 --- !u!1 &670199589
 GameObject:
@@ -8056,7 +8087,7 @@ GameObject:
   - 114: {fileID: 1466914741}
   - 114: {fileID: 1466914744}
   m_Layer: 5
-  m_Name: HELP_MENU_CANVAS
+  m_Name: HelpMenu_Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8145,7 +8176,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1466914739}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5efce0bfb468e7b49bc2168979c0b10c, type: 3}
+  m_Script: {fileID: 11500000, guid: 0856d193d0ee38e478ebbe8e7cadb44f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   eventSys: {fileID: 398801315}

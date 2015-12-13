@@ -3,41 +3,53 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class HELP_MENU_SCRIPT : MonoBehaviour 
+public class HelpMenu : MonoBehaviour 
 {
     private Canvas startMenu;
     private Canvas helpMenu;
 
     private Button backText;
 
-    private START_MENU_SCRIPT startMenuObj;
-    private HELP_MENU_SCRIPT helpMenuObj;
+    private StartMenu startMenuObj;
+    private HelpMenu helpMenuObj;
 
     public EventSystem eventSys;
     private GameObject backGameObj;
     private GameObject startMenuGameObj;
     private GameObject helpMenuGameObj;
 
-	void Start() 
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+	void 
+    Start() 
     {
         
 	}
 
-	public void LoadComponents()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+	public void 
+    LoadComponents()
     {
         startMenuGameObj            = GameObject.Find("START_MENU_CANVAS");
         helpMenuGameObj             = GameObject.Find("HELP_MENU_CANVAS");
         backGameObj                 = GameObject.Find("HELP_BACK_TEXT");
 
-        startMenuObj                = startMenuGameObj.GetComponent<START_MENU_SCRIPT>();
-        helpMenuObj                 = helpMenuGameObj.GetComponent<HELP_MENU_SCRIPT>();
+        startMenuObj                = startMenuGameObj.GetComponent<StartMenu>();
+        helpMenuObj                 = helpMenuGameObj.GetComponent<HelpMenu>();
 
         startMenu                   = startMenuGameObj.GetComponent<Canvas>();
         helpMenu                    = helpMenuGameObj.GetComponent<Canvas>();
         backText                    = backGameObj.GetComponent<Button>();
     }
 
-    public void BackPress()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    BackPress()
     {
         helpMenu.enabled = false;
         startMenu.enabled = true;
@@ -45,12 +57,20 @@ public class HELP_MENU_SCRIPT : MonoBehaviour
         startMenuObj.EnableStart();
     }
 
-    public void DisableHelp()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    DisableHelp()
     {
         backText.enabled = false;
     }
 
-    public void EnableHelp()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    EnableHelp()
     {
         backText.enabled = true;
         eventSys.SetSelectedGameObject(backGameObj);

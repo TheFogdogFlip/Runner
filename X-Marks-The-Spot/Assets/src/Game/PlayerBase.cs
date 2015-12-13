@@ -39,7 +39,9 @@ public class PlayerBase : MonoBehaviour
     protected float crntJumpForce;
 
 
-    // Use this for initialization
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     void Awake ()
     {
         rb = GetComponent<Rigidbody>();
@@ -52,12 +54,18 @@ public class PlayerBase : MonoBehaviour
         anim.Play("Run");
     }
 
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     protected void UpdateRun()
     {
         //Run forward
         transform.Translate(transform.forward * 2.0f * runSpeed * Time.deltaTime, Space.World);
     }
 
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     protected void TurnLeft()
     {
         //ACTIVATION PHASE
@@ -75,6 +83,10 @@ public class PlayerBase : MonoBehaviour
         qTo = Quaternion.Euler(0.0f, rotationTarget, 0.0f);
 
     }
+
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     protected void TurnRight()
     {
         //ACTIVATION PHASE
@@ -92,6 +104,10 @@ public class PlayerBase : MonoBehaviour
         qTo = Quaternion.Euler(0.0f, rotationTarget, 0.0f);
 
     }
+
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     private void UpdateTurn()
     {
         if (isTurning)
@@ -109,6 +125,9 @@ public class PlayerBase : MonoBehaviour
         }
     }
 
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     protected void Slide()
     {
         //Slide start
@@ -117,6 +136,10 @@ public class PlayerBase : MonoBehaviour
         bc.size = new Vector3(0.5f * bc.size.x, 0.5f * bc.size.y, 0.5f * bc.size.z);
         
     }
+
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     private void UpdateSlide()
     {
         if (isSliding)
@@ -134,6 +157,9 @@ public class PlayerBase : MonoBehaviour
         }
     }
 
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     void OnTriggerEnter(Collider other)
     {
         switch(other.gameObject.tag)
@@ -157,11 +183,18 @@ public class PlayerBase : MonoBehaviour
         }
     }
 
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     protected void Jump()
     {
         isJumping = true;
         anim.SetTrigger("Jump");
     }
+
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     private void UpdateJump()
     {
         if (isJumping)
@@ -179,6 +212,10 @@ public class PlayerBase : MonoBehaviour
             }
         }
     }
+
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     private void UpdateFalling()
     {
         if (isFalling)
@@ -187,11 +224,17 @@ public class PlayerBase : MonoBehaviour
         }
     }
 
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     protected void SetNextAction(PlayerState input)
     {
         nextAction = input;
     }
 
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     private void nextActionActivation()
     {
         
@@ -261,6 +304,9 @@ public class PlayerBase : MonoBehaviour
      
     }
 
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     virtual protected void ActivateNextAction()
     {
         if (nextAction != PlayerState.Idle)
@@ -274,21 +320,33 @@ public class PlayerBase : MonoBehaviour
         }
     }
 
-   
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     protected virtual void Death()
     {
         Destroy(gameObject);
     }
 
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     protected virtual void GoalFunc()
     {
-
+        //Empty
     }
+
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     protected virtual void Falling()
     {
         anim.SetTrigger("Slide");
     }
 
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     protected void MovementUpdate()
     {
         nextActionActivation();

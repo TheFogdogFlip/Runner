@@ -8,6 +8,10 @@ public class InitGame : MonoBehaviour {
     public Canvas gameUI;
     public Canvas loadingScreen;
     public Text loadingText;
+
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     void Awake()
     {
         loadingScreen.enabled = true;
@@ -31,15 +35,19 @@ public class InitGame : MonoBehaviour {
         gameUI.enabled = true;
     }
 
-	// Use this for initialization
+    /**---------------------------------------------------------------------------------
+     * 
+     */
 	void Start () 
     {
-	
+	    //Empty
 	}
-	
-	// Update is called once per frame
+
+    /**---------------------------------------------------------------------------------
+     * 
+     */
 	void Update () 
     {
-
+        //Empty
 	}
 }

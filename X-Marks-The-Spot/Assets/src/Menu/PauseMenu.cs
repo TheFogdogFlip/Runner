@@ -41,8 +41,11 @@ public class PauseMenu : MonoBehaviour
     public EventSystem eventSys;
 
 
-
-	void Start () 
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+	void 
+    Start () 
     {
         Time.timeScale = 1;
         LoadComponents();
@@ -50,7 +53,11 @@ public class PauseMenu : MonoBehaviour
         DisableAudioSettings();
 	}
 
-    public void LoadComponents()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    LoadComponents()
     {
         pauseMenuGameObject = GameObject.Find("PauseMenu");
         audioMenuGameObject = GameObject.Find("AudioSettings");
@@ -92,7 +99,11 @@ public class PauseMenu : MonoBehaviour
 
     }
 
-	void Update () 
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+	void 
+    Update () 
     {
 	    if (Input.GetButtonDown("Cancel"))
         {
@@ -103,32 +114,52 @@ public class PauseMenu : MonoBehaviour
         }
 	}
 
-    public void HightlightItem(GameObject gameObj)
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    HightlightItem(GameObject gameObj)
     {
         eventSys.SetSelectedGameObject(gameObj);
     }
 
-    public void ReloadGamePress()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    ReloadGamePress()
     {
         Time.timeScale = 1;
         Application.LoadLevel("Scene");
     }
 
-    public void ExitGamePress()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    ExitGamePress()
     {
         Time.timeScale = 1;
         Application.LoadLevel("Main_Menu");
     }
 
-    public void ResumeGamePress()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    ResumeGamePress()
     {
         DisablePauseMenu();
 
         Time.timeScale = 1;
         //AudioManager.Instance.UnPauseVolume();
     }
-    
-    public void SaveMapPress()
+
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    SaveMapPress()
     {
         //check all files MAPSAVE*.PNG in current directory
         string path = Directory.GetCurrentDirectory();
@@ -153,19 +184,31 @@ public class PauseMenu : MonoBehaviour
   
     }
 
-    private void GetCurrentDirectory()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    private void 
+    GetCurrentDirectory()
     {
         throw new System.NotImplementedException();
     }
 
-    public void AudioSettingsPress()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    AudioSettingsPress()
     {
         DisablePauseMenu();
         EnableAudioSettings();
         eventSys.SetSelectedGameObject(backGameObject);
     }
 
-    public void SetMasterVolume()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    SetMasterVolume()
     {
         int val = (int)masterVolSlider.value;
         masterVolText.text = val.ToString();
@@ -173,7 +216,11 @@ public class PauseMenu : MonoBehaviour
         GlobalGameSettings.SaveSettings();
     }
 
-    public void SetSoundEffectsVolume()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    SetSoundEffectsVolume()
     {
         int val = (int)effectsVolSlider.value;
         effectsVolText.text = val.ToString();
@@ -181,7 +228,11 @@ public class PauseMenu : MonoBehaviour
         GlobalGameSettings.SaveSettings();
     }
 
-    public void SetMusicVolume()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    SetMusicVolume()
     {
         int val = (int)musicVolSlider.value;
         musicVolText.text = val.ToString();
@@ -189,14 +240,22 @@ public class PauseMenu : MonoBehaviour
         GlobalGameSettings.SaveSettings();
     }
 
-    public void BackPress()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    BackPress()
     {
         DisableAudioSettings();
         EnablePauseMenu();
         eventSys.SetSelectedGameObject(resumeGameObject);
     }
 
-    public void EnablePauseMenu()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    EnablePauseMenu()
     {
         resumeGame.enabled = true;
         audioSettings.enabled = true;
@@ -205,7 +264,11 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.enabled = true;
     }
 
-    public void EnableAudioSettings()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    EnableAudioSettings()
     {
         masterVolSlider.enabled = true;
         effectsVolSlider.enabled = true;
@@ -214,7 +277,11 @@ public class PauseMenu : MonoBehaviour
         audioMenu.enabled = true;
     }
 
-    public void DisablePauseMenu()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    DisablePauseMenu()
     {
         resumeGame.enabled = false;
         audioSettings.enabled = false;
@@ -223,7 +290,11 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.enabled = false;
     }
 
-    public void DisableAudioSettings()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    DisableAudioSettings()
     {
         masterVolSlider.enabled = false;
         effectsVolSlider.enabled = false;

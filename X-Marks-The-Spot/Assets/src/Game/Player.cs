@@ -8,16 +8,16 @@ public class Player : PlayerBase
 {
     //Ctd Timer
     private GameObject ctdTimerGameObj;
-    private Timer_Countdown ctdTimerObj;
+    private TimerCountdown ctdTimerObj;
     
     //Player Timer
-    private Timer_Player playerTimerObj;
+    private TimerPlayer playerTimerObj;
     private GameObject playerTimerGameObj;
 
     public List<TimeStamp> inputs;
 
     //Ghost Timer
-    private Timer_Ghost ghostTimerObj;
+    private TimerGhost ghostTimerObj;
     private GameObject ghostTimerGameObj;
 
     private List<List<TimeStamp>> ghostinputs;
@@ -27,6 +27,9 @@ public class Player : PlayerBase
     private int cooldownCount = 25;
     private bool coolingDown = false;
 
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     void Start ()
     {
         
@@ -41,6 +44,9 @@ public class Player : PlayerBase
         anim.Play("Idle");
     }
 
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     void Update()
     {
         if (ghostTimerObj != null)
@@ -73,8 +79,12 @@ public class Player : PlayerBase
         }
     }
 
+    //Uhm, this is outside a function, is it meant to be here or should it be in the declarations section?
     Vector2 startPosition = -Vector2.one;
 
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     void KeyInputs()
     {
         int horizontal = 0;
@@ -169,10 +179,13 @@ public class Player : PlayerBase
         }
     }
 
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     public void SetupCtdTimer()
     {
         ctdTimerGameObj = GameObject.Find("ctdTimer");
-        ctdTimerObj = ctdTimerGameObj.GetComponent<Timer_Countdown>();
+        ctdTimerObj = ctdTimerGameObj.GetComponent<TimerCountdown>();
         ctdTimerObj.f_time = 2;
         ctdTimerObj.i_time = 2;
         ctdTimerObj.TimerFirstRunning = true;
@@ -180,24 +193,33 @@ public class Player : PlayerBase
         ctdTimerObj.textObj.enabled = true;
     }
 
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     public void SetupPlayerTimer()
     {
         playerTimerGameObj = GameObject.Find("playerTimer");
-        playerTimerObj = playerTimerGameObj.GetComponent<Timer_Player>();
+        playerTimerObj = playerTimerGameObj.GetComponent<TimerPlayer>();
         playerTimerObj.textObj.text = "0";
         playerTimerObj.TimerRunning = false;
     }
 
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     public void SetupGhostTimer()
     {
         ghostTimerGameObj = GameObject.Find("ghostTimer");
-        ghostTimerObj = ghostTimerGameObj.GetComponent<Timer_Ghost>();
+        ghostTimerObj = ghostTimerGameObj.GetComponent<TimerGhost>();
         ghostTimerObj.f_time = 0;
         ghostTimerObj.textObj.text = "0";
         ghostTimerObj.TimerRunning = true;
 
     }
 
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     void SetupNextGame()
     {
         GameObject go;
@@ -218,6 +240,9 @@ public class Player : PlayerBase
         SetupPlayerTimer();
     }
 
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     protected override void ActivateNextAction()
     {
         if (nextAction != PlayerState.Idle)
@@ -237,6 +262,9 @@ public class Player : PlayerBase
         }
     }
 
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     protected override void Death()
     {
         if (isSliding)
@@ -263,11 +291,19 @@ public class Player : PlayerBase
 
         SetupNextGame();
     }
+
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     protected override void Falling()
     {
         AudioManager.Instance.FallingSound();
         anim.SetTrigger("Slide");
     }
+
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     protected override void GoalFunc()
     {
         AudioManager.Instance.WinSound();
@@ -281,11 +317,18 @@ public class Player : PlayerBase
         rec.finishedTime = playerTimerObj.f_time;
 
     }
+
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     public bool GetTurn()
     {
         return isTurning;
     }
 
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     public PlayerState GetNextAction()
     {
         return nextAction;

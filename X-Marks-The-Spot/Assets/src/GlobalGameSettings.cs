@@ -52,31 +52,63 @@ public static class GlobalGameSettings
     private static string gp_Slide_Key;
     */
 
-    public static void LoadSettings()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public static void 
+    LoadSettings()
     {
         Sound_Master_Volume = PlayerPrefs.GetInt("MasterVol");
         Sound_Music_Volume = PlayerPrefs.GetInt("MusicVol");
         Sound_Effects_Volume = PlayerPrefs.GetInt("EffectsVol");
     }
 
-    public static void SaveSettings()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public static void 
+    SaveSettings()
     {
         PlayerPrefs.SetInt("MasterVol", Sound_Master_Volume);
         PlayerPrefs.SetInt("EffectsVol", Sound_Effects_Volume);
         PlayerPrefs.SetInt("MusicVol", Sound_Music_Volume);
     }
 
-    //Set and Get Master Volume
-    public static void SetMasterVolume(int val)     { Sound_Master_Volume = val; }
-    public static int GetMasterVolume()             { return Sound_Master_Volume; }
+    /**---------------------------------------------------------------------------------
+     * Set master volume
+     */
+    public static void 
+    SetMasterVolume(int val)        { Sound_Master_Volume = val; }
+    
+    /**---------------------------------------------------------------------------------
+     * Get master volume
+     */
+    public static int 
+    GetMasterVolume()               { return Sound_Master_Volume; }
 
-    //Set and Get Music Volume
-    public static void SetMusicVolume(int val)      { Sound_Music_Volume = val; }
-    public static int GetMusicVolume()              { return Sound_Music_Volume; }
+    /**---------------------------------------------------------------------------------
+     * Set music volume
+     */
+    public static void 
+    SetMusicVolume(int val)         { Sound_Music_Volume = val; }
 
-    //Set and Get Effects Volume
-    public static void SetEffectsVolume(int val)    { Sound_Effects_Volume = val; }
-    public static int GetEffectsVolume()            { return Sound_Effects_Volume; }
+    /**---------------------------------------------------------------------------------
+     * Get music volume
+     */
+    public static int
+    GetMusicVolume()                { return Sound_Music_Volume; }
+
+    /**---------------------------------------------------------------------------------
+     * Set effects volume
+     */
+    public static void 
+    SetEffectsVolume(int val)       { Sound_Effects_Volume = val; }
+
+    /**---------------------------------------------------------------------------------
+     * Get effects volume
+     */
+    public static int 
+    GetEffectsVolume()              { return Sound_Effects_Volume; }
 
     /*
     //Set and Get Field of View

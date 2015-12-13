@@ -22,11 +22,13 @@ public class CameraController : MonoBehaviour {
     private Transform lookAtTrans;
     private bool isTurning;
     private GameObject timer;
-    private Timer_Countdown timerObj;
+    private TimerCountdown timerObj;
 
-
-    // Use this for initialization
-    void Start () {
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    void Start () 
+    {
         //distance = 1.5f;
         height = 0.8f;
         heightDamping = 5.0f;
@@ -34,12 +36,15 @@ public class CameraController : MonoBehaviour {
         distanceDamping = 3.0f;
         target = GameObject.Find("Player(Clone)");
         timer = GameObject.Find("ctdTimer");
-        timerObj = timer.GetComponent<Timer_Countdown>();
+        timerObj = timer.GetComponent<TimerCountdown>();
         tilt = 0.3f;
     }
 
-	// Update is called once per frame
-	void Update () {
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+	void Update () 
+    {
         //wanted rotation and height
         rotAngleY = target.transform.eulerAngles.y;
         wantedHeight = target.transform.position.y + height;
@@ -61,14 +66,17 @@ public class CameraController : MonoBehaviour {
         {
             distance = 1.0f;
         }
+
         else if (isTurning)
         {
             distance = Mathf.Lerp(distance, 1.0f, distanceDamping * Time.deltaTime);
         }
+
         else
         {
             distance = Mathf.Lerp(distance, 1.5f, distanceDamping * Time.deltaTime);
         }
+
         this.gameObject.transform.LookAt(new Vector3(target.transform.position.x, 0, target.transform.position.z) + tiltVec);
        
     }

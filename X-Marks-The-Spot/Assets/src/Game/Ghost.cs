@@ -8,11 +8,13 @@ public class Ghost : PlayerBase
     //For Animation
 
     public List<TimeStamp> inputs;
-    private Timer_Ghost ghostTimerObj;
+    private TimerGhost ghostTimerObj;
     private GameObject ghostTimerGameObj;
     int index;
 
-    // Use this for initialization
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     void Start () 
     {
         index = 0;
@@ -20,14 +22,17 @@ public class Ghost : PlayerBase
         rb = GetComponent<Rigidbody>();
         bc = GetComponent<BoxCollider>();
         ghostTimerGameObj = GameObject.Find("ghostTimer");
-        ghostTimerObj = ghostTimerGameObj.GetComponent<Timer_Ghost>();
+        ghostTimerObj = ghostTimerGameObj.GetComponent<TimerGhost>();
     }
 
-    // Update is called once per frame
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     void Update()
     {
         ghostTimerObj.SetText();
         PlayerState currEvent = PlayerState.Idle;
+
         if (index < inputs.Count)
         {
             if (inputs[index].time <= ghostTimerObj.f_time)
@@ -54,6 +59,7 @@ public class Ghost : PlayerBase
                     break;
             }
         }
+
         else
         {
             switch (currEvent)
@@ -73,8 +79,10 @@ public class Ghost : PlayerBase
             }
         }
 
-        if(currEvent != PlayerState.Idle)
+        if (currEvent != PlayerState.Idle)
+        {
             index++;
+        }
 
         MovementUpdate();
     }

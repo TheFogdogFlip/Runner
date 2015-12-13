@@ -8,24 +8,30 @@ public class StartMenuAnimator : MonoBehaviour
     private BoxCollider bc;
 
     private GameObject TimerGameObject;
-    private Timer_Menu TimerObj;
+    private TimerMenu TimerObj;
 
     private bool firstAnimation;
     private bool secondAnimation;
 
-	// Use this for initialization
-	void Start () 
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+	void 
+    Start() 
     {
         TimerGameObject = GameObject.Find("menuTimer");
-        TimerObj = TimerGameObject.GetComponent<Timer_Menu>();
+        TimerObj = TimerGameObject.GetComponent<TimerMenu>();
 
         anim = gameObject.GetComponentInChildren<Animator>();
         anim.Play("Idle");
 	}
-	
-	// Update is called once per frame
-	void Update () 
+
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+	void 
+    Update () 
     {
-	    
+	    //Empty
 	}
 }

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class OPTIONS_MENU_SCRIPT : MonoBehaviour 
+public class OptionsMenu : MonoBehaviour 
 {
     private Canvas startMenu;
     private Canvas optionsMenu;
@@ -19,8 +19,8 @@ public class OPTIONS_MENU_SCRIPT : MonoBehaviour
     private Slider musicVolSlider;
     public Text musicVolText;
     
-    private START_MENU_SCRIPT startMenuObj;
-    private OPTIONS_MENU_SCRIPT optionsMenuObj;
+    private StartMenu startMenuObj;
+    private OptionsMenu optionsMenuObj;
 
     private GameObject backGameObj;
     private GameObject masterVolGameObj;
@@ -32,12 +32,20 @@ public class OPTIONS_MENU_SCRIPT : MonoBehaviour
 
     public EventSystem eventSys;
 
-	void Start() 
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+	void 
+    Start() 
     {
-        
+        //Empty
 	}
 
-    public void LoadComponents()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    LoadComponents()
     {
         GlobalGameSettings.LoadSettings();
         startMenuGameObj            = GameObject.Find("START_MENU_CANVAS");
@@ -50,8 +58,8 @@ public class OPTIONS_MENU_SCRIPT : MonoBehaviour
         startMenu                   = startMenuGameObj.GetComponent<Canvas>();
         optionsMenu                 = optionsMenuGameObj.GetComponent<Canvas>();
 
-        startMenuObj                = startMenuGameObj.GetComponent<START_MENU_SCRIPT>();
-        optionsMenuObj              = optionsMenuGameObj.GetComponent<OPTIONS_MENU_SCRIPT>();
+        startMenuObj                = startMenuGameObj.GetComponent<StartMenu>();
+        optionsMenuObj              = optionsMenuGameObj.GetComponent<OptionsMenu>();
 
         backText                    = backGameObj.GetComponent<Button>();
         masterVolSlider             = masterVolGameObj.GetComponent<Slider>();
@@ -71,14 +79,22 @@ public class OPTIONS_MENU_SCRIPT : MonoBehaviour
         musicVolText.text           = musicVol.ToString();
     }
 
-    public void SetSettings()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    SetSettings()
     {
         GlobalGameSettings.SetMasterVolume(40);
         GlobalGameSettings.SetEffectsVolume(30);
         GlobalGameSettings.SetMusicVolume(20);
     }
 
-    public void BackPress()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    BackPress()
     {
         optionsMenu.enabled = false;
         startMenu.enabled = true;
@@ -86,7 +102,11 @@ public class OPTIONS_MENU_SCRIPT : MonoBehaviour
         startMenuObj.EnableStart();
     }
 
-    public void SetMasterVolume()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    SetMasterVolume()
     {
         int val = (int)masterVolSlider.value;
         masterVolText.text = val.ToString();
@@ -94,7 +114,11 @@ public class OPTIONS_MENU_SCRIPT : MonoBehaviour
         GlobalGameSettings.SaveSettings();
     }
 
-    public void SetSoundEffectsVolume()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    SetSoundEffectsVolume()
     {
         int val = (int)effectsVolSlider.value;
         effectsVolText.text = val.ToString();
@@ -102,7 +126,11 @@ public class OPTIONS_MENU_SCRIPT : MonoBehaviour
         GlobalGameSettings.SaveSettings();
     }
 
-    public void SetMusicVolume()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    SetMusicVolume()
     {
         int val = (int)musicVolSlider.value;
         musicVolText.text = val.ToString();
@@ -110,7 +138,11 @@ public class OPTIONS_MENU_SCRIPT : MonoBehaviour
         GlobalGameSettings.SaveSettings();
     }
 
-    public void DisableOptions()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    DisableOptions()
     {
         backText.enabled = false;
         masterVolSlider.enabled = false;
@@ -118,7 +150,11 @@ public class OPTIONS_MENU_SCRIPT : MonoBehaviour
         effectsVolSlider.enabled = false;
     }
 
-    public void EnableOptions()
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public void 
+    EnableOptions()
     {
         backText.enabled = true;
         masterVolSlider.enabled = true;
