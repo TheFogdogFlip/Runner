@@ -48,12 +48,12 @@ public class OptionsMenu : MonoBehaviour
     LoadComponents()
     {
         GlobalGameSettings.LoadSettings();
-        startMenuGameObj            = GameObject.Find("START_MENU_CANVAS");
-        optionsMenuGameObj          = GameObject.Find("OPTIONS_MENU_CANVAS");
-        backGameObj                 = GameObject.Find("OPTIONS_BACK_TEXT");
-        masterVolGameObj            = GameObject.Find("SOUND_MASTER_SLIDER");
-        musicVolGameObj             = GameObject.Find("SOUND_MUSIC_SLIDER");
-        effectsVolGameObj           = GameObject.Find("SOUND_EFFECTS_SLIDER");
+        startMenuGameObj            = GameObject.Find("StartMenu_Canvas");
+        optionsMenuGameObj          = GameObject.Find("OptionsMenu_Canvas");
+        backGameObj                 = GameObject.Find("OptionsBack_TextBtn");
+        masterVolGameObj            = GameObject.Find("SoundMaster_Slider");
+        musicVolGameObj             = GameObject.Find("SoundMusic_Slider");
+        effectsVolGameObj           = GameObject.Find("SoundEffects_Slider");
 
         startMenu                   = startMenuGameObj.GetComponent<Canvas>();
         optionsMenu                 = optionsMenuGameObj.GetComponent<Canvas>();
@@ -77,17 +77,6 @@ public class OptionsMenu : MonoBehaviour
         masterVolText.text          = masterVol.ToString();
         effectsVolText.text         = effectsVol.ToString();
         musicVolText.text           = musicVol.ToString();
-    }
-
-    /**---------------------------------------------------------------------------------
-     * 
-     */
-    public void 
-    SetSettings()
-    {
-        GlobalGameSettings.SetMasterVolume(40);
-        GlobalGameSettings.SetEffectsVolume(30);
-        GlobalGameSettings.SetMusicVolume(20);
     }
 
     /**---------------------------------------------------------------------------------

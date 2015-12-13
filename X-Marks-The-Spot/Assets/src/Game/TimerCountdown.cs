@@ -16,8 +16,8 @@ public class TimerCountdown : MonoBehaviour
     void 
     Start()
     {
-        TimerFirstRunning = true;
-        TimerSecondRunning = true;
+        TimerFirstRunning           = true;
+        TimerSecondRunning          = true;
     }
 
     /**---------------------------------------------------------------------------------

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class LoadLevel : MonoBehaviour 
+public class LoadLevelMenu : MonoBehaviour 
 {
     private Canvas startMenu;
     private Canvas loadLevelMenu;
@@ -11,7 +11,7 @@ public class LoadLevel : MonoBehaviour
     private Button backText;
 
     private StartMenu startMenuObj;
-    private LoadLevel loadMenuObj;
+    private LoadLevelMenu loadMenuObj;
     
     public EventSystem eventSys;
 
@@ -34,12 +34,12 @@ public class LoadLevel : MonoBehaviour
     public void 
     LoadComponents()
     {
-        startMenuGameObj            = GameObject.Find("START_MENU_CANVAS");
-        loadMenuGameObj             = GameObject.Find("LOAD_LEVEL_CANVAS");
-        backGameObj                 = GameObject.Find("LOAD_BACK_TEXT");
+        startMenuGameObj            = GameObject.Find("HelpBack_TextBtn");
+        loadMenuGameObj             = GameObject.Find("LoadLevelMenu_Canvas");
+        backGameObj                 = GameObject.Find("LoadLevelBack_TextBtn");
 
         startMenuObj                = startMenuGameObj.GetComponent<StartMenu>();
-        loadMenuObj                 = loadMenuGameObj.GetComponent<LoadLevel>();
+        loadMenuObj                 = loadMenuGameObj.GetComponent<LoadLevelMenu>();
 
         startMenu                   = startMenuGameObj.GetComponent<Canvas>();
         loadLevelMenu               = loadMenuGameObj.GetComponent<Canvas>();

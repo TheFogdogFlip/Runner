@@ -59,43 +59,43 @@ public class PauseMenu : MonoBehaviour
     public void 
     LoadComponents()
     {
-        pauseMenuGameObject = GameObject.Find("PauseMenu");
-        audioMenuGameObject = GameObject.Find("AudioSettings");
-        exitGameObject = GameObject.Find("ExitGame_Text");
-        resumeGameObject = GameObject.Find("ResumeGame_Text");
-        audioGameObject = GameObject.Find("AudioSettings_Text");
-        saveMapGameObject = GameObject.Find("SaveMap_Text");
+        pauseMenuGameObject             = GameObject.Find("PauseMenu");
+        audioMenuGameObject             = GameObject.Find("AudioSettings");
+        exitGameObject                  = GameObject.Find("ExitGame_TextBtn");
+        resumeGameObject                = GameObject.Find("ResumeGame_TextBtn");
+        audioGameObject                 = GameObject.Find("AudioSettings_TextBtn");
+        saveMapGameObject               = GameObject.Find("SaveMap_TextBtn");
 
-        backGameObject = GameObject.Find("SETTINGS_BACK_TEXT");
-        masterVolGameObject = GameObject.Find("SOUND_MASTER_SLIDER");
-        musicVolGameObject = GameObject.Find("SOUND_MUSIC_SLIDER");
-        effectsVolGameObject = GameObject.Find("SOUND_EFFECTS_SLIDER");
+        backGameObject                  = GameObject.Find("SettingsBack_TextBtn");
+        masterVolGameObject             = GameObject.Find("SoundMaster_Slider");
+        musicVolGameObject              = GameObject.Find("SoundMusic_Slider");
+        effectsVolGameObject            = GameObject.Find("SoundEffects_Slider");
         
 
-        pauseMenu = pauseMenuGameObject.GetComponent<Canvas>();
-        audioMenu = audioMenuGameObject.GetComponent<Canvas>();
+        pauseMenu                       = pauseMenuGameObject.GetComponent<Canvas>();
+        audioMenu                       = audioMenuGameObject.GetComponent<Canvas>();
 
-        exitGame = exitGameObject.GetComponent<Button>();
-        resumeGame = resumeGameObject.GetComponent<Button>();
-        audioSettings = audioGameObject.GetComponent<Button>();
-        saveMapText = saveMapGameObject.GetComponent<Button>();
+        exitGame                        = exitGameObject.GetComponent<Button>();
+        resumeGame                      = resumeGameObject.GetComponent<Button>();
+        audioSettings                   = audioGameObject.GetComponent<Button>();
+        saveMapText                     = saveMapGameObject.GetComponent<Button>();
 
-        backText = backGameObject.GetComponent<Button>();
-        masterVolSlider = masterVolGameObject.GetComponent<Slider>();
-        effectsVolSlider = effectsVolGameObject.GetComponent<Slider>();
-        musicVolSlider = musicVolGameObject.GetComponent<Slider>();
+        backText                        = backGameObject.GetComponent<Button>();
+        masterVolSlider                 = masterVolGameObject.GetComponent<Slider>();
+        effectsVolSlider                = effectsVolGameObject.GetComponent<Slider>();
+        musicVolSlider                  = musicVolGameObject.GetComponent<Slider>();
 
-        int masterVol = GlobalGameSettings.GetMasterVolume();
-        int effectsVol = GlobalGameSettings.GetEffectsVolume();
-        int musicVol = GlobalGameSettings.GetMusicVolume();
+        int masterVol                   = GlobalGameSettings.GetMasterVolume();
+        int effectsVol                  = GlobalGameSettings.GetEffectsVolume();
+        int musicVol                    = GlobalGameSettings.GetMusicVolume();
 
-        masterVolSlider.value = masterVol;
-        effectsVolSlider.value = effectsVol;
-        musicVolSlider.value = musicVol;
+        masterVolSlider.value           = masterVol;
+        effectsVolSlider.value          = effectsVol;
+        musicVolSlider.value            = musicVol;
 
-        masterVolText.text = masterVol.ToString();
-        effectsVolText.text = effectsVol.ToString();
-        musicVolText.text = musicVol.ToString();        
+        masterVolText.text              = masterVol.ToString();
+        effectsVolText.text             = effectsVol.ToString();
+        musicVolText.text               = musicVol.ToString();        
 
     }
 
@@ -302,6 +302,4 @@ public class PauseMenu : MonoBehaviour
         backText.enabled = false;
         audioMenu.enabled = false;
     }
-
-
 }

@@ -19,10 +19,11 @@ public class StartMenuAnimator : MonoBehaviour
 	void 
     Start() 
     {
-        TimerGameObject = GameObject.Find("menuTimer");
-        TimerObj = TimerGameObject.GetComponent<TimerMenu>();
+        TimerGameObject         = GameObject.Find("menuTimer");
+        TimerObj                = TimerGameObject.GetComponent<TimerMenu>();
 
-        anim = gameObject.GetComponentInChildren<Animator>();
+        anim                    = gameObject.GetComponentInChildren<Animator>();
+
         anim.Play("Idle");
 	}
 

@@ -24,7 +24,7 @@ public class HelpMenu : MonoBehaviour
 	void 
     Start() 
     {
-        
+        //Empty
 	}
 
     /**---------------------------------------------------------------------------------
@@ -33,9 +33,9 @@ public class HelpMenu : MonoBehaviour
 	public void 
     LoadComponents()
     {
-        startMenuGameObj            = GameObject.Find("START_MENU_CANVAS");
-        helpMenuGameObj             = GameObject.Find("HELP_MENU_CANVAS");
-        backGameObj                 = GameObject.Find("HELP_BACK_TEXT");
+        startMenuGameObj            = GameObject.Find("StartMenu_Canvas");
+        helpMenuGameObj             = GameObject.Find("HelpMenu_Canvas");
+        backGameObj                 = GameObject.Find("HelpBack_TextBtn");
 
         startMenuObj                = startMenuGameObj.GetComponent<StartMenu>();
         helpMenuObj                 = helpMenuGameObj.GetComponent<HelpMenu>();

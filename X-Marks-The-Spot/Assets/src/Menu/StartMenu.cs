@@ -19,7 +19,7 @@ public class StartMenu : MonoBehaviour
 
     private StartMenu startMenuObj;
     private OptionsMenu optionsMenuObj;
-    private LoadLevel loadMenuObj;
+    private LoadLevelMenu loadMenuObj;
     private HelpMenu helpMenuObj;
 
     public Canvas quitMenu;
@@ -67,15 +67,15 @@ public class StartMenu : MonoBehaviour
     public void 
     LoadComponents()
     {
-        startMenuGameObj            = GameObject.Find("START_MENU_CANVAS");
-        helpMenuGameObj             = GameObject.Find("HELP_MENU_CANVAS");
-        loadMenuGameObj             = GameObject.Find("LOAD_LEVEL_CANVAS");
-        optionsMenuGameObj          = GameObject.Find("OPTIONS_MENU_CANVAS");
+        startMenuGameObj            = GameObject.Find("StartMenu_Canvas");
+        helpMenuGameObj             = GameObject.Find("HelpMenu_Canvas");
+        loadMenuGameObj             = GameObject.Find("LoadLevelMenu_Canvas");
+        optionsMenuGameObj          = GameObject.Find("OptionsMenu_Canvas");
 
         menuTimer                   = GameObject.Find("menuTimer").GetComponent<TimerMenu>();
 
         helpMenuObj                 = helpMenuGameObj.GetComponent<HelpMenu>();
-        loadMenuObj                 = loadMenuGameObj.GetComponent<LoadLevel>();
+        loadMenuObj                 = loadMenuGameObj.GetComponent<LoadLevelMenu>();
         optionsMenuObj              = optionsMenuGameObj.GetComponent<OptionsMenu>();
 
         quitMenu                    = quitMenu.GetComponent<Canvas>();
@@ -84,13 +84,13 @@ public class StartMenu : MonoBehaviour
         helpMenu                    = helpMenu.GetComponent<Canvas>();
         startMenu                   = startMenu.GetComponent<Canvas>();
 
-        playGameObj                 = GameObject.Find("PLAY_TEXT");
-        optionsGameObj              = GameObject.Find("OPTIONS_TEXT");
-        helpGameObj                 = GameObject.Find("HELP_TEXT");
-        loadGameObj                 = GameObject.Find("LOAD_LEVEL_TEXT");
-        exitGameObj                 = GameObject.Find("QUIT_TEXT");
-        yesGameObj                  = GameObject.Find("YES");
-        noGameObj                   = GameObject.Find("NO");
+        playGameObj                 = GameObject.Find("Play_TextBtn");
+        optionsGameObj              = GameObject.Find("Options_TextBtn");
+        helpGameObj                 = GameObject.Find("Help_TextBtn");
+        loadGameObj                 = GameObject.Find("LoadLevel_TextBtn");
+        exitGameObj                 = GameObject.Find("Quit_TextBtn");
+        yesGameObj                  = GameObject.Find("Yes_TextBtn");
+        noGameObj                   = GameObject.Find("No_TextBtn");
 
         startText                   = playGameObj.GetComponent<Button>();
         exitText                    = exitGameObj.GetComponent<Button>();
@@ -205,7 +205,6 @@ public class StartMenu : MonoBehaviour
     public void 
     StartLevel()
     {
-
         GameObject playerGameObject = GameObject.Find("Player");
         Animator anim;
         anim = playerGameObject.GetComponentInChildren<Animator>();
