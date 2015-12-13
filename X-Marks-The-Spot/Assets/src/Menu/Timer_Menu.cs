@@ -6,14 +6,19 @@ public class Timer_Menu : MonoBehaviour
 
     public float f_time;
     public int i_time;
+    public bool isActive;
 
     void Start()
     {
-
+        isActive = false;
     }
 
     void Update()
     {
-        f_time += Time.deltaTime;
+        if (isActive)
+        {
+            f_time += Time.deltaTime;
+            i_time = (int)f_time;
+        }
     }
 }

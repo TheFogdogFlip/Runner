@@ -310,15 +310,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 410142, guid: 13e5b5035256ce547854379454c84f4e, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -1.97899997
+      value: -1.99000001
       objectReference: {fileID: 0}
     - target: {fileID: 410142, guid: 13e5b5035256ce547854379454c84f4e, type: 2}
       propertyPath: m_LocalPosition.y
-      value: .00800000038
+      value: .00400000019
       objectReference: {fileID: 0}
     - target: {fileID: 410142, guid: 13e5b5035256ce547854379454c84f4e, type: 2}
       propertyPath: m_LocalPosition.z
-      value: .00499999989
+      value: -.00400000019
       objectReference: {fileID: 0}
     - target: {fileID: 410142, guid: 13e5b5035256ce547854379454c84f4e, type: 2}
       propertyPath: m_LocalRotation.x
@@ -446,6 +446,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   f_time: 0
   i_time: 0
+  isActive: 0
 --- !u!4 &89976092
 Transform:
   m_ObjectHideFlags: 0

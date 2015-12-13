@@ -128,25 +128,11 @@ public class START_MENU_SCRIPT : MonoBehaviour
 
     void Update()
     {
-        //if (menuTimer.f_time > 4 && needAlphaReduced)
-        //{
-        //    needAlphaReduced = false;
-        //    ReduceAlpha();
-        //}
-        //if (menuTimer.f_time > 4.5 && needPictureChanged)
-        //{
-        //    needPictureChanged = false;
-        //    SetBackground();
-        //}
-
-        //if(menuTimer.f_time > 4.6)
-        //{
-        //    IncreaseAlpha();
-        //    ResetTimer();
-
-        //    needAlphaReduced = true;
-        //    needPictureChanged = true;
-        //}
+        if (menuTimer.f_time > 0.77 && menuTimer.isActive)
+        {
+            Application.LoadLevel("Scene");
+        }
+        
     }
 
   
@@ -154,27 +140,6 @@ public class START_MENU_SCRIPT : MonoBehaviour
     {
         eventSys.SetSelectedGameObject(gameObj);
     }
-
-    //public void ReduceAlpha()
-    //{
-    //    imageFront.CrossFadeAlpha(0, 0.5f, false);
-    //}
-
-    //public void IncreaseAlpha()
-    //{
-    //    imageFront.CrossFadeAlpha(1, 0.5f, false);
-    //}
-
-    //public void SetBackground()
-    //{
-    //    currentSprite++;
-
-    //    if (currentSprite == sprites.Length)
-    //    {
-    //        currentSprite = 0;
-    //    }
-    //    imageFront.sprite = sprites[currentSprite];
-    //}
 
 	public void ExitPress()
     {
@@ -222,7 +187,16 @@ public class START_MENU_SCRIPT : MonoBehaviour
     }
     public void StartLevel()
     {
-        Application.LoadLevel("Scene");
+
+        GameObject playerGameObject = GameObject.Find("Player");
+        Animator anim;
+        anim = playerGameObject.GetComponentInChildren<Animator>();
+        
+        Timer_Menu timerObject = GameObject.Find("menuTimer").GetComponent<Timer_Menu>();
+        timerObject.f_time = 0;
+        timerObject.isActive = true;
+        anim.Play("Jump");
+        DisableStart();
     }
 
     public void ExitGame()
