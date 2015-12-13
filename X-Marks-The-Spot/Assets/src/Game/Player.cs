@@ -16,7 +16,7 @@ public class Player : PlayerBase
 
     public List<TimeStamp> inputs;
 
-    //Ghost Timer -- TEMPORARY, just needed somewhere to make it 
+    //Ghost Timer
     private Timer_Ghost ghostTimerObj;
     private GameObject ghostTimerGameObj;
 

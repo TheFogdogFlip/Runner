@@ -8,18 +8,16 @@ public class START_MENU_SCRIPT : MonoBehaviour
     private Sprite[] sprites;
 
     private GameObject Timer_GO;
-    private GameObject panelFront;
-    private GameObject panelBack;
+    //private GameObject panelFront;
+    //private GameObject panelBack;
 
-    private Image imageBack;
-    private Image imageFront;
+    //private Image imageBack;
+   //private Image imageFront;
 
     private Timer_Menu menuTimer;
 
     private int currentSprite;
     private int nextSprite;
-    private int topPanelLayer;
-    private int botPanelLayer;
 
     private string resourceName = "Backgrounds";
 
@@ -82,13 +80,13 @@ public class START_MENU_SCRIPT : MonoBehaviour
 
         currentSprite               = 0;
         Timer_GO                    = GameObject.Find("menuTimer");
-        panelBack                   = GameObject.Find("PANEL_BACKGROUND_BOT");
-        panelFront                  = GameObject.Find("PANEL_BACKGROUND_TOP");
-        panelFront.layer            = 8;
+        //panelBack                   = GameObject.Find("PANEL_BACKGROUND_BOT");
+        //panelFront                  = GameObject.Find("PANEL_BACKGROUND_TOP");
+        //panelFront.layer            = 8;
         menuTimer                   = Timer_GO.GetComponent<Timer_Menu>();
         sprites                     = Resources.LoadAll<Sprite>(resourceName);
-        imageFront                  = panelFront.GetComponent<Image>();
-        imageFront.sprite           = sprites[currentSprite];
+        //imageFront                  = panelFront.GetComponent<Image>();
+        //imageFront.sprite           = sprites[currentSprite];
 
         startMenuGameObj            = GameObject.Find("START_MENU_CANVAS");
         helpMenuGameObj             = GameObject.Find("HELP_MENU_CANVAS");
@@ -130,25 +128,25 @@ public class START_MENU_SCRIPT : MonoBehaviour
 
     void Update()
     {
-        if (menuTimer.f_time > 4 && needAlphaReduced)
-        {
-            needAlphaReduced = false;
-            ReduceAlpha();
-        }
-        if (menuTimer.f_time > 4.5 && needPictureChanged)
-        {
-            needPictureChanged = false;
-            SetBackground();
-        }
+        //if (menuTimer.f_time > 4 && needAlphaReduced)
+        //{
+        //    needAlphaReduced = false;
+        //    ReduceAlpha();
+        //}
+        //if (menuTimer.f_time > 4.5 && needPictureChanged)
+        //{
+        //    needPictureChanged = false;
+        //    SetBackground();
+        //}
 
-        if(menuTimer.f_time > 4.6)
-        {
-            IncreaseAlpha();
-            ResetTimer();
+        //if(menuTimer.f_time > 4.6)
+        //{
+        //    IncreaseAlpha();
+        //    ResetTimer();
 
-            needAlphaReduced = true;
-            needPictureChanged = true;
-        }
+        //    needAlphaReduced = true;
+        //    needPictureChanged = true;
+        //}
     }
 
   
@@ -157,26 +155,26 @@ public class START_MENU_SCRIPT : MonoBehaviour
         eventSys.SetSelectedGameObject(gameObj);
     }
 
-    public void ReduceAlpha()
-    {
-        imageFront.CrossFadeAlpha(0, 0.5f, false);
-    }
+    //public void ReduceAlpha()
+    //{
+    //    imageFront.CrossFadeAlpha(0, 0.5f, false);
+    //}
 
-    public void IncreaseAlpha()
-    {
-        imageFront.CrossFadeAlpha(1, 0.5f, false);
-    }
+    //public void IncreaseAlpha()
+    //{
+    //    imageFront.CrossFadeAlpha(1, 0.5f, false);
+    //}
 
-    public void SetBackground()
-    {
-        currentSprite++;
+    //public void SetBackground()
+    //{
+    //    currentSprite++;
 
-        if (currentSprite == sprites.Length)
-        {
-            currentSprite = 0;
-        }
-        imageFront.sprite = sprites[currentSprite];
-    }
+    //    if (currentSprite == sprites.Length)
+    //    {
+    //        currentSprite = 0;
+    //    }
+    //    imageFront.sprite = sprites[currentSprite];
+    //}
 
 	public void ExitPress()
     {
