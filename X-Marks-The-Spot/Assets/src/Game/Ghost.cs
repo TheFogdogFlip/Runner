@@ -53,11 +53,11 @@ public class Ghost : PlayerBase
                     SetNextAction(PlayerState.TurnLeft);
                     break;
                 case PlayerState.Jump:
-                    if (index < inputs.Count) isInvulnerable = true;
+                    if (index == inputs.Count -1) isInvulnerable = true;
                     SetNextAction(PlayerState.Jump);
                     break;
                 case PlayerState.Slide:
-                    if (index < inputs.Count) isInvulnerable = true;
+                    if (index == inputs.Count -1) isInvulnerable = true;
                     SetNextAction(PlayerState.Slide);
                     break;
             }
@@ -74,18 +74,18 @@ public class Ghost : PlayerBase
                     SetNextAction(PlayerState.TurnLeft);
                     break;
                 case PlayerState.Jump:
-                    if (index < inputs.Count) isInvulnerable = true;
+                    if (index == inputs.Count-1) isInvulnerable = true;
                     Jump();
                     break;
                 case PlayerState.Slide:
-                    if (index < inputs.Count) isInvulnerable = true;
+                    if (index == inputs.Count-1) isInvulnerable = true;
                     Slide();
                     break;
             }
         }
 
         if (isInvulnerable) invulnerabilityTime -= Time.deltaTime;
-        if (invulnerabilityTime < 0) isInvulnerable = false;
+        if (invulnerabilityTime < 0) isInvulnerable = false; invulnerabilityTime = 1f;
 
         if (currEvent != PlayerState.Idle)
         {
