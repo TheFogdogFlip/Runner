@@ -36,7 +36,7 @@ public class AudioManager : Object{
             if (!audioInitiated)
             {
                 audioManager = new AudioManager();
-                audioManager.InitAudio();
+                audioManager.initAudio();
                 audioInitiated = true;
             }
 
@@ -55,6 +55,7 @@ public class AudioManager : Object{
     private void initAudio()
     {
         GameObject audioHolder = Instantiate(Resources.Load("AudioHolder", typeof(GameObject))) as GameObject;
+        DontDestroyOnLoad(audioHolder);
         AudioSource[] audioSources = audioHolder.GetComponents<AudioSource>();
         loopSound = audioSources[0];
         jumpSound = audioSources[1];
@@ -65,6 +66,8 @@ public class AudioManager : Object{
         MasterMixer = Resources.Load<AudioMixer>("Audio/MasterMixer");
         paused = MasterMixer.FindSnapshot("Paused");
         unPaused = MasterMixer.FindSnapshot("Unpaused");
+
+
     }
      /**---------------------------------------------------------------------------------
      * 
