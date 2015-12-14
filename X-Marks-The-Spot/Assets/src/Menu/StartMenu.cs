@@ -127,7 +127,8 @@ public class StartMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed every frame. 
+     * Simply checks if the player has pressed play, in which case UnityChans jump animation has started and after 0.77 sec the scene "Scene" is loaded.
      */
     void 
     Update()
@@ -140,7 +141,8 @@ public class StartMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executes when the mouse pointer is over a UI button
+     * Highlights the specific GameObject for EventSystem.
      */
     public void 
     HighlightItem(GameObject gameObj)
@@ -149,7 +151,9 @@ public class StartMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed when the Exit Game button is pressed.
+     * Enables the Quit menu and disables the start menu without hiding it.
+     * Sets the selected GameObject to the No button.
      */
 	public void 
     ExitPress()
@@ -162,7 +166,8 @@ public class StartMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executes when the No button is pressed.
+     * Disables and hides the Quit menu and enables the Start menu.
      */
     public void 
     NoPress()
@@ -174,16 +179,8 @@ public class StartMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
-     */
-    public void 
-    ResetTimer()
-    {
-        menuTimer.f_time = 0;
-    }
-
-    /**---------------------------------------------------------------------------------
-     * 
+     * Executed when the Load Level button is pressed. 
+     * Disables the start menu and hides it and enables the Load Level menu. 
      */
     public void 
     LoadLevelPress()
@@ -195,7 +192,8 @@ public class StartMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed when the Options button is pressed.
+     * Disables and hides the Start menu and enables the Options menu.
      */
     public void
     OptionsPress()
@@ -207,7 +205,8 @@ public class StartMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed when the Help button is pressed.
+     * Disables and hides the Start menu and enables the Help menu.
      */
     public void 
     HelpMenuPress()
@@ -219,10 +218,13 @@ public class StartMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed when the Play button is pressed. 
+     * Finds the GameObject called Player and gets it's Animator component.
+     * Initiates the menu timer and plays UnityChan's "Jump" animation
+     * Disables the Start menu without hiding it. 
      */
     public void 
-    StartLevel()
+    PlayPress()
     {
         GameObject playerGameObject = GameObject.Find("Player");
         Animator anim;
@@ -235,7 +237,8 @@ public class StartMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed when the Yes button in the quit menu is pressed. 
+     * Terminates the game.
      */
     public void 
     ExitGame()
@@ -244,7 +247,7 @@ public class StartMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Disables the start menu and it's components but does not hide it.
      */
     public void 
     DisableStart()
@@ -257,7 +260,8 @@ public class StartMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Enables the start menu and disables the Quit menu.
+     * Sets the selected GameObject to the Play button.
      */
     public void 
     EnableStart()

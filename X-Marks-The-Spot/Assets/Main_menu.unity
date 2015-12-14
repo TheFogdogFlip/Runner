@@ -4335,7 +4335,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 656565305}
-        m_MethodName: StartLevel
+        m_MethodName: PlayPress
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
