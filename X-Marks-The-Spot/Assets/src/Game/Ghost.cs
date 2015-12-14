@@ -10,6 +10,7 @@ public class Ghost : PlayerBase
     public List<TimeStamp> inputs;
     private TimerGhost ghostTimerObj;
     private GameObject ghostTimerGameObj;
+    private float invulnerabilityTime = 1f;
     int index;
 
     /**---------------------------------------------------------------------------------
@@ -52,9 +53,11 @@ public class Ghost : PlayerBase
                     SetNextAction(PlayerState.TurnLeft);
                     break;
                 case PlayerState.Jump:
+                    if (index < inputs.Count) isInvulnerable = true;
                     SetNextAction(PlayerState.Jump);
                     break;
                 case PlayerState.Slide:
+                    if (index < inputs.Count) isInvulnerable = true;
                     SetNextAction(PlayerState.Slide);
                     break;
             }
@@ -71,13 +74,18 @@ public class Ghost : PlayerBase
                     SetNextAction(PlayerState.TurnLeft);
                     break;
                 case PlayerState.Jump:
+                    if (index < inputs.Count) isInvulnerable = true;
                     Jump();
                     break;
                 case PlayerState.Slide:
+                    if (index < inputs.Count) isInvulnerable = true;
                     Slide();
                     break;
             }
         }
+
+        if (isInvulnerable) invulnerabilityTime -= Time.deltaTime;
+        if (invulnerabilityTime < 0) isInvulnerable = false;
 
         if (currEvent != PlayerState.Idle)
         {

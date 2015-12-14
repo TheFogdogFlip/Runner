@@ -23,6 +23,7 @@ public class PlayerBase : MonoBehaviour
     
 
     //DONT TOUCH
+    protected bool isInvulnerable = false;
     protected bool isJumping = false;
     protected bool isFalling = false;
     protected Rigidbody rb;
@@ -164,7 +165,8 @@ public class PlayerBase : MonoBehaviour
      */
     void OnTriggerEnter(Collider other)
     {
-        switch(other.gameObject.tag)
+        
+        switch (other.gameObject.tag)
         {
             case "Floor":
                 isJumping = false;
@@ -178,11 +180,18 @@ public class PlayerBase : MonoBehaviour
             case "Goal":
                 GoalFunc();
                 break;
+            case "Obstacle":
+                if (!isInvulnerable) Death();
+                break;
             case "Hole":
-                Falling();
-                isFalling = true;
+                if (!isInvulnerable)
+                {
+                    Falling();
+                    isFalling = true;
+                }
                 break;
         }
+        
     }
 
     /**---------------------------------------------------------------------------------

@@ -32,8 +32,6 @@ public class Player : PlayerBase
      */
     void Start ()
     {
-        
-
         SetupCtdTimer();
         //SetupGhostTimer();
         SetupPlayerTimer();
