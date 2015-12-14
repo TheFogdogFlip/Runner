@@ -4,10 +4,10 @@ using UnityEngine.Audio;
 
 public class AudioManager : Object{
 
-    public static AudioMixer MasterMixer;
+    private static AudioMixer MasterMixer;
 
-    public static AudioMixerSnapshot paused;
-    public static AudioMixerSnapshot unPaused;
+    private static AudioMixerSnapshot paused;
+    private static AudioMixerSnapshot unPaused;
 
     private static AudioSource loopSound;
     private static AudioSource jumpSound;
@@ -17,7 +17,16 @@ public class AudioManager : Object{
     private static AudioSource winSound;
 
     private static AudioManager audioManager;
+    /**---------------------------------------------------------------------------------
+    * 
+     */
+    private static int MasterVolume;
+    private static int MusicVolume;
+    private static int FXVolume;
 
+    /**---------------------------------------------------------------------------------
+    * 
+    */
     public static AudioManager Instance 
     {
         get 
@@ -28,12 +37,16 @@ public class AudioManager : Object{
             return audioManager;
         }
     }
-
+    /**---------------------------------------------------------------------------------
+     * 
+    */
     private AudioManager()
     { 
         
     }
-
+    /**---------------------------------------------------------------------------------
+     * 
+    */
     public void InitAudio()
     {
         GameObject audioHolder = Instantiate(Resources.Load("AudioHolder", typeof(GameObject))) as GameObject;
@@ -48,15 +61,23 @@ public class AudioManager : Object{
         paused = MasterMixer.FindSnapshot("Paused");
         unPaused = MasterMixer.FindSnapshot("Unpaused");
     }
+     /**---------------------------------------------------------------------------------
+     * 
+     */
     public void startLoop()
     {
         loopSound.Play();
     }
+    /**---------------------------------------------------------------------------------
+    * 
+     */
     public void stopLoop()
     {
         loopSound.Stop();
     }
-
+    /**---------------------------------------------------------------------------------
+    * 
+    */
     public void JumpSound()
     {
         if (!jumpSound.isPlaying)
@@ -64,7 +85,9 @@ public class AudioManager : Object{
             jumpSound.Play();
         }
     }
-    
+    /**---------------------------------------------------------------------------------
+    * 
+    */
     public void SlideSound()
     {
         if (!slideSound.isPlaying)
@@ -72,7 +95,9 @@ public class AudioManager : Object{
             slideSound.Play();
         }
     }
-
+    /**---------------------------------------------------------------------------------
+    * 
+    */
     public void CollisionSound()
     {
         if (!collisionSound.isPlaying)
@@ -80,7 +105,9 @@ public class AudioManager : Object{
             collisionSound.Play();
         }
     }
-
+    /**---------------------------------------------------------------------------------
+    * 
+    */
     public void FallingSound()
     {
         if (!fallingSound.isPlaying)
@@ -88,7 +115,9 @@ public class AudioManager : Object{
             fallingSound.Play();
         }
     }
-
+    /**---------------------------------------------------------------------------------
+    * 
+    */
     public void WinSound()
     {
         if (!winSound.isPlaying)
@@ -96,29 +125,42 @@ public class AudioManager : Object{
             winSound.Play();
         }
     }
-
+    /**---------------------------------------------------------------------------------
+     * 
+    */
     public void pauseVolume()
     {
         paused.TransitionTo(0.01f);
     }
-
+    /**---------------------------------------------------------------------------------
+    * 
+    */
     public void UnPauseVolume()
     {
         unPaused.TransitionTo(0.01f);
     }
-
-    public void SetMasterVolume(float masterVolume)
+    /**---------------------------------------------------------------------------------
+    * 
+    */
+    public void SetMasterVolume()
     {
-        MasterMixer.SetFloat("masterVolume", masterVolume);
+        MasterVolume = GlobalGameSettings.GetEffectsVolume();
+        MasterMixer.SetFloat("masterVolume", MasterVolume);
     }
-
-    public void SetMusicVolume(float musicVolume)
+    /**---------------------------------------------------------------------------------
+    * 
+    */
+    public void SetMusicVolume()
     {
-        MasterMixer.SetFloat("musicVolume", musicVolume);
+        MusicVolume = GlobalGameSettings.GetEffectsVolume();
+        MasterMixer.SetFloat("musicVolume", MusicVolume);
     }
-
-    public void SetSoundFXVolume(float soundFXVolume)
+    /**---------------------------------------------------------------------------------
+    * 
+    */
+    public void SetSoundFXVolume()
     {
-        MasterMixer.SetFloat("soundFXVolume", soundFXVolume);
+        FXVolume = GlobalGameSettings.GetEffectsVolume();
+        MasterMixer.SetFloat("soundFXVolume", FXVolume);
     }
 }
