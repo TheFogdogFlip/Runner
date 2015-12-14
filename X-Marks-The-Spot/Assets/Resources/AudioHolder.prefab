@@ -256,10 +256,10 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24344744, guid: 1b6981bdb0afc784d94178e3341d88f3,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: c103ac01ba1980449b4a8274ef9fbcd0, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: .899999976
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   Priority: 128
@@ -504,6 +504,10 @@ Prefab:
       value: 
       objectReference: {fileID: 24100000, guid: 1b6981bdb0afc784d94178e3341d88f3,
         type: 2}
+    - target: {fileID: 0}
+      propertyPath: Loop
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 172388}

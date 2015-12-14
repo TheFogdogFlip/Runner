@@ -9,6 +9,7 @@ public class AudioManager : Object{
     public static AudioMixerSnapshot paused;
     public static AudioMixerSnapshot unPaused;
 
+    private static AudioSource loopSound;
     private static AudioSource jumpSound;
     private static AudioSource slideSound;
     private static AudioSource collisionSound;
@@ -37,11 +38,20 @@ public class AudioManager : Object{
     {
         GameObject audioHolder = Instantiate(Resources.Load("AudioHolder", typeof(GameObject))) as GameObject;
         AudioSource[] audioSources = audioHolder.GetComponents<AudioSource>();
+        loopSound = audioSources[0];
         jumpSound = audioSources[1];
         slideSound = audioSources[2];
         collisionSound = audioSources[3];
         fallingSound = audioSources[4];
         winSound = audioSources[5];
+    }
+    public void startLoop()
+    {
+        loopSound.Play();
+    }
+    public void stopLoop()
+    {
+        loopSound.Stop();
     }
 
     public void JumpSound()

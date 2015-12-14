@@ -13,7 +13,6 @@ GameObject:
   - 92: {fileID: 9280178}
   - 81: {fileID: 8118250}
   - 114: {fileID: 11415714}
-  - 131: {fileID: 13194472}
   m_Layer: 0
   m_Name: ReplayCamera
   m_TagString: Untagged
@@ -73,7 +72,7 @@ AudioListener:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 192860}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!92 &9280178
 Behaviour:
   m_ObjectHideFlags: 1
@@ -92,9 +91,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dbb5416e1dc5de41a5967a4e2d68b85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraHeight: 12
+  cameraAngle: 70
+  fps: 30
+  imageFolder: captured_images
   timer: 0
   ghosts: []
-  record: 0
+  finishedTime: 0
+  recording: 0
 --- !u!124 &12474604
 Behaviour:
   m_ObjectHideFlags: 1
@@ -102,25 +106,6 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 192860}
   m_Enabled: 0
---- !u!131 &13194472
-GUITexture:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 192860}
-  m_Enabled: 1
-  m_Texture: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: .5}
-  m_PixelInset:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 0
-    height: 0
-  m_LeftBorder: 0
-  m_RightBorder: 0
-  m_TopBorder: 0
-  m_BottomBorder: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -130,7 +115,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.x
@@ -151,10 +136,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: overlay
       value: 
-      objectReference: {fileID: 13194472}
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_HDR
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: cameraHeight
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: cameraAngle
+      value: 70
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

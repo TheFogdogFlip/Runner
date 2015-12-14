@@ -8,10 +8,12 @@ using System.Text.RegularExpressions;
 
 public class Recorder : MonoBehaviour 
 {
+    public int cameraHeight;
+    public int cameraAngle;
+
     int imageNumber;
     public int fps = 30;
     public string imageFolder = "captured_images";
-    public string audioFolder = "captured_audio";
     public float timer;
     
     GameObject target = null;
@@ -30,6 +32,7 @@ public class Recorder : MonoBehaviour
     private float loadValue;
     private Image loadBarImage;
     private Text loadText;
+    private Text loadPercentageText;
     private TimerGhost ghostTimerObj;
     public float finishedTime;
     private bool generating = false;
@@ -38,8 +41,7 @@ public class Recorder : MonoBehaviour
     Process process;
     StreamReader reader;
 
-    //For Soundrecording
-    float[] audioData;
+    //For Sound
 
     /**---------------------------------------------------------------------------------
      * 
@@ -75,18 +77,7 @@ public class Recorder : MonoBehaviour
             }
         }
 
-        if (!System.IO.Directory.Exists(Application.persistentDataPath + "/" + audioFolder))
-        {
-            System.IO.Directory.CreateDirectory(Application.persistentDataPath + "/" + audioFolder);
-        }
-        //else
-        //{
-        //    foreach (string path in System.IO.Directory.GetFiles(Application.persistentDataPath + "/" + audioFolder))
-        //    {
-        //        System.IO.File.Delete(path);
-        //    }
-        //}
-
+        AudioManager.Instance.startLoop();
         setupRun(false);
     }
 
@@ -125,8 +116,8 @@ public class Recorder : MonoBehaviour
             Destroy(temp);
         }
 
-        gameObject.transform.position = new Vector3(target.transform.position.x, 20, target.transform.position.z);
-        gameObject.transform.rotation = Quaternion.Euler(new Vector3(70, 0, 0));
+        gameObject.transform.position = new Vector3(target.transform.position.x, cameraHeight, target.transform.position.z);
+        gameObject.transform.rotation = Quaternion.Euler(new Vector3(cameraAngle, 0, 0));
         ghost = target.GetComponent<Ghost>();
         ghost.inputs = inputs;
 
@@ -169,6 +160,7 @@ public class Recorder : MonoBehaviour
             Instantiate(Resources.Load("RecordingOverlay", typeof(Canvas)));
             loadBarImage = GameObject.Find("LoadBar").GetComponent<Image>();
             loadText = GameObject.Find("LoadText").GetComponent<Text>();
+            loadPercentageText = GameObject.Find("PercentageText").GetComponent<Text>();
         }
 
         if (loading)
@@ -196,7 +188,13 @@ public class Recorder : MonoBehaviour
 
                     process.EnableRaisingEvents = true;
                     process.StartInfo.FileName = "ffmpeg.exe";
-                    process.StartInfo.Arguments = "-framerate " + fps.ToString() + " -i \"" + filepath + "/captured_images/img%05d.png\" -i Kalimba.mp3 -c:v libx264 -vf fps=" + fps.ToString() + " -pix_fmt yuv420p -shortest \"" + filepath + "/out.mp4\" -y";
+                    process.StartInfo.Arguments = "-framerate " + fps.ToString() + " -i \"" + filepath + "/captured_images/img%05d.png\" "
+                                                + " -i Dreamworld.mp3"
+                                                + " -c:v libx264"
+                                                + " -vf fps=" + fps.ToString()
+                                                + " -pix_fmt yuv420p "
+                                                + " -shortest \"" 
+                                                + filepath + "/out.mp4\" -y";
 
                     process.StartInfo.UseShellExecute = false;
                     process.StartInfo.RedirectStandardError = true;
@@ -249,18 +247,10 @@ public class Recorder : MonoBehaviour
             }
 
             loadBarImage.fillAmount = loadValue;
+            loadPercentageText.text = System.Math.Ceiling(loadValue*100) + "%";
+            
         }
        
-    }
-
-    /**---------------------------------------------------------------------------------
-     * 
-     */
-    void OnAudioFilterRead(float[] data, int channels)
-    {
-        AudioClip clip = new AudioClip();
-        clip.SetData(data, 0);
-        SavWav.Save("test.wav", clip);
     }
 
     /**---------------------------------------------------------------------------------
@@ -270,7 +260,7 @@ public class Recorder : MonoBehaviour
     {
         if (target != null)
         {
-            gameObject.transform.position = new Vector3(target.transform.position.x, 20, target.transform.position.z);
+            gameObject.transform.position = new Vector3(target.transform.position.x, cameraHeight, target.transform.position.z);
         }
 
         if (recording)
