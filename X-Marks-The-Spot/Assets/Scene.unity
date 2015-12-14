@@ -234,7 +234,7 @@ RectTransform:
   m_RootOrder: 4
   m_AnchorMin: {x: .5, y: 1}
   m_AnchorMax: {x: .5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -401}
+  m_AnchoredPosition: {x: 0, y: -308}
   m_SizeDelta: {x: 160, y: 21}
   m_Pivot: {x: .5, y: 1}
 --- !u!114 &205925744
@@ -534,6 +534,7 @@ GameObject:
   - 114: {fileID: 437866544}
   - 114: {fileID: 437866543}
   - 114: {fileID: 437866542}
+  - 114: {fileID: 437866546}
   m_Layer: 5
   m_Name: ReloadGame_TextBtn
   m_TagString: Untagged
@@ -682,6 +683,20 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 437866540}
+--- !u!114 &437866546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 437866540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: .272000015}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &464139025
 GameObject:
   m_ObjectHideFlags: 0
@@ -727,6 +742,7 @@ GameObject:
   - 114: {fileID: 542439333}
   - 114: {fileID: 542439332}
   - 114: {fileID: 542439336}
+  - 114: {fileID: 542439337}
   m_Layer: 5
   m_Name: AudioSettings_TextBtn
   m_TagString: Untagged
@@ -875,6 +891,20 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!114 &542439337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 542439331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: .272000015}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &542530061
 GameObject:
   m_ObjectHideFlags: 0
@@ -987,6 +1017,7 @@ GameObject:
   - 114: {fileID: 744956923}
   - 114: {fileID: 744956922}
   - 114: {fileID: 744956926}
+  - 114: {fileID: 744956927}
   m_Layer: 5
   m_Name: ExitGame_TextBtn
   m_TagString: Untagged
@@ -1135,6 +1166,20 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!114 &744956927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 744956921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: .272000015}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &805451966
 GameObject:
   m_ObjectHideFlags: 0
@@ -1145,6 +1190,7 @@ GameObject:
   - 224: {fileID: 805451967}
   - 222: {fileID: 805451969}
   - 114: {fileID: 805451968}
+  - 114: {fileID: 805451970}
   m_Layer: 5
   m_Name: SoundMasterCounter_Text
   m_TagString: Untagged
@@ -1207,6 +1253,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 805451966}
+--- !u!114 &805451970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 805451966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: .272000015}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &817174858
 GameObject:
   m_ObjectHideFlags: 0
@@ -1543,6 +1603,7 @@ GameObject:
   - 224: {fileID: 978070319}
   - 222: {fileID: 978070321}
   - 114: {fileID: 978070320}
+  - 114: {fileID: 978070322}
   m_Layer: 5
   m_Name: SoundMusicCounter_Text
   m_TagString: Untagged
@@ -1605,6 +1666,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 978070318}
+--- !u!114 &978070322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 978070318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: .272000015}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1008843585
 GameObject:
   m_ObjectHideFlags: 0
@@ -1817,6 +1892,7 @@ GameObject:
   - 224: {fileID: 1248678569}
   - 222: {fileID: 1248678571}
   - 114: {fileID: 1248678570}
+  - 114: {fileID: 1248678572}
   m_Layer: 5
   m_Name: SoundMaster_Text
   m_TagString: Untagged
@@ -1879,6 +1955,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1248678568}
+--- !u!114 &1248678572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1248678568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: .272000015}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1284510193
 GameObject:
   m_ObjectHideFlags: 0
@@ -1889,6 +1979,7 @@ GameObject:
   - 224: {fileID: 1284510194}
   - 222: {fileID: 1284510196}
   - 114: {fileID: 1284510195}
+  - 114: {fileID: 1284510197}
   m_Layer: 5
   m_Name: SoundMusic_Text
   m_TagString: Untagged
@@ -1951,6 +2042,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1284510193}
+--- !u!114 &1284510197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1284510193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: .272000015}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1291311608
 GameObject:
   m_ObjectHideFlags: 0
@@ -1961,6 +2066,7 @@ GameObject:
   - 224: {fileID: 1291311609}
   - 222: {fileID: 1291311611}
   - 114: {fileID: 1291311610}
+  - 114: {fileID: 1291311612}
   m_Layer: 5
   m_Name: SoundEffects_Text
   m_TagString: Untagged
@@ -2023,6 +2129,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1291311608}
+--- !u!114 &1291311612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1291311608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: .272000015}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1321357945
 GameObject:
   m_ObjectHideFlags: 0
@@ -2059,7 +2179,7 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: .5, y: 1}
   m_AnchorMax: {x: .5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -276}
+  m_AnchoredPosition: {x: 0, y: -183}
   m_SizeDelta: {x: 166.199997, y: 23.1000061}
   m_Pivot: {x: .5, y: 1}
 --- !u!114 &1321357947
@@ -2217,7 +2337,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: -210}
+  m_AnchoredPosition: {x: 0, y: -195}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1438752962
@@ -2842,7 +2962,7 @@ RectTransform:
   m_RootOrder: 3
   m_AnchorMin: {x: .5, y: 1}
   m_AnchorMax: {x: .5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -338}
+  m_AnchoredPosition: {x: 0, y: -245}
   m_SizeDelta: {x: 160, y: 21}
   m_Pivot: {x: .5, y: 1}
 --- !u!114 &1666195860
@@ -3023,6 +3143,7 @@ GameObject:
   - 114: {fileID: 1733901682}
   - 114: {fileID: 1733901681}
   - 114: {fileID: 1733901685}
+  - 114: {fileID: 1733901686}
   m_Layer: 5
   m_Name: SaveMap_TextBtn
   m_TagString: Untagged
@@ -3171,6 +3292,20 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!114 &1733901686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1733901680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: .272000015}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1780947979
 GameObject:
   m_ObjectHideFlags: 0
@@ -3371,6 +3506,7 @@ GameObject:
   - 224: {fileID: 1812322416}
   - 222: {fileID: 1812322418}
   - 114: {fileID: 1812322417}
+  - 114: {fileID: 1812322419}
   m_Layer: 5
   m_Name: SoundEffectsCounter_Text
   m_TagString: Untagged
@@ -3433,6 +3569,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1812322415}
+--- !u!114 &1812322419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1812322415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: .272000015}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1855979006
 GameObject:
   m_ObjectHideFlags: 0
@@ -3713,6 +3863,7 @@ GameObject:
   - 114: {fileID: 2006888033}
   - 114: {fileID: 2006888032}
   - 114: {fileID: 2006888035}
+  - 114: {fileID: 2006888036}
   m_Layer: 5
   m_Name: ResumeGame_TextBtn
   m_TagString: Untagged
@@ -3861,6 +4012,20 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!114 &2006888036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2006888030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: .272000015}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!114 &2007157530 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11476132, guid: 6b090319341210a40a27e506f775f030,
