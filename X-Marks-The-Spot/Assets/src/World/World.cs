@@ -35,10 +35,10 @@ public class World
 {
     private static World instance;
 
-    private Texture2D map;
+    private Texture2D map = new Texture2D(width, depth, TextureFormat.RGBA32, false);
 
-    private int width;
-    private int depth;
+    private const int width = 256;
+    private const int depth = 256;
     private Tile[,] grid;
 
     private static Vector3 gridDimentions = new Vector3(2, 2, 2);
@@ -160,8 +160,15 @@ public class World
             for (int x = 0; x < width; x++)
             {
                 Tile tile = grid[y, x];
-                if(tile != null)
-                    UnityEngine.Object.DontDestroyOnLoad(tile);
+                try
+                {
+                    if (tile != null)
+                        UnityEngine.Object.DontDestroyOnLoad(tile.GameObject);
+                }
+                catch
+                {
+
+                }
             }
         }
     }
@@ -205,6 +212,20 @@ public class World
         return r.Color;
     }
 
+    ColorNode[,] mapcolor = new ColorNode[depth, width];
+
+    public void SetMapColor()
+    {
+        map = new Texture2D(width, depth, TextureFormat.RGBA32, false);
+        for (int y = 0; y < depth; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                map.SetPixel(x, y, mapcolor[y, x].ToColor());
+            }
+        }
+    }
+
     /**---------------------------------------------------------------------------------
     *   Generates a random world
     */
@@ -213,15 +234,10 @@ public class World
     {
         System.Random rand = new System.Random();
 
-        width = 256;
-        depth = 256;
-
-        map = new Texture2D(width, depth, TextureFormat.RGBA32, false);
-
         for (int y = 0; y < depth; y++)
         {
             for (int x = 0; x < width; x++)
-                map.SetPixel(y, x, Color.white);
+                mapcolor[y, x] = new ColorNode(255.0f, 255.0f, 255.0f, 255.0f);
         }
 
         int startX = 128;
@@ -236,8 +252,8 @@ public class World
         int angle = direction * 90;
         startDirection = new Vector3(0.0f, angle, 0.0f);
 
-        var color = findColor(startTile, angle).ToColor();
-        map.SetPixel(startX, startZ, color);
+        var color = findColor(startTile, angle);
+        mapcolor[startZ, startX] = color;
 
         List<TileDirectionNode> directions = new List<TileDirectionNode>();
         List<EndPosition> ends = new List<EndPosition>();
@@ -258,7 +274,7 @@ public class World
             var connection = getRandomConnection(dir, rand);
             var tile = findTile(connection.TileName);
             var rotation = getRandomRotation(connection, rand);
-            color = findColor(tile, rotation).ToColor();
+            color = findColor(tile, rotation);
             var rN = tile.Rotations.Find(r => r.Rotation == rotation);
 
 
@@ -278,9 +294,9 @@ public class World
                     break;
             }
 
-            if (map.GetPixel(dir.X, dir.Y) == Color.white)
+            if (mapcolor[dir.Y, dir.X].R == 255.0f && mapcolor[dir.Y, dir.X].G == 255.0f && mapcolor[dir.Y, dir.X].B == 255.0f && mapcolor[dir.Y, dir.X].A == 255.0f)
             {
-                map.SetPixel(dir.X, dir.Y, color);
+                mapcolor[dir.Y, dir.X] = color;
                 if (tile.TileName.ToLower() == "end".ToLower())
                     ends.Add(new EndPosition() { X = dir.X, Y = dir.Y, Rotation = rN.Rotation });
                 foreach (var item in rN.Directions)
@@ -294,7 +310,7 @@ public class World
             var connection = dir.Connections.Find(t => t.TileName.ToLower() == "end");
             var tile = findTile(connection.TileName);
             var rotation = getRandomRotation(connection, rand);
-            color = findColor(tile, rotation).ToColor();
+            color = findColor(tile, rotation);
             var rN = tile.Rotations.Find(r => r.Rotation == rotation);
 
             switch (dir.Direction)
@@ -313,19 +329,17 @@ public class World
                     break;
             }
 
-            if (map.GetPixel(dir.X, dir.Y) == Color.white)
+            if (mapcolor[dir.Y, dir.X].R == 255.0f && mapcolor[dir.Y, dir.X].G == 255.0f && mapcolor[dir.Y, dir.X].B == 255.0f && mapcolor[dir.Y, dir.X].A == 255.0f)
             {
-                map.SetPixel(dir.X, dir.Y, color);
+                mapcolor[dir.Y ,dir.X] = color;
                 ends.Add(new EndPosition() { X = dir.X, Y = dir.Y, Rotation = rN.Rotation });
             }
         }
 
         var end = getRandomEnd(ends, rand);
         var finishTile = findTile("finish");
-        color = findColor(finishTile, end.Rotation).ToColor();
-        map.SetPixel(end.X, end.Y, color);
-
-        loadFromMemory();
+        color = findColor(finishTile, end.Rotation);
+        mapcolor[end.Y, end.X] = color;
     }
 
     /**---------------------------------------------------------------------------------
@@ -442,11 +456,11 @@ public class World
     /**---------------------------------------------------------------------------------
     *   Load map from memory.
     */
-    private void 
+    public void 
     loadFromMemory()
     {
-        depth = map.height;
-        width = map.width;
+        //depth = map.height;
+        //width = map.width;
 
         grid = new Tile[width, depth];
 
@@ -497,8 +511,8 @@ public class World
     Load(string filename)
     {
         map = loadTexture2D(filename);
-        depth = map.height;
-        width = map.width;
+        //depth = map.height;
+        //width = map.width;
 
         grid = new Tile[width, depth];
 

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Tile : Object
+public class Tile
 {
     private GameObject gameObject = null;
     private float rotation = 0.0f;
@@ -59,7 +59,7 @@ public class Tile : Object
 
     public Tile(Vector3 position, Color color, string gameObjectTag, float rotation = 0.0f)
     {
-        GameObject = (GameObject)Instantiate(Resources.Load(gameObjectTag));
+        GameObject = (GameObject)UnityEngine.Object.Instantiate(Resources.Load(gameObjectTag));
         Color = color;
         Position = position;
         Rotation = rotation;

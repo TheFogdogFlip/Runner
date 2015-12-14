@@ -61,10 +61,14 @@ public class StartMenu : MonoBehaviour
      * Enables start menu and disables help, options and load level menu.
      * Highlights the Play button.
      */
+    LoadingThreadHandler threadHandler;
+
 	void 
     Start ()
     {
         World.Instance.LoadXML();
+        threadHandler = new LoadingThreadHandler();
+
         LoadComponents();
         loadMenuObj.LoadComponents();
         helpMenuObj.LoadComponents();
@@ -76,6 +80,7 @@ public class StartMenu : MonoBehaviour
         helpMenuObj.DisableHelp();
 
         eventSys.SetSelectedGameObject(playGameObj);
+        threadHandler.GenerateWorld();
 	}
 
     /**---------------------------------------------------------------------------------
@@ -135,7 +140,15 @@ public class StartMenu : MonoBehaviour
     {
         if (menuTimer.f_time > 0.77 && menuTimer.isActive)
         {
-            Application.LoadLevel("Scene");
+            if (threadHandler.Generated)
+            {
+                World.Instance.SetMapColor();
+                World.Instance.loadFromMemory();
+                threadHandler.UseGenerated();
+                var test = World.Instance.GetTile(256, 256);
+                threadHandler.LoadAssets();
+                Application.LoadLevel("Scene");
+            }
         }
         
     }
