@@ -1805,7 +1805,7 @@ MonoBehaviour:
   i_time: 0
   TimerFirstRunning: 0
   TimerSecondRunning: 0
-  textObj: {fileID: 1790553608}
+  countDownText: {fileID: 1790553608}
 --- !u!4 &1165519776
 Transform:
   m_ObjectHideFlags: 0
@@ -4165,7 +4165,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   f_time: 0
-  textObj: {fileID: 2097854504}
   TimerRunning: 0
 --- !u!4 &2083134451
 Transform:

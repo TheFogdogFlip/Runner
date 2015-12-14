@@ -31,7 +31,6 @@ public class Ghost : PlayerBase
      */
     void Update()
     {
-        ghostTimerObj.SetText();
         PlayerState currEvent = PlayerState.Idle;
 
         if (index < inputs.Count)
