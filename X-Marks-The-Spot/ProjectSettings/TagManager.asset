@@ -9,7 +9,8 @@ TagManager:
   - Hole
   - Goal
   - Pole
-  - Obstacle
+  - Obstacle_Jump
+  - Obstacle_Slide
   layers:
   - Default
   - TransparentFX
