@@ -20,6 +20,7 @@ public class InitGame : MonoBehaviour {
         loadingText.text = "Generating World...";
         World.Instance.Generate();
 
+        loadingText.text = "Loading Audio...";
         AudioManager.Instance.InitAudio();
 
         loadingText.text = "Loading Player...";
