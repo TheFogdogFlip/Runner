@@ -3,84 +3,114 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class OptionsMenu : MonoBehaviour 
+public class OptionsMenu : MonoBehaviour
 {
+    /**---------------------------------------------------------------------------------
+     * GameObjects associated with the script.
+     */
+    private GameObject backGameObject;
+    private GameObject masterVolGameObject;
+    private GameObject effectsVolGameObject;
+    private GameObject musicVolGameObject;
+    private GameObject startMenuGameObject;
+    private GameObject optionsMenuGameObject;
+
+    /**---------------------------------------------------------------------------------
+     * Canvas associated with the script.
+     */
     private Canvas startMenu;
     private Canvas optionsMenu;
-    
+
+    /**---------------------------------------------------------------------------------
+     * Buttons associated with the script.
+     */
     private Button backText;
-    
+
+    /**---------------------------------------------------------------------------------
+     * Master volume slider used in Audio Settings.
+     */
     private Slider masterVolSlider;
-    public Text masterVolText;
-    
+    private Text masterVolText;
+
+    /**---------------------------------------------------------------------------------
+     * Sound effects volume slider used in Audio Settings.
+     */
     private Slider effectsVolSlider;
-    public Text effectsVolText;
-    
+    private Text effectsVolText;
+
+    /**---------------------------------------------------------------------------------
+     * Music volume slider used in Audio Settings.
+     */
     private Slider musicVolSlider;
-    public Text musicVolText;
-    
+    private Text musicVolText;
+
+    /**---------------------------------------------------------------------------------
+     * Class objects used by the script.
+     */
     private StartMenu startMenuObj;
     private OptionsMenu optionsMenuObj;
 
-    private GameObject backGameObj;
-    private GameObject masterVolGameObj;
-    private GameObject effectsVolGameObj;
-    private GameObject musicVolGameObj;
-    private GameObject startMenuGameObj;
-    private GameObject optionsMenuGameObj;
-
-
+    /**---------------------------------------------------------------------------------
+     * EventSystem associated with the script.
+     */
     public EventSystem eventSys;
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed when the script starts.
      */
-	void 
+    void 
     Start() 
     {
         //Empty
 	}
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Should only be executed once.
+     * Loads all components necessary for the script.
+     * Changing the name of a GameObject in the scene will require changing the string in the respective GameObject.Find() call.
+     * Loads audio settings from GlobalGameSettings.
      */
     public void 
     LoadComponents()
     {
         GlobalGameSettings.LoadSettings();
-        startMenuGameObj            = GameObject.Find("StartMenu_Canvas");
-        optionsMenuGameObj          = GameObject.Find("OptionsMenu_Canvas");
-        backGameObj                 = GameObject.Find("OptionsBack_TextBtn");
-        masterVolGameObj            = GameObject.Find("SoundMaster_Slider");
-        musicVolGameObj             = GameObject.Find("SoundMusic_Slider");
-        effectsVolGameObj           = GameObject.Find("SoundEffects_Slider");
+        startMenuGameObject             = GameObject.Find("StartMenu_Canvas");
+        optionsMenuGameObject           = GameObject.Find("OptionsMenu_Canvas");
+        backGameObject                  = GameObject.Find("OptionsBack_TextBtn");
+        masterVolGameObject             = GameObject.Find("SoundMaster_Slider");
+        masterVolText                   = GameObject.Find("SoundMasterCounter_Text").GetComponent<Text>();
+        musicVolGameObject              = GameObject.Find("SoundMusic_Slider");
+        musicVolText                    = GameObject.Find("SoundMusicCounter_Text").GetComponent<Text>();
+        effectsVolGameObject            = GameObject.Find("SoundEffects_Slider");
+        effectsVolText                  = GameObject.Find("SoundEffectsCounter_Text").GetComponent<Text>();
 
-        startMenu                   = startMenuGameObj.GetComponent<Canvas>();
-        optionsMenu                 = optionsMenuGameObj.GetComponent<Canvas>();
+        startMenu                       = startMenuGameObject.GetComponent<Canvas>();
+        optionsMenu                     = optionsMenuGameObject.GetComponent<Canvas>();
 
-        startMenuObj                = startMenuGameObj.GetComponent<StartMenu>();
-        optionsMenuObj              = optionsMenuGameObj.GetComponent<OptionsMenu>();
+        startMenuObj                    = startMenuGameObject.GetComponent<StartMenu>();
+        optionsMenuObj                  = optionsMenuGameObject.GetComponent<OptionsMenu>();
 
-        backText                    = backGameObj.GetComponent<Button>();
-        masterVolSlider             = masterVolGameObj.GetComponent<Slider>();
-        effectsVolSlider            = effectsVolGameObj.GetComponent<Slider>();
-        musicVolSlider              = musicVolGameObj.GetComponent<Slider>();
+        backText                        = backGameObject.GetComponent<Button>();
+        masterVolSlider                 = masterVolGameObject.GetComponent<Slider>();
+        effectsVolSlider                = effectsVolGameObject.GetComponent<Slider>();
+        musicVolSlider                  = musicVolGameObject.GetComponent<Slider>();
 
-        int masterVol               = GlobalGameSettings.GetMasterVolume();
-        int effectsVol              = GlobalGameSettings.GetEffectsVolume();
-        int musicVol                = GlobalGameSettings.GetMusicVolume();
+        int masterVol                   = GlobalGameSettings.GetMasterVolume();
+        int effectsVol                  = GlobalGameSettings.GetEffectsVolume();
+        int musicVol                    = GlobalGameSettings.GetMusicVolume();
 
-        masterVolSlider.value       = masterVol;
-        effectsVolSlider.value      = effectsVol;
-        musicVolSlider.value        = musicVol;
+        masterVolSlider.value           = masterVol;
+        effectsVolSlider.value          = effectsVol;
+        musicVolSlider.value            = musicVol;
 
-        masterVolText.text          = masterVol.ToString();
-        effectsVolText.text         = effectsVol.ToString();
-        musicVolText.text           = musicVol.ToString();
+        masterVolText.text              = masterVol.ToString();
+        effectsVolText.text             = effectsVol.ToString();
+        musicVolText.text               = musicVol.ToString();
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed when the Options back button is pressed. 
+     * Disables the options menu and enables the start menu.
      */
     public void 
     BackPress()
@@ -92,7 +122,8 @@ public class OptionsMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed when the Sound Master volume slider is moved. 
+     * Sets the master volume in GlobalGameSettings and calls GlobalGameSettings.SaveSettings.
      */
     public void 
     SetMasterVolume()
@@ -104,7 +135,8 @@ public class OptionsMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed when the Sound Effects volume slider is moved. 
+     * Sets the sound effects volume in GlobalGameSettings and calls GlobalGameSettings.SaveSettings.
      */
     public void 
     SetSoundEffectsVolume()
@@ -116,7 +148,8 @@ public class OptionsMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed when the Sound Music volume slider is moved. 
+     * Sets the music volume in GlobalGameSettings and calls GlobalGameSettings.SaveSettings.
      */
     public void 
     SetMusicVolume()
@@ -128,7 +161,22 @@ public class OptionsMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed when the Options menu needs to be enabled.
+     * Enables the canvas and all the components associated with the script.
+     */
+    public void
+    EnableOptions()
+    {
+        backText.enabled = true;
+        masterVolSlider.enabled = true;
+        musicVolSlider.enabled = true;
+        effectsVolSlider.enabled = true;
+        eventSys.SetSelectedGameObject(backGameObject);
+    }
+
+    /**---------------------------------------------------------------------------------
+     * Executed when the Options menu needs to be disabled.
+     * Disables the canvas and all the components associated with the script.
      */
     public void 
     DisableOptions()
@@ -137,18 +185,5 @@ public class OptionsMenu : MonoBehaviour
         masterVolSlider.enabled = false;
         musicVolSlider.enabled = false;
         effectsVolSlider.enabled = false;
-    }
-
-    /**---------------------------------------------------------------------------------
-     * 
-     */
-    public void 
-    EnableOptions()
-    {
-        backText.enabled = true;
-        masterVolSlider.enabled = true;
-        musicVolSlider.enabled = true;
-        effectsVolSlider.enabled = true;
-        eventSys.SetSelectedGameObject(backGameObj);
     }
 }

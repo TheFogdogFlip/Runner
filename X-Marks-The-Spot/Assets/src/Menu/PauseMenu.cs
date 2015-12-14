@@ -77,7 +77,7 @@ public class PauseMenu : MonoBehaviour
     /**---------------------------------------------------------------------------------
      * Should only be executed once.
      * Loads components necessary for the script. 
-     * Changing the name of a GameObject in the scene will require changing the respective GameObject.Find() call.
+     * Changing the name of a GameObject in the scene will require changing the string in the respective GameObject.Find() call.
      * Loads audio settings from GlobalGameSettings.
      */
     public void 
@@ -215,15 +215,6 @@ public class PauseMenu : MonoBehaviour
         //World.Instance.Save("MAPSAVE" +  info.Length + ".PNG");
         //World.Instance.Save(path + "MAPSAVE" + info.Length + ".PNG");
   
-    }
-
-    /**---------------------------------------------------------------------------------
-     * Gets the current directory.
-     */
-    private void 
-    GetCurrentDirectory()
-    {
-        throw new System.NotImplementedException();
     }
 
     /**---------------------------------------------------------------------------------

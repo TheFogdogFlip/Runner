@@ -5,21 +5,38 @@ using System.Collections;
 
 public class HelpMenu : MonoBehaviour 
 {
-    private Canvas startMenu;
-    private Canvas helpMenu;
-
-    private Button backText;
-
-    private StartMenu startMenuObj;
-    private HelpMenu helpMenuObj;
-
-    public EventSystem eventSys;
+    /**---------------------------------------------------------------------------------
+     * GameObjects associated with the script.
+     */
     private GameObject backGameObj;
     private GameObject startMenuGameObj;
     private GameObject helpMenuGameObj;
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Canvas associated with the script.
+     */
+    private Canvas startMenu;
+    private Canvas helpMenu;
+
+    /**---------------------------------------------------------------------------------
+     * Buttons associated with the script.
+     */
+    private Button backText;
+
+    /**---------------------------------------------------------------------------------
+     * Class objects used by the script.
+     */
+    private StartMenu startMenuObj;
+    private HelpMenu helpMenuObj;
+
+    /**---------------------------------------------------------------------------------
+     * EventSystem used by the script.
+     */
+    public EventSystem eventSys;
+    
+
+    /**---------------------------------------------------------------------------------
+     * Executed when the script starts.
      */
 	void 
     Start() 
@@ -28,9 +45,11 @@ public class HelpMenu : MonoBehaviour
 	}
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Should only be executed once.
+     * Loads all components necessary for the script.
+     * Changing the name of a GameObject in the scene will require changing the string in the respective GameObject.Find() call.
      */
-	public void 
+    public void 
     LoadComponents()
     {
         startMenuGameObj            = GameObject.Find("StartMenu_Canvas");
@@ -46,13 +65,12 @@ public class HelpMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed when the Back button is pressed.
+     * Disables help menu and enables start menu.
      */
     public void 
     BackPress()
     {
-        helpMenu.enabled = false;
-        startMenu.enabled = true;
         DisableHelp();
         startMenuObj.EnableStart();
     }
@@ -63,6 +81,7 @@ public class HelpMenu : MonoBehaviour
     public void 
     DisableHelp()
     {
+        helpMenu.enabled = false;
         backText.enabled = false;
     }
 
