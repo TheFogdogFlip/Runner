@@ -3,33 +3,33 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-
+/**
+ * Child of 'PlayerBase' which contains all movement methods.
+ */
 public class Player : PlayerBase
 {
-    Vector2 startPosition = -Vector2.one;
     //Ctd Timer
     private GameObject ctdTimerGameObj;
     private TimerCountdown ctdTimerObj;
-
     //Player Timer
     private TimerPlayer playerTimerObj;
     private GameObject playerTimerGameObj;
-
-    public List<TimeStamp> inputs;
-
     //Ghost Timer
     private TimerGhost ghostTimerObj;
     private GameObject ghostTimerGameObj;
-
-    private List<List<TimeStamp>> ghostinputs;
-    private List<GameObject> ghosts;
-
     //Joystick cooldown
     private int cooldownCount = 25;
     private bool coolingDown = false;
 
+    private List<List<TimeStamp>> ghostinputs;
+    private List<GameObject> ghosts;
+    Vector2 startPosition = -Vector2.one;
+    public List<TimeStamp> inputs;
+
+
+
     /**---------------------------------------------------------------------------------
-     *
+     * Activated when the player is activated, initiates all the necessities.
      */
     void Start()
     {
@@ -49,7 +49,7 @@ public class Player : PlayerBase
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Metod activated every turn.
      */
     void Update()
     {
@@ -76,13 +76,16 @@ public class Player : PlayerBase
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Method which does things when stuff is clicked, checked every frame.
      */
     void KeyInputs()
     {
         int horizontal = 0;
         int vertical = 0;
 
+        /**
+         * Used on touchpad devices.
+         */
         if (Input.touches.Length > 0)
         {
             Touch firstFinger = Input.touches[0];
@@ -105,9 +108,13 @@ public class Player : PlayerBase
             }
         }
 
+        //Temp stuff for easier testing.
         if (Input.GetKeyDown(KeyCode.R))
             GoalFunc();
 
+        /**
+         * Cooldown to avoid queuing up unwanted commands.
+         */
         if (coolingDown)
         {
             Input.ResetInputAxes();
@@ -173,7 +180,7 @@ public class Player : PlayerBase
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Sets up the countdown timer.
      */
     public void SetupCtdTimer()
     {
@@ -187,7 +194,7 @@ public class Player : PlayerBase
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Sets up the playertimer
      */
     public void SetupPlayerTimer()
     {
@@ -197,7 +204,7 @@ public class Player : PlayerBase
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Sets up the GHOST.
      */
     public void SetupGhostTimer()
     {
@@ -209,7 +216,7 @@ public class Player : PlayerBase
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Metod for setting up the next game, occurs on death-
      */
     void SetupNextGame()
     {
@@ -218,6 +225,9 @@ public class Player : PlayerBase
         ghostinputs.Add(inputs);
         inputs = new List<TimeStamp>();
 
+        /**
+         * Activates all saved away ghosts.
+         */
         for (int i = 0; i < ghostinputs.Count; ++i)
         {
             go = Instantiate(Resources.Load("Ghost", typeof(GameObject)), World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection)) as GameObject;
@@ -232,7 +242,7 @@ public class Player : PlayerBase
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Method overridden to save away the action for the next ghost.
      */
     protected override void ActivateNextAction()
     {
@@ -254,7 +264,7 @@ public class Player : PlayerBase
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Method activeted on death, resetts all necessary values to their correct state.
      */
     protected override void Death()
     {
@@ -276,6 +286,7 @@ public class Player : PlayerBase
         anim.Play("Idle");
         AudioManager.Instance.CollisionSound();
 
+        //Kills off all current ghosts.
         foreach (GameObject go in ghosts)
         {
             Destroy(go);
@@ -285,7 +296,7 @@ public class Player : PlayerBase
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Pitfalling ovverridden, just for the sound :)
      */
     protected override void Falling()
     {
@@ -294,7 +305,7 @@ public class Player : PlayerBase
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Method activated when the goal is reached, set's up the finishing camera.
      */
     protected override void GoalFunc()
     {
@@ -311,7 +322,7 @@ public class Player : PlayerBase
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Returns wheter or not the character is turning or not.
      */
     public bool GetTurn()
     {
@@ -319,7 +330,7 @@ public class Player : PlayerBase
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Returns the players state.
      */
     public PlayerState GetNextAction()
     {
