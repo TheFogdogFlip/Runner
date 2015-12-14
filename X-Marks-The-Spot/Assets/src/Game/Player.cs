@@ -28,11 +28,12 @@ public class Player : PlayerBase
     private bool coolingDown = false;
 
     /**---------------------------------------------------------------------------------
-     * 
+     *
      */
     void Start ()
     {
-
+        //reset captureframerate so game runs at normal speed
+        Time.captureFramerate = 0;
         
         SetupCtdTimer();
         //SetupGhostTimer();
