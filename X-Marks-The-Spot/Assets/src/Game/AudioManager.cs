@@ -17,6 +17,7 @@ public class AudioManager : Object{
     private static AudioSource winSound;
 
     private static AudioManager audioManager;
+    private static bool audioInitiated = false;
     /**---------------------------------------------------------------------------------
     * 
      */
@@ -31,9 +32,12 @@ public class AudioManager : Object{
     {
         get 
         {
-            if (audioManager == null)
+            if (!audioInitiated)
+            {
                 audioManager = new AudioManager();
-
+                audioManager.InitAudio();
+                audioInitiated = true;
+            }
             return audioManager;
         }
     }
@@ -42,7 +46,6 @@ public class AudioManager : Object{
     */
     private AudioManager()
     {
-        
     }
     /**---------------------------------------------------------------------------------
      * 

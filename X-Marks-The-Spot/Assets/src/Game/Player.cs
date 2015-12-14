@@ -44,7 +44,6 @@ public class Player : PlayerBase
         ghosts = new List<GameObject>();
         inputs = new List<TimeStamp>();
         anim.Play("Idle");
-        AudioManager.Instance.InitAudio();
         AudioManager.Instance.startLoop();
     }
 
