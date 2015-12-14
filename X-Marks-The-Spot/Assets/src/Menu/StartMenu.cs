@@ -5,6 +5,9 @@ using System.Collections;
 
 public class StartMenu : MonoBehaviour
 {
+    /**---------------------------------------------------------------------------------
+     * GameObjects associated with the script.
+     */   
     private GameObject playGameObj;
     private GameObject loadGameObj;
     private GameObject helpGameObj;
@@ -17,17 +20,27 @@ public class StartMenu : MonoBehaviour
     private GameObject loadMenuGameObj;
     private GameObject optionsMenuGameObj;
 
+    /**---------------------------------------------------------------------------------
+     * Class objects associated with the script.
+     */
     private StartMenu startMenuObj;
     private OptionsMenu optionsMenuObj;
     private LoadLevelMenu loadMenuObj;
     private HelpMenu helpMenuObj;
+    private TimerMenu menuTimer;
 
+    /**---------------------------------------------------------------------------------
+     * Canvas associated with the script.
+     */
     public Canvas quitMenu;
     public Canvas optionsMenu;
     public Canvas loadLevelMenu;
     public Canvas helpMenu;
     public Canvas startMenu;
 
+    /**---------------------------------------------------------------------------------
+     * Buttons associated with the script.
+     */
     private Button startText;
     private Button exitText;
     private Button optionsText;
@@ -35,17 +48,23 @@ public class StartMenu : MonoBehaviour
     private Button helpText;
     private Button noText;
     private Button yesText;
-
-    private TimerMenu menuTimer;
-
+    
+    /**---------------------------------------------------------------------------------
+     * EventSystem used by the script.
+     */
     public EventSystem eventSys;
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executes when the script starts.
+     * Loads necessary components for start menu and all other menus in order to use them right away instead of waiting for each scripts Start() function.
+     * LoadXML loads tile data.
+     * Enables start menu and disables help, options and load level menu.
+     * Highlights the Play button.
      */
 	void 
     Start ()
     {
+        World.Instance.LoadXML();
         LoadComponents();
         loadMenuObj.LoadComponents();
         helpMenuObj.LoadComponents();
@@ -57,12 +76,12 @@ public class StartMenu : MonoBehaviour
         helpMenuObj.DisableHelp();
 
         eventSys.SetSelectedGameObject(playGameObj);
-
-
 	}
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Should only be executed once.
+     * Loads necessary components for Start menu.
+     * Changing the name of a GameObject in the scene will require changing the string in the respective GameObject.Find() call.
      */
     public void 
     LoadComponents()
@@ -71,6 +90,14 @@ public class StartMenu : MonoBehaviour
         helpMenuGameObj             = GameObject.Find("HelpMenu_Canvas");
         loadMenuGameObj             = GameObject.Find("LoadLevelMenu_Canvas");
         optionsMenuGameObj          = GameObject.Find("OptionsMenu_Canvas");
+
+        playGameObj                 = GameObject.Find("Play_TextBtn");
+        optionsGameObj              = GameObject.Find("Options_TextBtn");
+        helpGameObj                 = GameObject.Find("Help_TextBtn");
+        loadGameObj                 = GameObject.Find("LoadLevel_TextBtn");
+        exitGameObj                 = GameObject.Find("Quit_TextBtn");
+        yesGameObj                  = GameObject.Find("Yes_TextBtn");
+        noGameObj                   = GameObject.Find("No_TextBtn");
 
         menuTimer                   = GameObject.Find("menuTimer").GetComponent<TimerMenu>();
 
@@ -84,13 +111,7 @@ public class StartMenu : MonoBehaviour
         helpMenu                    = helpMenu.GetComponent<Canvas>();
         startMenu                   = startMenu.GetComponent<Canvas>();
 
-        playGameObj                 = GameObject.Find("Play_TextBtn");
-        optionsGameObj              = GameObject.Find("Options_TextBtn");
-        helpGameObj                 = GameObject.Find("Help_TextBtn");
-        loadGameObj                 = GameObject.Find("LoadLevel_TextBtn");
-        exitGameObj                 = GameObject.Find("Quit_TextBtn");
-        yesGameObj                  = GameObject.Find("Yes_TextBtn");
-        noGameObj                   = GameObject.Find("No_TextBtn");
+        
 
         startText                   = playGameObj.GetComponent<Button>();
         exitText                    = exitGameObj.GetComponent<Button>();
