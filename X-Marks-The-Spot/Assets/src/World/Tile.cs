@@ -8,9 +8,16 @@ public class Tile
     private Vector3 position;
     private Color color;
 
-    private static Dictionary<string, GameObject> gameObjects = new Dictionary<string,GameObject>();
+    /**---------------------------------------------------------------------------------
+    *   Used for Tile cache. So you don't have to read from disk for each tile.
+    */
+    private static Dictionary<string, GameObject> gameObjectsCache = new Dictionary<string,GameObject>();
 
-    public Vector3 Position
+    /**---------------------------------------------------------------------------------
+    *   Used to get and set position of the tile.
+    */
+    public Vector3 
+    Position
     {
         get
         {
@@ -24,7 +31,11 @@ public class Tile
         }
     }
 
-    public Color Color
+    /**---------------------------------------------------------------------------------
+    *   Holds the color value of the tile.
+    */
+    public Color 
+    Color
     {
         get
         {
@@ -36,7 +47,11 @@ public class Tile
         }
     }
 
-    public float Rotation
+    /**---------------------------------------------------------------------------------
+    *   Used to get and set the rotation of the tile.
+    */
+    public float 
+    Rotation
     {
         get { return rotation; }
         set
@@ -47,7 +62,11 @@ public class Tile
         }
     }
 
-    public GameObject GameObject
+    /**---------------------------------------------------------------------------------
+    *   Used to get and set the Tile prefab for the tile.
+    */
+    public GameObject 
+    GameObject
     {
         set
         {
@@ -61,16 +80,21 @@ public class Tile
         get { return gameObject; }
     }
 
-    public Tile(Vector3 position, Color color, string gameObjectTag, float rotation = 0.0f)
+    /**---------------------------------------------------------------------------------
+    *   Constructor. Adds unseen tile types to the game chache and then 
+    *   instantiates the tile at given position and rotation.
+    */
+    public 
+    Tile(Vector3 position, Color color, string gameObjectTag, float rotation = 0.0f)
     {
         GameObject gameObject = null;
 
-        if(gameObjects.ContainsKey(gameObjectTag))
-            gameObject = gameObjects[gameObjectTag];
+        if (gameObjectsCache.ContainsKey(gameObjectTag))
+            gameObject = gameObjectsCache[gameObjectTag];
         else
         {
             gameObject = Resources.Load<GameObject>(gameObjectTag);
-            gameObjects[gameObjectTag] = gameObject;
+            gameObjectsCache[gameObjectTag] = gameObject;
         }
 
         GameObject = Object.Instantiate<GameObject>(gameObject);

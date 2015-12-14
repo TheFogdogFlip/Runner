@@ -147,6 +147,9 @@ public class StartMenu : MonoBehaviour
 
     }
 
+    /**---------------------------------------------------------------------------------
+    *   Used to fix unity's fucked system.
+    */
     IEnumerator Coroutine()
     {
         MainCamera.transform.position = new Vector3(256, 60, 256);
