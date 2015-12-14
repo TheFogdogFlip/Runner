@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 public class Player : PlayerBase
 {
+    Vector2 startPosition = -Vector2.one;
     //Ctd Timer
     private GameObject ctdTimerGameObj;
     private TimerCountdown ctdTimerObj;
@@ -51,9 +52,6 @@ public class Player : PlayerBase
      */
     void Update()
     {
-        if (ghostTimerObj != null)
-            ghostTimerObj.SetText();
-
         //Running forward block
         if (!ctdTimerObj.TimerFirstRunning)
         {
@@ -66,10 +64,6 @@ public class Player : PlayerBase
                 anim.SetTrigger("Run");
             }
 
-            else
-            {
-                playerTimerObj.SetText();
-            }
         }
         if(!ctdTimerObj.TimerSecondRunning)
         {
@@ -80,9 +74,6 @@ public class Player : PlayerBase
             ctdTimerObj.SetText();
         }
     }
-
-    //Uhm, this is outside a function, is it meant to be here or should it be in the declarations section?
-    Vector2 startPosition = -Vector2.one;
 
     /**---------------------------------------------------------------------------------
      * 
@@ -192,7 +183,7 @@ public class Player : PlayerBase
         ctdTimerObj.i_time = 2;
         ctdTimerObj.TimerFirstRunning = true;
         ctdTimerObj.TimerSecondRunning = true;
-        ctdTimerObj.textObj.enabled = true;
+        ctdTimerObj.countDownText.enabled = true;
     }
 
     /**---------------------------------------------------------------------------------
@@ -202,7 +193,6 @@ public class Player : PlayerBase
     {
         playerTimerGameObj = GameObject.Find("playerTimer");
         playerTimerObj = playerTimerGameObj.GetComponent<TimerPlayer>();
-        playerTimerObj.textObj.text = "0";
         playerTimerObj.TimerRunning = false;
     }
 
@@ -214,7 +204,6 @@ public class Player : PlayerBase
         ghostTimerGameObj = GameObject.Find("ghostTimer");
         ghostTimerObj = ghostTimerGameObj.GetComponent<TimerGhost>();
         ghostTimerObj.f_time = 0;
-        ghostTimerObj.textObj.text = "0";
         ghostTimerObj.TimerRunning = true;
 
     }
@@ -310,8 +299,8 @@ public class Player : PlayerBase
     protected override void GoalFunc()
     {
         AudioManager.Instance.WinSound();
-        ctdTimerObj.textObj.enabled = true;
-        ctdTimerObj.textObj.text = "Victory!";
+        ctdTimerObj.countDownText.enabled = true;
+        ctdTimerObj.countDownText.text = "Victory!";
 
         Camera cam = Instantiate(Resources.Load("ReplayCamera", typeof(Camera)), World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection)) as Camera;
         Recorder rec = cam.GetComponent<Recorder>();
