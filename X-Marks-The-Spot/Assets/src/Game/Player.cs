@@ -10,7 +10,7 @@ public class Player : PlayerBase
     //Ctd Timer
     private GameObject ctdTimerGameObj;
     private TimerCountdown ctdTimerObj;
-    
+
     //Player Timer
     private TimerPlayer playerTimerObj;
     private GameObject playerTimerGameObj;
@@ -31,11 +31,11 @@ public class Player : PlayerBase
     /**---------------------------------------------------------------------------------
      *
      */
-    void Start ()
+    void Start()
     {
-        //reset captureframerate so game runs at normal speed
+        //reset captureframerate so game runs at normal speed afer recordign
         Time.captureFramerate = 0;
-        
+
         SetupCtdTimer();
         //SetupGhostTimer();
         SetupPlayerTimer();
@@ -44,6 +44,7 @@ public class Player : PlayerBase
         ghosts = new List<GameObject>();
         inputs = new List<TimeStamp>();
         anim.Play("Idle");
+        AudioManager.Instance.InitAudio();
         AudioManager.Instance.startLoop();
     }
 
@@ -63,9 +64,8 @@ public class Player : PlayerBase
                 playerTimerObj.f_time = 0;
                 anim.SetTrigger("Run");
             }
-
         }
-        if(!ctdTimerObj.TimerSecondRunning)
+        if (!ctdTimerObj.TimerSecondRunning)
         {
             ctdTimerObj.HideTimer();
         }
@@ -83,11 +83,11 @@ public class Player : PlayerBase
         int horizontal = 0;
         int vertical = 0;
 
-        if(Input.touches.Length > 0)
+        if (Input.touches.Length > 0)
         {
             Touch firstFinger = Input.touches[0];
 
-            if(firstFinger.phase == TouchPhase.Began)
+            if (firstFinger.phase == TouchPhase.Began)
                 startPosition = firstFinger.position;
             else if (firstFinger.phase == TouchPhase.Ended && startPosition != -Vector2.one)
             {
