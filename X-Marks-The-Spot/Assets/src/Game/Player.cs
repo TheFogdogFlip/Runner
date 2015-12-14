@@ -31,7 +31,8 @@ public class Player : PlayerBase
     /**---------------------------------------------------------------------------------
      * Activated when the player is activated, initiates all the necessities.
      */
-    void Start()
+    void 
+    Start()
     {
         //reset captureframerate so game runs at normal speed afer recordign
         Time.captureFramerate = 0;
@@ -50,7 +51,8 @@ public class Player : PlayerBase
     /**---------------------------------------------------------------------------------
      * Metod activated every turn.
      */
-    void Update()
+    void 
+    Update()
     {
         //Running forward block
         if (!ctdTimerObj.TimerFirstRunning)
@@ -77,7 +79,8 @@ public class Player : PlayerBase
     /**---------------------------------------------------------------------------------
      * Method which does things when stuff is clicked, checked every frame.
      */
-    void KeyInputs()
+    void 
+    KeyInputs()
     {
         int horizontal = 0;
         int vertical = 0;
@@ -181,7 +184,8 @@ public class Player : PlayerBase
     /**---------------------------------------------------------------------------------
      * Sets up the countdown timer.
      */
-    public void SetupCtdTimer()
+    public void 
+    SetupCtdTimer()
     {
         ctdTimerGameObj = GameObject.Find("ctdTimer");
         ctdTimerObj = ctdTimerGameObj.GetComponent<TimerCountdown>();
@@ -195,7 +199,8 @@ public class Player : PlayerBase
     /**---------------------------------------------------------------------------------
      * Sets up the playertimer
      */
-    public void SetupPlayerTimer()
+    public void 
+    SetupPlayerTimer()
     {
         playerTimerGameObj = GameObject.Find("playerTimer");
         playerTimerObj = playerTimerGameObj.GetComponent<TimerPlayer>();
@@ -205,7 +210,8 @@ public class Player : PlayerBase
     /**---------------------------------------------------------------------------------
      * Sets up the GHOST.
      */
-    public void SetupGhostTimer()
+    public void 
+    SetupGhostTimer()
     {
         ghostTimerGameObj = GameObject.Find("ghostTimer");
         ghostTimerObj = ghostTimerGameObj.GetComponent<TimerGhost>();
@@ -217,7 +223,8 @@ public class Player : PlayerBase
     /**---------------------------------------------------------------------------------
      * Metod for setting up the next game, occurs on death-
      */
-    void SetupNextGame()
+    void 
+    SetupNextGame()
     {
         GameObject go;
         Ghost ghost;
@@ -243,7 +250,8 @@ public class Player : PlayerBase
     /**---------------------------------------------------------------------------------
      * Method overridden to save away the action for the next ghost.
      */
-    protected override void ActivateNextAction()
+    protected override void 
+    ActivateNextAction()
     {
         if (nextAction != PlayerState.Idle)
         {
@@ -265,7 +273,8 @@ public class Player : PlayerBase
     /**---------------------------------------------------------------------------------
      * Method activeted on death, resetts all necessary values to their correct state.
      */
-    protected override void Death()
+    protected override void 
+    Death()
     {
         if (isSliding)
         {
@@ -297,7 +306,8 @@ public class Player : PlayerBase
     /**---------------------------------------------------------------------------------
      * Pitfalling ovverridden, just for the sound :)
      */
-    protected override void Falling()
+    protected override void 
+    Falling()
     {
         AudioManager.Instance.FallingSound();
         anim.SetTrigger("Slide");
@@ -306,7 +316,8 @@ public class Player : PlayerBase
     /**---------------------------------------------------------------------------------
      * Method activated when the goal is reached, set's up the finishing camera.
      */
-    protected override void GoalFunc()
+    protected override void 
+    GoalFunc()
     {
         AudioManager.Instance.WinSound();
         ctdTimerObj.countDownText.enabled = true;
@@ -323,7 +334,8 @@ public class Player : PlayerBase
     /**---------------------------------------------------------------------------------
      * Returns wheter or not the character is turning or not.
      */
-    public bool GetTurn()
+    public bool 
+    GetTurn()
     {
         return isTurning;
     }
@@ -331,7 +343,8 @@ public class Player : PlayerBase
     /**---------------------------------------------------------------------------------
      * Returns the players state.
      */
-    public PlayerState GetNextAction()
+    public PlayerState 
+    GetNextAction()
     {
         return nextAction;
     }

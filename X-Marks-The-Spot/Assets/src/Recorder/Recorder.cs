@@ -61,7 +61,8 @@ public class Recorder : MonoBehaviour
      * Exectutes at the start of replay, setup som valuesm destroys some player related objects
      * makes sure record folder exists and starts audio 
      */
-    void Start () 
+    private void 
+    Start() 
     {
         loadValue = 0.0f;
         replayCam = gameObject.GetComponent<Camera>();
@@ -94,7 +95,8 @@ public class Recorder : MonoBehaviour
     /**---------------------------------------------------------------------------------
      * Sets up necessary variables, resets ghost timer and destroys not yet destroyed ghosts.
      */
-    void setupRun(bool r)
+    private void 
+    setupRun(bool r)
     {
         width = Screen.width;
         height = Screen.height;
@@ -146,7 +148,8 @@ public class Recorder : MonoBehaviour
     /**---------------------------------------------------------------------------------
      * Setting up ghost timer, same as in playerscript.
      */
-    public void SetupGhostTimer()
+    public void 
+    SetupGhostTimer()
     {
         GameObject ghostTimerGameObj = GameObject.Find("ghostTimer");
         ghostTimerObj = ghostTimerGameObj.GetComponent<TimerGhost>();
@@ -158,7 +161,8 @@ public class Recorder : MonoBehaviour
     /**---------------------------------------------------------------------------------
     * Setting up for recording, Instantiating overlay objects.
     */
-    void SetupRecording()
+    private void 
+    SetupRecording()
     {
         foreach (GameObject go in ghosts)
         {
@@ -175,7 +179,8 @@ public class Recorder : MonoBehaviour
     /**---------------------------------------------------------------------------------
      * Executes every frame, Video recording and generation is done here.
      */
-    void Update()
+    void 
+    Update()
     {
         //Can be removed for a option in some replay menu
         if (Input.GetKeyDown(KeyCode.R))
@@ -281,7 +286,8 @@ public class Recorder : MonoBehaviour
      * Executes when last every frame, makes replay camera follow replayplayer.
      * Screenshot is put here so everything is rendered and moved for this frame.
      */
-    void LateUpdate()
+    private void 
+    LateUpdate()
     {
         if (target != null)
         {
@@ -298,7 +304,8 @@ public class Recorder : MonoBehaviour
      * Executes every frame while recording(Default: 30 per second).
      * Takes image from a specific camera(in this case replay camera.
      */
-    void screenShot()
+    private void 
+    screenShot()
     {
        
         int n = (int)System.Math.Floor(System.Math.Log10(imageNumber) + 1.0);

@@ -50,7 +50,8 @@ public class PlayerBase : MonoBehaviour
     /**---------------------------------------------------------------------------------
      * Occurs on creation of the character, necessary values are set.
      */
-    void Awake ()
+    void 
+    Awake ()
     {
         rb = GetComponent<Rigidbody>();
         bc = GetComponent<BoxCollider>();
@@ -64,7 +65,8 @@ public class PlayerBase : MonoBehaviour
     /**---------------------------------------------------------------------------------
      * The keeper of the continual movement.
      */
-    protected void UpdateRun()
+    protected void 
+    UpdateRun()
     {
         //Run forward
         transform.Translate(transform.forward * 2.0f * runSpeed * Time.deltaTime, Space.World);
@@ -73,7 +75,8 @@ public class PlayerBase : MonoBehaviour
     /**---------------------------------------------------------------------------------
      * The activation of a left turn, rotationtarget is set to the appropriate point. Open possibility to add a animation.
      */
-    protected void TurnLeft()
+    protected void 
+    TurnLeft()
     {
         //anim.SetTrigger("TurnLeft90");
 
@@ -92,7 +95,8 @@ public class PlayerBase : MonoBehaviour
     /**---------------------------------------------------------------------------------
      * Activation of a right turn, with possibility to easily add some turning animations.
      */
-    protected void TurnRight()
+    protected void 
+    TurnRight()
     {
         //anim.SetTrigger("TurnRight90");
 
@@ -111,7 +115,8 @@ public class PlayerBase : MonoBehaviour
     /**---------------------------------------------------------------------------------
      * Continual updating of the turning, only really applicable if a turn is initiated.
      */
-    private void UpdateTurn()
+    private void 
+    UpdateTurn()
     {
         if (isTurning)
         {
@@ -131,7 +136,8 @@ public class PlayerBase : MonoBehaviour
     /**---------------------------------------------------------------------------------
      * Activation method for the slide command, shrinks the hitbox and activates the animation.
      */
-    protected void Slide()
+    protected void 
+    Slide()
     {
 
         isSliding = true;
@@ -143,7 +149,8 @@ public class PlayerBase : MonoBehaviour
     /**---------------------------------------------------------------------------------
      * updatemethod for the slide command, keeps the characters hitbox shrinked until the slidelenght has been reached.
      */
-    private void UpdateSlide()
+    private void 
+    UpdateSlide()
     {
         if (isSliding)
         {
@@ -164,7 +171,8 @@ public class PlayerBase : MonoBehaviour
     /**---------------------------------------------------------------------------------
      * The collider detector, pretty selfexplanatory.
      */
-    void OnTriggerEnter(Collider other)
+    void 
+    OnTriggerEnter(Collider other)
     {
         
         switch (other.gameObject.tag)
@@ -201,7 +209,8 @@ public class PlayerBase : MonoBehaviour
     /**---------------------------------------------------------------------------------
      * Activation command of the jump command.
      */
-    protected void Jump()
+    protected void 
+    Jump()
     {
         
         isJumping = true;
@@ -211,7 +220,8 @@ public class PlayerBase : MonoBehaviour
     /**---------------------------------------------------------------------------------
      * Continual updatecheck wheter a not a jump has been initiated.
      */
-    private void UpdateJump()
+    private void 
+    UpdateJump()
     {
         if (isJumping)
         {
@@ -232,7 +242,8 @@ public class PlayerBase : MonoBehaviour
     /**---------------------------------------------------------------------------------
      * Continual updatecheck wheter or not the character shuold currently be falling.
      */
-    private void UpdateFalling()
+    private void 
+    UpdateFalling()
     {
         if (isFalling)
         {
@@ -243,7 +254,8 @@ public class PlayerBase : MonoBehaviour
     /**---------------------------------------------------------------------------------
      * Set's a new value to the nextAction variable, this value will then be applied next time a tile is reached.
      */
-    protected void SetNextAction(PlayerState input)
+    protected void 
+    SetNextAction(PlayerState input)
     {
         nextAction = input;
     }
@@ -251,7 +263,8 @@ public class PlayerBase : MonoBehaviour
     /**---------------------------------------------------------------------------------
      * Activation of the choosen queued up action, checks for when a new tile is reached.
      */
-    private void nextActionActivation()
+    private void 
+    nextActionActivation()
     {
         if (!isSliding && !isFalling && !isJumping)
         {   
@@ -324,7 +337,8 @@ public class PlayerBase : MonoBehaviour
     /**---------------------------------------------------------------------------------
      * Is activated every time a new tile is reached, activates an action if an action is queued up.
      */
-    virtual protected void ActivateNextAction()
+    virtual protected void 
+    ActivateNextAction()
     {
         if (nextAction != PlayerState.Idle)
         {
@@ -340,7 +354,8 @@ public class PlayerBase : MonoBehaviour
     /**---------------------------------------------------------------------------------
      * What actually happens when the death state is reached, overridden by player, applies only on ghosts.
      */
-    protected virtual void Death()
+    protected virtual void 
+    Death()
     {
         Destroy(gameObject);
     }
@@ -348,7 +363,8 @@ public class PlayerBase : MonoBehaviour
     /**---------------------------------------------------------------------------------
      * Empty method, overridden by player.
      */
-    protected virtual void GoalFunc()
+    protected virtual void 
+    GoalFunc()
     {
         //Empty
     }
@@ -356,7 +372,8 @@ public class PlayerBase : MonoBehaviour
     /**---------------------------------------------------------------------------------
      * Method activated when falling down a pit, falling down pits currently activates the slide animation.
      */
-    protected virtual void Falling()
+    protected virtual void 
+    Falling()
     {
         anim.SetTrigger("Slide");
     }
@@ -364,7 +381,8 @@ public class PlayerBase : MonoBehaviour
     /**---------------------------------------------------------------------------------
      * Updateloop, updates the movement of the character.
      */
-    protected void MovementUpdate()
+    protected void 
+    MovementUpdate()
     {
         nextActionActivation();
         UpdateJump();

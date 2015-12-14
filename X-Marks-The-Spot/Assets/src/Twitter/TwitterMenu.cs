@@ -3,25 +3,14 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class LoadLevelMenu : MonoBehaviour 
+public class TwitterMenu : MonoBehaviour 
 {
     /**---------------------------------------------------------------------------------
      * GameObjects associated with the script.
      */
-    private GameObject backGameObject;
+    private GameObject twitterMenuGameObject;
     private GameObject startMenuGameObject;
-    private GameObject loadMenuGameObject;
-
-    /**---------------------------------------------------------------------------------
-     * Canvas associated with the script.
-     */
-    private Canvas startMenu;
-    private Canvas loadLevelMenu;
-
-    /**---------------------------------------------------------------------------------
-     * Buttons associated with the script.
-     */
-    private Button backText;
+    private GameObject backGameObject;
 
     /**---------------------------------------------------------------------------------
      * Class objects associated with the script.
@@ -29,69 +18,82 @@ public class LoadLevelMenu : MonoBehaviour
     private StartMenu startMenuObject;
 
     /**---------------------------------------------------------------------------------
+     * Canvas associated with the script.
+     */
+    private Canvas twitterMenu;
+    private Canvas startMenu;
+
+    /**---------------------------------------------------------------------------------
+     * Buttons associated with the script.
+     */
+    private Button backText;
+
+    /**---------------------------------------------------------------------------------
      * EventSystem used by the script.
      */
     public EventSystem eventSys;
-    
+
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed when the script starts.
      */
-    void 
-    Start()
+	void 
+    Start () 
     {
-        //Empty 
-    }
+	
+	}
 
     /**---------------------------------------------------------------------------------
      * Should only be executed once.
-     * Loads necessary components for Load Level menu.
+     * Loads necessary components for Twitter menu.
      * Changing the name of a GameObject in the scene will require changing the string in the respective GameObject.Find() call.
      */
     public void 
-    LoadComponents()
+    LoadCompononents()
     {
         startMenuGameObject             = GameObject.Find("StartMenu_Canvas");
-        loadMenuGameObject              = GameObject.Find("LoadLevelMenu_Canvas");
-        backGameObject                  = GameObject.Find("LoadLevelBack_TextBtn");
+        twitterMenuGameObject           = GameObject.Find("TwitterMenu_Canvas");
+        backGameObject                  = GameObject.Find("TwitterBack_TextBtn");
 
-        startMenuObject                 = startMenuGameObject.GetComponent<StartMenu>();
+        startMenuObject                 = startMenuGameObject.GetComponent<StartMenu>(); 
 
+        twitterMenu                     = twitterMenuGameObject.GetComponent<Canvas>();
         startMenu                       = startMenuGameObject.GetComponent<Canvas>();
-        loadLevelMenu                   = loadMenuGameObject.GetComponent<Canvas>();
-        backText                        = backGameObject.GetComponent<Button>();
+        backText                        = backGameObject.GetComponent<Button>();    
     }
 
     /**---------------------------------------------------------------------------------
-     * Executed when the Load Level back button is pressed. 
-     * Disables the load level menu and enables the start menu.
+     * Executed when the Twitter back button is pressed. 
+     * Disables the twitter menu and enables the start menu.
      */
     public void 
     BackPress()
     {
-        loadLevelMenu.enabled = false;
+        twitterMenu.enabled = false;
         startMenu.enabled = true;
-        DisableLoadLevel();
+        DisableTwitterMenu();
         startMenuObject.EnableStart();
     }
 
     /**---------------------------------------------------------------------------------
-     * Executed when the Load Level menu needs to be disabled.
-     * Disables the canvas and all the components associated with the script.
-     */
-    public void 
-    DisableLoadLevel()
-    {
-        backText.enabled = false;
-    }
-
-    /**---------------------------------------------------------------------------------
-     * Executed when the Load Level menu needs to be enabled.
+     * Executed when the Options menu needs to be enabled.
      * Enables the canvas and all the components associated with the script.
      */
-    public void 
-    EnableLoadLevel()
+    public void
+    EnableTwitterMenu()
     {
         backText.enabled = true;
         eventSys.SetSelectedGameObject(backGameObject);
     }
+
+    /**---------------------------------------------------------------------------------
+     * Executed when the Twitter menu needs to be disabled.
+     * Disables the canvas and all the components associated with the script.
+     */
+    public void
+    DisableTwitterMenu()
+    {
+        backText.enabled = false;
+    }
+
+    
 }

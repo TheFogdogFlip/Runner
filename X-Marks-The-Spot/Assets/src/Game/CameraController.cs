@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraController : MonoBehaviour {
+public class CameraController : MonoBehaviour 
+{
 
     public GameObject target;
     private float distance;
@@ -27,7 +28,8 @@ public class CameraController : MonoBehaviour {
     /**---------------------------------------------------------------------------------
      * 
      */
-    void Start () 
+    void 
+    Start () 
     {
         //distance = 1.5f;
         height = 0.8f;
@@ -43,7 +45,8 @@ public class CameraController : MonoBehaviour {
     /**---------------------------------------------------------------------------------
      * 
      */
-	void Update () 
+	void 
+    Update () 
     {
         /**---------------------------------------------------------------------------------
         * wanted rotation and height

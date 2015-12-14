@@ -12,7 +12,8 @@ public class InitGame : MonoBehaviour
     /**---------------------------------------------------------------------------------
      * 
      */
-	void Start () 
+	void 
+    Start () 
     {
         loadingText.text = "Loading Player...";
         Instantiate(Resources.Load("Player", typeof(GameObject)), World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection));
@@ -24,7 +25,8 @@ public class InitGame : MonoBehaviour
     /**---------------------------------------------------------------------------------
      * 
      */
-	void Update () 
+	void 
+    Update () 
     {
         //Empty
 	}

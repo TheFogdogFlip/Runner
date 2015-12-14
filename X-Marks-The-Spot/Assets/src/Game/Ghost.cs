@@ -17,7 +17,8 @@ public class Ghost : PlayerBase
     /**---------------------------------------------------------------------------------
      * Exectues at start
      */
-    void Start () 
+    void 
+    Start () 
     {
         index = 0;
         rotationTarget = World.Instance.StartDirection.y;
@@ -30,7 +31,8 @@ public class Ghost : PlayerBase
     /**---------------------------------------------------------------------------------
      * Executed every frame. Handles ghost movement and actions
      */
-    void Update()
+    void 
+    Update()
     {
         PlayerState currEvent = PlayerState.Idle;
 
