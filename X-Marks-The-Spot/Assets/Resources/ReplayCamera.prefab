@@ -93,6 +93,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraHeight: 12
   cameraAngle: 70
+  cameraZoffset: -3
   fps: 30
   imageFolder: captured_images
   timer: 0
@@ -148,6 +149,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: cameraAngle
       value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: cameraZoffset
+      value: -3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

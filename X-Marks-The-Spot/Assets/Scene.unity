@@ -2699,9 +2699,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bee1d559ea72824691538301842d757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masterVolText: {fileID: 805451968}
-  effectsVolText: {fileID: 1812322417}
-  musicVolText: {fileID: 978070320}
   eventSys: {fileID: 1671037130}
 --- !u!223 &1563004483
 Canvas:

@@ -10,6 +10,7 @@ public class Recorder : MonoBehaviour
 {
     public int cameraHeight;
     public int cameraAngle;
+    public int cameraZoffset;
 
     int imageNumber;
     public int fps = 30;
@@ -116,7 +117,7 @@ public class Recorder : MonoBehaviour
             Destroy(temp);
         }
 
-        gameObject.transform.position = new Vector3(target.transform.position.x, cameraHeight, target.transform.position.z);
+        gameObject.transform.position = new Vector3(target.transform.position.x, cameraHeight, target.transform.position.z + cameraZoffset);
         gameObject.transform.rotation = Quaternion.Euler(new Vector3(cameraAngle, 0, 0));
         ghost = target.GetComponent<Ghost>();
         ghost.inputs = inputs;
@@ -260,7 +261,7 @@ public class Recorder : MonoBehaviour
     {
         if (target != null)
         {
-            gameObject.transform.position = new Vector3(target.transform.position.x, cameraHeight, target.transform.position.z);
+            gameObject.transform.position = new Vector3(target.transform.position.x, cameraHeight, target.transform.position.z + cameraZoffset);
         }
 
         if (recording)
