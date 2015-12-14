@@ -5,19 +5,36 @@ using System.Collections;
 
 public class LoadLevelMenu : MonoBehaviour 
 {
-    private Canvas startMenu;
-    private Canvas loadLevelMenu;
-
-    private Button backText;
-
-    private StartMenu startMenuObj;
-    private LoadLevelMenu loadMenuObj;
-    
-    public EventSystem eventSys;
-
+    /**---------------------------------------------------------------------------------
+     * 
+     */
     private GameObject backGameObj;
     private GameObject startMenuGameObj;
     private GameObject loadMenuGameObj;
+
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    private Canvas startMenu;
+    private Canvas loadLevelMenu;
+
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    private Button backText;
+
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    private StartMenu startMenuObj;
+    private LoadLevelMenu loadMenuObj;
+
+    /**---------------------------------------------------------------------------------
+     * 
+     */
+    public EventSystem eventSys;
+
+    
 
     /**---------------------------------------------------------------------------------
      * 
@@ -34,7 +51,7 @@ public class LoadLevelMenu : MonoBehaviour
     public void 
     LoadComponents()
     {
-        startMenuGameObj            = GameObject.Find("HelpBack_TextBtn");
+        startMenuGameObj            = GameObject.Find("StartMenu_Canvas");
         loadMenuGameObj             = GameObject.Find("LoadLevelMenu_Canvas");
         backGameObj                 = GameObject.Find("LoadLevelBack_TextBtn");
 

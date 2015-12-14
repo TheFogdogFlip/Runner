@@ -6,6 +6,9 @@ using System.IO;
 
 public class PauseMenu : MonoBehaviour 
 {
+    /**---------------------------------------------------------------------------------
+     * GameObjects associated with the script.
+     */
     private GameObject pauseMenuGameObject;
     private GameObject audioMenuGameObject;
 
@@ -19,30 +22,48 @@ public class PauseMenu : MonoBehaviour
     private GameObject effectsVolGameObject;
     private GameObject musicVolGameObject;
 
+    /**---------------------------------------------------------------------------------
+     * Canvas associated with the script.
+     */
     private Canvas pauseMenu;
     private Canvas audioMenu;
 
+    /**---------------------------------------------------------------------------------
+     * Buttons associated with the script.
+     */
     private Button exitGame;
     private Button resumeGame;
     private Button audioSettings;
     private Button saveMapText;
-
-    private Slider masterVolSlider;
-    public Text masterVolText;
-
-    private Slider effectsVolSlider;
-    public Text effectsVolText;
-
-    private Slider musicVolSlider;
-    public Text musicVolText;
-
     private Button backText;
-    
+
+    /**---------------------------------------------------------------------------------
+     * Master volume slider used in Audio Settings.
+     */
+    private Slider masterVolSlider;
+    private Text masterVolText;
+
+    /**---------------------------------------------------------------------------------
+     * Sound effects volume slider used in Audio Settings.
+     */
+    private Slider effectsVolSlider;
+    private Text effectsVolText;
+
+    /**---------------------------------------------------------------------------------
+     * Music volume slider used in Audio Settings.
+     */
+    private Slider musicVolSlider;
+    private Text musicVolText;
+
+    /**---------------------------------------------------------------------------------
+     * The EventSystem used by the script.
+     */
     public EventSystem eventSys;
 
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Should only be executed once.
+     * Executed automatically on the startup of the script.
      */
 	void 
     Start () 
@@ -54,7 +75,10 @@ public class PauseMenu : MonoBehaviour
 	}
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Should only be executed once.
+     * Loads components necessary for the script. 
+     * Changing the name of a GameObject in the scene will require changing the respective GameObject.Find() call.
+     * Loads audio settings from GlobalGameSettings.
      */
     public void 
     LoadComponents()
@@ -68,8 +92,11 @@ public class PauseMenu : MonoBehaviour
 
         backGameObject                  = GameObject.Find("SettingsBack_TextBtn");
         masterVolGameObject             = GameObject.Find("SoundMaster_Slider");
+        masterVolText                   = GameObject.Find("SoundMasterCounter_Text").GetComponent<Text>();
         musicVolGameObject              = GameObject.Find("SoundMusic_Slider");
+        musicVolText                    = GameObject.Find("SoundMusicCounter_Text").GetComponent<Text>();
         effectsVolGameObject            = GameObject.Find("SoundEffects_Slider");
+        effectsVolText                  = GameObject.Find("SoundEffectsCounter_Text").GetComponent<Text>();
         
 
         pauseMenu                       = pauseMenuGameObject.GetComponent<Canvas>();
@@ -100,7 +127,8 @@ public class PauseMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed every frame.
+     * Checks if CancelButton is down, in which case it enables the pause menu.
      */
 	void 
     Update () 
@@ -115,7 +143,8 @@ public class PauseMenu : MonoBehaviour
 	}
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executes when the mouse pointer is over a UI button.
+     * Highlights the specific GameObject for EventSystem.
      */
     public void 
     HightlightItem(GameObject gameObj)
@@ -124,7 +153,8 @@ public class PauseMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executes when the Reload Game button is pressed. 
+     * Reloads the game by loading the scene called "Scene".
      */
     public void 
     ReloadGamePress()
@@ -134,7 +164,8 @@ public class PauseMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed when the Exit Game buttons i pressed.
+     * Loads scene called "Main_Menu".
      */
     public void 
     ExitGamePress()
@@ -144,7 +175,8 @@ public class PauseMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed when Resume Game button is pressed. 
+     * Disables the pause menu and sets timeScale to 1.
      */
     public void 
     ResumeGamePress()
@@ -156,7 +188,8 @@ public class PauseMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed when the Save Map button is pressed.
+     * Saves the current map to current directory as a .png file.
      */
     public void 
     SaveMapPress()
@@ -185,7 +218,7 @@ public class PauseMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Gets the current directory.
      */
     private void 
     GetCurrentDirectory()
@@ -194,7 +227,8 @@ public class PauseMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed when the Audio Settings button is pressed. 
+     * Disables pause menu and enables audio settings menu, then highlights the Back button.
      */
     public void 
     AudioSettingsPress()
@@ -205,7 +239,8 @@ public class PauseMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed when the Sound Master volume slider is moved. 
+     * Sets the master volume in GlobalGameSettings and calls GlobalGameSettings.SaveSettings.
      */
     public void 
     SetMasterVolume()
@@ -217,7 +252,8 @@ public class PauseMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed when the Sound Effects volume slider is moved. 
+     * Sets the sound effects volume in GlobalGameSettings and calls GlobalGameSettings.SaveSettings.
      */
     public void 
     SetSoundEffectsVolume()
@@ -229,7 +265,8 @@ public class PauseMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed when the Sound Music volume slider is moved. 
+     * Sets the music volume in GlobalGameSettings and calls GlobalGameSettings.SaveSettings.
      */
     public void 
     SetMusicVolume()
@@ -241,7 +278,8 @@ public class PauseMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed when the AudioSettingsBack button is pressed. 
+     * Disables the audio settings menu and enables the pause menu, then highlights the Resume Game button
      */
     public void 
     BackPress()
@@ -252,7 +290,8 @@ public class PauseMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed when the Pause menu needs to be enabled.
+     * Enables the canvas and all the buttons in the canvas.
      */
     public void 
     EnablePauseMenu()
@@ -265,7 +304,8 @@ public class PauseMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed when the Audio Settings menu needs to be enabled.
+     * Enables the canvas and all the buttons in the canvas.
      */
     public void 
     EnableAudioSettings()
@@ -278,7 +318,8 @@ public class PauseMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed when the Pause menu needs to be disabled.
+     * Disables the canvas and all the buttons in the canvas.
      */
     public void 
     DisablePauseMenu()
@@ -291,7 +332,8 @@ public class PauseMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed when the Audio Settings menu needs to be disabled.
+     * Disables the canvas and all the buttons in the canvas.
      */
     public void 
     DisableAudioSettings()
