@@ -77,7 +77,8 @@ public class HelpMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed when the help menu needs to be hidden.
+     * Hides the help menu and disables it's components.
      */
     public void 
     DisableHelp()
@@ -87,7 +88,8 @@ public class HelpMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed when the help menu needs to be shown.
+     * Shows the help menu and enables it's components.
      */
     public void 
     EnableHelp()
