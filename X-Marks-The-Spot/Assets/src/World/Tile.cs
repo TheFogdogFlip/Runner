@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Tile
 {
@@ -7,7 +8,16 @@ public class Tile
     private Vector3 position;
     private Color color;
 
-    public Vector3 Position
+    /**---------------------------------------------------------------------------------
+    *   Used for Tile cache. So you don't have to read from disk for each tile.
+    */
+    private static Dictionary<string, GameObject> gameObjectsCache = new Dictionary<string,GameObject>();
+
+    /**---------------------------------------------------------------------------------
+    *   Used to get and set position of the tile.
+    */
+    public Vector3 
+    Position
     {
         get
         {
@@ -21,7 +31,11 @@ public class Tile
         }
     }
 
-    public Color Color
+    /**---------------------------------------------------------------------------------
+    *   Holds the color value of the tile.
+    */
+    public Color 
+    Color
     {
         get
         {
@@ -33,7 +47,11 @@ public class Tile
         }
     }
 
-    public float Rotation
+    /**---------------------------------------------------------------------------------
+    *   Used to get and set the rotation of the tile.
+    */
+    public float 
+    Rotation
     {
         get { return rotation; }
         set
@@ -44,7 +62,11 @@ public class Tile
         }
     }
 
-    public GameObject GameObject
+    /**---------------------------------------------------------------------------------
+    *   Used to get and set the Tile prefab for the tile.
+    */
+    public GameObject 
+    GameObject
     {
         set
         {
@@ -58,9 +80,24 @@ public class Tile
         get { return gameObject; }
     }
 
-    public Tile(Vector3 position, Color color, string gameObjectTag, float rotation = 0.0f)
+    /**---------------------------------------------------------------------------------
+    *   Constructor. Adds unseen tile types to the game chache and then 
+    *   instantiates the tile at given position and rotation.
+    */
+    public 
+    Tile(Vector3 position, Color color, string gameObjectTag, float rotation = 0.0f)
     {
-        GameObject = (GameObject)UnityEngine.Object.Instantiate(Resources.Load(gameObjectTag));
+        GameObject gameObject = null;
+
+        if (gameObjectsCache.ContainsKey(gameObjectTag))
+            gameObject = gameObjectsCache[gameObjectTag];
+        else
+        {
+            gameObject = Resources.Load<GameObject>(gameObjectTag);
+            gameObjectsCache[gameObjectTag] = gameObject;
+        }
+
+        GameObject = Object.Instantiate<GameObject>(gameObject);
         Color = color;
         Position = position;
         Rotation = rotation;

@@ -65,7 +65,9 @@ public class StartMenu : MonoBehaviour
      */
     private LoadingThreadHandler threadHandler;
 
-    /**---------------------------------------------------------------------------------
+    public Camera MainCamera;
+	
+	/**---------------------------------------------------------------------------------
      * Executes when the script starts.
      * Loads necessary components for start menu and all other menus in order to use them right away instead of waiting for each scripts Start() function.
      * LoadXML loads tile data.
@@ -158,17 +160,29 @@ public class StartMenu : MonoBehaviour
     {
         if (menuTimer.f_time > 0.77 && menuTimer.isActive)
         {
-            if (threadHandler.Generated)
-            {
-                World.Instance.SetMapColor();
-                World.Instance.loadFromMemory();
-                threadHandler.UseGenerated();
-                var test = World.Instance.GetTile(256, 256);
-                threadHandler.LoadAssets();
-                Application.LoadLevel("Scene");
-            }
+            StartCoroutine(Coroutine());
         }
 
+    }
+
+    /**---------------------------------------------------------------------------------
+    *   Used to fix unity's fucked system.
+    */
+    IEnumerator Coroutine()
+    {
+        MainCamera.transform.position = new Vector3(256, 60, 256);
+        MainCamera.transform.LookAt(World.Instance.StartPosition * 2);
+        
+        yield return new WaitForSeconds(0);
+
+        if (threadHandler.Generated)
+        {
+            World.Instance.SetMapColor();
+            World.Instance.loadFromMemory();
+            threadHandler.UseGenerated();
+            threadHandler.LoadAssets();
+            Application.LoadLevel("Scene");
+        }
     }
 
     /**---------------------------------------------------------------------------------

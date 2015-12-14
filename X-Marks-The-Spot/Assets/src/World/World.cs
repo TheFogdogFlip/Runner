@@ -45,10 +45,15 @@ public class World
     private Vector3 start;
     private Vector3 startDirection;
 
+    /**---------------------------------------------------------------------------------
+    *   Used for storing mapcolors which will be used to load the map in the main thread.
+    */
+    ColorNode[,] mapcolor = new ColorNode[depth, width];
+
     private TileContainer tileContainer = null;
 
     /**---------------------------------------------------------------------------------
-    *   Container for all the different tile types.
+    *   Container for all the different tile types. Tile data cache.
     */
     private TileContainer
     tileTypes
@@ -212,9 +217,11 @@ public class World
         return r.Color;
     }
 
-    ColorNode[,] mapcolor = new ColorNode[depth, width];
-
-    public void SetMapColor()
+    /**---------------------------------------------------------------------------------
+    *   Sets the texture color for each pixel, in the main thread.
+    */
+    public void 
+    SetMapColor()
     {
         map = new Texture2D(width, depth, TextureFormat.RGBA32, false);
         for (int y = 0; y < depth; y++)
@@ -459,9 +466,6 @@ public class World
     public void
     loadFromMemory()
     {
-        //depth = map.height;
-        //width = map.width;
-
         grid = new Tile[width, depth];
 
         for (int y = 0; y < depth; y++)

@@ -3669,6 +3669,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventSys: {fileID: 398801315}
+  MainCamera: {fileID: 2141780838}
 --- !u!1 &670199589
 GameObject:
   m_ObjectHideFlags: 0
