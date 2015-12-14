@@ -36,7 +36,7 @@ public class AudioManager : Object{
             if (!audioInitiated)
             {
                 audioManager = new AudioManager();
-                audioManager.InitAudio();
+                audioManager.initAudio();
                 audioInitiated = true;
             }
 
