@@ -44,6 +44,9 @@ public class AudioManager : Object{
         collisionSound = audioSources[3];
         fallingSound = audioSources[4];
         winSound = audioSources[5];
+        MasterMixer = Resources.Load<AudioMixer>("Audio/MasterMixer");
+        paused = MasterMixer.FindSnapshot("Paused");
+        unPaused = MasterMixer.FindSnapshot("Unpaused");
     }
     public void startLoop()
     {
