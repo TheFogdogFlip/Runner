@@ -7,7 +7,7 @@ public class StartMenu : MonoBehaviour
 {
     /**---------------------------------------------------------------------------------
      * GameObjects associated with the script.
-     */   
+     */
     private GameObject playGameObj;
     private GameObject loadGameObj;
     private GameObject helpGameObj;
@@ -48,7 +48,7 @@ public class StartMenu : MonoBehaviour
     private Button helpText;
     private Button noText;
     private Button yesText;
-    
+
     /**---------------------------------------------------------------------------------
      * EventSystem used by the script.
      */
@@ -63,8 +63,8 @@ public class StartMenu : MonoBehaviour
      */
     LoadingThreadHandler threadHandler;
 
-	void 
-    Start ()
+    void
+    Start()
     {
         World.Instance.LoadXML();
         threadHandler = new LoadingThreadHandler();
@@ -73,7 +73,7 @@ public class StartMenu : MonoBehaviour
         loadMenuObj.LoadComponents();
         helpMenuObj.LoadComponents();
         optionsMenuObj.LoadComponents();
-       
+
         EnableStart();
         loadMenuObj.DisableLoadLevel();
         optionsMenuObj.DisableOptions();
@@ -81,61 +81,61 @@ public class StartMenu : MonoBehaviour
 
         eventSys.SetSelectedGameObject(playGameObj);
         threadHandler.GenerateWorld();
-	}
+    }
 
     /**---------------------------------------------------------------------------------
      * Should only be executed once.
      * Loads necessary components for Start menu.
      * Changing the name of a GameObject in the scene will require changing the string in the respective GameObject.Find() call.
      */
-    public void 
+    public void
     LoadComponents()
     {
-        startMenuGameObj            = GameObject.Find("StartMenu_Canvas");
-        helpMenuGameObj             = GameObject.Find("HelpMenu_Canvas");
-        loadMenuGameObj             = GameObject.Find("LoadLevelMenu_Canvas");
-        optionsMenuGameObj          = GameObject.Find("OptionsMenu_Canvas");
+        startMenuGameObj = GameObject.Find("StartMenu_Canvas");
+        helpMenuGameObj = GameObject.Find("HelpMenu_Canvas");
+        loadMenuGameObj = GameObject.Find("LoadLevelMenu_Canvas");
+        optionsMenuGameObj = GameObject.Find("OptionsMenu_Canvas");
 
-        playGameObj                 = GameObject.Find("Play_TextBtn");
-        optionsGameObj              = GameObject.Find("Options_TextBtn");
-        helpGameObj                 = GameObject.Find("Help_TextBtn");
-        loadGameObj                 = GameObject.Find("LoadLevel_TextBtn");
-        exitGameObj                 = GameObject.Find("Quit_TextBtn");
-        yesGameObj                  = GameObject.Find("Yes_TextBtn");
-        noGameObj                   = GameObject.Find("No_TextBtn");
+        playGameObj = GameObject.Find("Play_TextBtn");
+        optionsGameObj = GameObject.Find("Options_TextBtn");
+        helpGameObj = GameObject.Find("Help_TextBtn");
+        loadGameObj = GameObject.Find("LoadLevel_TextBtn");
+        exitGameObj = GameObject.Find("Quit_TextBtn");
+        yesGameObj = GameObject.Find("Yes_TextBtn");
+        noGameObj = GameObject.Find("No_TextBtn");
 
-        menuTimer                   = GameObject.Find("menuTimer").GetComponent<TimerMenu>();
+        menuTimer = GameObject.Find("menuTimer").GetComponent<TimerMenu>();
 
-        helpMenuObj                 = helpMenuGameObj.GetComponent<HelpMenu>();
-        loadMenuObj                 = loadMenuGameObj.GetComponent<LoadLevelMenu>();
-        optionsMenuObj              = optionsMenuGameObj.GetComponent<OptionsMenu>();
+        helpMenuObj = helpMenuGameObj.GetComponent<HelpMenu>();
+        loadMenuObj = loadMenuGameObj.GetComponent<LoadLevelMenu>();
+        optionsMenuObj = optionsMenuGameObj.GetComponent<OptionsMenu>();
 
-        quitMenu                    = quitMenu.GetComponent<Canvas>();
-        optionsMenu                 = optionsMenu.GetComponent<Canvas>();
-        loadLevelMenu               = loadLevelMenu.GetComponent<Canvas>();
-        helpMenu                    = helpMenu.GetComponent<Canvas>();
-        startMenu                   = startMenu.GetComponent<Canvas>();
+        quitMenu = quitMenu.GetComponent<Canvas>();
+        optionsMenu = optionsMenu.GetComponent<Canvas>();
+        loadLevelMenu = loadLevelMenu.GetComponent<Canvas>();
+        helpMenu = helpMenu.GetComponent<Canvas>();
+        startMenu = startMenu.GetComponent<Canvas>();
 
-        startText                   = playGameObj.GetComponent<Button>();
-        exitText                    = exitGameObj.GetComponent<Button>();
-        optionsText                 = optionsGameObj.GetComponent<Button>();
-        loadLevelText               = loadGameObj.GetComponent<Button>();
-        helpText                    = helpGameObj.GetComponent<Button>();
-        yesText                     = yesGameObj.GetComponent<Button>();
-        noText                      = noGameObj.GetComponent<Button>();
+        startText = playGameObj.GetComponent<Button>();
+        exitText = exitGameObj.GetComponent<Button>();
+        optionsText = optionsGameObj.GetComponent<Button>();
+        loadLevelText = loadGameObj.GetComponent<Button>();
+        helpText = helpGameObj.GetComponent<Button>();
+        yesText = yesGameObj.GetComponent<Button>();
+        noText = noGameObj.GetComponent<Button>();
 
-        quitMenu.enabled            = false;
-        optionsMenu.enabled         = false;
-        loadLevelMenu.enabled       = false;
-        helpMenu.enabled            = false;
-        startMenu.enabled           = true;
+        quitMenu.enabled = false;
+        optionsMenu.enabled = false;
+        loadLevelMenu.enabled = false;
+        helpMenu.enabled = false;
+        startMenu.enabled = true;
     }
 
     /**---------------------------------------------------------------------------------
      * Executed every frame. 
      * Simply checks if the player has pressed play, in which case UnityChans jump animation has started and after 0.77 sec the scene "Scene" is loaded.
      */
-    void 
+    void
     Update()
     {
         if (menuTimer.f_time > 0.77 && menuTimer.isActive)
@@ -150,14 +150,14 @@ public class StartMenu : MonoBehaviour
                 Application.LoadLevel("Scene");
             }
         }
-        
+
     }
 
     /**---------------------------------------------------------------------------------
      * Executes when the mouse pointer is over a UI button
      * Highlights the specific GameObject for EventSystem.
      */
-    public void 
+    public void
     HighlightItem(GameObject gameObj)
     {
         eventSys.SetSelectedGameObject(gameObj);
@@ -168,7 +168,7 @@ public class StartMenu : MonoBehaviour
      * Enables the Quit menu and disables the start menu without hiding it.
      * Sets the selected GameObject to the No button.
      */
-	public void 
+    public void
     ExitPress()
     {
         quitMenu.enabled = true;
@@ -182,7 +182,7 @@ public class StartMenu : MonoBehaviour
      * Executes when the No button is pressed.
      * Disables and hides the Quit menu and enables the Start menu.
      */
-    public void 
+    public void
     NoPress()
     {
         quitMenu.enabled = false;
@@ -195,7 +195,7 @@ public class StartMenu : MonoBehaviour
      * Executed when the Load Level button is pressed. 
      * Disables the start menu and hides it and enables the Load Level menu. 
      */
-    public void 
+    public void
     LoadLevelPress()
     {
         startMenu.enabled = false;
@@ -221,7 +221,7 @@ public class StartMenu : MonoBehaviour
      * Executed when the Help button is pressed.
      * Disables and hides the Start menu and enables the Help menu.
      */
-    public void 
+    public void
     HelpMenuPress()
     {
         startMenu.enabled = false;
@@ -236,7 +236,7 @@ public class StartMenu : MonoBehaviour
      * Initiates the menu timer and plays UnityChan's "Jump" animation
      * Disables the Start menu without hiding it. 
      */
-    public void 
+    public void
     PlayPress()
     {
         GameObject playerGameObject = GameObject.Find("Player");
@@ -253,7 +253,7 @@ public class StartMenu : MonoBehaviour
      * Executed when the Yes button in the quit menu is pressed. 
      * Terminates the game.
      */
-    public void 
+    public void
     ExitGame()
     {
         Application.Quit();
@@ -262,7 +262,7 @@ public class StartMenu : MonoBehaviour
     /**---------------------------------------------------------------------------------
      * Disables the start menu and it's components but does not hide it.
      */
-    public void 
+    public void
     DisableStart()
     {
         exitText.enabled = false;
@@ -276,7 +276,7 @@ public class StartMenu : MonoBehaviour
      * Enables the start menu and disables the Quit menu.
      * Sets the selected GameObject to the Play button.
      */
-    public void 
+    public void
     EnableStart()
     {
         exitText.enabled = true;

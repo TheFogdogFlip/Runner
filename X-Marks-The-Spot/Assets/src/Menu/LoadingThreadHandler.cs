@@ -2,7 +2,8 @@
 using System.Collections;
 using System.Threading;
 
-public class LoadingThreadHandler {
+public class LoadingThreadHandler
+{
 
     private Thread loadingThread;
     private string loadingText;
@@ -58,17 +59,16 @@ public class LoadingThreadHandler {
 
     public void LoadAssets()
     {
-        loadingText = "Loading Audio...";
-        AudioManager.Instance.InitAudio();
-        Object.DontDestroyOnLoad(AudioManager.Instance);
+        //loadingText = "Loading Audio...";
+        //Object.DontDestroyOnLoad(AudioManager.Instance);
 
-        loadingText = "Loading Player...";
-        var player = Resources.Load("Player", typeof(GameObject));
-        Object.DontDestroyOnLoad(Object.Instantiate(player, World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection)));
+        //loadingText = "Loading Player...";
+        //var player = Resources.Load("Player", typeof(GameObject));
+        //Object.DontDestroyOnLoad(Object.Instantiate(player, World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection)));
 
-        loadingText = "Loading Camera...";
-        var camera = Resources.Load("PlayerCamera", typeof(GameObject));
-        Object.DontDestroyOnLoad(Object.Instantiate(camera, World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection)));
+        //loadingText = "Loading Camera...";
+        //var camera = Resources.Load("PlayerCamera", typeof(GameObject));
+        //Object.DontDestroyOnLoad(Object.Instantiate(camera, World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection)));
     }
 
     public void UseGenerated()

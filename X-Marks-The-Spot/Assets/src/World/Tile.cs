@@ -7,7 +7,8 @@ public class Tile
     private Vector3 position;
     private Color color;
 
-    public Vector3 Position {
+    public Vector3 Position
+    {
         get
         {
             return position;
@@ -15,7 +16,7 @@ public class Tile
         set
         {
             position = value;
-            if(gameObject != null)
+            if (gameObject != null)
                 gameObject.transform.position = position;
         }
     }

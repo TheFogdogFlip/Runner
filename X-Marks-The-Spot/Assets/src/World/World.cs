@@ -14,7 +14,7 @@ public class TileDirectionNode : DirectionNode
     /**---------------------------------------------------------------------------------
      * Constructor
      */
-    public 
+    public
     TileDirectionNode(int direction, int x, int y, List<ConnectionNode> connections)
     {
         Direction = direction;
@@ -50,7 +50,7 @@ public class World
     /**---------------------------------------------------------------------------------
     *   Container for all the different tile types.
     */
-    private TileContainer 
+    private TileContainer
     tileTypes
     {
         get
@@ -65,7 +65,7 @@ public class World
     /**---------------------------------------------------------------------------------
     *   Holds the instance of the singleton class.
     */
-    public static World 
+    public static World
     Instance
     {
         get
@@ -80,7 +80,7 @@ public class World
     /**---------------------------------------------------------------------------------
     *   Grid dimentions used for each tile.
     */
-    public static Vector3 
+    public static Vector3
     GridDimentions
     {
         get
@@ -92,7 +92,7 @@ public class World
     /**---------------------------------------------------------------------------------
     *   Indicates the starting position of the start tile in the world.
     */
-    public Vector3 
+    public Vector3
     StartPosition
     {
         get
@@ -104,7 +104,7 @@ public class World
     /**---------------------------------------------------------------------------------
     *   Inidicates which direction the start tile is pointing at.
     */
-    public Vector3 
+    public Vector3
     StartDirection
     {
         get
@@ -116,7 +116,7 @@ public class World
     /**---------------------------------------------------------------------------------
     *   Load the XML file with all the tile data.
     */
-    public void 
+    public void
     LoadXML()
     {
         tileContainer = getTileTypes();
@@ -125,7 +125,7 @@ public class World
     /**---------------------------------------------------------------------------------
     *   Constructor made private so only one instance can be created.
     */
-    private 
+    private
     World()
     {
 
@@ -134,7 +134,7 @@ public class World
     /**---------------------------------------------------------------------------------
     *   Gets the tile at specified position in the world.
     */
-    public Tile 
+    public Tile
     GetTile(int x, int y)
     {
         return grid[Mathf.FloorToInt(y / gridDimentions.y), Mathf.FloorToInt(x / gridDimentions.x)];
@@ -143,7 +143,7 @@ public class World
     /**---------------------------------------------------------------------------------
     *   Sets the tile at specified position in the world.
     */
-    public void 
+    public void
     SetTile(int x, int y, Tile tile)
     {
         grid[Mathf.FloorToInt(y / gridDimentions.y), Mathf.FloorToInt(x / gridDimentions.x)] = tile;
@@ -152,7 +152,7 @@ public class World
     /**---------------------------------------------------------------------------------
     *   Marks all the tiles to don't be destoyed so they will appear in the next scene;
     */
-    public void 
+    public void
     UseGenerated()
     {
         for (int y = 0; y < depth; y++)
@@ -176,7 +176,7 @@ public class World
     /**---------------------------------------------------------------------------------
     *   Finds the tile with specified name.
     */
-    private TileNode 
+    private TileNode
     findTile(string name)
     {
         return tileTypes.Tiles.Find(n => n.TileName.ToLower() == name.ToLower());
@@ -185,7 +185,7 @@ public class World
     /**---------------------------------------------------------------------------------
     *   Finds the color of specified tile with a specific rotation
     */
-    private ColorNode 
+    private ColorNode
     findColor(TileNode tile, float rotation)
     {
         var r = tile.Rotations.Find(c => c.Rotation == rotation);
@@ -229,7 +229,7 @@ public class World
     /**---------------------------------------------------------------------------------
     *   Generates a random world
     */
-    public void 
+    public void
     Generate()
     {
         System.Random rand = new System.Random();
@@ -270,7 +270,7 @@ public class World
             i++;
 
             var dir = directions[0];
-            
+
             var connection = getRandomConnection(dir, rand);
             var tile = findTile(connection.TileName);
             var rotation = getRandomRotation(connection, rand);
@@ -305,7 +305,7 @@ public class World
             directions.Remove(dir);
         }
 
-        foreach(var dir in directions)
+        foreach (var dir in directions)
         {
             var connection = dir.Connections.Find(t => t.TileName.ToLower() == "end");
             var tile = findTile(connection.TileName);
@@ -331,7 +331,7 @@ public class World
 
             if (mapcolor[dir.Y, dir.X].R == 255.0f && mapcolor[dir.Y, dir.X].G == 255.0f && mapcolor[dir.Y, dir.X].B == 255.0f && mapcolor[dir.Y, dir.X].A == 255.0f)
             {
-                mapcolor[dir.Y ,dir.X] = color;
+                mapcolor[dir.Y, dir.X] = color;
                 ends.Add(new EndPosition() { X = dir.X, Y = dir.Y, Rotation = rN.Rotation });
             }
         }
@@ -345,7 +345,7 @@ public class World
     /**---------------------------------------------------------------------------------
     *   Gets one random position from the list of positions.
     */
-    private EndPosition 
+    private EndPosition
     getRandomEnd(List<EndPosition> ends, System.Random rand)
     {
         float randomNumber = (float)rand.NextDouble() * 100.0f;
@@ -367,13 +367,13 @@ public class World
     /**---------------------------------------------------------------------------------
     *   Gets a random rotation of the specified tile.
     */
-    private float 
+    private float
     getRandomRotation(ConnectionNode connection, System.Random rand)
     {
 
         float randomNumber = (float)rand.NextDouble() * 100.0f;
         RotationChanceNode rotation = null;
-        
+
         float chance = 0.0f;
 
         for (int i = 0; i < connection.Rotations.Count; i++)
@@ -389,7 +389,7 @@ public class World
     /**---------------------------------------------------------------------------------
     *   Gets a random tile from the list of possible tiles.
     */
-    private ConnectionNode 
+    private ConnectionNode
     getRandomConnection(TileDirectionNode dir, System.Random rand)
     {
 
@@ -411,7 +411,7 @@ public class World
     /**---------------------------------------------------------------------------------
     *   Write the map to disk as a png
     */
-    public void 
+    public void
     Save(string filename)
     {
         var rawMap = map.EncodeToPNG();
@@ -424,7 +424,7 @@ public class World
     /**---------------------------------------------------------------------------------
     *   Load XML file with tile data.
     */
-    private TileContainer 
+    private TileContainer
     getTileTypes()
     {
         TextAsset textAsset = Resources.Load<TextAsset>("TileNodes");
@@ -440,7 +440,7 @@ public class World
     /**---------------------------------------------------------------------------------
     *   Load 2D texture from disk
     */
-    private Texture2D 
+    private Texture2D
     loadTexture2D(string filename)
     {
         FileStream stream = new FileStream(filename, FileMode.Open);
@@ -456,7 +456,7 @@ public class World
     /**---------------------------------------------------------------------------------
     *   Load map from memory.
     */
-    public void 
+    public void
     loadFromMemory()
     {
         //depth = map.height;
@@ -507,7 +507,7 @@ public class World
     /**---------------------------------------------------------------------------------
     *   Load map from disk.
     */
-    public void 
+    public void
     Load(string filename)
     {
         map = loadTexture2D(filename);

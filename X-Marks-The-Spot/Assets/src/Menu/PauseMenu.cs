@@ -240,6 +240,7 @@ public class PauseMenu : MonoBehaviour
         masterVolText.text = val.ToString();
         GlobalGameSettings.SetMasterVolume(val);
         GlobalGameSettings.SaveSettings();
+        AudioManager.Instance.SetMasterVolume(val);
     }
 
     /**---------------------------------------------------------------------------------
@@ -253,6 +254,7 @@ public class PauseMenu : MonoBehaviour
         effectsVolText.text = val.ToString();
         GlobalGameSettings.SetEffectsVolume(val);
         GlobalGameSettings.SaveSettings();
+        AudioManager.Instance.SetSoundFXVolume(val);
     }
 
     /**---------------------------------------------------------------------------------
@@ -266,6 +268,7 @@ public class PauseMenu : MonoBehaviour
         musicVolText.text = val.ToString();
         GlobalGameSettings.SetMusicVolume(val);
         GlobalGameSettings.SaveSettings();
+        AudioManager.Instance.SetMusicVolume(val);
     }
 
     /**---------------------------------------------------------------------------------

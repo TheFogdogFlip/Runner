@@ -132,6 +132,7 @@ public class OptionsMenu : MonoBehaviour
         masterVolText.text = val.ToString();
         GlobalGameSettings.SetMasterVolume(val);
         GlobalGameSettings.SaveSettings();
+        AudioManager.Instance.SetMasterVolume(val);
     }
 
     /**---------------------------------------------------------------------------------
@@ -145,6 +146,7 @@ public class OptionsMenu : MonoBehaviour
         effectsVolText.text = val.ToString();
         GlobalGameSettings.SetEffectsVolume(val);
         GlobalGameSettings.SaveSettings();
+        AudioManager.Instance.SetSoundFXVolume(val);
     }
 
     /**---------------------------------------------------------------------------------
@@ -158,6 +160,7 @@ public class OptionsMenu : MonoBehaviour
         musicVolText.text = val.ToString();
         GlobalGameSettings.SetMusicVolume(val);
         GlobalGameSettings.SaveSettings();
+        AudioManager.Instance.SetMusicVolume(val);
     }
 
     /**---------------------------------------------------------------------------------

@@ -8,53 +8,62 @@ using System.Text.RegularExpressions;
 
 public class Recorder : MonoBehaviour 
 {
+    /**---------------------------------------------------------------------------------
+     * Variabels to adjust replay camera.
+     */
     public int cameraHeight;
     public int cameraAngle;
     public int cameraZoffset;
 
-    int imageNumber;
-    public int fps = 30;
+    /**---------------------------------------------------------------------------------
+     * Adjustable capture variables.
+     */
     public string imageFolder = "captured_images";
-    public float timer;
-    
-    GameObject target = null;
+    public int fps = 30;
 
+    /**---------------------------------------------------------------------------------
+     * Various variables for replay player, ghost and camera follow target.
+     */
+    public float timer;
+    GameObject target = null;
     public List<TimeStamp> inputs;
     public List<List<TimeStamp>> ghostinputs;
     public List<GameObject> ghosts;
+    public float finishedTime;
+    private TimerGhost ghostTimerObj;
 
-    //For RenderTexuter screenshot
-    private Camera replayCam;
+    /**---------------------------------------------------------------------------------
+     * Variables associated with screenshots.
+     */
+    int imageNumber; //counter for current recorded image.
+    private Camera replayCam; //camera following replay player.
     private int width;
     private int height;
-    private Rect rectangle;
+    private Rect rectangle; //rectangle used for capturing area.
 
-    //For Overlay/Recording/Generating
+    /**---------------------------------------------------------------------------------
+     * variables for recording/video generating overlay and generation process.
+     */
     private float loadValue;
     private Image loadBarImage;
     private Text loadText;
     private Text loadPercentageText;
-    private TimerGhost ghostTimerObj;
-    public float finishedTime;
-    private bool generating = false;
-    public bool recording = false;
+
     private bool loading = false;
+    public bool recording = false;
+    private bool generating = false;
+    
     Process process;
     StreamReader reader;
 
-    //For Sound
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Exectutes at the start of replay, setup som valuesm destroys some player related objects
+     * makes sure record folder exists and starts audio 
      */
     void Start () 
     {
-
-        width = Screen.width;
-        height = Screen.height;
-
         loadValue = 0.0f;
-        rectangle = new Rect(0, 0, width, height);
         replayCam = gameObject.GetComponent<Camera>();
 
         GameObject playerObject = GameObject.Find("Player(Clone)");
@@ -83,10 +92,13 @@ public class Recorder : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Sets up necessary variables, resets ghost timer and destroys not yet destroyed ghosts.
      */
     void setupRun(bool r)
     {
+        width = Screen.width;
+        height = Screen.height;
+        rectangle = new Rect(0, 0, width, height);
         recording = r;
         imageNumber = 1;
         timer = 0;
@@ -109,7 +121,6 @@ public class Recorder : MonoBehaviour
         {
             target = Instantiate(Resources.Load("ReplayPlayer", typeof(GameObject)), World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection)) as GameObject;
         }
-
         else
         {
             GameObject temp = target;
@@ -124,7 +135,7 @@ public class Recorder : MonoBehaviour
 
         SetupGhostTimer();
 
-
+        //If recording capture framerate needs to be set to get consistent video
         if (recording)
         {
             Time.captureFramerate = fps;
@@ -133,7 +144,7 @@ public class Recorder : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Setting up ghost timer, same as in playerscript.
      */
     public void SetupGhostTimer()
     {
@@ -145,37 +156,48 @@ public class Recorder : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+    * Setting up for recording, Instantiating overlay objects.
+    */
+    void SetupRecording()
+    {
+        foreach (GameObject go in ghosts)
+        {
+            Destroy(go);
+        }
+        setupRun(true);
+        loading = true;
+        Instantiate(Resources.Load("RecordingOverlay", typeof(Canvas)));
+        loadBarImage = GameObject.Find("LoadBar").GetComponent<Image>();
+        loadText = GameObject.Find("LoadText").GetComponent<Text>();
+        loadPercentageText = GameObject.Find("PercentageText").GetComponent<Text>();
+    }
+
+    /**---------------------------------------------------------------------------------
+     * Executes every frame, Video recording and generation is done here.
      */
     void Update()
     {
+        //Can be removed for a option in some replay menu
         if (Input.GetKeyDown(KeyCode.R))
         {
-            foreach(GameObject go in ghosts)
-            {
-                Destroy(go);
-            }
-            setupRun(true);
-            loading = true;
-            Instantiate(Resources.Load("RecordingOverlay", typeof(Canvas)));
-            loadBarImage = GameObject.Find("LoadBar").GetComponent<Image>();
-            loadText = GameObject.Find("LoadText").GetComponent<Text>();
-            loadPercentageText = GameObject.Find("PercentageText").GetComponent<Text>();
+            SetupRecording();
         }
 
+        //Whole recording and generation process
         if (loading)
         {
+            //Updating loading value while recording
             if (ghostTimerObj.f_time <= finishedTime && recording)
             {
                 loadText.text = "Recording Video";
                 loadValue = 0.5f * ghostTimerObj.f_time / finishedTime;
             }
-
             else
             {
                 recording = false;
             }
 
+            //Generating setup
             if (!recording && !generating)
             {
                 generating = true;
@@ -187,21 +209,24 @@ public class Recorder : MonoBehaviour
                     process = new Process();
 
                     process.EnableRaisingEvents = true;
-                    process.StartInfo.FileName = "ffmpeg.exe";
-                    process.StartInfo.Arguments = "-framerate " + fps.ToString() + " -i \"" + filepath + "/captured_images/img%05d.png\" "
-                                                + " -i Dreamworld.mp3"
-                                                + " -c:v libx264"
-                                                + " -vf fps=" + fps.ToString()
-                                                + " -pix_fmt yuv420p "
-                                                + " -shortest \"" 
-                                                + filepath + "/out.mp4\" -y";
+                    process.StartInfo.FileName = "ffmpeg.exe"; //executable to use
+                    process.StartInfo.Arguments = 
+                    "-framerate " + fps.ToString()                              //Sets number of images per second to use for input
+                    + " -i \"" + filepath + "/" + imageFolder +"/img%05d.png\" "   //image input path declaration 
+                    //(%05d works as it does with printf in c++, could be for emaple img00001.png or img99999.png or anything inbetween)
+                    + " -i Dreamworld.mp3"                                      //audio input path declaration
+                    + " -c:v libx264"                                           //sets videocodec to h.264
+                    + " -vf fps=" + fps.ToString()                              //sets video output framerate
+                    + " -pix_fmt yuv420p"                                       //sets pixelformat(not exactly sure what yuv420p is, seems to be needed for this to work).
+                    + " -shortest \""                                           //cuts whatever is the longer of audio/video to the lenght of the shortest input 
+                    + filepath + "/out.mp4\" -y";                               //video output path -y makes ffmpeg skip asking to start
 
                     process.StartInfo.UseShellExecute = false;
-                    process.StartInfo.RedirectStandardError = true;
+                    process.StartInfo.RedirectStandardError = true; // used to get values for loadingbar
                     process.StartInfo.CreateNoWindow = true;
                     process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
 
-
+                    //Does not allways seem to work, could be unity tho
                     if (!process.Start())
                     {
                         print("Error trying to start");
@@ -209,13 +234,13 @@ public class Recorder : MonoBehaviour
                     reader = process.StandardError;
 
                 }
-
                 catch
                 {
                     print("Error generating file");
                 }
             }
 
+            //Geration process, reading messages from ffmpeg for use on loadingbar progression
             if (generating)
             {
                 string line;
@@ -229,7 +254,6 @@ public class Recorder : MonoBehaviour
                             loadValue = 0.5f + 0.5f * int.Parse(match.Groups[1].Value) / imageNumber;
                         }
                     }
-
                     else
                     {
                         generating = false;
@@ -254,7 +278,8 @@ public class Recorder : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executes when last every frame, makes replay camera follow replayplayer.
+     * Screenshot is put here so everything is rendered and moved for this frame.
      */
     void LateUpdate()
     {
@@ -270,7 +295,8 @@ public class Recorder : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executes every frame while recording(Default: 30 per second).
+     * Takes image from a specific camera(in this case replay camera.
      */
     void screenShot()
     {

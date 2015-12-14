@@ -5,16 +5,17 @@ using System.Collections.Generic;
 public class Ghost : PlayerBase
 {
 
-    //For Animation
-
+    /**---------------------------------------------------------------------------------
+     * Various variables for ghosts
+     */
     public List<TimeStamp> inputs;
     private TimerGhost ghostTimerObj;
     private GameObject ghostTimerGameObj;
     private float invulnerabilityTime = 1f;
-    int index;
+    int index; //current ghost action index to check with timer (action could for example be jump)
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Exectues at start
      */
     void Start () 
     {
@@ -27,7 +28,7 @@ public class Ghost : PlayerBase
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed every frame. Handles ghost movement and actions
      */
     void Update()
     {
