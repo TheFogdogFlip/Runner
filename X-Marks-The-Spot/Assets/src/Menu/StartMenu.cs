@@ -111,8 +111,6 @@ public class StartMenu : MonoBehaviour
         helpMenu                    = helpMenu.GetComponent<Canvas>();
         startMenu                   = startMenu.GetComponent<Canvas>();
 
-        
-
         startText                   = playGameObj.GetComponent<Button>();
         exitText                    = exitGameObj.GetComponent<Button>();
         optionsText                 = optionsGameObj.GetComponent<Button>();
