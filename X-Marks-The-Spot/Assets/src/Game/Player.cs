@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 public class Player : PlayerBase
 {
+    Vector2 startPosition = -Vector2.one;
     //Ctd Timer
     private GameObject ctdTimerGameObj;
     private TimerCountdown ctdTimerObj;
@@ -69,9 +70,6 @@ public class Player : PlayerBase
             ctdTimerObj.SetText();
         }
     }
-
-    //Uhm, this is outside a function, is it meant to be here or should it be in the declarations section?
-    Vector2 startPosition = -Vector2.one;
 
     /**---------------------------------------------------------------------------------
      * 
