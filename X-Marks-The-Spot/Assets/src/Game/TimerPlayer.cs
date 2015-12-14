@@ -2,36 +2,31 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class TimerPlayer : MonoBehaviour {
+public class TimerPlayer : MonoBehaviour 
+{
+    /**---------------------------------------------------------------------------------
+     * Variables used by the script.
+     */
     public float f_time;
-    public Text textObj;
     public bool TimerRunning;
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed when the script starts.
      */
-	void 
+    void 
     Start () 
     {
         //Empty
 	}
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed on every frame.
+     * Alters f_time by using Time.deltaTime.
+     * Time.deltaTime is the time since the last time Update() was called (i.e. the time since the last frame).
      */
-	void 
+    void 
     Update () 
     {
         f_time += Time.deltaTime;
 	}
-
-    /**---------------------------------------------------------------------------------
-     * 
-     */
-    public void 
-    SetText()
-    {
-        int i_time = (int)f_time;
-        textObj.text = i_time.ToString();
-    }
 }
