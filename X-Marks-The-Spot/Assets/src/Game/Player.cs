@@ -269,7 +269,8 @@ public class Player : PlayerBase
     {
         if (isSliding)
         {
-            bc.size = new Vector3(2.0f * bc.size.x, 2.0f * bc.size.y, 2.0f * bc.size.z);
+            bc.center = new Vector3(bc.center.x, 0.2765842f, bc.center.z);
+            bc.size = new Vector3(bc.size.x, 2.0f * bc.size.y, bc.size.z);
         }
 
         isTurning = false;

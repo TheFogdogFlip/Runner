@@ -18,6 +18,7 @@ public class PlayerBase : MonoBehaviour
     protected float turnSpeed = 225;
     protected float jumpForce = 2.2f;
     protected float gravity = 5f;
+    protected float slideLenght = 0.75f;
     protected bool isJumpLocked = false;
     
 
@@ -46,7 +47,7 @@ public class PlayerBase : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         bc = GetComponent<BoxCollider>();
-        crntSlideLength = 1 / runSpeed;
+        crntSlideLength = slideLenght;
         crntJumpForce = jumpForce;
         rotationTarget = World.Instance.StartDirection.y;
         isFirstFrame = false;
@@ -130,11 +131,11 @@ public class PlayerBase : MonoBehaviour
      */
     protected void Slide()
     {
-        //Slide start
+
         isSliding = true;
         anim.SetTrigger("Slide");
-        bc.size = new Vector3(0.5f * bc.size.x, 0.5f * bc.size.y, 0.5f * bc.size.z);
-        
+        bc.center = new Vector3(bc.center.x, 0.14f, bc.center.z);
+        bc.size = new Vector3(bc.size.x, 0.5f * bc.size.y,bc.size.z);
     }
 
     /**---------------------------------------------------------------------------------
@@ -146,8 +147,9 @@ public class PlayerBase : MonoBehaviour
         {
             if (crntSlideLength <= 0.1)
             {
-                bc.size = new Vector3(2.0f * bc.size.x, 2.0f * bc.size.y, 2.0f * bc.size.z);
-                crntSlideLength = 1  / runSpeed;
+                bc.size = new Vector3(bc.size.x, 2.0f * bc.size.y, bc.size.z);
+                bc.center = new Vector3(bc.center.x, 0.2765842f, bc.center.z);
+                crntSlideLength = slideLenght;
                 isSliding = false;
             }
             else
@@ -188,6 +190,7 @@ public class PlayerBase : MonoBehaviour
      */
     protected void Jump()
     {
+        
         isJumping = true;
         anim.SetTrigger("Jump");
     }
@@ -237,71 +240,72 @@ public class PlayerBase : MonoBehaviour
      */
     private void nextActionActivation()
     {
-        
-        Vector3 tempVec = transform.position;
-        if (tempVec.z < 0) tempVec.z *= -1;
-        if (tempVec.x < 0) tempVec.x *= -1;
+        if (!isSliding && !isFalling && !isJumping)
+        {   
+            Vector3 tempVec = transform.position;
+            if (tempVec.z < 0) tempVec.z *= -1;
+            if (tempVec.x < 0) tempVec.x *= -1;
 
-        if (rotationTarget <= 1 && rotationTarget >= -1)
-        {
-            rotationTarget = 0;
+            if (rotationTarget <= 1 && rotationTarget >= -1)
+            {
+                rotationTarget = 0;
+            }
+
+            if (rotationTarget == 0)
+            {
+
+                if (tempVec.z % 2 <= 1)
+                {
+                    isActionActive = false;
+                }
+
+                if (tempVec.z % 2 >= 1 && !isActionActive)
+                {
+                    ActivateNextAction();
+                    isActionActive = true;
+                }
+            }
+            if (rotationTarget == 90)
+            {
+                if (tempVec.x % 2 <= 1)
+                {
+                    isActionActive = false;
+                }
+
+                if (tempVec.x % 2 >= 1 && !isActionActive)
+                {
+                    ActivateNextAction();
+                    isActionActive = true;
+                }
+            }
+            if (rotationTarget == 180)
+            {
+
+                if (tempVec.z % 2 >= 1)
+                {
+                    isActionActive = false;
+                }
+
+                if (tempVec.z % 2 < 1 && !isActionActive)
+                {
+                    ActivateNextAction();
+                    isActionActive = true;
+                }
+            }
+            if (rotationTarget == 270)
+            {
+
+                if (tempVec.x % 2 >= 1)
+                {
+                    isActionActive = false;
+                }
+                if (tempVec.x % 2 <= 1 && !isActionActive)
+                {
+                    ActivateNextAction();
+                    isActionActive = true;
+                }
+            }
         }
-
-        if (rotationTarget == 0)
-        {
-
-            if (tempVec.z % 2 <= 1 && !isJumping && !isSliding)
-            {
-                isActionActive = false;
-            }
-
-            if (tempVec.z % 2 >= 1 && !isActionActive)
-            {
-                ActivateNextAction();
-                isActionActive = true;
-            }
-        }
-        if (rotationTarget == 90)
-        {
-            if (tempVec.x % 2 <= 1 && !isJumping && !isSliding)
-            {
-                isActionActive = false;
-            }
-
-            if (tempVec.x % 2 >= 1 && !isActionActive)
-            {
-                ActivateNextAction();
-                isActionActive = true;
-            }
-        }
-        if (rotationTarget == 180)
-        {
-
-            if (tempVec.z % 2 >= 1 && !isJumping && !isSliding)
-            {
-                isActionActive = false;
-            }
-
-            if (tempVec.z % 2 < 1 && !isActionActive)
-            {
-                ActivateNextAction();
-                isActionActive = true;
-            }
-        }
-        if (rotationTarget == 270)
-        {
-
-            if (tempVec.x % 2 >= 1 && !isJumping && !isSliding)
-            {
-                isActionActive = false;
-            }
-            if (tempVec.x % 2 <= 1 && !isActionActive)
-            {
-                ActivateNextAction();
-                isActionActive = true;
-            }
-        }
-     
     }
 
     /**---------------------------------------------------------------------------------
