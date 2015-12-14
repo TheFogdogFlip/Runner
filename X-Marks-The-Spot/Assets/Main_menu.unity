@@ -3517,6 +3517,7 @@ MonoBehaviour:
   helpMenu: {fileID: 1466914740}
   startMenu: {fileID: 656565303}
   eventSys: {fileID: 398801315}
+  MainCamera: {fileID: 2141780838}
 --- !u!1 &670199589
 GameObject:
   m_ObjectHideFlags: 0

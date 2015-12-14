@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Tile
 {
@@ -6,6 +7,8 @@ public class Tile
     private float rotation = 0.0f;
     private Vector3 position;
     private Color color;
+
+    private static Dictionary<string, GameObject> gameObjects = new Dictionary<string,GameObject>();
 
     public Vector3 Position
     {
@@ -60,7 +63,17 @@ public class Tile
 
     public Tile(Vector3 position, Color color, string gameObjectTag, float rotation = 0.0f)
     {
-        GameObject = (GameObject)UnityEngine.Object.Instantiate(Resources.Load(gameObjectTag));
+        GameObject gameObject = null;
+
+        if(gameObjects.ContainsKey(gameObjectTag))
+            gameObject = gameObjects[gameObjectTag];
+        else
+        {
+            gameObject = Resources.Load<GameObject>(gameObjectTag);
+            gameObjects[gameObjectTag] = gameObject;
+        }
+
+        GameObject = Object.Instantiate<GameObject>(gameObject);
         Color = color;
         Position = position;
         Rotation = rotation;

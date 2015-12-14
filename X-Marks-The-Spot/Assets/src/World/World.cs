@@ -459,9 +459,6 @@ public class World
     public void
     loadFromMemory()
     {
-        //depth = map.height;
-        //width = map.width;
-
         grid = new Tile[width, depth];
 
         for (int y = 0; y < depth; y++)

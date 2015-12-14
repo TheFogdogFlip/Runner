@@ -63,6 +63,8 @@ public class StartMenu : MonoBehaviour
      */
     LoadingThreadHandler threadHandler;
 
+    public Camera MainCamera;
+
     void
     Start()
     {
@@ -140,17 +142,26 @@ public class StartMenu : MonoBehaviour
     {
         if (menuTimer.f_time > 0.77 && menuTimer.isActive)
         {
-            if (threadHandler.Generated)
-            {
-                World.Instance.SetMapColor();
-                World.Instance.loadFromMemory();
-                threadHandler.UseGenerated();
-                var test = World.Instance.GetTile(256, 256);
-                threadHandler.LoadAssets();
-                Application.LoadLevel("Scene");
-            }
+            StartCoroutine(Coroutine());
         }
 
+    }
+
+    IEnumerator Coroutine()
+    {
+        MainCamera.transform.position = new Vector3(256, 60, 256);
+        MainCamera.transform.LookAt(World.Instance.StartPosition * 2);
+        
+        yield return new WaitForSeconds(0);
+
+        if (threadHandler.Generated)
+        {
+            World.Instance.SetMapColor();
+            World.Instance.loadFromMemory();
+            threadHandler.UseGenerated();
+            threadHandler.LoadAssets();
+            Application.LoadLevel("Scene");
+        }
     }
 
     /**---------------------------------------------------------------------------------
