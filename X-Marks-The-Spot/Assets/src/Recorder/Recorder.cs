@@ -151,7 +151,6 @@ public class Recorder : MonoBehaviour
         GameObject ghostTimerGameObj = GameObject.Find("ghostTimer");
         ghostTimerObj = ghostTimerGameObj.GetComponent<TimerGhost>();
         ghostTimerObj.f_time = 0;
-        ghostTimerObj.textObj.text = "0";
         ghostTimerObj.TimerRunning = true;
 
     }

@@ -23,7 +23,8 @@ public class PlayerBase : MonoBehaviour
     
 
     //DONT TOUCH
-    protected bool isInvulnerable = false;
+    protected bool isInvulnerableJ = false;
+    protected bool isInvulnerableS = false;
     protected bool isJumping = false;
     protected bool isFalling = false;
     protected Rigidbody rb;
@@ -180,11 +181,14 @@ public class PlayerBase : MonoBehaviour
             case "Goal":
                 GoalFunc();
                 break;
-            case "Obstacle":
-                if (!isInvulnerable) Death();
+            case "Obstacle_Jump":
+                if (!isInvulnerableJ) Death();
+                break;
+            case "Obstacle_Slide":
+                if (!isInvulnerableS) Death();
                 break;
             case "Hole":
-                if (!isInvulnerable)
+                if (!isInvulnerableJ)
                 {
                     Falling();
                     isFalling = true;

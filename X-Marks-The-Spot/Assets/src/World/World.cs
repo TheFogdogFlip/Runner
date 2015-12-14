@@ -150,6 +150,23 @@ public class World
     }
 
     /**---------------------------------------------------------------------------------
+    *   Marks all the tiles to don't be destoyed so they will appear in the next scene;
+    */
+    public void 
+    UseGenerated()
+    {
+        for (int y = 0; y < depth; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                Tile tile = grid[y, x];
+                if(tile != null)
+                    UnityEngine.Object.DontDestroyOnLoad(tile);
+            }
+        }
+    }
+
+    /**---------------------------------------------------------------------------------
     *   Finds the tile with specified name.
     */
     private TileNode 

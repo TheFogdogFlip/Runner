@@ -4,14 +4,22 @@ using System.Collections;
 
 public class TimerCountdown : MonoBehaviour
 {
+    /**---------------------------------------------------------------------------------
+     * Variables used by the script.
+     */
     public float f_time;
     public int i_time;
     public bool TimerFirstRunning;
     public bool TimerSecondRunning;
-    public Text textObj;
+    
+    /**---------------------------------------------------------------------------------
+     * Text objects used by the script.
+     */
+    public Text countDownText;
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed when the script starts.
+     * Sets both bools to true to make the timer start running.
      */
     void 
     Start()
@@ -21,7 +29,9 @@ public class TimerCountdown : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed on every frame.
+     * Alters f_time by using Time.deltaTime.
+     * Time.deltaTime is the time since the last time Update() was called (i.e. the time since the last frame).
      */
     void 
     Update()
@@ -31,20 +41,21 @@ public class TimerCountdown : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Sets the text to the countDownText depending on where the timer is at.
+     * Hides the timer if enough time has passed.
      */
     public void 
     SetText()
     {
         if(f_time >= 1)
         {
-            textObj.text = i_time.ToString();
+            countDownText.text = i_time.ToString();
             return;
         }
 
         else if(f_time < 1 && f_time > 0)
         {
-            textObj.text = "GO!";
+            countDownText.text = "GO!";
             TimerFirstRunning = false;
             return;
         }
@@ -59,11 +70,11 @@ public class TimerCountdown : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Hides the timer when "GO!" has been on the screen for a long enough time.
      */
     public void 
     HideTimer()
     {
-        textObj.enabled = false;
+        countDownText.enabled = false;
     }
 }
