@@ -36,7 +36,7 @@ public class AudioManager : Object{
             if (!audioInitiated)
             {
                 audioManager = new AudioManager();
-                audioManager.InitAudio();
+                audioManager.initAudio();
                 audioInitiated = true;
             }
 
@@ -55,6 +55,7 @@ public class AudioManager : Object{
     private void initAudio()
     {
         GameObject audioHolder = Instantiate(Resources.Load("AudioHolder", typeof(GameObject))) as GameObject;
+        DontDestroyOnLoad(audioHolder);
         AudioSource[] audioSources = audioHolder.GetComponents<AudioSource>();
         loopSound = audioSources[0];
         jumpSound = audioSources[1];
@@ -150,7 +151,9 @@ public class AudioManager : Object{
     public void SetMasterVolume(int MasterVolume)
     {
         //MasterVolume = GlobalGameSettings.GetEffectsVolume();
-        MasterMixer.SetFloat("Master", MasterVolume);
+        MasterMixer.SetFloat("Master", MasterVolume - 80);
+        
+
     }
     /**---------------------------------------------------------------------------------
     * 
@@ -158,7 +161,7 @@ public class AudioManager : Object{
     public void SetMusicVolume(int MusicVolume)
     {
         //MusicVolume = GlobalGameSettings.GetEffectsVolume();
-        MasterMixer.SetFloat("Music", MusicVolume);
+        MasterMixer.SetFloat("Music", MusicVolume - 80);
     }
     /**---------------------------------------------------------------------------------
     * 
@@ -166,6 +169,6 @@ public class AudioManager : Object{
     public void SetSoundFXVolume(int FXVolume)
     {
         //FXVolume = GlobalGameSettings.GetEffectsVolume();
-        MasterMixer.SetFloat("SoundFx", FXVolume);
+        MasterMixer.SetFloat("SoundFx", FXVolume - 80);
     }
 }
