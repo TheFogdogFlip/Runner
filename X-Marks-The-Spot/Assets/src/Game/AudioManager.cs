@@ -153,7 +153,9 @@ public class AudioManager : Object{
     public void SetMasterVolume(int MasterVolume)
     {
         //MasterVolume = GlobalGameSettings.GetEffectsVolume();
-        MasterMixer.SetFloat("Master", MasterVolume);
+        MasterMixer.SetFloat("Master", MasterVolume - 80);
+        
+
     }
     /**---------------------------------------------------------------------------------
     * 
@@ -161,7 +163,7 @@ public class AudioManager : Object{
     public void SetMusicVolume(int MusicVolume)
     {
         //MusicVolume = GlobalGameSettings.GetEffectsVolume();
-        MasterMixer.SetFloat("Music", MusicVolume);
+        MasterMixer.SetFloat("Music", MusicVolume - 80);
     }
     /**---------------------------------------------------------------------------------
     * 
@@ -169,6 +171,6 @@ public class AudioManager : Object{
     public void SetSoundFXVolume(int FXVolume)
     {
         //FXVolume = GlobalGameSettings.GetEffectsVolume();
-        MasterMixer.SetFloat("SoundFx", FXVolume);
+        MasterMixer.SetFloat("SoundFx", FXVolume - 80);
     }
 }
