@@ -67,9 +67,6 @@ public class LoadingThreadHandler : Object {
 
     private void loadAssets()
     {
-        loadingText = "Loading Audio...";
-        AudioManager.Instance.InitAudio();
-
         loadingText = "Loading Player...";
         Instantiate(Resources.Load("Player", typeof(GameObject)), World.Instance.StartPosition, Quaternion.Euler(World.Instance.StartDirection));
 

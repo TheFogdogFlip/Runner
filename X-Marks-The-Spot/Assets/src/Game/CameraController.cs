@@ -45,17 +45,22 @@ public class CameraController : MonoBehaviour {
      */
 	void Update () 
     {
-        //wanted rotation and height
+        /**---------------------------------------------------------------------------------
+        * wanted rotation and height
+        */
         rotAngleY = target.transform.eulerAngles.y;
         wantedHeight = target.transform.position.y + height;
         isTurning = target.GetComponent<Player>().GetTurn();
-        //smooth rot
+        /**---------------------------------------------------------------------------------
+        * smooth rotation
+        */
         currentRotAngleY = Mathf.LerpAngle(currentRotAngleY, rotAngleY, rotationDamping * Time.deltaTime);
         currentHeight = Mathf.Lerp(currentHeight, wantedHeight, heightDamping * Time.deltaTime);
 
         currentRot = Quaternion.Euler(0, currentRotAngleY, 0);
-
-        //camera transform
+        /**---------------------------------------------------------------------------------
+        * camera transform
+        */
         this.gameObject.transform.position = target.transform.position;
         this.gameObject.transform.position -= (currentRot * Vector3.forward * distance);
         heightVec[1] = height;

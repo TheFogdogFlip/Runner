@@ -17,12 +17,13 @@ public class AudioManager : Object{
     private static AudioSource winSound;
 
     private static AudioManager audioManager;
+    private static bool audioInitiator = false;
     /**---------------------------------------------------------------------------------
     * 
      */
-    private static int MasterVolume;
-    private static int MusicVolume;
-    private static int FXVolume;
+    //private static int MasterVolume;
+    //private static int MusicVolume;
+    //private static int FXVolume;
 
     /**---------------------------------------------------------------------------------
     * 
@@ -31,8 +32,12 @@ public class AudioManager : Object{
     {
         get 
         {
-            if (audioManager == null)
+            if (!audioInitiator)
+            {
                 audioManager = new AudioManager();
+                audioManager.initAudio();
+                audioInitiator = true;
+            }
 
             return audioManager;
         }
@@ -47,7 +52,7 @@ public class AudioManager : Object{
     /**---------------------------------------------------------------------------------
      * 
     */
-    public void InitAudio()
+    private void initAudio()
     {
         GameObject audioHolder = Instantiate(Resources.Load("AudioHolder", typeof(GameObject))) as GameObject;
         AudioSource[] audioSources = audioHolder.GetComponents<AudioSource>();
@@ -142,25 +147,25 @@ public class AudioManager : Object{
     /**---------------------------------------------------------------------------------
     * 
     */
-    public void SetMasterVolume()
+    public void SetMasterVolume(int MasterVolume)
     {
-        MasterVolume = GlobalGameSettings.GetEffectsVolume();
-        MasterMixer.SetFloat("masterVolume", MasterVolume);
+        //MasterVolume = GlobalGameSettings.GetEffectsVolume();
+        MasterMixer.SetFloat("Master", MasterVolume);
     }
     /**---------------------------------------------------------------------------------
     * 
     */
-    public void SetMusicVolume()
+    public void SetMusicVolume(int MusicVolume)
     {
-        MusicVolume = GlobalGameSettings.GetEffectsVolume();
-        MasterMixer.SetFloat("musicVolume", MusicVolume);
+        //MusicVolume = GlobalGameSettings.GetEffectsVolume();
+        MasterMixer.SetFloat("Music", MusicVolume);
     }
     /**---------------------------------------------------------------------------------
     * 
     */
-    public void SetSoundFXVolume()
+    public void SetSoundFXVolume(int FXVolume)
     {
-        FXVolume = GlobalGameSettings.GetEffectsVolume();
-        MasterMixer.SetFloat("soundFXVolume", FXVolume);
+        //FXVolume = GlobalGameSettings.GetEffectsVolume();
+        MasterMixer.SetFloat("SoundFx", FXVolume);
     }
 }
