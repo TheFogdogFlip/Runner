@@ -73,6 +73,7 @@ public class HelpMenu : MonoBehaviour
     {
         DisableHelp();
         startMenuObj.EnableStart();
+        startMenu.enabled = true;
     }
 
     /**---------------------------------------------------------------------------------
