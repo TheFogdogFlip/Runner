@@ -22,13 +22,6 @@ public class AudioManager : Object{
 
     /**---------------------------------------------------------------------------------
     * 
-     */
-    //private static int MasterVolume;
-    //private static int MusicVolume;
-    //private static int FXVolume;
-
-    /**---------------------------------------------------------------------------------
-    * 
     */
     public static AudioManager Instance 
     {

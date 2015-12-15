@@ -291,6 +291,7 @@ public class StartMenu : MonoBehaviour
         menuTimer.f_time = 0;
         menuTimer.isActive = true;
         anim.Play("Jump");
+        AudioManager.Instance.JumpSound();
         DisableStart();
     }
 
