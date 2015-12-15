@@ -134,8 +134,8 @@ public class LoadLevelMenu : MonoBehaviour
     LoadLevelSelection(string theSave)
     {
         //set the selected mapName to the selected saved map
-        print("Selected save: " + theSave);
         mapName = theSave;
+        BackPress();
     }
 
 
