@@ -60,6 +60,10 @@ public class PauseMenu : MonoBehaviour
      */
     public EventSystem eventSys;
 
+    /**---------------------------------------------------------------------------------
+     * Variables used by the script.
+     */
+    private bool gameIsPaused;
 
     /**---------------------------------------------------------------------------------
      * Should only be executed once.
@@ -133,8 +137,9 @@ public class PauseMenu : MonoBehaviour
 	void 
     Update () 
     {
-	    if (Input.GetButtonDown("Cancel"))
+	    if (Input.GetButtonDown("Cancel") && !gameIsPaused)
         {
+            gameIsPaused = true;
             Time.timeScale = 0;
             EnablePauseMenu();
             eventSys.SetSelectedGameObject(resumeGameObject);
@@ -182,7 +187,7 @@ public class PauseMenu : MonoBehaviour
     ResumeGamePress()
     {
         DisablePauseMenu();
-
+        gameIsPaused = false;
         Time.timeScale = 1;
         AudioManager.Instance.UnPauseVolume();
     }
