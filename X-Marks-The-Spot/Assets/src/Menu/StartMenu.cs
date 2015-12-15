@@ -3,6 +3,10 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
+/**---------------------------------------------------------------------------------
+ * Twitter menu objects have been disabled. Uncomment all of them in order to re-implement.
+ */
+
 public class StartMenu : MonoBehaviour
 {
     /**---------------------------------------------------------------------------------
@@ -13,15 +17,15 @@ public class StartMenu : MonoBehaviour
     private GameObject helpGameObject;
     private GameObject optionsGameObject;
     private GameObject exitGameObject;
-    private GameObject twitterGameObject;
     private GameObject yesGameObject;
     private GameObject noGameObject;
     private GameObject startMenuGameObject;
     private GameObject helpMenuGameObject;
     private GameObject loadMenuGameObject;
     private GameObject optionsMenuGameObject;
-    private GameObject twitterMenuGameObject;
     private GameObject quitMenuGameObject;
+    //private GameObject twitterGameObject;
+    //private GameObject twitterMenuGameObject;
 
     /**---------------------------------------------------------------------------------
      * Class objects associated with the script.
@@ -30,8 +34,8 @@ public class StartMenu : MonoBehaviour
     private OptionsMenu optionsMenuObject;
     private LoadLevelMenu loadMenuObject;
     private HelpMenu helpMenuObject;
-    private TwitterMenu twitterMenuObject;
     private TimerMenu menuTimer;
+    //private TwitterMenu twitterMenuObject;
 
     /**---------------------------------------------------------------------------------
      * Canvas associated with the script.
@@ -41,7 +45,7 @@ public class StartMenu : MonoBehaviour
     private Canvas loadLevelMenu;
     private Canvas helpMenu;
     private Canvas startMenu;
-    private Canvas twitterMenu;
+    //private Canvas twitterMenu;
 
     /**---------------------------------------------------------------------------------
      * Buttons associated with the script.
@@ -51,9 +55,9 @@ public class StartMenu : MonoBehaviour
     private Button optionsText;
     private Button loadLevelText;
     private Button helpText;
-    private Button twitterImg;
     private Button noText;
     private Button yesText;
+    //private Button twitterImg;
 
     /**---------------------------------------------------------------------------------
      * EventSystem used by the script.
@@ -65,6 +69,9 @@ public class StartMenu : MonoBehaviour
      */
     private LoadingThreadHandler threadHandler;
 
+    /**---------------------------------------------------------------------------------
+     * Camera required for the Scene.
+     */
     public Camera MainCamera;
 	
 	/**---------------------------------------------------------------------------------
@@ -84,13 +91,13 @@ public class StartMenu : MonoBehaviour
         loadMenuObject.LoadComponents();
         helpMenuObject.LoadComponents();
         optionsMenuObject.LoadComponents();
-        twitterMenuObject.LoadCompononents();
+        //twitterMenuObject.LoadCompononents();
 
         EnableStart();
         loadMenuObject.DisableLoadLevel();
         optionsMenuObject.DisableOptions();
         helpMenuObject.DisableHelp();
-        twitterMenuObject.DisableTwitterMenu();
+        //twitterMenuObject.DisableTwitterMenu();
 
         eventSys.SetSelectedGameObject(playGameObject);
         threadHandler.GenerateWorld();
@@ -109,46 +116,46 @@ public class StartMenu : MonoBehaviour
         loadMenuGameObject              = GameObject.Find("LoadLevelMenu_Canvas");
         optionsMenuGameObject           = GameObject.Find("OptionsMenu_Canvas");
         quitMenuGameObject              = GameObject.Find("QuitMenu_Canvas");
-        twitterMenuGameObject           = GameObject.Find("TwitterMenu_Canvas");
+        //twitterMenuGameObject           = GameObject.Find("TwitterMenu_Canvas");
 
         playGameObject                  = GameObject.Find("Play_TextBtn");
         optionsGameObject               = GameObject.Find("Options_TextBtn");
         helpGameObject                  = GameObject.Find("Help_TextBtn");
         loadGameObject                  = GameObject.Find("LoadLevel_TextBtn");
-        exitGameObject                  = GameObject.Find("Quit_TextBtn");
-        twitterGameObject               = GameObject.Find("Twitter_ImgBtn");
+        exitGameObject                  = GameObject.Find("Quit_TextBtn");        
         yesGameObject                   = GameObject.Find("Yes_TextBtn");
         noGameObject                    = GameObject.Find("No_TextBtn");
+        //twitterGameObject               = GameObject.Find("Twitter_ImgBtn");
 
         menuTimer                       = GameObject.Find("menuTimer").GetComponent<TimerMenu>();
 
         helpMenuObject                  = helpMenuGameObject.GetComponent<HelpMenu>();
         loadMenuObject                  = loadMenuGameObject.GetComponent<LoadLevelMenu>();
         optionsMenuObject               = optionsMenuGameObject.GetComponent<OptionsMenu>();
-        twitterMenuObject               = twitterMenuGameObject.GetComponent<TwitterMenu>();
+        //twitterMenuObject               = twitterMenuGameObject.GetComponent<TwitterMenu>();
 
         quitMenu                        = quitMenuGameObject.GetComponent<Canvas>();
-        twitterMenu                     = twitterMenuGameObject.GetComponent<Canvas>();
         optionsMenu                     = optionsMenuGameObject.GetComponent<Canvas>();
         loadLevelMenu                   = loadMenuGameObject.GetComponent<Canvas>();
         helpMenu                        = helpMenuGameObject.GetComponent<Canvas>();
         startMenu                       = startMenuGameObject.GetComponent<Canvas>();
+        //twitterMenu                     = twitterMenuGameObject.GetComponent<Canvas>();
 
         startText                       = playGameObject.GetComponent<Button>();
         exitText                        = exitGameObject.GetComponent<Button>();
         optionsText                     = optionsGameObject.GetComponent<Button>();
         loadLevelText                   = loadGameObject.GetComponent<Button>();
         helpText                        = helpGameObject.GetComponent<Button>();
-        twitterImg                      = twitterGameObject.GetComponent<Button>();
         yesText                         = yesGameObject.GetComponent<Button>();
         noText                          = noGameObject.GetComponent<Button>();
+        //twitterImg                      = twitterGameObject.GetComponent<Button>();
 
         quitMenu.enabled                = false;
         optionsMenu.enabled             = false;
         loadLevelMenu.enabled           = false;
         helpMenu.enabled                = false;
-        twitterMenu.enabled             = false;
         startMenu.enabled               = true;
+        //twitterMenu.enabled             = false;
     }
 
     /**---------------------------------------------------------------------------------
@@ -168,7 +175,8 @@ public class StartMenu : MonoBehaviour
     /**---------------------------------------------------------------------------------
     *   Used to fix unity's fucked system.
     */
-    IEnumerator Coroutine()
+    IEnumerator 
+    Coroutine()
     {
         MainCamera.transform.position = new Vector3(256, 60, 256);
         MainCamera.transform.LookAt(World.Instance.StartPosition * 2);
@@ -266,14 +274,14 @@ public class StartMenu : MonoBehaviour
     * Executed when the Twitter button is pressed.
     * Disables and hides the Start menu and enables the Twitter menu.
     */
-    public void
-    TwitterPress()
-    {
-        startMenu.enabled = false;
-        twitterMenu.enabled = true;
-        twitterMenuObject.EnableTwitterMenu();
-        DisableStart();
-    }
+    //public void
+    //TwitterPress()
+    //{
+    //    startMenu.enabled = false;
+    //    twitterMenu.enabled = true;
+    //    twitterMenuObject.EnableTwitterMenu();
+    //    DisableStart();
+    //}
 
     /**---------------------------------------------------------------------------------
      * Executed when the Play button is pressed. 
@@ -316,6 +324,7 @@ public class StartMenu : MonoBehaviour
         helpText.enabled = false;
         optionsText.enabled = false;
         loadLevelText.enabled = false;
+        //twitterImg.enabled = false;
     }
 
     /**---------------------------------------------------------------------------------
@@ -330,6 +339,7 @@ public class StartMenu : MonoBehaviour
         helpText.enabled = true;
         optionsText.enabled = true;
         loadLevelText.enabled = true;
+        //twitterImg.enabled = true;
         yesText.enabled = false;
         noText.enabled = false;
         eventSys.SetSelectedGameObject(playGameObject);
