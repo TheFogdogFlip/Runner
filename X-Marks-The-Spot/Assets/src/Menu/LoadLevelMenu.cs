@@ -12,6 +12,11 @@ public class LoadLevelMenu : MonoBehaviour
     private GameObject backGameObject;
     private GameObject startMenuGameObject;
     private GameObject loadMenuGameObject;
+    private GameObject loadGame1GameObject;
+    private GameObject loadGame2GameObject;
+    private GameObject loadGame3GameObject;
+    private GameObject loadGame4GameObject;
+    private GameObject loadGame5GameObject;
 
     /**---------------------------------------------------------------------------------
      * Canvas associated with the script.
@@ -33,11 +38,17 @@ public class LoadLevelMenu : MonoBehaviour
      * EventSystem used by the script.
      */
     public EventSystem eventSys;
+
     /**---------------------------------------------------------------------------------
-    * 
+    * When no saved file is selected the mapName is "default"
     */
     public static string mapName = "default";
-    
+
+    /**---------------------------------------------------------------------------------
+    * Variables used by the script.
+    */
+    private int activeButtons;
+
     /**---------------------------------------------------------------------------------
      * Executed when the script starts.
      */
@@ -79,15 +90,7 @@ public class LoadLevelMenu : MonoBehaviour
         startMenuObject.EnableStart();
     }
 
-    /**---------------------------------------------------------------------------------
-     * Executed when the Load Level menu needs to be disabled.
-     * Disables the canvas and all the components associated with the script.
-     */
-    public void 
-    DisableLoadLevel()
-    {
-        backText.enabled = false;
-    }
+    
 
     /**---------------------------------------------------------------------------------
     * 
@@ -114,7 +117,7 @@ public class LoadLevelMenu : MonoBehaviour
         {
             GameObject.Find("LoadGame" + i).GetComponent<Text>().text = System.IO.Path.GetFileName(info[i - 1]);
         }
-
+        activeButtons = i;
         //disable all buttons where no save is present
         for (; i <= numberOfButtons; ++i)
         {
@@ -125,16 +128,14 @@ public class LoadLevelMenu : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-    * Not used??
+    * Executed when a savegame is selected in the Load map menu
     */
     public void
     LoadLevelSelection(string theSave)
     {
-        //World.Instance.Load(theSave); //<- should be this line that¨s needed
- 
-        //Application.LoadLevel("scene");
-        //how start the game with the selected map????
-        print("in the selection" + theSave);
+        //set the selected mapName to the selected saved map
+        mapName = theSave;
+        BackPress();
     }
 
 
@@ -147,5 +148,23 @@ public class LoadLevelMenu : MonoBehaviour
     {
         backText.enabled = true;
         eventSys.SetSelectedGameObject(backGameObject);
+        for (int i = 1; i <= activeButtons-1; ++i)
+        {
+            GameObject.Find("LoadGame" + i).GetComponent<Button>().enabled = true;
+        }
+    }
+    
+    /**---------------------------------------------------------------------------------
+     * Executed when the Load Level menu needs to be disabled.
+     * Disables the canvas and all the components associated with the script.
+     */
+    public void
+    DisableLoadLevel()
+    {
+        backText.enabled = false;
+        for (int i = 1; i <= 5; ++i)
+        {
+            GameObject.Find("LoadGame" + i).GetComponent<Button>().enabled = false;
+        }
     }
 }

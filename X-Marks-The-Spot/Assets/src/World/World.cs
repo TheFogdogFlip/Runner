@@ -466,6 +466,7 @@ public class World
     public void
     loadFromMemory()
     {
+        deletePrevious();
         grid = new Tile[width, depth];
 
         for (int y = 0; y < depth; y++)
@@ -509,11 +510,31 @@ public class World
     }
 
     /**---------------------------------------------------------------------------------
+    *   Deletes the map that is currently loaded.
+    */
+    private void deletePrevious()
+    {
+        if (grid != null)
+        {
+            for (int y = 0; y < depth; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    var tileObject = grid[y, x];
+                    if (tileObject != null)
+                        UnityEngine.Object.DestroyImmediate(tileObject.GameObject);
+                }
+            }
+        }
+    }
+
+    /**---------------------------------------------------------------------------------
     *   Load map from disk.
     */
     public void
     Load(string filename)
     {
+        deletePrevious();
         map = loadTexture2D(filename);
         //depth = map.height;
         //width = map.width;

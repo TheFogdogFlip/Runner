@@ -160,7 +160,9 @@ public class StartMenu : MonoBehaviour
 
     /**---------------------------------------------------------------------------------
      * Executed every frame. 
-     * Simply checks if the player has pressed play, in which case UnityChans jump animation has started and after 0.77 sec the scene "Scene" is loaded.
+     * Simply checks if the player has pressed play, 
+     * in which case UnityChans jump animation has started and after 0.77 sec the scene "Scene" is loaded.
+     * Also checks if a savegame is selected from the loadlevel scene
      */
     void
     Update()
@@ -169,7 +171,6 @@ public class StartMenu : MonoBehaviour
         {
             StartCoroutine(Coroutine());
         }
-
     }
 
     /**---------------------------------------------------------------------------------
@@ -183,14 +184,21 @@ public class StartMenu : MonoBehaviour
         
         yield return new WaitForSeconds(0);
 
-        if (threadHandler.Generated)
+        if (LoadLevelMenu.mapName != "default")
         {
-            World.Instance.SetMapColor();
-            World.Instance.loadFromMemory();
+            threadHandler.LoadWorld(LoadLevelMenu.mapName);
             threadHandler.UseGenerated();
-            threadHandler.LoadAssets();
+            LoadLevelMenu.mapName = "default";
             Application.LoadLevel("Scene");
-        }
+
+        } else if (threadHandler.Generated)
+            {
+                World.Instance.SetMapColor();
+                World.Instance.loadFromMemory();
+                threadHandler.UseGenerated();
+                threadHandler.LoadAssets();
+                Application.LoadLevel("Scene");
+            }
     }
 
     /**---------------------------------------------------------------------------------
