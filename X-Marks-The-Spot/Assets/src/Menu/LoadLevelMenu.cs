@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
+using System.IO;
 
 public class LoadLevelMenu : MonoBehaviour 
 {
@@ -32,6 +33,10 @@ public class LoadLevelMenu : MonoBehaviour
      * EventSystem used by the script.
      */
     public EventSystem eventSys;
+    /**---------------------------------------------------------------------------------
+    * 
+    */
+    public static string mapName = "default";
     
     /**---------------------------------------------------------------------------------
      * 
@@ -39,7 +44,7 @@ public class LoadLevelMenu : MonoBehaviour
     void 
     Start()
     {
-        //Empty 
+        GetMaps();
     }
 
     /**---------------------------------------------------------------------------------
@@ -83,6 +88,59 @@ public class LoadLevelMenu : MonoBehaviour
     {
         backText.enabled = false;
     }
+
+    /**---------------------------------------------
+
+------------------------------------
+    * 
+    */
+    public string[]
+    GetMaps()
+    {
+
+        //check all files MAPSAVE*.PNG in current directory 
+
+        string path = Directory.GetCurrentDirectory();
+        //DirectoryInfo dir = new DirectoryInfo (path);
+        string[] info = Directory.GetFiles(path, "MAPSAVE*.PNG");
+        int i = 1;
+
+        //update buttons in load screen so that a saved map can be loaded
+        int numberOfButtons = 5; //fixed number of buttons, five right now
+        print(info.Length);
+        int lenghtMax = info.Length;
+
+        if (lenghtMax > numberOfButtons)
+            lenghtMax = numberOfButtons;
+        for (; i <= lenghtMax; ++i)
+        {
+            GameObject.Find("LoadGame" + i).GetComponent<Text>().text = System.IO.Path.GetFileName(info[i - 1]);
+        }
+
+        //disable all buttons where no save is present
+        for (; i <= numberOfButtons; ++i)
+        {
+            GameObject.Find("LoadGame" + i).GetComponent<Button>().enabled = false;
+        }
+
+        return info;
+    }
+
+    /**---------------------------------------------
+
+------------------------------------
+  * 
+  */
+    public void
+    LoadLevelSelection(string theSave)
+    {
+        //World.Instance.Load(theSave); //<- should be this line that¨s needed
+ 
+        //Application.LoadLevel("scene");
+        //how start the game with the selected map????
+        print("in the selection" + theSave);
+    }
+
 
     /**---------------------------------------------------------------------------------
      * Executed when the Load Level menu needs to be enabled.
