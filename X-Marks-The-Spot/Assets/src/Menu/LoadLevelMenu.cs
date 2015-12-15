@@ -38,11 +38,17 @@ public class LoadLevelMenu : MonoBehaviour
      * EventSystem used by the script.
      */
     public EventSystem eventSys;
+
     /**---------------------------------------------------------------------------------
     * When no saved file is selected the mapName is "default"
     */
     public static string mapName = "default";
-    
+
+    /**---------------------------------------------------------------------------------
+    * Variables used by the script.
+    */
+    private int activeButtons;
+
     /**---------------------------------------------------------------------------------
      * Executed when the script starts.
      */
@@ -111,7 +117,7 @@ public class LoadLevelMenu : MonoBehaviour
         {
             GameObject.Find("LoadGame" + i).GetComponent<Text>().text = System.IO.Path.GetFileName(info[i - 1]);
         }
-
+        activeButtons = i;
         //disable all buttons where no save is present
         for (; i <= numberOfButtons; ++i)
         {
@@ -142,6 +148,10 @@ public class LoadLevelMenu : MonoBehaviour
     {
         backText.enabled = true;
         eventSys.SetSelectedGameObject(backGameObject);
+        for (int i = 1; i <= activeButtons-1; ++i)
+        {
+            GameObject.Find("LoadGame" + i).GetComponent<Button>().enabled = true;
+        }
     }
     
     /**---------------------------------------------------------------------------------
