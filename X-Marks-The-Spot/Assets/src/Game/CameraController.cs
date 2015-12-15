@@ -40,7 +40,6 @@ public class CameraController : MonoBehaviour
     void 
     Start() 
     {
-        //distance = 1.5f;
         height = 0.8f;
         heightDamping = 5.0f;
         rotationDamping = 5.0f;
@@ -52,27 +51,27 @@ public class CameraController : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Happens every frame
      */
 	void 
     Update() 
     {
         /**---------------------------------------------------------------------------------
-        * wanted rotation and height
-        */
+         * wanted rotation and height
+         */
         rotAngleY = target.transform.eulerAngles.y;
         wantedHeight = target.transform.position.y + height;
         isTurning = target.GetComponent<Player>().GetTurn();
         /**---------------------------------------------------------------------------------
-        * smooth rotation
-        */
+         * smooth rotation
+         */
         currentRotAngleY = Mathf.LerpAngle(currentRotAngleY, rotAngleY, rotationDamping * Time.deltaTime);
         currentHeight = Mathf.Lerp(currentHeight, wantedHeight, heightDamping * Time.deltaTime);
 
         currentRot = Quaternion.Euler(0, currentRotAngleY, 0);
         /**---------------------------------------------------------------------------------
-        * camera transform
-        */
+         * camera transform
+         */
         this.gameObject.transform.position = target.transform.position;
         this.gameObject.transform.position -= (currentRot * Vector3.forward * distance);
         heightVec[1] = height;
@@ -83,17 +82,20 @@ public class CameraController : MonoBehaviour
         {
             distance = 1.0f;
         }
-
+        /**---------------------------------------------------------------------------------
+         * Smooth camera zoom while turning
+         */
         else if (isTurning)
         {
             distance = Mathf.Lerp(distance, 1.0f, distanceDamping * Time.deltaTime);
         }
-
         else
         {
             distance = Mathf.Lerp(distance, 1.5f, distanceDamping * Time.deltaTime);
         }
-
+        /**---------------------------------------------------------------------------------
+         * LookAt target
+         */
         this.gameObject.transform.LookAt(new Vector3(target.transform.position.x, 0, target.transform.position.z) + tiltVec);
        
     }
