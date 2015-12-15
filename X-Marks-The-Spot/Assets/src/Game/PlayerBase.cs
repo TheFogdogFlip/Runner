@@ -21,22 +21,22 @@ public class PlayerBase : MonoBehaviour
     
     protected float runSpeed = 2f; //Tiles per Second.
     protected float turnSpeed = 225; //The speed of which the character turn.
-    protected float jumpForce = 2.2f; //The inital vertical force of the jump.
+    protected float jumpForce = 2.2f; //The initial vertical force of the jump.
     protected float gravity = 5f; //The negative force that pulls the character back towards the floor.
-    protected float slideLenght = 0.75f; //The lenght of the slide.
+    protected float slideLenght = 0.75f; //The length of the slide.
     
     protected bool isJumpLocked = false; //Bool value which sets the current input mode of jump/slide, locked jumps only occur once a new tile is stepped on.
-    protected bool isInvulnerableJ = false; //Remembers wheter or not the character is vulnerable by jump based obstacles.
-    protected bool isInvulnerableS = false; //Remembers wheter or not the character is vulnerable by slide based obstacles.
+    protected bool isInvulnerableJ = false; //Remembers whether or not the character is vulnerable by jump based obstacles.
+    protected bool isInvulnerableS = false; //Remembers whether or not the character is vulnerable by slide based obstacles.
     protected bool isJumping = false; //Remembers when the character is currently jumping.
     protected bool isFalling = false; //Remembers when the character is currently falling.
-    protected bool isTurning = false; //Remembers when the character is activly turning.
+    protected bool isTurning = false; //Remembers when the character is actively turning.
     protected bool isSliding = false; //Remembers when the character is currently sliding.
-    protected bool isActionActive = true; //Remembers wheter or not an non-specific action is active.
+    protected bool isActionActive = true; //Remembers whether or not an non-specific action is active.
 
-    protected float rotationTarget; //Remembers the targetrotation of a turn.
-    protected float rotationLast; //Remembers the sourcerotation of a turn.
-    protected float crntSlideLength; //Stores the current slide lenght.
+    protected float rotationTarget; //Remembers the target rotation of a turn.
+    protected float rotationLast; //Remembers the source rotation of a turn.
+    protected float crntSlideLength; //Stores the current slide length.
     protected float crntJumpForce; //Stores the current jump force.
   
     protected PlayerState nextAction = PlayerState.Idle; //Remembers the current state of the character.
@@ -73,7 +73,7 @@ public class PlayerBase : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * The activation of a left turn, rotationtarget is set to the appropriate point. Open possibility to add a animation.
+     * The activation of a left turn, rotationTarget is set to the appropriate point. Open possibility to add a animation.
      */
     protected void 
     TurnLeft()
@@ -147,7 +147,7 @@ public class PlayerBase : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * updatemethod for the slide command, keeps the characters hitbox shrinked until the slidelenght has been reached.
+     * update method for the slide command, keeps the characters hitbox shrunk until the slide length has been reached.
      */
     private void 
     UpdateSlide()
@@ -169,7 +169,7 @@ public class PlayerBase : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * The collider detector, pretty selfexplanatory.
+     * The collider detector, pretty self-explanatory.
      */
     void 
     OnTriggerEnter(Collider other)
@@ -218,7 +218,7 @@ public class PlayerBase : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * Continual updatecheck wheter a not a jump has been initiated.
+     * Continual update-check whether or not a jump has been initiated.
      */
     private void 
     UpdateJump()
@@ -240,7 +240,7 @@ public class PlayerBase : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * Continual updatecheck wheter or not the character shuold currently be falling.
+     * Continual update-check whether or not the character should currently be falling.
      */
     private void 
     UpdateFalling()
@@ -261,7 +261,7 @@ public class PlayerBase : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * Activation of the choosen queued up action, checks for when a new tile is reached.
+     * Activation of the chosen queued up action, checks for when a new tile is reached.
      */
     private void 
     nextActionActivation()
@@ -379,7 +379,7 @@ public class PlayerBase : MonoBehaviour
     }
 
     /**---------------------------------------------------------------------------------
-     * Updateloop, updates the movement of the character.
+     * Update-loop, updates the movement of the character.
      */
     protected void 
     MovementUpdate()
