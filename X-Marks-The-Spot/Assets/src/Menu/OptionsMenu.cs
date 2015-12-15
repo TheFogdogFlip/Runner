@@ -48,7 +48,6 @@ public class OptionsMenu : MonoBehaviour
      * Class objects used by the script.
      */
     private StartMenu startMenuObj;
-    private OptionsMenu optionsMenuObj;
 
     /**---------------------------------------------------------------------------------
      * EventSystem associated with the script.
@@ -88,7 +87,6 @@ public class OptionsMenu : MonoBehaviour
         optionsMenu                     = optionsMenuGameObject.GetComponent<Canvas>();
 
         startMenuObj                    = startMenuGameObject.GetComponent<StartMenu>();
-        optionsMenuObj                  = optionsMenuGameObject.GetComponent<OptionsMenu>();
 
         backText                        = backGameObject.GetComponent<Button>();
         masterVolSlider                 = masterVolGameObject.GetComponent<Slider>();

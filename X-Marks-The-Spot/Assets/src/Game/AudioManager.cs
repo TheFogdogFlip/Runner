@@ -54,7 +54,7 @@ public class AudioManager : Object{
      * Initiates audioholder, snapshots, sounds and mixers.
      * Is used when first audio is called.
      */
-    private void 
+    private void
     initAudio()
     {
         GameObject audioHolder = Instantiate(Resources.Load("AudioHolder", typeof(GameObject))) as GameObject;
@@ -69,22 +69,26 @@ public class AudioManager : Object{
         MasterMixer = Resources.Load<AudioMixer>("Audio/MasterMixer");
         paused = MasterMixer.FindSnapshot("Paused");
         unPaused = MasterMixer.FindSnapshot("Unpaused");
-{
+    }
 
     /**---------------------------------------------------------------------------------
      * Playes the background music.
      */
-    public void startLoop()
+    public void 
+    startLoop()
     {
         loopSound.Play();
     }
+
     /**---------------------------------------------------------------------------------
      * Stops the background music.
      */
-    public void stopLoop()
+    public void 
+    stopLoop()
     {
         loopSound.Stop();
     }
+
     /**---------------------------------------------------------------------------------
      * Is called by Player "Jump" function.
      * Playes the slide sound.
@@ -97,6 +101,7 @@ public class AudioManager : Object{
             jumpSound.Play();
         }
     }
+
     /**---------------------------------------------------------------------------------
      * Is called by Player "Slide" function.
      * Playes the slide sound.
@@ -109,6 +114,7 @@ public class AudioManager : Object{
             slideSound.Play();
         }
     }
+
     /**---------------------------------------------------------------------------------
      * Is called by Player "Death" function.
      * Playes the collision/death sound.
@@ -121,6 +127,7 @@ public class AudioManager : Object{
             collisionSound.Play();
         }
     }
+
     /**---------------------------------------------------------------------------------
      * Is called by Player "Falling" function.
      * Playes the fall sound.
@@ -133,6 +140,7 @@ public class AudioManager : Object{
             fallingSound.Play();
         }
     }
+
     /**---------------------------------------------------------------------------------
      * Is called by Player "GoalFunc" function.
      * Playes the win sound.
@@ -145,6 +153,7 @@ public class AudioManager : Object{
             winSound.Play();
         }
     }
+
     /**---------------------------------------------------------------------------------
      * Is called by PauseMenu "keyPress (Esc)" function.
      * sets audiomixersnapshot to "Paused".
@@ -154,6 +163,7 @@ public class AudioManager : Object{
     {
         paused.TransitionTo(0.01f);
     }
+
     /**---------------------------------------------------------------------------------
      * Is called by PauseMenu "ResumeGamePress" function.
      * sets audiomixersnapshot to "Unpaused".
@@ -163,6 +173,7 @@ public class AudioManager : Object{
     {
         unPaused.TransitionTo(0.01f);
     }
+
     /**---------------------------------------------------------------------------------
      * Is called by menu "SetMasterVolume" function.
      * sets master channel volume.
@@ -174,6 +185,7 @@ public class AudioManager : Object{
         
 
     }
+
     /**---------------------------------------------------------------------------------
      * Is called by menu "SetMusicVolume" function.
      * sets music channel volume.
@@ -183,6 +195,7 @@ public class AudioManager : Object{
     {
         MasterMixer.SetFloat("Music", MusicVolume * 0.8f - 80);
     }
+
     /**---------------------------------------------------------------------------------
      * Is called by menu "SetSoundEffectsVolume" function.
      * sets soundeffects channel volume.

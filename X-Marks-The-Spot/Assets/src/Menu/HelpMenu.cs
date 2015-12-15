@@ -27,7 +27,6 @@ public class HelpMenu : MonoBehaviour
      * Class objects used by the script.
      */
     private StartMenu startMenuObj;
-    private HelpMenu helpMenuObj;
 
     /**---------------------------------------------------------------------------------
      * EventSystem used by the script.
@@ -57,7 +56,6 @@ public class HelpMenu : MonoBehaviour
         backGameObj                 = GameObject.Find("HelpBack_TextBtn");
 
         startMenuObj                = startMenuGameObj.GetComponent<StartMenu>();
-        helpMenuObj                 = helpMenuGameObj.GetComponent<HelpMenu>();
 
         startMenu                   = startMenuGameObj.GetComponent<Canvas>();
         helpMenu                    = helpMenuGameObj.GetComponent<Canvas>();

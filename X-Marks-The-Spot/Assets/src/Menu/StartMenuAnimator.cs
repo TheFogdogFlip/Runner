@@ -9,16 +9,6 @@ public class StartMenuAnimator : MonoBehaviour
     private Animator anim;
     private Rigidbody rb;
     private BoxCollider bc;
-
-    /**---------------------------------------------------------------------------------
-     * GameObjects used by the script.
-     */
-    private GameObject TimerGameObject;
-
-    /**---------------------------------------------------------------------------------
-     * Class objects used by the script.
-     */
-    private TimerMenu TimerObj;
     
     /**---------------------------------------------------------------------------------
      * Executed when the script starts.
@@ -27,11 +17,7 @@ public class StartMenuAnimator : MonoBehaviour
 	void 
     Start() 
     {
-        TimerGameObject         = GameObject.Find("menuTimer");
-        TimerObj                = TimerGameObject.GetComponent<TimerMenu>();
-
         anim                    = gameObject.GetComponentInChildren<Animator>();
-
         anim.Play("Idle");
 	}
 
