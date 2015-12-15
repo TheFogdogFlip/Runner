@@ -12,6 +12,11 @@ public class LoadLevelMenu : MonoBehaviour
     private GameObject backGameObject;
     private GameObject startMenuGameObject;
     private GameObject loadMenuGameObject;
+    private GameObject loadGame1GameObject;
+    private GameObject loadGame2GameObject;
+    private GameObject loadGame3GameObject;
+    private GameObject loadGame4GameObject;
+    private GameObject loadGame5GameObject;
 
     /**---------------------------------------------------------------------------------
      * Canvas associated with the script.
@@ -39,7 +44,7 @@ public class LoadLevelMenu : MonoBehaviour
     public static string mapName = "default";
     
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed when the script starts.
      */
     void 
     Start()
@@ -79,19 +84,9 @@ public class LoadLevelMenu : MonoBehaviour
         startMenuObject.EnableStart();
     }
 
+    
+
     /**---------------------------------------------------------------------------------
-     * Executed when the Load Level menu needs to be disabled.
-     * Disables the canvas and all the components associated with the script.
-     */
-    public void 
-    DisableLoadLevel()
-    {
-        backText.enabled = false;
-    }
-
-    /**---------------------------------------------
-
-------------------------------------
     * 
     */
     public string[]
@@ -147,5 +142,19 @@ public class LoadLevelMenu : MonoBehaviour
     {
         backText.enabled = true;
         eventSys.SetSelectedGameObject(backGameObject);
+    }
+    
+    /**---------------------------------------------------------------------------------
+     * Executed when the Load Level menu needs to be disabled.
+     * Disables the canvas and all the components associated with the script.
+     */
+    public void
+    DisableLoadLevel()
+    {
+        backText.enabled = false;
+        for (int i = 1; i <= 5; ++i)
+        {
+            GameObject.Find("LoadGame" + i).GetComponent<Button>().enabled = false;
+        }
     }
 }
