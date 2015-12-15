@@ -310,7 +310,6 @@ public class Player : PlayerBase
     Falling()
     {
         AudioManager.Instance.FallingSound();
-        anim.SetTrigger("Slide");
     }
 
     /**---------------------------------------------------------------------------------
