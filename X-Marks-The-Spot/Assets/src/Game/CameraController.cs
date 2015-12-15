@@ -3,33 +3,42 @@ using System.Collections;
 
 public class CameraController : MonoBehaviour 
 {
-
+    /**---------------------------------------------------------------------------------
+     * GameObjects associated with the scene.
+     */
     public GameObject target;
+    private GameObject timer;
+
+    /**---------------------------------------------------------------------------------
+     * Variables used by the script.
+     */
     private float distance;
     private float height;
     private float heightDamping;
     private float rotationDamping;
     private float distanceDamping;
-
     private float rotAngleY;
     private float currentRotAngleY;
-    private Quaternion currentRot;
-
     private float wantedHeight;
     private float currentHeight;
-    private Vector3 heightVec;
-    private Vector3 tiltVec;
     private float tilt;
-    private Transform lookAtTrans;
     private bool isTurning;
-    private GameObject timer;
-    private TimerCountdown timerObj;
 
     /**---------------------------------------------------------------------------------
-     * 
+     * Class objects used by the script.
+     */
+    private TimerCountdown timerObj;
+    private Quaternion currentRot;
+    private Vector3 heightVec;
+    private Vector3 tiltVec;    
+    private Transform lookAtTrans;    
+    
+
+    /**---------------------------------------------------------------------------------
+     * Executed when the script starts.
      */
     void 
-    Start () 
+    Start() 
     {
         //distance = 1.5f;
         height = 0.8f;
@@ -46,7 +55,7 @@ public class CameraController : MonoBehaviour
      * 
      */
 	void 
-    Update () 
+    Update() 
     {
         /**---------------------------------------------------------------------------------
         * wanted rotation and height

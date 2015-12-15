@@ -39,7 +39,7 @@ public class LoadLevelMenu : MonoBehaviour
     public static string mapName = "default";
     
     /**---------------------------------------------------------------------------------
-     * 
+     * Executed when the script starts.
      */
     void 
     Start()
@@ -89,9 +89,7 @@ public class LoadLevelMenu : MonoBehaviour
         backText.enabled = false;
     }
 
-    /**---------------------------------------------
-
-------------------------------------
+    /**---------------------------------------------------------------------------------
     * 
     */
     public string[]
@@ -126,11 +124,9 @@ public class LoadLevelMenu : MonoBehaviour
         return info;
     }
 
-    /**---------------------------------------------
-
-------------------------------------
-  * 
-  */
+    /**---------------------------------------------------------------------------------
+    * Not used??
+    */
     public void
     LoadLevelSelection(string theSave)
     {

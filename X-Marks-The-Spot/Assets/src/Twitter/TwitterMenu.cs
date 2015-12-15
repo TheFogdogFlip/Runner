@@ -39,7 +39,7 @@ public class TwitterMenu : MonoBehaviour
 	void 
     Start () 
     {
-	
+	    //Empty.
 	}
 
     /**---------------------------------------------------------------------------------

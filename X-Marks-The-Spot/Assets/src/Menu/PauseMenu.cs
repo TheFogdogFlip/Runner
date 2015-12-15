@@ -126,8 +126,7 @@ public class PauseMenu : MonoBehaviour
 
         masterVolText.text              = masterVol.ToString();
         effectsVolText.text             = effectsVol.ToString();
-        musicVolText.text               = musicVol.ToString();        
-
+        musicVolText.text               = musicVol.ToString();
     }
 
     /**---------------------------------------------------------------------------------
