@@ -34,7 +34,7 @@ public class LoadLevelMenu : MonoBehaviour
      */
     public EventSystem eventSys;
     /**---------------------------------------------------------------------------------
-    * 
+    * When no saved file is selected the mapName is "default"
     */
     public static string mapName = "default";
     
@@ -126,19 +126,15 @@ public class LoadLevelMenu : MonoBehaviour
         return info;
     }
 
-    /**---------------------------------------------
-
-------------------------------------
-  * 
-  */
+    /**---------------------------------------------------------------------------------
+    * Executed when a savegame is selected in the Load map menu
+    */
     public void
     LoadLevelSelection(string theSave)
     {
-        //World.Instance.Load(theSave); //<- should be this line that¨s needed
- 
-        //Application.LoadLevel("scene");
-        //how start the game with the selected map????
-        print("in the selection" + theSave);
+        //set the selected mapName to the selected saved map
+        print("Selected save: " + theSave);
+        mapName = theSave;
     }
 
 

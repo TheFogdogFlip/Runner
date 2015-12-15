@@ -44,17 +44,9 @@ public class LoadingThreadHandler
         if (!generated)
             loadingThread.Abort();
 
-        worldPath = path;
-        loadingThread = new Thread(new ThreadStart(loadWorld));
-        loadingThread.Start();
-    }
-
-    private string worldPath;
-
-    private void loadWorld()
-    {
         loadingText = "Loading World...";
-        World.Instance.Load(worldPath);
+        World.Instance.Load(path);
+        loaded = true;
     }
 
     public void LoadAssets()
