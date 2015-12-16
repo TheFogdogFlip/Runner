@@ -166,6 +166,7 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1;
         Application.LoadLevel("Scene");
+        AudioManager.Instance.UnPauseVolume();
     }
 
     /**---------------------------------------------------------------------------------
@@ -177,6 +178,7 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1;
         Application.LoadLevel("Main_Menu");
+        AudioManager.Instance.UnPauseVolume();
     }
 
     /**---------------------------------------------------------------------------------
