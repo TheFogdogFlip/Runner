@@ -217,9 +217,9 @@ public class Recorder : MonoBehaviour
                     process.StartInfo.FileName = "ffmpeg.exe"; //executable to use
                     process.StartInfo.Arguments = 
                     "-framerate " + fps.ToString()                              //Sets number of images per second to use for input
-                    + " -i \"" + filepath + "/" + imageFolder +"/img%05d.png\" "   //image input path declaration 
+                    + " -i \"" + filepath + "/" + imageFolder +"/img%05d.png\""   //image input path declaration 
                     //(%05d works as it does with printf in c++, could be for emaple img00001.png or img99999.png or anything inbetween)
-                    + " -i Dreamworld.mp3"                                      //audio input path declaration
+                    + " -i Background.mp3"                                      //audio input path declaration
                     + " -c:v libx264"                                           //sets videocodec to h.264
                     + " -vf fps=" + fps.ToString()                              //sets video output framerate
                     + " -pix_fmt yuv420p"                                       //sets pixelformat(not exactly sure what yuv420p is, seems to be needed for this to work).
@@ -253,6 +253,7 @@ public class Recorder : MonoBehaviour
                 {
                     if ((line = reader.ReadLine()) != null)
                     {
+                        print(line);
                         Match match = Regex.Match(line, "frame=\\s+(\\d+)");
                         if (match.Captures.Count > 0)
                         {
