@@ -130,25 +130,25 @@ public class Player : PlayerBase
         }
         else
         {
-            if (Input.GetButtonDown("Right") || Input.GetAxisRaw("Horizontal") == 1 || horizontal == 1)
+            if (ifTurnRightInput() || horizontal == 1)
             {
                 SetNextAction(PlayerState.TurnRight);
                 coolingDown = true;
             }
 
-            if (Input.GetButtonDown("Left") || Input.GetAxisRaw("Horizontal") == -1 || horizontal == -1)
+            else if (ifTurnLeftInput() || horizontal == -1)
             {
                 SetNextAction(PlayerState.TurnLeft);
                 coolingDown = true;
             }
             if (isJumpLocked)
             {
-                if ((Input.GetButtonDown("Slide") || vertical == -1) && !isSliding && !isJumping)
+                if ((ifSlideInput() || vertical == -1) && !isSliding && !isJumping)
                 {
                     SetNextAction(PlayerState.Slide);
                 }
 
-                if ((Input.GetButtonDown("Jump") || vertical == 1) && !isJumping && !isSliding)
+                else if ((ifJumpInput() || vertical == 1) && !isJumping && !isSliding)
                 {
                     SetNextAction(PlayerState.Jump);
                 }
@@ -157,7 +157,7 @@ public class Player : PlayerBase
 
         if (!isJumpLocked)
         {
-            if ((Input.GetButtonDown("Slide") || vertical == -1) && !isSliding && !isJumping)
+            if ((ifSlideInput() || vertical == -1) && !isSliding && !isJumping)
             {
                 float time = playerTimerObj.f_time;
                 TimeStamp ts = new TimeStamp();
@@ -168,7 +168,7 @@ public class Player : PlayerBase
                 AudioManager.Instance.SlideSound();
             }
 
-            if ((Input.GetButtonDown("Jump") || vertical == 1) && !isJumping && !isSliding)
+            else if ((ifJumpInput() || vertical == 1) && !isJumping && !isSliding)
             {
                 float time = playerTimerObj.f_time;
                 TimeStamp ts = new TimeStamp();
@@ -179,6 +179,42 @@ public class Player : PlayerBase
                 AudioManager.Instance.JumpSound();
             }
         }
+    }
+
+    /**---------------------------------------------------------------------------------
+     * Checks if there is a slide input.
+     */
+    public bool
+    ifSlideInput()
+    {
+        return (Input.GetButtonDown("Slide_kb") || Input.GetButtonDown("Slide_gp"));
+    }
+
+    /**---------------------------------------------------------------------------------
+     * Checks if there is a jump input.
+     */
+    public bool
+    ifJumpInput()
+    {
+        return (Input.GetButtonDown("Jump_kb") || Input.GetButtonDown("Jump_gp"));
+    }
+
+    /**---------------------------------------------------------------------------------
+     * Checks if there is a turn RIGHT input.
+     */
+    public bool
+    ifTurnRightInput()
+    {
+        return ((Input.GetAxisRaw("Horizontal_kb") == 1) || Input.GetAxisRaw("Horizontal_gp") == 1);        
+    }
+
+    /**---------------------------------------------------------------------------------
+     * Checks if there is a turn LEFT input.
+     */
+    public bool
+    ifTurnLeftInput()
+    {
+        return ((Input.GetAxisRaw("Horizontal_kb") == -1) || Input.GetAxisRaw("Horizontal_gp") == -1);
     }
 
     /**---------------------------------------------------------------------------------

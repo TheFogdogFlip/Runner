@@ -73,7 +73,20 @@ public class StartMenu : MonoBehaviour
      * Camera required for the Scene.
      */
     public Camera MainCamera;
-	
+
+    /**---------------------------------------------------------------------------------
+     * Input module array for switching between input types.
+     */
+    private StandaloneInputModule[] inputModuleArray;
+
+    /**---------------------------------------------------------------------------------
+     * Variables used by the script.
+     */
+    private bool keyboardActive;
+    private bool gamepadActive;
+    private bool isNextFrame;
+    private GameObject currentSelectedGameObject;
+
 	/**---------------------------------------------------------------------------------
      * Executes when the script starts.
      * Loads necessary components for start menu and all other menus in order to use them right away instead of waiting for each scripts Start() function.
@@ -84,6 +97,8 @@ public class StartMenu : MonoBehaviour
     void
     Start()
     {
+        
+
         World.Instance.LoadXML();
         threadHandler = new LoadingThreadHandler();
 
@@ -100,6 +115,11 @@ public class StartMenu : MonoBehaviour
         //twitterMenuObject.DisableTwitterMenu();
 
         eventSys.SetSelectedGameObject(playGameObject);
+        gamepadActive = false;
+        keyboardActive = false;
+        inputModuleArray = eventSys.GetComponents<StandaloneInputModule>();
+        inputModuleArray[0].enabled = false;     //Keyboard
+        inputModuleArray[1].enabled = false;     //Gamepad
         threadHandler.GenerateWorld();
     }
 
@@ -167,10 +187,49 @@ public class StartMenu : MonoBehaviour
     void
     Update()
     {
+        if (eventSys.currentSelectedGameObject == null)
+        {
+            eventSys.SetSelectedGameObject(playGameObject);
+        }
+        
+        if (!keyboardActive && CheckForKeyboardInput())     //Setting keyboard as active input module
+        {
+            inputModuleArray[0].enabled = true;
+            inputModuleArray[1].enabled = false;
+            keyboardActive = true;
+            gamepadActive = false;
+        }
+
+        if (!gamepadActive && CheckForGamepadInput())       //Setting gamepad as active input module
+        {
+            inputModuleArray[0].enabled = false;
+            inputModuleArray[1].enabled = true;
+            gamepadActive = true;
+            keyboardActive = false;
+        }
         if (menuTimer.f_time > 0.77 && menuTimer.isActive)
         {
             StartCoroutine(Coroutine());
         }
+        
+    }
+
+    /**---------------------------------------------------------------------------------
+    * Checks for keyboard input.
+    */
+    private bool
+    CheckForKeyboardInput()
+    {
+        return (Input.GetButtonDown("Submit_Menu_kb") || Input.GetButtonDown("Cancel_Menu_kb") || Input.GetAxisRaw("Horizontal_Menu_kb") == 1 || Input.GetAxisRaw("Horizontal_Menu_kb") == -1 || Input.GetAxisRaw("Vertical_Menu_kb") == 1 || Input.GetAxisRaw("Vertical_Menu_kb") == -1);
+    }
+
+    /**---------------------------------------------------------------------------------
+    * Checks for gamepad input.
+    */
+    private bool
+    CheckForGamepadInput()
+    {
+        return (Input.GetButtonDown("Submit_Menu_gp") || Input.GetButtonDown("Cancel_Menu_gp") || Input.GetAxisRaw("Horizontal_Menu_gp") == 1 || Input.GetAxisRaw("Horizontal_Menu_gp") == -1 || Input.GetAxisRaw("Vertical_Menu_gp") == 1 || Input.GetAxisRaw("Vertical_Menu_gp") == -1);
     }
 
     /**---------------------------------------------------------------------------------

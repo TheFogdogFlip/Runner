@@ -64,7 +64,9 @@ public class PauseMenu : MonoBehaviour
      * Variables used by the script.
      */
     private bool gameIsPaused;
-
+    private bool keyboardActive;
+    private bool gamepadActive;
+    private StandaloneInputModule[] inputModuleArray;
     /**---------------------------------------------------------------------------------
      * Should only be executed once.
      * Executed automatically on the startup of the script.
@@ -87,6 +89,12 @@ public class PauseMenu : MonoBehaviour
     public void 
     LoadComponents()
     {
+        gamepadActive = false;
+        keyboardActive = false;
+        inputModuleArray = eventSys.GetComponents<StandaloneInputModule>();
+        inputModuleArray[0].enabled = false;     //Keyboard
+        inputModuleArray[1].enabled = false;     //Gamepad
+
         pauseMenuGameObject             = GameObject.Find("PauseMenu");
         audioMenuGameObject             = GameObject.Find("AudioSettings");
         exitGameObject                  = GameObject.Find("ExitGame_TextBtn");
@@ -137,7 +145,27 @@ public class PauseMenu : MonoBehaviour
 	void 
     Update () 
     {
-	    if (Input.GetButtonDown("Cancel") && !gameIsPaused)
+        if (gameIsPaused && eventSys.currentSelectedGameObject == null)
+        {
+            eventSys.SetSelectedGameObject(resumeGameObject);
+        }
+
+        if (gameIsPaused && !keyboardActive && CheckForKeyboardInput())     //Setting keyboard as active input module
+        {
+            inputModuleArray[0].enabled = true;
+            inputModuleArray[1].enabled = false;
+            keyboardActive = true;
+            gamepadActive = false;
+        }
+
+        if (gameIsPaused && !gamepadActive && CheckForGamepadInput())       //Setting gamepad as active input module
+        {
+            inputModuleArray[0].enabled = false;
+            inputModuleArray[1].enabled = true;
+            gamepadActive = true;
+            keyboardActive = false;
+        }
+        if ((Input.GetButtonDown("Cancel_Menu_kb") || Input.GetButtonDown("Cancel_Menu_gp")) && !gameIsPaused)
         {
             gameIsPaused = true;
             Time.timeScale = 0;
@@ -145,7 +173,32 @@ public class PauseMenu : MonoBehaviour
             eventSys.SetSelectedGameObject(resumeGameObject);
             AudioManager.Instance.pauseVolume();
         }
+        else if ((Input.GetButtonDown("Cancel_Menu_kb") || Input.GetButtonDown("Cancel_Menu_gp")) && gameIsPaused)
+        {
+            gameIsPaused = false;
+            Time.timeScale = 1;
+            DisablePauseMenu();
+            AudioManager.Instance.UnPauseVolume();
+        }
 	}
+
+    /**---------------------------------------------------------------------------------
+    * Checks for keyboard input.
+    */
+    private bool
+    CheckForKeyboardInput()
+    {
+        return (Input.GetButtonDown("Submit_Menu_kb") || Input.GetButtonDown("Cancel_Menu_kb") || Input.GetAxisRaw("Horizontal_Menu_kb") == 1 || Input.GetAxisRaw("Horizontal_Menu_kb") == -1 || Input.GetAxisRaw("Vertical_Menu_kb") == 1 || Input.GetAxisRaw("Vertical_Menu_kb") == -1);
+    }
+
+    /**---------------------------------------------------------------------------------
+    * Checks for gamepad input.
+    */
+    private bool
+    CheckForGamepadInput()
+    {
+        return (Input.GetButtonDown("Submit_Menu_gp") || Input.GetButtonDown("Cancel_Menu_gp") || Input.GetAxisRaw("Horizontal_Menu_gp") == 1 || Input.GetAxisRaw("Horizontal_Menu_gp") == -1 || Input.GetAxisRaw("Vertical_Menu_gp") == 1 || Input.GetAxisRaw("Vertical_Menu_gp") == -1);
+    }
 
     /**---------------------------------------------------------------------------------
      * Executes when the mouse pointer is over a UI button.
