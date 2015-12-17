@@ -116,9 +116,9 @@ public class StartMenu : MonoBehaviour
 
         eventSys.SetSelectedGameObject(playGameObject);
         gamepadActive = false;
-        keyboardActive = false;
+        keyboardActive = true;
         inputModuleArray = eventSys.GetComponents<StandaloneInputModule>();
-        inputModuleArray[0].enabled = false;     //Keyboard
+        inputModuleArray[0].enabled = true;     //Keyboard
         inputModuleArray[1].enabled = false;     //Gamepad
         threadHandler.GenerateWorld();
     }
@@ -187,9 +187,13 @@ public class StartMenu : MonoBehaviour
     void
     Update()
     {
+        if (eventSys.currentSelectedGameObject != null)
+        {
+            currentSelectedGameObject = eventSys.currentSelectedGameObject;
+        }
         if (eventSys.currentSelectedGameObject == null)
         {
-            eventSys.SetSelectedGameObject(playGameObject);
+            eventSys.SetSelectedGameObject(currentSelectedGameObject);
         }
         
         if (!keyboardActive && CheckForKeyboardInput())     //Setting keyboard as active input module

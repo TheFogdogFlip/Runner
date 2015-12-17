@@ -66,6 +66,7 @@ public class PauseMenu : MonoBehaviour
     private bool gameIsPaused;
     private bool keyboardActive;
     private bool gamepadActive;
+    private GameObject currentSelectedGameObject;
     private StandaloneInputModule[] inputModuleArray;
     /**---------------------------------------------------------------------------------
      * Should only be executed once.
@@ -90,9 +91,9 @@ public class PauseMenu : MonoBehaviour
     LoadComponents()
     {
         gamepadActive = false;
-        keyboardActive = false;
+        keyboardActive = true;
         inputModuleArray = eventSys.GetComponents<StandaloneInputModule>();
-        inputModuleArray[0].enabled = false;     //Keyboard
+        inputModuleArray[0].enabled = true;     //Keyboard
         inputModuleArray[1].enabled = false;     //Gamepad
 
         pauseMenuGameObject             = GameObject.Find("PauseMenu");
@@ -147,7 +148,11 @@ public class PauseMenu : MonoBehaviour
     {
         if (gameIsPaused && eventSys.currentSelectedGameObject == null)
         {
-            eventSys.SetSelectedGameObject(resumeGameObject);
+            eventSys.SetSelectedGameObject(currentSelectedGameObject);
+        }
+        if (gameIsPaused && eventSys.currentSelectedGameObject != null)
+        {
+            currentSelectedGameObject = eventSys.currentSelectedGameObject;
         }
 
         if (gameIsPaused && !keyboardActive && CheckForKeyboardInput())     //Setting keyboard as active input module
